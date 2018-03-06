@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.ruanmeng.base.BaseFragment
 import com.ruanmeng.north_town.R
-import com.ruanmeng.utils.MultiGapDecoration
 import com.ruanmeng.utils.TopDecoration
 import kotlinx.android.synthetic.main.fragment_main_first.*
 import kotlinx.android.synthetic.main.layout_title_main.*
