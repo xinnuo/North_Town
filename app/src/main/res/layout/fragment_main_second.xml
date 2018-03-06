@@ -1,13 +1,156 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.ruanmeng.fragment.MainSecondFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include layout="@layout/layout_title_main" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+    <com.aohanyao.jelly.library.BouncingJellyView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        app:BouncingDuration="300"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/second_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="@dimen/dimen_size_15">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/second_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="@dimen/dimen_size_5"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/default_user"
+                    app:riv_oval="true" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/second_name"
+                        style="@style/Font15_black_dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:textSize="@dimen/sp_size_16" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_size_10"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dimen_size_18"
+                            android:adjustViewBounds="true"
+                            android:src="@mipmap/minephone"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/second_tel"
+                            style="@style/Font14_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_size_5"
+                            android:text="电话" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_15"
+                    android:layout_height="@dimen/dimen_size_15"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:background="@color/divider" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/second_fold"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_46"
+                android:layout_marginTop="@dimen/dimen_size_10"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftIconRes="@mipmap/left1"
+                app:sLeftIconSize="@dimen/dimen_size_18"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="我的钱包"
+                app:sLineShow="both"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconRes="@mipmap/arrow_right"
+                app:sRightIconSize="@dimen/dimen_size_13"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_30"
+                app:sTopLineMargin="0dp" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/second_customer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_0"
+                app:sLeftIconRes="@mipmap/left2"
+                app:sLeftIconSize="@dimen/dimen_size_18"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="我的客户"
+                app:sLineShow="bottom"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconRes="@mipmap/arrow_right"
+                app:sRightIconSize="@dimen/dimen_size_13"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/second_setting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_46"
+                android:layout_marginTop="@dimen/dimen_size_10"
+                app:sBothLineMargin="@dimen/dimen_size_0"
+                app:sLeftIconRes="@mipmap/left7"
+                app:sLeftIconSize="@dimen/dimen_size_18"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="设置"
+                app:sLineShow="both"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconRes="@mipmap/arrow_right"
+                app:sRightIconSize="@dimen/dimen_size_13"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+        </LinearLayout>
+
+    </com.aohanyao.jelly.library.BouncingJellyView>
+
+</LinearLayout>

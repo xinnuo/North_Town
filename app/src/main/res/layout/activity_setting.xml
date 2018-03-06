@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/setting_about"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_46"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="关于我们"
+        app:sLineShow="both"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_30"
+        app:sTopLineMargin="@dimen/dimen_size_0" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/setting_cache"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="清理缓存"
+        app:sLineShow="bottom"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_20"
+        app:sRightTextString="0B" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/setting_version"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="@dimen/dimen_size_0"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="当前版本"
+        app:sLineShow="bottom"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_20"
+        app:sRightTextString="v1.0.0" />
+
+    <Button
+        android:id="@+id/setting_quit"
+        style="@style/Font15_black_dark"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_white"
+        android:onClick="doClick"
+        android:text="退出登录" />
+
+</LinearLayout>

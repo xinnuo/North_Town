@@ -6,7 +6,7 @@
     android:background="?attr/colorPrimary">
 
     <TextView
-        android:id="@+id/left_nav_title"
+        android:id="@id/tv_nav_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
