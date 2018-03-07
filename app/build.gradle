@@ -108,4 +108,5 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'net.idik:slimadapter:2.1.2'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.fang:dashview:v1.0.0'
 }

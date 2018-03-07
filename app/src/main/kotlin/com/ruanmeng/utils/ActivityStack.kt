@@ -49,7 +49,6 @@ class ActivityStack private constructor() {
     /**
      * 是否包含指定的Activity
      */
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     fun isContainsActivity(cls: Class<*>): Boolean {
         if (mActivityStack == null || mActivityStack!!.size == 0) {
             return false
@@ -65,7 +64,6 @@ class ActivityStack private constructor() {
     /**
      * 弹出栈中指定Activity
      */
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     fun popOneActivity(cls: Class<*>): Boolean {
         if (mActivityStack == null || mActivityStack!!.size == 0) return false
         for (activity in mActivityStack!!) {
@@ -94,7 +92,6 @@ class ActivityStack private constructor() {
     /**
      * 移除指定的多个activity
      */
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     fun popActivities(vararg clss: Class<*>) {
         for (cls in clss) {
             if (isContainsActivity(cls))

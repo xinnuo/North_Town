@@ -14,4 +14,14 @@
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
+    <ImageView
+        android:id="@+id/main_close"
+        android:layout_width="@dimen/dimen_size_35"
+        android:layout_height="@dimen/dimen_size_45"
+        android:layout_gravity="center_vertical"
+        android:onClick="doClick"
+        android:padding="@dimen/dimen_size_10"
+        android:src="@mipmap/nav_close"
+        android:visibility="gone" />
+
 </FrameLayout>

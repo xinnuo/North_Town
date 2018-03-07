@@ -21,7 +21,7 @@
         android:layout_height="@dimen/dimen_size_45"
         android:layout_gravity="center_vertical"
         android:onClick="doClick"
-        android:padding="9dp"
+        android:padding="@dimen/dimen_size_10"
         android:src="@mipmap/nav_back" />
 
 </FrameLayout>
