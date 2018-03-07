@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/funds_agent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="经纪人佣金统计"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_30"  />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/funds_lead"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="老带新佣金统计"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/funds_sale"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="@dimen/dimen_size_0"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="销售部佣金统计"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+</LinearLayout>

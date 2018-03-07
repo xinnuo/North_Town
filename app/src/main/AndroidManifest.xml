@@ -17,6 +17,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,7 +45,96 @@
         <activity
             android:name=".ClientActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".ReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportLikeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportJobActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportUnitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportBankActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportAgentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataCheckActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CheckActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CheckDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewsOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewsLookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PerformActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PerformCheckActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FundsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FundsAgentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FundsLeadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FundsSaleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FinanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FinanceSubmitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FinanceSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
