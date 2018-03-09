@@ -36,7 +36,7 @@
                     android:id="@+id/second_img"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="@dimen/dimen_size_5"
+                    android:layout_marginEnd="@dimen/dimen_size_5"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/default_user"
                     app:riv_oval="true" />
@@ -44,7 +44,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -74,7 +74,7 @@
                             style="@style/Font14_gray"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_size_5"
+                            android:layout_marginStart="@dimen/dimen_size_5"
                             android:text="电话" />
 
                     </LinearLayout>

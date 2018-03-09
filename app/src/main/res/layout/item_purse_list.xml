@@ -33,7 +33,7 @@
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginStart="@dimen/dimen_size_10"
                 android:gravity="end"
                 android:text="购买产品：" />
 
@@ -42,7 +42,7 @@
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_size_5"
+                android:layout_marginStart="@dimen/dimen_size_5"
                 android:text="产品名称" />
 
         </LinearLayout>
@@ -83,7 +83,7 @@
                 style="@style/Font15_black_dark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginStart="@dimen/dimen_size_10"
                 android:layout_weight="1"
                 android:text="姓名" />
 
@@ -91,7 +91,7 @@
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginStart="@dimen/dimen_size_10"
                 android:gravity="end"
                 android:text="获得佣金" />
 
@@ -100,7 +100,7 @@
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_size_5"
+                android:layout_marginStart="@dimen/dimen_size_5"
                 android:text="￥0"
                 android:textColor="@color/orange" />
 

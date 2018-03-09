@@ -13,7 +13,8 @@
         android:layout_gravity="center_vertical"
         android:onClick="doClick"
         android:padding="@dimen/dimen_size_10"
-        android:src="@mipmap/nav_back" />
+        android:src="@mipmap/nav_back"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -25,9 +26,9 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="@dimen/dimen_size_15"
-            android:layout_height="@dimen/dimen_size_15"
-            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_width="@dimen/dimen_size_16"
+            android:layout_height="@dimen/dimen_size_16"
+            android:layout_marginStart="@dimen/dimen_size_15"
             android:src="@mipmap/search"
             tools:ignore="ContentDescription" />
 
@@ -36,11 +37,11 @@
             style="@style/Font14_black_dark"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/dimen_size_10"
             android:background="@color/transparent"
             android:hint="请输入客户姓名或身份证号"
             android:imeOptions="actionSearch"
-            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingEnd="@dimen/dimen_size_10"
+            android:paddingStart="@dimen/dimen_size_10"
             android:singleLine="true" />
 
     </LinearLayout>

@@ -23,7 +23,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="@dimen/dimen_size_0"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="头像" />
@@ -40,7 +40,7 @@
             <ImageView
                 android:layout_width="@dimen/dimen_size_13"
                 android:layout_height="@dimen/dimen_size_13"
-                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginStart="@dimen/dimen_size_10"
                 android:src="@mipmap/arrow_right"
                 tools:ignore="ContentDescription" />
 

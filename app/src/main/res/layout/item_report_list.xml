@@ -19,7 +19,7 @@
             android:id="@+id/item_report_img"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="@dimen/dimen_size_5"
+            android:layout_marginStart="@dimen/dimen_size_5"
             android:scaleType="centerCrop"
             android:src="@mipmap/default_user"
             app:riv_oval="true" />

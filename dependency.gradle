@@ -1,7 +1,7 @@
 ext.versions = [
         gradlePluginVersion: '3.0.1',
         compileSdkVersion: 27,
-        minSdkVersion: 16,
+        minSdkVersion: 17,
         targetSdkVersion: 27,
         supportLibraryVersion: '27.1.0',
         constraintLayoutVersion: '1.0.2',

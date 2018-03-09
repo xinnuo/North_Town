@@ -82,7 +82,7 @@
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:onClick="doClick"
                 android:paddingTop="@dimen/dimen_size_10"
                 android:paddingBottom="@dimen/dimen_size_10"
