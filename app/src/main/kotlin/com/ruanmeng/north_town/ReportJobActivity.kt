@@ -8,6 +8,6 @@ class ReportJobActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_job)
-        init_title("选择职业")
+        init_title("选择行业")
     }
 }

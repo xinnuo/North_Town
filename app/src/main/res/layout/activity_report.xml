@@ -4,9 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/layout_title_search" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/report_result"
+        style="@style/Font14_gray"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_40"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_size_15"
+        android:text="搜索结果(0)" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/recycle_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+
+        <include layout="@layout/layout_empty_add" />
+
+    </FrameLayout>
 
 </LinearLayout>

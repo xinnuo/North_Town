@@ -20,8 +20,7 @@
     <dimen name="sp_size_10">10sp</dimen>
     <dimen name="sp_size_8">8sp</dimen>
 
-    <dimen name="dimen_size_46">46dp</dimen>
-    <dimen name="dimen_size_45.5">45.5dp</dimen>
+    <dimen name="dimen_size_100">100dp</dimen>
     <dimen name="dimen_size_90">90dp</dimen>
     <dimen name="dimen_size_80">80dp</dimen>
     <dimen name="dimen_size_75">75dp</dimen>
@@ -29,6 +28,8 @@
     <dimen name="dimen_size_65">65dp</dimen>
     <dimen name="dimen_size_60">60dp</dimen>
     <dimen name="dimen_size_50">50dp</dimen>
+    <dimen name="dimen_size_46">46dp</dimen>
+    <dimen name="dimen_size_45.5">45.5dp</dimen>
     <dimen name="dimen_size_45">45dp</dimen>
     <dimen name="dimen_size_40">40dp</dimen>
     <dimen name="dimen_size_35">35dp</dimen>

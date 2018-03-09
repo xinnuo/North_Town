@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/empty_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_size_90"
+        android:layout_marginTop="@dimen/dimen_size_90"
+        android:src="@mipmap/search_no" />
+
+    <TextView
+        style="@style/Font14_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:text="没有找到客户信息哦" />
+
+    <Button
+        android:id="@+id/empty_add"
+        style="@style/Font15_black_dark"
+        android:layout_width="180dp"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_trans_stroke_red"
+        android:onClick="doClick"
+        android:text="添加客户信息"
+        android:textColor="@color/colorAccent" />
+
+</LinearLayout>
