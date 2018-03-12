@@ -17,8 +17,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/item_report_img"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/dimen_size_50"
+            android:layout_height="@dimen/dimen_size_50"
             android:layout_marginStart="@dimen/dimen_size_5"
             android:scaleType="centerCrop"
             android:src="@mipmap/default_user"
@@ -43,7 +43,7 @@
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_size_10"
+                android:layout_marginTop="@dimen/dimen_size_8"
                 android:text="手机 " />
 
             <TextView
@@ -51,7 +51,7 @@
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_size_10"
+                android:layout_marginTop="@dimen/dimen_size_8"
                 android:text="身份证号 " />
 
         </LinearLayout>

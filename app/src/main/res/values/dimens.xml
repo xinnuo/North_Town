@@ -8,6 +8,8 @@
     <dimen name="line_height">45dp</dimen>
     <dimen name="btn_height">35dp</dimen>
 
+    <dimen name="sp_size_30">30sp</dimen>
+    <dimen name="sp_size_25">25sp</dimen>
     <dimen name="sp_size_20">20sp</dimen>
     <dimen name="sp_size_18">18sp</dimen>
     <dimen name="sp_size_17">17sp</dimen>
@@ -27,6 +29,7 @@
     <dimen name="dimen_size_70">70dp</dimen>
     <dimen name="dimen_size_65">65dp</dimen>
     <dimen name="dimen_size_60">60dp</dimen>
+    <dimen name="dimen_size_55">55dp</dimen>
     <dimen name="dimen_size_50">50dp</dimen>
     <dimen name="dimen_size_46">46dp</dimen>
     <dimen name="dimen_size_45.5">45.5dp</dimen>

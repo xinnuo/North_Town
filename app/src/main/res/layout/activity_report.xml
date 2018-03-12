@@ -20,18 +20,25 @@
         android:paddingLeft="@dimen/dimen_size_15"
         android:text="搜索结果(0)" />
 
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@id/recycle_list"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never" />
+            android:layout_height="match_parent">
 
-        <include layout="@layout/layout_empty_add" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@id/recycle_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
 
-    </FrameLayout>
+            <include layout="@layout/layout_empty_add" />
+
+        </FrameLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

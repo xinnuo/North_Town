@@ -15,7 +15,7 @@
     <color name="light">#999999</color>
     <color name="lighter">#CCCCCC</color>
     <color name="white">@android:color/white</color>
-    <color name="orange">#FFCA02</color>
+    <color name="orange">#FF7F00</color>
     <color name="blue">#5574FF</color>
     <color name="transparent">@android:color/transparent</color>
 

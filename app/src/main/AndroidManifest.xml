@@ -47,7 +47,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ReportActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ReportAddActivity"
             android:screenOrientation="portrait" />
@@ -65,7 +66,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ReportOrderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ReportBankActivity"
             android:screenOrientation="portrait" />
@@ -74,10 +76,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".DataActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".DataDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".DataCheckActivity"
             android:screenOrientation="portrait" />
@@ -113,7 +113,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".FundsAgentActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".FundsLeadActivity"
             android:screenOrientation="portrait" />
@@ -128,7 +129,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".FinanceSubmitActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".FinanceSelectActivity"
             android:screenOrientation="portrait" />

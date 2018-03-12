@@ -83,7 +83,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-v4:27.1.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:appcompat-v7:' + versions.supportLibraryVersion
@@ -109,4 +108,5 @@ dependencies {
     implementation 'net.idik:slimadapter:2.1.2'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.fang:dashview:v1.0.0'
+    implementation 'com.github.santalu:mask-edittext:1.0.1'
 }
