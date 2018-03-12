@@ -51,7 +51,8 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ReportAddActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ReportLikeActivity"
             android:screenOrientation="portrait" />
@@ -86,7 +87,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".NewsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".CheckActivity"
             android:screenOrientation="portrait" />

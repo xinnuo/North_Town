@@ -109,4 +109,5 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.fang:dashview:v1.0.0'
     implementation 'com.github.santalu:mask-edittext:1.0.1'
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 }
