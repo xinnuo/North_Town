@@ -106,7 +106,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".PerformActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".PerformCheckActivity"
             android:screenOrientation="portrait" />
