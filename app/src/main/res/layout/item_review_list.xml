@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/item_review_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_10"
+        android:background="@color/background" />
+
+    <LinearLayout
+        android:id="@+id/item_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_size_10"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:background="@drawable/rec_bg_white_stroke_divider"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_size_10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_size_5"
+            android:gravity="center_vertical">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/item_review_img"
+                android:layout_width="@dimen/dimen_size_30"
+                android:layout_height="@dimen/dimen_size_30"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/default_user"
+                app:riv_oval="true"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/item_review_name"
+                style="@style/Font15_black_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_10"
+                android:text="名称" />
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="下单日期" />
+
+            <TextView
+                android:id="@+id/item_review_time"
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_10"
+                android:text="2017-11-28" />
+
+        </LinearLayout>
+
+        <com.fang.dashview.DashView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_size_10"
+            android:layout_marginTop="@dimen/dimen_size_10"
+            app:dashOrientation="0"
+            app:dashWidth="@dimen/dimen_size_5"
+            app:lineColor="@color/lighter"
+            app:lineHeight="@dimen/divider_height"
+            app:lineWidth="@dimen/dimen_size_5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产品" />
+
+            <TextView
+                android:id="@+id/item_review_product"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_10"
+                android:layout_weight="1"
+                android:gravity="end" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_size_10"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="期限" />
+
+            <TextView
+                android:id="@+id/item_review_year"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="0年" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_size_10"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="投资金额" />
+
+            <TextView
+                android:id="@+id/item_review_money"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="0万" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_size_5"
+            android:layout_marginTop="@dimen/dimen_size_10"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="付款方式" />
+
+            <TextView
+                android:id="@+id/item_review_pay"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_10"
+                android:layout_weight="1"
+                android:gravity="end" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

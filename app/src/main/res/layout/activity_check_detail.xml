@@ -1,12 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <TextView
+            style="@style/Font13_light"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_40"
+            android:drawablePadding="@dimen/dimen_size_5"
+            android:drawableStart="@drawable/rec_bg_line"
+            android:gravity="center_vertical"
+            android:text="客户信息" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_46"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="客户名称"
+            app:sLineShow="both"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10"
+            app:sTopLineMargin="@dimen/dimen_size_0" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_tel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="联系电话"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginRight="@dimen/dimen_size_10"
+                    android:gravity="center_vertical"
+                    android:text="邮寄地址" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/check_addr"
+                        style="@style/Font14_gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="top|end"
+                        android:lineSpacingExtra="@dimen/dimen_size_3"
+                        android:minHeight="@dimen/line_height"
+                        android:paddingBottom="@dimen/dimen_size_13"
+                        android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingRight="@dimen/dimen_size_10"
+                        android:paddingTop="@dimen/dimen_size_13" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+        </LinearLayout>
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_fax"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="传真"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_idcard"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_0"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="身份证号(营业执照号)"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <TextView
+            style="@style/Font13_light"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_40"
+            android:drawablePadding="@dimen/dimen_size_5"
+            android:drawableStart="@drawable/rec_bg_line"
+            android:gravity="center_vertical"
+            android:text="财务信息" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_get"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_46"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="收款方式"
+            app:sLineShow="both"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10"
+            app:sTopLineMargin="@dimen/dimen_size_0" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_bankname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="银行开户名"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_bank"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="开户行"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_account"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="银行账号"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_money"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="收据金额"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_code"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="收据编码"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_type"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="所属类型"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_yin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_0"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="收银员姓名"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <TextView
+            style="@style/Font13_light"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_40"
+            android:drawablePadding="@dimen/dimen_size_5"
+            android:drawableStart="@drawable/rec_bg_line"
+            android:gravity="center_vertical"
+            android:text="产品信息" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_product"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_46"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="产品名"
+            app:sLineShow="both"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10"
+            app:sTopLineMargin="@dimen/dimen_size_0" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_year"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="投资期限(年)"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_total"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_0"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="投资金额(万)"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <Button
+            android:id="@+id/check_pass"
+            style="@style/Font15_white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_margin="@dimen/dimen_size_20"
+            android:background="@drawable/rec_bg_red"
+            android:onClick="doClick"
+            android:text="通过" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
