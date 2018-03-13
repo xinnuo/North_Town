@@ -16,8 +16,8 @@ class WebActivity : BaseActivity() {
         init_title(intent.getStringExtra("title"))
 
         when (intent.getStringExtra("title")) {
-            "佣金规则" -> {
-            }
+            "佣金规则" -> { }
+            "关于我们" -> { }
         }
     }
 
