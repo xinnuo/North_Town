@@ -1,25 +1,25 @@
 package com.ruanmeng.north_town
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.load_Linear
 import com.ruanmeng.base.refresh
+import com.ruanmeng.base.startActivity
 import com.ruanmeng.model.CommonData
-import kotlinx.android.synthetic.main.activity_perform_check.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
 
-class PerformCheckActivity : BaseActivity() {
+class FundsProductActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_perform_check)
-        init_title()
+        setContentView(R.layout.activity_funds_product)
+        init_title("老带新明细")
 
         list.add(CommonData("1"))
         list.add(CommonData("2"))
@@ -32,14 +32,9 @@ class PerformCheckActivity : BaseActivity() {
         mAdapter.updateData(list)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun init_title() {
         super.init_title()
-        val title = intent.getStringExtra("title")
-        tvTitle.text = title
-        perform_hint.text = "按${title.substring(0, 1)}查询业绩"
-
-        empty_hint.text = "暂无相关业绩信息！"
+        empty_hint.text = "暂无相关产品信息！"
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
             if (!isLoadingMore) {
@@ -49,19 +44,16 @@ class PerformCheckActivity : BaseActivity() {
         }
 
         mAdapter = SlimAdapter.create()
-                .register<CommonData>(R.layout.item_perform_list) { data, injector ->
-                    injector.visibility(R.id.item_perform_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
-                            .visibility(R.id.item_perform_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+                .register<CommonData>(R.layout.item_detail_list) { data, injector ->
+                    injector.visibility(R.id.item_detail_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_detail_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+
+                            .clicked(R.id.item_detail) {
+                                val intent = Intent(baseContext, FundsDetailActivity::class.java)
+                                intent.putExtra("isLead", true)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
-    }
-
-    fun updateList() {
-        swipe_refresh.isRefreshing = true
-        if (list.size > 0) {
-            list.clear()
-            mAdapter.notifyDataSetChanged()
-        }
-        getData(mPosition)
     }
 }

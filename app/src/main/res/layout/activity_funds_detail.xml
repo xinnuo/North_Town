@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_size_15"
+                android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginTop="@dimen/dimen_size_15"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Font14_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投资产品" />
+
+                <TextView
+                    android:id="@+id/funds_product"
+                    style="@style/Font14_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_size_10"
+                    android:text="有限合伙人"
+                    android:textSize="@dimen/sp_size_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#30000000">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dimen_size_5"
+                    android:paddingTop="@dimen/dimen_size_5">
+
+                    <TextView
+                        android:id="@+id/funds_money"
+                        style="@style/Font14_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="@dimen/sp_size_20" />
+
+                    <TextView
+                        style="@style/Font14_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总金额(万)" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/divider_height"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/dimen_size_15"
+                    android:layout_marginTop="@dimen/dimen_size_15"
+                    android:background="#50000000" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dimen_size_5"
+                    android:paddingTop="@dimen/dimen_size_5">
+
+                    <TextView
+                        android:id="@+id/funds_year"
+                        style="@style/Font14_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="@dimen/sp_size_20" />
+
+                    <TextView
+                        style="@style/Font14_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="投资期限(年)" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginTop="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Font13_black_dark"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_40"
+                android:drawablePadding="@dimen/dimen_size_5"
+                android:drawableStart="@drawable/rec_bg_line"
+                android:gravity="center_vertical"
+                android:text="投资人信息" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="投资人姓名"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_tel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="投资人手机"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_idcard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="身份证号"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_attribute"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="投资属性"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_start"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="购买日期"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_end"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="到期日期"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_get"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="收益"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_0"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="计算详细"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/funds_expand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_duration="300"
+            app:el_expanded="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginTop="@dimen/dimen_size_10"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Font13_black_dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_40"
+                        android:drawablePadding="@dimen/dimen_size_5"
+                        android:drawableStart="@drawable/rec_bg_line"
+                        android:gravity="center_vertical"
+                        android:text="上级客户信息" />
+
+                    <com.allen.library.SuperTextView
+                        android:id="@+id/funds_name2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_45.5"
+                        app:sBottomLineMargin="@dimen/dimen_size_10"
+                        app:sLeftTextColor="@color/black_dark"
+                        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                        app:sLeftTextString="上级姓名"
+                        app:sLineShow="bottom"
+                        app:sRightTextColor="@color/gray"
+                        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+                    <com.allen.library.SuperTextView
+                        android:id="@+id/funds_tel2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_45.5"
+                        app:sBottomLineMargin="@dimen/dimen_size_10"
+                        app:sLeftTextColor="@color/black_dark"
+                        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                        app:sLeftTextString="上级手机"
+                        app:sLineShow="bottom"
+                        app:sRightTextColor="@color/gray"
+                        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+                    <com.allen.library.SuperTextView
+                        android:id="@+id/funds_idcard2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_45.5"
+                        app:sBottomLineMargin="@dimen/dimen_size_10"
+                        app:sLeftTextColor="@color/black_dark"
+                        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                        app:sLeftTextString="身份证号"
+                        app:sLineShow="bottom"
+                        app:sRightTextColor="@color/gray"
+                        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+                    <com.allen.library.SuperTextView
+                        android:id="@+id/funds_get2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_45.5"
+                        app:sBottomLineMargin="@dimen/dimen_size_10"
+                        app:sLeftTextColor="@color/black_dark"
+                        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                        app:sLeftTextString="收益(元)"
+                        app:sLineShow="bottom"
+                        app:sRightTextColor="@color/gray"
+                        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+                    <com.allen.library.SuperTextView
+                        android:id="@+id/funds_detail2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_45.5"
+                        app:sBottomLineMargin="@dimen/dimen_size_0"
+                        app:sLeftTextColor="@color/black_dark"
+                        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                        app:sLeftTextString="计算详细"
+                        app:sLineShow="bottom"
+                        app:sRightTextColor="@color/gray"
+                        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

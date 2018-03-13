@@ -2,6 +2,7 @@ package com.ruanmeng.north_town
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.view.View
 import com.lzy.okgo.OkGo
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.load_Linear
@@ -60,11 +61,13 @@ class DataActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_data_list) { data, injector ->
-                    injector.clicked(R.id.item_data) {
-                        intent.setClass(baseContext, ReportDetailActivity::class.java)
-                        intent.putExtra("isData", true)
-                        startActivity(intent)
-                    }
+                    injector.visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+                            .clicked(R.id.item_data) {
+                                intent.setClass(baseContext, ReportDetailActivity::class.java)
+                                intent.putExtra("isData", true)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
     }

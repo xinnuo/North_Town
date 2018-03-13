@@ -2,11 +2,11 @@ package com.ruanmeng.north_town
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.view.View
 import com.lzy.okgo.OkGo
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.load_Linear
 import com.ruanmeng.base.refresh
-import com.ruanmeng.base.startActivity
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_data.*
@@ -64,7 +64,20 @@ class PerformActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_data_list) { data, injector ->
                     injector.gone(R.id.item_data_idcard)
-                            .clicked(R.id.item_data) { startActivity(PerformCheckActivity::class.java) }
+                            .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+                            .clicked(R.id.item_data) {
+                                val title = when (mPosition) {
+                                    0 -> "日业绩"
+                                    1 -> "周业绩"
+                                    2 -> "月业绩"
+                                    3 -> "年业绩"
+                                    else  -> ""
+                                }
+                                intent.setClass(baseContext, PerformCheckActivity::class.java)
+                                intent.putExtra("title", title)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
     }
@@ -77,6 +90,8 @@ class PerformActivity : BaseActivity() {
         }
         getData(mPosition)*/
 
+        list.add(CommonData())
+        list.add(CommonData())
         list.add(CommonData())
         list.add(CommonData())
         list.add(CommonData())

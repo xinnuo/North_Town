@@ -140,6 +140,12 @@
         <activity
             android:name=".WebActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".FundsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FundsProductActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

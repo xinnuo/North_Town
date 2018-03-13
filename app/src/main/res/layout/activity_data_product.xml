@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -61,7 +61,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="@dimen/dimen_size_10">
+                android:paddingBottom="@dimen/dimen_size_5"
+                android:paddingTop="@dimen/dimen_size_5">
 
                 <TextView
                     android:id="@+id/product_money"
@@ -92,7 +93,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="@dimen/sp_size_10">
+                android:paddingBottom="@dimen/dimen_size_5"
+                android:paddingTop="@dimen/dimen_size_5">
 
                 <TextView
                     android:id="@+id/product_year"
@@ -157,8 +159,8 @@
             app:sLeftTextString="预期收益"
             app:sLineShow="bottom"
             app:sRightTextColor="@color/orange"
-            app:sRightTextString="+0(元)"
-            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+            app:sRightTextMarginRight="@dimen/dimen_size_10"
+            app:sRightTextString="+0(元)" />
 
         <com.allen.library.SuperTextView
             android:id="@+id/product_start"
