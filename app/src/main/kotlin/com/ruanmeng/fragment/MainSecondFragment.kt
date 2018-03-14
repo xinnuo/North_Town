@@ -36,6 +36,16 @@ class MainSecondFragment : BaseFragment() {
     override fun init_title() {
         main_title.text = "个人中心"
 
+        second_name.text = getString("userName")
+        second_tel.text = getString("mobile")
+        GlideApp.with(activity!!)
+                .load(BaseHttp.baseImg + getString("userhead"))
+                .placeholder(R.mipmap.default_user)
+                .error(R.mipmap.default_user)
+                .dontAnimate()
+                .into(second_img)
+        second_img.setTag(R.id.second_img, getString("userhead"))
+
         second_info.setOnClickListener { startActivity(InfoActivity::class.java) }
         second_fold.setOnClickListener { startActivity(PurseActivity::class.java) }
         second_customer.setOnClickListener { startActivity(ClientActivity::class.java) }
