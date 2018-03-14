@@ -144,6 +144,7 @@ public class CommonUtil {
     public static String phoneReplaceWithStar(String phone) {
 
         if (phone == null || phone.isEmpty()) return "";
+        if (phone.length() < 7) return phone;
         else return replaceAction(phone, "(?<=\\d{3})\\d(?=\\d{4})");
     }
 
@@ -156,6 +157,7 @@ public class CommonUtil {
     public static String idCardReplaceWithStar(String idCard) {
 
         if (idCard == null || idCard.isEmpty()) return "";
+        if (idCard.length() < 8) return idCard;
         else return replaceAction(idCard, "(?<=\\d{4})\\d(?=\\d{4})");
     }
 
@@ -168,6 +170,7 @@ public class CommonUtil {
     public static String bankCardReplaceWithStar(String bankCard) {
 
         if (bankCard == null || bankCard.isEmpty()) return "";
+        if (bankCard.length() < 4) return bankCard;
         else return replaceAction(bankCard, "(?<=\\d{0})\\d(?=\\d{4})");
     }
 
@@ -180,6 +183,7 @@ public class CommonUtil {
     public static String bankCardReplaceHeaderWithStar(String bankCard) {
 
         if (bankCard == null || bankCard.isEmpty()) return "";
+        if (bankCard.length() < 10) return bankCard;
         return replaceAction(bankCard, "(?<=\\d{6})\\d(?=\\d{4})");
     }
 

@@ -131,6 +131,9 @@
             android:name=".ManageActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ManageDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".FinanceActivity"
             android:screenOrientation="portrait" />
         <activity

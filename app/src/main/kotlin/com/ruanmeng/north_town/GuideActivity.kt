@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.WindowManager
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.getBoolean
-import com.ruanmeng.base.startActivity
-import com.ruanmeng.base.toast
+import com.ruanmeng.base.*
 import com.ruanmeng.utils.ActivityStack
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.PermissionListener
@@ -46,7 +43,7 @@ class GuideActivity : BaseActivity() {
                     }
 
                     override fun onFailed(requestCode: Int, deniedPermissions: MutableList<String>) {
-                        toast("请求权限被拒绝")
+                        showToast("请求权限被拒绝")
                         onBackPressed()
                     }
                 }).start()

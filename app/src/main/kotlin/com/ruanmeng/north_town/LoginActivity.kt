@@ -76,6 +76,7 @@ class LoginActivity : BaseActivity() {
                                 putString("mobile", obj.getString("telephone"))
                                 putString("userName", obj.getString("userName"))
                                 putString("userhead", obj.getString("userhead"))
+                                putString("cardNo", obj.getString("cardNo"))
 
                                 startActivity(MainActivity::class.java)
                                 ActivityStack.screenManager.popActivities(this@LoginActivity::class.java)

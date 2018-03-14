@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ruanmeng.base.BaseFragment
+import com.ruanmeng.base.GlideApp
+import com.ruanmeng.base.getString
 import com.ruanmeng.base.startActivity
 import com.ruanmeng.north_town.*
+import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.fragment_main_second.*
 import kotlinx.android.synthetic.main.layout_title_main.*
 
@@ -28,6 +31,21 @@ class MainSecondFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init_title()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        second_name.text = getString("userName")
+        second_tel.text = getString("mobile")
+
+        activity?.let {
+            GlideApp.with(it)
+                .load(BaseHttp.baseImg + getString("userhead"))
+                .placeholder(R.mipmap.default_user)
+                .error(R.mipmap.default_user)
+                .dontAnimate()
+                .into(second_img)
+        }
     }
 
     override fun init_title() {
