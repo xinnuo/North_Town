@@ -9,26 +9,39 @@
         android:layout_height="@dimen/dimen_size_35"
         android:layout_margin="@dimen/dimen_size_10"
         android:background="@drawable/rec_ova_bg_white_stroke_divider"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_vertical">
 
         <ImageView
             android:layout_width="@dimen/dimen_size_16"
             android:layout_height="@dimen/dimen_size_16"
-            android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginStart="@dimen/dimen_size_12"
             android:src="@mipmap/search"
             tools:ignore="ContentDescription" />
 
         <EditText
             android:id="@+id/search_edit"
             style="@style/Font14_black_dark"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@color/transparent"
             android:hint="输入经纪人名称或手机"
             android:imeOptions="actionSearch"
             android:paddingEnd="@dimen/dimen_size_10"
             android:paddingStart="@dimen/dimen_size_10"
             android:singleLine="true" />
+
+        <ImageView
+            android:id="@+id/search_close"
+            android:layout_width="@dimen/dimen_size_23"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/dimen_size_7"
+            android:paddingEnd="@dimen/dimen_size_5"
+            android:src="@mipmap/ico_close"
+            android:visibility="gone"
+            tools:ignore="ContentDescription,RtlSymmetry" />
 
     </LinearLayout>
 

@@ -23,6 +23,8 @@
         android:layout_marginTop="@dimen/dimen_size_8"
         android:layout_weight="1"
         android:background="@drawable/rec_ova_bg_background"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_vertical">
 
         <ImageView
