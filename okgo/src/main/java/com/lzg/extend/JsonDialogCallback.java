@@ -36,12 +36,12 @@ public abstract class JsonDialogCallback<T> extends JsonCallback<T> {
 
     private ProgressDialogManager mProgressManager;
     private Activity activity;
-    private boolean isVisible = true;
+    private boolean isVisible;
 
     private void initDialog(Activity activity) {
         this.activity = activity;
-
-        mProgressManager = new ProgressDialogManager(activity);
+        if (isVisible)
+            mProgressManager = new ProgressDialogManager(activity);
     }
 
     public JsonDialogCallback(Activity activity) {
@@ -69,7 +69,7 @@ public abstract class JsonDialogCallback<T> extends JsonCallback<T> {
     @Override
     public void onFinish() {
         //网络请求结束后关闭对话框
-        mProgressManager.dismiss();
+        if (isVisible) mProgressManager.dismiss();
     }
 
     @Override

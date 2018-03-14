@@ -38,7 +38,7 @@ public abstract class StringDialogCallback extends StringCallback {
 
     private ProgressDialogManager mProgressManager;
     private Activity activity;
-    private boolean isVisible = true;
+    private boolean isVisible;
 
     public StringDialogCallback(Activity activity) {
         this(activity, true);
@@ -48,7 +48,7 @@ public abstract class StringDialogCallback extends StringCallback {
         this.activity = activity;
         this.isVisible = isVisible;
 
-        mProgressManager = new ProgressDialogManager(activity);
+        if (isVisible) mProgressManager = new ProgressDialogManager(activity);
     }
 
     @Override
@@ -79,7 +79,8 @@ public abstract class StringDialogCallback extends StringCallback {
 
     public abstract void onSuccessResponse(Response<String> response, String msg, String msgCode);
 
-    public void onSuccessResponseErrorCode(Response<String> response, String msg, String msgCode) { }
+    public void onSuccessResponseErrorCode(Response<String> response, String msg, String msgCode) {
+    }
 
     /**
      * 当缓存读取成功后，回调该方法
@@ -100,7 +101,7 @@ public abstract class StringDialogCallback extends StringCallback {
 
     @Override
     public void onFinish() {
-        mProgressManager.dismiss();
+        if (isVisible) mProgressManager.dismiss();
     }
 
     @Override
