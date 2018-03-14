@@ -30,7 +30,7 @@
         <ImageView
             android:layout_width="@dimen/dimen_size_16"
             android:layout_height="@dimen/dimen_size_16"
-            android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginStart="@dimen/dimen_size_12"
             android:src="@mipmap/search"
             tools:ignore="ContentDescription" />
 
