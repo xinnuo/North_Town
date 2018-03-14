@@ -70,11 +70,8 @@
             app:sLeftTextMarginLeft="@dimen/dimen_size_10"
             app:sLeftTextString="身份证"
             app:sLineShow="bottom"
-            app:sRightIconMarginRight="@dimen/dimen_size_10"
-            app:sRightIconRes="@mipmap/arrow_right"
-            app:sRightIconSize="@dimen/dimen_size_13"
             app:sRightTextColor="@color/gray"
-            app:sRightTextMarginRight="@dimen/dimen_size_30" />
+            app:sRightTextMarginRight="@dimen/dimen_size_20" />
 
         <com.allen.library.SuperTextView
             android:id="@+id/info_pwd"
