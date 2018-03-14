@@ -2,10 +2,7 @@ package com.ruanmeng.north_town
 
 import android.os.Bundle
 import android.view.View
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.load_Linear
-import com.ruanmeng.base.refresh
-import com.ruanmeng.base.startActivity
+import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.utils.ActivityStack
 import kotlinx.android.synthetic.main.activity_report.*
@@ -29,9 +26,8 @@ class ReportActivity : BaseActivity() {
         mAdapter.updateData(list)
     }
 
+    @Suppress("DEPRECATION")
     override fun init_title() {
-        // empty_view.visibility = View.VISIBLE
-
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
             if (!isLoadingMore) {
@@ -42,7 +38,8 @@ class ReportActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_report_list) { data, injector ->
-                    injector.clicked(R.id.item_report) {
+                    injector.text(R.id.item_report_name, getColorText("姓名", "姓"))
+                            .clicked(R.id.item_report) {
                         startActivity(ReportDetailActivity::class.java)
                     }
                 }
