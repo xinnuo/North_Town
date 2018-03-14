@@ -45,7 +45,7 @@ inline fun <reified T : View> Activity.find(@IdRes id: Int): T = findViewById(id
 
 inline fun Activity.startActivity(activity: Class<*>) = startActivity(Intent(this, activity))
 
-inline fun Activity.toast(text: CharSequence) = MToast.makeTextShort(this, text).show()
+// inline fun Activity.toast(text: CharSequence) = MToast.makeTextShort(this, text).show()
 
 inline fun Activity.showToast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(this, text, duration).show()
 

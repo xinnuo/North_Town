@@ -8,7 +8,6 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.showToast
-import com.ruanmeng.base.toast
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import kotlinx.android.synthetic.main.activity_password.*
