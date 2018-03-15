@@ -10,6 +10,7 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.showToast
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.share.Const
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.DESUtil
@@ -72,14 +73,11 @@ class ForgetActivity : BaseActivity() {
                     }
                 }
 
-                val currentMillis = System.currentTimeMillis().toString()
-                JiaMiUtil.DESIV = JiaMiUtil.getiv(currentMillis)
-
                 OkGo.post<String>(BaseHttp.get_smscode)
                         .tag(this@ForgetActivity)
-                        .params("mobile", DESUtil.encode(JiaMiUtil.getkey(currentMillis), et_tel.text.trim().toString()))
+                        .params("mobile", DESUtil.encode(JiaMiUtil.getkey(Const.MAKER), et_tel.text.trim().toString()))
                         .params("accountType", "App_Staff")
-                        .params("time", currentMillis)
+                        .params("time", Const.MAKER)
                         .params("smsKey", "hOWt3hiakXHrePCqDKUsPz5T6f7j8P")
                         .params("isReg", "false")
                         .execute(object : StringDialogCallback(baseContext) {

@@ -1,7 +1,9 @@
 package com.ruanmeng.north_town
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.BaseResponse
@@ -12,9 +14,10 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.share.BaseHttp
-import com.ruanmeng.utils.ActivityStack
+import com.ruanmeng.utils.KeyboardHelper
 import kotlinx.android.synthetic.main.activity_report.*
 import kotlinx.android.synthetic.main.layout_empty_add.*
+import kotlinx.android.synthetic.main.layout_title_search.*
 import net.idik.lib.slimadapter.SlimAdapter
 
 class ReportActivity : BaseActivity() {
@@ -34,6 +37,8 @@ class ReportActivity : BaseActivity() {
 
     @Suppress("DEPRECATION")
     override fun init_title() {
+        search_edit.addTextChangedListener(this@ReportActivity)
+
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
             if (!isLoadingMore) {
@@ -45,8 +50,8 @@ class ReportActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_report_list) { data, injector ->
                     injector.text(R.id.item_report_name, getColorText(data.userName, keyWord))
-                            .text(R.id.item_report_phone, "手机 ${data.telephone}")
-                            .text(R.id.item_report_idcard, "身份证号 " + getColorText(data.cardNo, keyWord))
+                            .text(R.id.item_report_phone, getColorText("手机 ${data.telephone}", keyWord))
+                            .text(R.id.item_report_idcard, getColorText("身份证号 " + data.cardNo, keyWord))
 
                             .with<RoundedImageView>(R.id.item_report_img) { view ->
                                 Glide.with(baseContext)
@@ -64,12 +69,26 @@ class ReportActivity : BaseActivity() {
                             }
                 }
                 .attachTo(recycle_list)
+
+        search_edit.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
+
+                if (search_edit.text.toString().isBlank()) {
+                    showToast("请输入关键字")
+                } else {
+                    keyWord = search_edit.text.toString()
+                    updateList()
+                }
+            }
+            return@setOnEditorActionListener false
+        }
     }
 
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.search_cancel -> ActivityStack.screenManager.popActivities(this@ReportActivity::class.java)
+            R.id.search_cancel -> search_edit.setText("")
             R.id.empty_add -> startActivity(ReportAddActivity::class.java)
         }
     }
@@ -77,6 +96,7 @@ class ReportActivity : BaseActivity() {
     override fun getData(pindex: Int) {
         OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_list)
                 .tag(this@ReportActivity)
+                .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("search", keyWord)
                 .params("page", pindex)
@@ -95,14 +115,35 @@ class ReportActivity : BaseActivity() {
                         mAdapter.updateData(list)
                     }
 
+                    @SuppressLint("SetTextI18n")
                     override fun onFinish() {
                         super.onFinish()
                         swipe_refresh.isRefreshing = false
                         isLoadingMore = false
 
+                        report_result.text = "搜索结果(${list.size})"
                         empty_view.visibility = if (list.size == 0) View.VISIBLE else View.GONE
                     }
 
                 })
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun updateList() {
+        list.clear()
+        report_result.text = "搜索结果(${list.size})"
+        mAdapter.notifyDataSetChanged()
+        empty_view.visibility = View.GONE
+
+        pageNum = 1
+        swipe_refresh.isRefreshing = true
+        getData(pageNum)
+    }
+
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        if (s.isEmpty() && keyWord.isNotEmpty()) {
+            keyWord = ""
+            updateList()
+        }
     }
 }

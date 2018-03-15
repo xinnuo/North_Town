@@ -25,6 +25,8 @@ import com.lzy.okgo.exception.StorageException;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 
+import org.json.JSONException;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -76,7 +78,8 @@ public abstract class JsonDialogCallback<T> extends JsonCallback<T> {
     public void onError(Response<T> response) {
         super.onError(response);
         Throwable exception = response.getException();
-        if (exception instanceof UnknownHostException || exception instanceof ConnectException) {
+        if (exception instanceof UnknownHostException
+                || exception instanceof ConnectException) {
             showToast("网络连接失败，请连接网络！");
         } else if (exception instanceof SocketTimeoutException) {
             showToast("网络请求超时！");
@@ -84,7 +87,8 @@ public abstract class JsonDialogCallback<T> extends JsonCallback<T> {
             showToast("服务器发生未知错误！");
         } else if (exception instanceof StorageException) {
             showToast("SD卡不存在或没有权限！");
-        } else if (exception instanceof JsonSyntaxException) {
+        } else if (exception instanceof JsonSyntaxException
+                || exception instanceof JSONException) {
             showToast("数据格式错误或解析失败！");
         } else {
             showToast("网络数据请求失败！");

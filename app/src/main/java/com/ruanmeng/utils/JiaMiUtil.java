@@ -7,9 +7,9 @@ package com.ruanmeng.utils;
  */
 
 public class JiaMiUtil {
-    public static String appkey="c306e6eb-fdba-11e7-9bb0-00163e0004bf";
-    public static String sercret="jZ0F9RTa5Y4NDZ95C4n38SuddBgtSw05";
-    public static String DESIV;
+    public static String appkey = "c306e6eb-fdba-11e7-9bb0-00163e0004bf";
+    public static String sercret = "jZ0F9RTa5Y4NDZ95C4n38SuddBgtSw05";
+    public static String DESIV = "B110BA97";
 
     public static String getkey(String time) {
         String a;
