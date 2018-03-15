@@ -12,6 +12,8 @@ import com.ruanmeng.base.showToast
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
+import com.ruanmeng.utils.DESUtil
+import com.ruanmeng.utils.JiaMiUtil
 import kotlinx.android.synthetic.main.activity_forget.*
 import org.json.JSONObject
 
@@ -70,15 +72,23 @@ class ForgetActivity : BaseActivity() {
                     }
                 }
 
+                val currentMillis = System.currentTimeMillis().toString()
+                JiaMiUtil.DESIV = JiaMiUtil.getiv(currentMillis)
+
                 OkGo.post<String>(BaseHttp.get_smscode)
                         .tag(this@ForgetActivity)
-                        .params("mobile", et_tel.text.trim().toString())
+                        .params("mobile", DESUtil.encode(JiaMiUtil.getkey(currentMillis), et_tel.text.trim().toString()))
                         .params("accountType", "App_Staff")
-                        .params("time", System.currentTimeMillis())
+                        .params("time", currentMillis)
                         .params("smsKey", "hOWt3hiakXHrePCqDKUsPz5T6f7j8P")
                         .params("isReg", "false")
                         .execute(object : StringDialogCallback(baseContext) {
-
+                            /*{
+                                "info": "验证码发送成功",
+                                "code": 100,
+                                "object": "1383",
+                                "refrsh": true
+                            }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                                 YZM = JSONObject(response.body()).getString("object")
@@ -126,7 +136,11 @@ class ForgetActivity : BaseActivity() {
                         .params("newpwd", et_pwd.text.trim().toString())
                         .params("accountType", "App_Staff")
                         .execute(object : StringDialogCallback(this@ForgetActivity) {
-
+                            /*{
+                                "info": "密码修改成功!",
+                                "code": 100,
+                                "refrsh": true
+                            }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                                 showToast(msg)
