@@ -1,5 +1,5 @@
 /**
- * created by 小卷毛, 2018/3/7 0007
+ * created by 小卷毛, 2018/3/15 0015
  * Copyright (c) 2018, 416143467@qq.com All Rights Reserved.
  * #                   *********                            #
  * #                  ************                          #
@@ -32,13 +32,12 @@ import java.io.Serializable
 /**
  * 项目名称：North_Town
  * 创建人：小卷毛
- * 创建时间：2018-03-07 15:07
+ * 创建时间：2018-03-15 09:01
  */
-data class CommonData(
-        //报备列表
-        var accountInfoId: String = "",
-        var cardNo: String = "",
-        var telephone: String = "",
-        var userhead: String = "",
-        var userName: String = ""
-) : Serializable
+data class CommonModel(
+        var total: String = "",
+        var page: String = "",
+        var pageCount: String = "",
+        var pages: String = "",
+        var rows: List<CommonData> ?= ArrayList()
+): Serializable

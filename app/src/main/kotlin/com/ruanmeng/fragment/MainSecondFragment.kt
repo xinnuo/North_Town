@@ -40,9 +40,7 @@ class MainSecondFragment : BaseFragment() {
         second_tel.text = getString("mobile")
         GlideApp.with(activity!!)
                 .load(BaseHttp.baseImg + getString("userhead"))
-                .placeholder(R.mipmap.default_user)
-                .error(R.mipmap.default_user)
-                .dontAnimate()
+                .resourceOption(R.mipmap.default_user)
                 .into(second_img)
         second_img.setTag(R.id.second_img, getString("userhead"))
 
@@ -78,9 +76,7 @@ class MainSecondFragment : BaseFragment() {
                         if (second_img.getTag(R.id.second_img) == null) {
                             GlideApp.with(activity!!)
                                     .load(BaseHttp.baseImg + getString("userhead"))
-                                    .placeholder(R.mipmap.default_user)
-                                    .error(R.mipmap.default_user)
-                                    .dontAnimate()
+                                    .resourceOption(R.mipmap.default_user)
                                     .into(second_img)
 
                             second_img.setTag(R.id.second_img, getString("userhead"))
@@ -88,9 +84,7 @@ class MainSecondFragment : BaseFragment() {
                             if (second_img.getTag(R.id.second_img) != getString("userhead")) {
                                 GlideApp.with(activity!!)
                                         .load(BaseHttp.baseImg + getString("userhead"))
-                                        .placeholder(R.mipmap.default_user)
-                                        .error(R.mipmap.default_user)
-                                        .dontAnimate()
+                                        .resourceOption(R.mipmap.default_user)
                                         .into(second_img)
 
                                 second_img.setTag(R.id.second_img, getString("userhead"))

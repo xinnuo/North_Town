@@ -45,7 +45,7 @@ class SettingActivity : BaseActivity() {
 
                         GlideCacheUtil.getInstance().clearImageAllCache(baseContext)
                         PictureFileUtils.deleteCacheDirFile(baseContext)
-                        setting_cache.setRightString("0.0B")
+                        setting_cache.setRightString("0B")
                     }
                     .setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
                     .create()

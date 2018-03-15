@@ -32,6 +32,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.ruanmeng.north_town.R
 
 fun <T> ArrayList<T>.addItems(items: List<T>? = null): ArrayList<T> {
@@ -88,9 +89,9 @@ fun RecyclerView.load_Linear(mContext: Activity,
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             when (newState) {
-                RecyclerView.SCROLL_STATE_DRAGGING -> GlideApp.with(context.applicationContext).resumeRequests()
-                RecyclerView.SCROLL_STATE_SETTLING -> GlideApp.with(context.applicationContext).pauseRequests()
-                RecyclerView.SCROLL_STATE_IDLE -> GlideApp.with(context.applicationContext).resumeRequests()
+                RecyclerView.SCROLL_STATE_DRAGGING -> Glide.with(context.applicationContext).resumeRequests()
+                RecyclerView.SCROLL_STATE_SETTLING -> Glide.with(context.applicationContext).pauseRequests()
+                RecyclerView.SCROLL_STATE_IDLE -> Glide.with(context.applicationContext).resumeRequests()
             }
         }
     })
@@ -135,9 +136,9 @@ fun RecyclerView.load_Grid(refreshLayout: SwipeRefreshLayout? = null,
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             when (newState) {
-                RecyclerView.SCROLL_STATE_DRAGGING -> GlideApp.with(context.applicationContext).resumeRequests()
-                RecyclerView.SCROLL_STATE_SETTLING -> GlideApp.with(context.applicationContext).pauseRequests()
-                RecyclerView.SCROLL_STATE_IDLE -> GlideApp.with(context.applicationContext).resumeRequests()
+                RecyclerView.SCROLL_STATE_DRAGGING -> Glide.with(context.applicationContext).resumeRequests()
+                RecyclerView.SCROLL_STATE_SETTLING -> Glide.with(context.applicationContext).pauseRequests()
+                RecyclerView.SCROLL_STATE_IDLE -> Glide.with(context.applicationContext).resumeRequests()
             }
         }
     })
