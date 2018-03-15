@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.lzg.extend.BaseResponse
+import com.lzg.extend.jackson.JacksonDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
 import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
@@ -24,11 +28,8 @@ class ReportActivity : BaseActivity() {
         setToolbarVisibility(false)
         init_title()
 
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        mAdapter.updateData(list)
+        swipe_refresh.isRefreshing = true
+        getData(pageNum)
     }
 
     @Suppress("DEPRECATION")
@@ -44,8 +45,8 @@ class ReportActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_report_list) { data, injector ->
                     injector.text(R.id.item_report_name, getColorText(data.userName, keyWord))
-                            .text(R.id.item_report_phone, data.telephone)
-                            .text(R.id.item_report_idcard, getColorText(data.cardNo, keyWord))
+                            .text(R.id.item_report_phone, "手机 ${data.telephone}")
+                            .text(R.id.item_report_idcard, "身份证号 " + getColorText(data.cardNo, keyWord))
 
                             .with<RoundedImageView>(R.id.item_report_img) { view ->
                                 Glide.with(baseContext)
@@ -74,6 +75,34 @@ class ReportActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_list)
+                .tag(this@ReportActivity)
+                .headers("token", getString("token"))
+                .params("search", keyWord)
+                .params("page", pindex)
+                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
 
+                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+
+                        list.apply {
+                            if (pindex == 1) {
+                                clear()
+                                pageNum = pindex
+                            }
+                            addItems(response.body().`object`)
+                            if (count(response.body().`object`) > 0) pageNum++
+                        }
+                        mAdapter.updateData(list)
+                    }
+
+                    override fun onFinish() {
+                        super.onFinish()
+                        swipe_refresh.isRefreshing = false
+                        isLoadingMore = false
+
+                        empty_view.visibility = if (list.size == 0) View.VISIBLE else View.GONE
+                    }
+
+                })
     }
 }

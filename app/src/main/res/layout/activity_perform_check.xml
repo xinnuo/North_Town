@@ -56,6 +56,8 @@
                 android:id="@+id/perform_left"
                 android:layout_width="@dimen/dimen_size_35"
                 android:layout_height="@dimen/dimen_size_35"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/iv_perform_selector_1"
                 tools:ignore="ContentDescription" />
 
@@ -75,6 +77,8 @@
                 android:id="@+id/perform_right"
                 android:layout_width="@dimen/dimen_size_35"
                 android:layout_height="@dimen/dimen_size_35"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/iv_perform_selector_2"
                 tools:ignore="ContentDescription" />
 

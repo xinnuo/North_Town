@@ -89,11 +89,12 @@ public class JsonUtil {
                 }
 
             });
-            mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false); //当找不到对应的序列化器时 忽略此字段
 
             SimpleModule module = new SimpleModule();
             module.addSerializer(String.class, new StringUnicodeSerializer()); //使Jackson支持Unicode编码非ASCII字符
             mapper.registerModule(module);
+
+            mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false); //当找不到对应的序列化器时 忽略此字段
             mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -58,17 +59,38 @@ public abstract class JacksonCallback<T> extends AbsCallback<T> {
             final Type type = ((ParameterizedType) genType).getActualTypeArguments()[0];
 
             if (type instanceof ParameterizedType) {
-                Type rawType = ((ParameterizedType) type).getRawType();                     //泛型的实际类型
+                Type rawType = ((ParameterizedType) type).getRawType(); //泛型的实际类型
                 Type typeArgument = ((ParameterizedType) type).getActualTypeArguments()[0]; //泛型的参数
 
                 if (rawType == BaseResponse.class) {
-                    Class<?> clazzArgument = getClass(typeArgument);
 
-                    BaseResponse baseResponse = new BaseResponse();
-                    baseResponse.object = JsonUtil.jsonToBean(new JSONObject(json).getJSONObject("object").toString(), clazzArgument);
-                    // T t = JsonUtil.jsonToBean(json, new TypeReference<T>() { }); //解析成为LinkedHashMap
-                    response.close();
-                    return (T) baseResponse;
+                    if (typeArgument instanceof ParameterizedType) {
+                        Type rawTypeInner = ((ParameterizedType) typeArgument).getRawType(); //泛型的实际类型
+                        Type typeArgumentInner = ((ParameterizedType) typeArgument).getActualTypeArguments()[0]; //泛型的参数
+
+                        if (rawTypeInner == ArrayList.class) {
+                            Class<?> clazzArgument = getClass(typeArgumentInner);
+
+                            BaseResponse baseResponse = new BaseResponse();
+                            baseResponse.object = JsonUtil.toList(new JSONObject(json).getJSONArray("object").toString(), clazzArgument);
+
+                            response.close();
+                            return (T) baseResponse;
+                        } else {
+
+                            T t = JsonUtil.jsonToBean(json, new TypeReference<T>() { }); //解析成为LinkedHashMap
+                            response.close();
+                            return t;
+                        }
+                    } else {
+                        Class<?> clazzArgument = getClass(typeArgument);
+
+                        BaseResponse baseResponse = new BaseResponse();
+                        baseResponse.object = JsonUtil.jsonToBean(new JSONObject(json).getJSONObject("object").toString(), clazzArgument);
+
+                        response.close();
+                        return (T) baseResponse;
+                    }
                 } else {
 
                     T t = JsonUtil.jsonToBean(json, new TypeReference<T>() { }); //解析成为LinkedHashMap
