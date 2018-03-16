@@ -40,5 +40,12 @@ data class CommonData(
         var cardNo: String = "",
         var telephone: String = "",
         var userhead: String = "",
-        var userName: String = ""
+        var userName: String = "",
+        //偏好列表
+        var isChecked: Boolean = false,
+        var preferenceId: String = "",
+        var preferenceName: String = "",
+        //职业列表
+        var industryId: String = "",
+        var industryName: String = ""
 ) : Serializable

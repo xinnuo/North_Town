@@ -24,8 +24,8 @@
 
         <CheckBox
             android:id="@+id/item_like_check"
-            android:layout_width="@dimen/dimen_size_16"
-            android:layout_height="@dimen/dimen_size_16"
+            android:layout_width="@dimen/dimen_size_20"
+            android:layout_height="@dimen/dimen_size_20"
             android:background="@drawable/cb_like_selector"
             android:button="@null"
             android:clickable="false" />

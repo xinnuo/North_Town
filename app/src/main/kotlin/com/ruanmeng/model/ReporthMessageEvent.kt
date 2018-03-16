@@ -1,5 +1,5 @@
 /**
- * created by 小卷毛, 2018/3/8 0008
+ * created by 小卷毛, 2018/3/16 0016
  * Copyright (c) 2018, 416143467@qq.com All Rights Reserved.
  * #                   *********                            #
  * #                  ************                          #
@@ -25,16 +25,11 @@
  * #          *****       ***        ***      *             #
  * #            **       ****        ****                   #
  */
-package com.ruanmeng.fragment
+package com.ruanmeng.model
 
 /**
  * 项目名称：North_Town
  * 创建人：小卷毛
- * 创建时间：2018-03-07 15:07
+ * 创建时间：2018-03-16 09:34
  */
-interface OnFragmentItemSelectListener {
-    fun onitemSelected(
-            type: String,
-            id: String,
-            name: String)
-}
+data class ReportMessageEvent(var id: String = "", var name: String = "", var type: String = "")
