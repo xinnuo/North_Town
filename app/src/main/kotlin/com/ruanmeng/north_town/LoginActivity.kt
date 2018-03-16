@@ -30,8 +30,8 @@ class LoginActivity : BaseActivity() {
         bt_login.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         bt_login.isClickable = false
 
-        et_name.addTextChangedListener(this)
-        et_pwd.addTextChangedListener(this)
+        et_name.addTextChangedListener(this@LoginActivity)
+        et_pwd.addTextChangedListener(this@LoginActivity)
 
         if (getString("mobile").isNotEmpty()) {
             et_name.setText(getString("mobile"))

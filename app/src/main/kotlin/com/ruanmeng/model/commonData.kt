@@ -47,5 +47,11 @@ data class CommonData(
         var preferenceName: String = "",
         //职业列表
         var industryId: String = "",
-        var industryName: String = ""
+        var industryName: String = "",
+        //类型列表
+        var villageTypeId: String = "",
+        var villageTypeName: String = "",
+        //单位列表
+        var unitTypeId: String = "",
+        var unitTypeName: String = ""
 ) : Serializable

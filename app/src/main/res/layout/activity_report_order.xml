@@ -36,7 +36,7 @@
                 app:sBottomLineMargin="@dimen/dimen_size_10"
                 app:sLeftTextColor="@color/gray"
                 app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="本有限合伙人名称为"
+                app:sLeftTextString="本有限合伙人名称"
                 app:sLineShow="bottom"
                 app:sRightTextColor="@color/gray"
                 app:sRightTextMarginRight="@dimen/dimen_size_10" />

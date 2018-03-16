@@ -25,8 +25,10 @@ public class BaseHttp {
     public static String customer_list = baseIp + "/customer_list.rm"; //报备列表√
     public static String customer_details = baseIp + "/customer_details.rm"; //客户详情√
     public static String customer_sub = baseIp + "/customer_sub.rm"; //添加客户√
+    public static String villagetype_list = baseIp + "/villagetype_list.rm"; //小区类型√
     public static String preference_list = baseIp + "/preference_list.rm"; //偏好列表√
     public static String industry_list = baseIp + "/industry_list.rm"; //职业列表√
+    public static String unittype_list = baseIp + "/unittype_list.rm"; //单位类型√
     public static String purchase_sub = baseIp + "/purchase_sub.rm"; //添加订单√
 
     public static String yjgz_center = baseIp + "/yjgz_center.rm";             //佣金规则√

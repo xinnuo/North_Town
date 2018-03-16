@@ -14,12 +14,15 @@ import com.lzy.okgo.model.Response
 import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.KeyboardHelper
 import kotlinx.android.synthetic.main.activity_report.*
 import kotlinx.android.synthetic.main.layout_empty_add.*
 import kotlinx.android.synthetic.main.layout_title_search.*
 import net.idik.lib.slimadapter.SlimAdapter
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class ReportActivity : BaseActivity() {
 
@@ -31,6 +34,8 @@ class ReportActivity : BaseActivity() {
         setContentView(R.layout.activity_report)
         setToolbarVisibility(false)
         init_title()
+
+        EventBus.getDefault().register(this@ReportActivity)
 
         swipe_refresh.isRefreshing = true
         getData(pageNum)
@@ -147,6 +152,18 @@ class ReportActivity : BaseActivity() {
         if (s.isEmpty() && keyWord.isNotEmpty()) {
             keyWord = ""
             updateList()
+        }
+    }
+
+    override fun finish() {
+        EventBus.getDefault().unregister(this@ReportActivity)
+        super.finish()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: ReportMessageEvent) {
+        when (event.type) {
+            "添加客户" -> updateList()
         }
     }
 }
