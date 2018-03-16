@@ -1,6 +1,7 @@
 package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -65,7 +66,9 @@ class ReportActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_report) {
-                                startActivity(ReportDetailActivity::class.java)
+                                val intent = Intent(baseContext, ReportDetailActivity::class.java)
+                                intent.putExtra("accountInfoId", data.accountInfoId)
+                                startActivity(intent)
                             }
                 }
                 .attachTo(recycle_list)
