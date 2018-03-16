@@ -2,7 +2,6 @@ package com.ruanmeng.north_town
 
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.DrawableTransformation
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.StringDialogCallback
@@ -10,7 +9,6 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
-import com.ruanmeng.base.putString
 import com.ruanmeng.base.startActivity
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_report_detail.*
@@ -40,7 +38,7 @@ class ReportDetailActivity : BaseActivity() {
     }
 
     override fun getData() {
-        OkGo.post<String>(BaseHttp.customer_details)
+        OkGo.post<String>(BaseHttp.other_userinfo)
                 .tag(this@ReportDetailActivity)
                 .headers("token", getString("token"))
                 .params("accountInfoId", intent.getStringExtra("accountInfoId"))
@@ -66,9 +64,9 @@ class ReportDetailActivity : BaseActivity() {
                             "1" -> "是"
                             else -> "否"
                         })
-                        report_house.text = obj.getString("isOwner")
-                        report_num.setRightString(obj.getString("isOwner"))
-                        report_memo.text = obj.getString("isOwner")
+                        report_house.text = obj.getString("villageName")
+                        report_num.setRightString(obj.getString("houseNumber"))
+                        report_memo.text = obj.getString("remark")
                     }
 
                 })
