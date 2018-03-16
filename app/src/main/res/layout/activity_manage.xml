@@ -1,43 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.allen.library.SuperTextView
-        android:id="@+id/manage_vip"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/manage_list"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginTop="@dimen/dimen_size_10"
-        app:sBottomLineMargin="@dimen/dimen_size_10"
-        app:sLeftIconRes="@mipmap/icon_vip"
-        app:sLeftIconSize="@dimen/dimen_size_45"
-        app:sLeftTextColor="@color/black_dark"
-        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-        app:sLeftTextSize="@dimen/sp_size_15"
-        app:sLeftTextString="会员卡投资"
-        app:sLineShow="both"
-        app:sRightIconMarginRight="@dimen/dimen_size_10"
-        app:sRightIconRes="@mipmap/arrow_right"
-        app:sRightIconSize="@dimen/dimen_size_13"
-        app:sTopLineMargin="0dp" />
-
-    <com.allen.library.SuperTextView
-        android:id="@+id/manage_partner"
-        android:layout_width="match_parent"
-        android:layout_height="65.5dp"
-        app:sBottomLineMargin="@dimen/dimen_size_0"
-        app:sLeftIconRes="@mipmap/icon_coo"
-        app:sLeftIconSize="@dimen/dimen_size_45"
-        app:sLeftTextColor="@color/black_dark"
-        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-        app:sLeftTextSize="@dimen/sp_size_15"
-        app:sLeftTextString="有限合伙人投资"
-        app:sLineShow="bottom"
-        app:sRightIconMarginRight="@dimen/dimen_size_10"
-        app:sRightIconRes="@mipmap/arrow_right"
-        app:sRightIconSize="@dimen/dimen_size_13"
-        app:sRightTextMarginRight="@dimen/dimen_size_30" />
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
 
 </LinearLayout>

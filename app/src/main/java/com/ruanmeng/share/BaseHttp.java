@@ -31,6 +31,9 @@ public class BaseHttp {
     public static String unittype_list = baseIp + "/unittype_list.rm"; //单位类型√
     public static String purchase_sub = baseIp + "/purchase_sub.rm"; //添加订单√
 
+    public static String product_list = baseIp + "/product_list.rm"; //产品列表√
+    public static String get_product = baseIp + "/get_product.rm"; //产品详情√
+
     public static String yjgz_center = baseIp + "/yjgz_center.rm";             //佣金规则√
     public static String about_us = baseIp + "/about_us.rm";                   //关于我们√
     public static String get_version_staff = baseIp + "/get_version_staff.rm"; //版本升级√

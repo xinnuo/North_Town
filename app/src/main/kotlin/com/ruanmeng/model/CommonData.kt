@@ -41,17 +41,32 @@ data class CommonData(
         var telephone: String = "",
         var userhead: String = "",
         var userName: String = "",
+
         //偏好列表
         var isChecked: Boolean = false,
         var preferenceId: String = "",
         var preferenceName: String = "",
+
         //职业列表
         var industryId: String = "",
         var industryName: String = "",
+
         //类型列表
         var villageTypeId: String = "",
         var villageTypeName: String = "",
+
         //单位列表
         var unitTypeId: String = "",
-        var unitTypeName: String = ""
+        var unitTypeName: String = "",
+
+        //产品列表
+        var img: String = "",
+        var productId: String = "",
+        var productName: String = "",
+
+        //利率列表
+        var max: String = "",
+        var min: String = "",
+        var rate: String = "",
+        var years: String = ""
 ) : Serializable
