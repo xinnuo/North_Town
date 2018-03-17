@@ -59,6 +59,10 @@ data class CommonData(
         var unitTypeId: String = "",
         var unitTypeName: String = "",
 
+        //银行列表
+        var bankId: String = "",
+        var bankName: String = "",
+
         //产品列表
         var img: String = "",
         var productId: String = "",

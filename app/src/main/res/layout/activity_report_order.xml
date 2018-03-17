@@ -58,63 +58,172 @@
                 android:layout_height="@dimen/dimen_size_15"
                 android:background="@color/background" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_product"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_46"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="选择产品"
-                app:sLineShow="both"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30"
-                app:sTopLineMargin="@dimen/dimen_size_0" />
+                android:layout_height="@dimen/divider_height"
+                android:background="@color/divider" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_money"
+            <LinearLayout
+                android:id="@+id/report_product_ll"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="认购金额：人民币(元)"
-                app:sLineShow="bottom"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_start"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="出资日期"
-                app:sLineShow="bottom"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择产品" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_end"
+                <TextView
+                    android:id="@+id/report_product"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择产品"
+                    android:paddingLeft="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="到期日期"
-                app:sLineShow="bottom"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_size_10"
+                android:paddingStart="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_size_10"
+                    android:text="认购金额：人民币(元)" />
+
+                <com.santalu.maskedittext.MaskEditText
+                    android:id="@+id/et_money"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical|end"
+                    android:hint="输入认购金额"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/dimen_size_10"
+                    app:mask="#,###,###,###" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_start_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="出资日期" />
+
+                <TextView
+                    android:id="@+id/report_start"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择出资日期"
+                    android:paddingLeft="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_end_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="到期日期" />
+
+                <TextView
+                    android:id="@+id/report_end"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择到期日期"
+                    android:paddingLeft="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
 
             <com.allen.library.SuperTextView
                 android:id="@+id/report_expect"
@@ -181,20 +290,54 @@
                 android:paddingStart="@dimen/dimen_size_10"
                 android:text="开户信息" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_bank"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_46"
-                app:sBothLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="开户行"
-                app:sLineShow="both"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_bank_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="开户行" />
+
+                <TextView
+                    android:id="@+id/report_bank"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择开户行"
+                    android:paddingLeft="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -343,50 +486,131 @@
                 android:layout_marginRight="@dimen/dimen_size_10"
                 android:background="@color/divider" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_agent"
+            <LinearLayout
+                android:id="@+id/report_agent_ll"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="选择经纪人"
-                app:sLineShow="bottom"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_up"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="选择上级客户信息"
-                app:sLineShow="bottom"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择经纪人" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_relation"
+                <TextView
+                    android:id="@+id/report_agent"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择经纪人"
+                    android:paddingLeft="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="选择与上级客户关系"
-                app:sLineShow="bottom"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_up_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择上级客户信息" />
+
+                <TextView
+                    android:id="@+id/report_up"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择上级客户信息"
+                    android:paddingLeft="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_relation_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择与上级客户关系" />
+
+                <TextView
+                    android:id="@+id/report_relation"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择与上级客户关系"
+                    android:paddingLeft="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
