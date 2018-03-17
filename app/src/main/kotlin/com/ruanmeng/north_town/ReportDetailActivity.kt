@@ -31,7 +31,10 @@ class ReportDetailActivity : BaseActivity() {
 
         report_input.setOnClickListener {
             when (isData) {
-                true -> startActivity(DataCheckActivity::class.java)
+                true -> {
+                    intent.setClass(baseContext, DataCheckActivity::class.java)
+                    startActivity(intent)
+                }
                 false -> startActivity(ReportOrderActivity::class.java)
             }
         }

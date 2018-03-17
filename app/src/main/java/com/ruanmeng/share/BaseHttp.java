@@ -33,9 +33,11 @@ public class BaseHttp {
     public static String bank_list = baseIp + "/bank_list.rm"; //银行列表√
 
     public static String customer_list_all = baseIp + "/customer_list_all.rm"; //资料列表√
+    public static String customer_purchase_list = baseIp + "/customer_purchase_list.rm"; //客户订单√
+    public static String customer_purchase_details = baseIp + "/customer_purchase_details.rm"; //订单详情√
 
     public static String product_list = baseIp + "/product_list.rm"; //产品列表√
-    public static String get_product = baseIp + "/get_product.rm"; //产品详情√
+    public static String get_product = baseIp + "/get_product.rm";   //产品详情√
 
     public static String yjgz_center = baseIp + "/yjgz_center.rm";             //佣金规则√
     public static String about_us = baseIp + "/about_us.rm";                   //关于我们√

@@ -40,7 +40,7 @@
                     style="@style/Font15_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="姓名" />
+                    android:text="产品名称" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -66,14 +66,19 @@ data class CommonData(
         //资料列表
         var amount: String = "",
 
+        //客户订单
+        var beginDate: String = "",
+        var endDate: String = "",
+        var productName: String = "",
+        var purchaseId: String = "",
+        var rate: String = "",
+        var years: String = "",
+
         //产品列表
         var img: String = "",
         var productId: String = "",
-        var productName: String = "",
 
         //利率列表
         var max: String = "",
-        var min: String = "",
-        var rate: String = "",
-        var years: String = ""
+        var min: String = ""
 ) : Serializable
