@@ -43,8 +43,6 @@ class ReportActivity : BaseActivity() {
 
     @Suppress("DEPRECATION")
     override fun init_title() {
-        search_edit.addTextChangedListener(this@ReportActivity)
-
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
             if (!isLoadingMore) {
@@ -78,6 +76,7 @@ class ReportActivity : BaseActivity() {
                 }
                 .attachTo(recycle_list)
 
+        search_edit.addTextChangedListener(this@ReportActivity)
         search_edit.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
@@ -130,7 +129,7 @@ class ReportActivity : BaseActivity() {
                         isLoadingMore = false
 
                         report_result.text = "搜索结果(${list.size})"
-                        empty_view.visibility = if (list.size == 0) View.VISIBLE else View.GONE
+                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
                     }
 
                 })
@@ -138,13 +137,16 @@ class ReportActivity : BaseActivity() {
 
     @SuppressLint("SetTextI18n")
     fun updateList() {
-        list.clear()
-        report_result.text = "搜索结果(${list.size})"
-        mAdapter.notifyDataSetChanged()
-        empty_view.visibility = View.GONE
+        swipe_refresh.isRefreshing = true
+
+        if (list.size > 0) {
+            list.clear()
+            report_result.text = "搜索结果(${list.size})"
+            mAdapter.notifyDataSetChanged()
+            empty_view.visibility = View.GONE
+        }
 
         pageNum = 1
-        swipe_refresh.isRefreshing = true
         getData(pageNum)
     }
 

@@ -15,7 +15,6 @@
         app:tabTextColor="@color/gray" />
 
     <View
-        android:id="@+id/data_divider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:background="@color/divider" />
@@ -23,6 +22,7 @@
     <include layout="@layout/layout_search" />
 
     <View
+        android:id="@+id/data_divider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:background="@color/divider" />
