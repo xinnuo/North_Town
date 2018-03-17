@@ -32,6 +32,8 @@ public class BaseHttp {
     public static String purchase_sub = baseIp + "/purchase_sub.rm"; //添加订单√
     public static String bank_list = baseIp + "/bank_list.rm"; //银行列表√
 
+    public static String customer_list_all = baseIp + "/customer_list_all.rm"; //资料列表√
+
     public static String product_list = baseIp + "/product_list.rm"; //产品列表√
     public static String get_product = baseIp + "/get_product.rm"; //产品详情√
 

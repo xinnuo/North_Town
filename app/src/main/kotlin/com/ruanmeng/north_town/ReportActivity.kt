@@ -57,7 +57,7 @@ class ReportActivity : BaseActivity() {
                 .register<CommonData>(R.layout.item_report_list) { data, injector ->
                     injector.text(R.id.item_report_name, getColorText(data.userName, keyWord))
                             .text(R.id.item_report_phone, getColorText("手机 ${data.telephone}", keyWord))
-                            .text(R.id.item_report_idcard, getColorText("身份证号 " + data.cardNo, keyWord))
+                            .text(R.id.item_report_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
 
                             .with<RoundedImageView>(R.id.item_report_img) { view ->
                                 Glide.with(baseContext)

@@ -63,6 +63,9 @@ data class CommonData(
         var bankId: String = "",
         var bankName: String = "",
 
+        //资料列表
+        var amount: String = "",
+
         //产品列表
         var img: String = "",
         var productId: String = "",

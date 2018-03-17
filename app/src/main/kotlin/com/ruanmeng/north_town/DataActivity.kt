@@ -3,11 +3,16 @@ package com.ruanmeng.north_town
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.View
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.lzy.okgo.OkGo
+import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.getColorText
 import com.ruanmeng.base.load_Linear
 import com.ruanmeng.base.refresh
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_data.*
 import kotlinx.android.synthetic.main.layout_empty.*
@@ -18,6 +23,7 @@ import net.idik.lib.slimadapter.SlimAdapter
 class DataActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
+    private var keyWord = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +67,24 @@ class DataActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_data_list) { data, injector ->
-                    injector.visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                    injector.text(R.id.item_data_name, getColorText(data.userName, keyWord))
+                            .text(R.id.item_data_phone, getColorText("手机 ${data.telephone}", keyWord))
+                            .text(R.id.item_data_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
+
+                            .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+
+                            .with<RoundedImageView>(R.id.item_data_img) { view ->
+                                Glide.with(baseContext)
+                                        .load(BaseHttp.baseImg + data.userhead)
+                                        .apply(RequestOptions
+                                                .centerCropTransform()
+                                                .placeholder(R.mipmap.default_user)
+                                                .error(R.mipmap.default_user)
+                                                .dontAnimate())
+                                        .into(view)
+                            }
+
                             .clicked(R.id.item_data) {
                                 intent.setClass(baseContext, ReportDetailActivity::class.java)
                                 intent.putExtra("isData", true)
