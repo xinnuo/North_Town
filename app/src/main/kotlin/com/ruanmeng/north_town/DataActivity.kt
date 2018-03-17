@@ -92,6 +92,7 @@ class DataActivity : BaseActivity() {
 
                             .clicked(R.id.item_data) {
                                 intent.setClass(baseContext, ReportDetailActivity::class.java)
+                                intent.putExtra("accountInfoId", data.accountInfoId)
                                 intent.putExtra("isData", true)
                                 startActivity(intent)
                             }
