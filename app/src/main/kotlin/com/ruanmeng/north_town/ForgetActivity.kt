@@ -89,7 +89,7 @@ class ForgetActivity : BaseActivity() {
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                                YZM = JSONObject(response.body()).getString("object")
+                                YZM = JSONObject(response.body()).optString("object")
                                 mTel = et_tel.text.trim().toString()
                                 if (BuildConfig.LOG_DEBUG) et_yzm.setText(YZM)
 

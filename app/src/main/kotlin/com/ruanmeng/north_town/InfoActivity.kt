@@ -146,7 +146,7 @@ class InfoActivity : BaseActivity() {
                                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                                         showToast(msg)
-                                        val userhead = JSONObject(response.body()).getString("object")
+                                        val userhead = JSONObject(response.body()).optString("object")
                                         putString("userhead", userhead)
                                         loadUserHead(userhead)
                                     }

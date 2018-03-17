@@ -34,19 +34,19 @@ class DataProductActivity : BaseActivity() {
 
                         val obj = JSONObject(response.body()).getJSONObject("object")
 
-                        product_type.text = obj.getString("productName")
-                        product_name.setRightString(obj.getString("productName"))
-                        product_year.text = obj.getString("years") ?: "0"
-                        product_start.setRightString(obj.getString("beginDate"))
-                        product_end.setRightString(obj.getString("endDate"))
+                        product_type.text = obj.optString("productName")
+                        product_name.setRightString(obj.optString("productName"))
+                        product_year.text = obj.optString("years", "0")
+                        product_start.setRightString(obj.optString("beginDate"))
+                        product_end.setRightString(obj.optString("endDate"))
 
-                        val amount = obj?.getString("amount") ?: "0"
+                        val amount = obj.optString("amount", "0")
                         product_money.text = DecimalFormat(",##0.##").format(amount.toInt() / 10000.0)
 
-                        val rate = obj?.getString("rate") ?: "0"
+                        val rate = obj.optString("rate", "0")
                         product_range.text = "${DecimalFormat("0.##").format(rate.toDouble())}%"
 
-                        val profit = obj?.getString("profit") ?: "0"
+                        val profit = obj.optString("profit", "0")
                         product_income.setRightString("+${DecimalFormat("0.##").format(profit.toDouble())}(元)")
                     }
 

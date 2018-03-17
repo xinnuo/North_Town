@@ -41,7 +41,7 @@ class WebActivity : BaseActivity() {
                                         "</style>\n" +
                                         "<body style=\"padding:0; margin:0; \">" +
                                         "<div class=\"con\">" +
-                                        (JSONObject(response.body()).getJSONObject("object")?.getString("content") ?: "") +
+                                        (JSONObject(response.body()).getJSONObject("object")?.optString("content") ?: "") +
                                         "</div>" +
                                         "</body>" +
                                         "</html>"
@@ -69,7 +69,7 @@ class WebActivity : BaseActivity() {
                                         "</style>\n" +
                                         "<body style=\"padding:0; margin:0; \">" +
                                         "<div class=\"con\">" +
-                                        (JSONObject(response.body()).getJSONObject("object")?.getString("content") ?: "") +
+                                        (JSONObject(response.body()).getJSONObject("object")?.optString("content") ?: "") +
                                         "</div>" +
                                         "</body>" +
                                         "</html>"

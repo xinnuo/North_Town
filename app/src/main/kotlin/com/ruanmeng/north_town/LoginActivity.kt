@@ -72,11 +72,11 @@ class LoginActivity : BaseActivity() {
                                 val obj = JSONObject(response.body()).getJSONObject("object")
 
                                 putBoolean("isLogin", true)
-                                putString("token", obj.getString("token"))
-                                putString("mobile", obj.getString("telephone"))
-                                putString("userName", obj.getString("userName"))
-                                putString("userhead", obj.getString("userhead"))
-                                putString("cardNo", obj.getString("cardNo"))
+                                putString("token", obj.optString("token"))
+                                putString("mobile", obj.optString("telephone"))
+                                putString("userName", obj.optString("userName"))
+                                putString("userhead", obj.optString("userhead"))
+                                putString("cardNo", obj.optString("cardNo"))
 
                                 startActivity(MainActivity::class.java)
                                 ActivityStack.screenManager.popActivities(this@LoginActivity::class.java)

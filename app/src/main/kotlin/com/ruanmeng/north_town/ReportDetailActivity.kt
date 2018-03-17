@@ -52,7 +52,7 @@ class ReportDetailActivity : BaseActivity() {
                         val obj = JSONObject(response.body()).getJSONObject("object")
 
                         Glide.with(baseContext)
-                                .load(BaseHttp.baseImg + obj.getString("userhead"))
+                                .load(BaseHttp.baseImg + obj.optString("userhead"))
                                 .apply(RequestOptions
                                         .centerCropTransform()
                                         .placeholder(R.mipmap.default_user)
@@ -60,16 +60,16 @@ class ReportDetailActivity : BaseActivity() {
                                 .transition(DrawableTransitionOptions.withCrossFade())
                                 .into(report_img)
 
-                        report_name.text = obj?.getString("userName") ?: "姓名"
-                        report_tel.text = obj?.getString("telephone") ?: "电话"
-                        report_idcard.setRightString(obj.getString("cardNo"))
-                        report_owner.setRightString(when (obj.getString("isOwner")) {
+                        report_name.text = obj.optString("userName", "姓名")
+                        report_tel.text = obj.optString("telephone", "电话")
+                        report_idcard.setRightString(obj.optString("cardNo"))
+                        report_owner.setRightString(when (obj.opt("isOwner")) {
                             "1" -> "是"
                             else -> "否"
                         })
-                        report_house.text = obj.getString("villageName")
-                        report_num.setRightString(obj.getString("houseNumber"))
-                        report_memo.text = obj.getString("remark")
+                        report_house.text = obj.optString("villageName")
+                        report_num.setRightString(obj.optString("houseNumber"))
+                        report_memo.text = obj.optString("remark")
                     }
 
                 })
