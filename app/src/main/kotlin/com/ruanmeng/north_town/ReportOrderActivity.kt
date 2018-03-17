@@ -25,6 +25,22 @@ class ReportOrderActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
+        report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
+        report_submit.isClickable = false
+
+        report_product.addTextChangedListener(this@ReportOrderActivity)
+        et_money.addTextChangedListener(this@ReportOrderActivity)
+        report_start.addTextChangedListener(this@ReportOrderActivity)
+        report_end.addTextChangedListener(this@ReportOrderActivity)
+        report_bank.addTextChangedListener(this@ReportOrderActivity)
+        et_card.addTextChangedListener(this@ReportOrderActivity)
+        et_phone.addTextChangedListener(this@ReportOrderActivity)
+        et_addr.addTextChangedListener(this@ReportOrderActivity)
+        et_fax.addTextChangedListener(this@ReportOrderActivity)
+        report_agent.addTextChangedListener(this@ReportOrderActivity)
+        report_up.addTextChangedListener(this@ReportOrderActivity)
+        report_relation.addTextChangedListener(this@ReportOrderActivity)
+        et_memo.addTextChangedListener(this@ReportOrderActivity)
     }
 
     override fun doClick(v: View) {
@@ -62,6 +78,28 @@ class ReportOrderActivity : BaseActivity() {
             R.id.report_up_ll -> { }
             R.id.report_relation_ll -> { }
             R.id.report_submit -> { }
+        }
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        if (report_product.text.isNotBlank()
+                && et_money.text.isNotBlank()
+                && report_start.text.isNotBlank()
+                && report_end.text.isNotBlank()
+                && report_bank.text.isNotBlank()
+                && et_card.text.isNotBlank()
+                && et_phone.text.isNotBlank()
+                && et_addr.text.isNotBlank()
+                && et_fax.text.isNotBlank()
+                && report_agent.text.isNotBlank()
+                && report_up.text.isNotBlank()
+                && report_relation.text.isNotBlank()
+                && et_memo.text.isNotBlank()) {
+            report_submit.setBackgroundResource(R.drawable.rec_bg_red)
+            report_submit.isClickable = true
+        } else {
+            report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
+            report_submit.isClickable = false
         }
     }
 

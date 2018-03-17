@@ -130,7 +130,7 @@
                     android:hint="输入认购金额"
                     android:inputType="number"
                     android:paddingLeft="@dimen/dimen_size_10"
-                    app:mask="#,###,###,###" />
+                    app:mask="##########" />
 
             </LinearLayout>
 
