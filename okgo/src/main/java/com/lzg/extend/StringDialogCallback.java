@@ -63,8 +63,8 @@ public abstract class StringDialogCallback extends StringCallback {
         try {
             JSONObject obj = new JSONObject(response.body());
 
-            String msgCode = obj.isNull("code") ? obj.getString("msgcode") : obj.getString("code");
-            String msg = obj.isNull("info") ? (obj.isNull("msg") ? "请求成功！" : obj.getString("msg")) : obj.getString("info");
+            String msgCode = obj.optString("msgcode", obj.optString("code"));
+            String msg = obj.optString("msg", obj.optString("info", "请求成功！"));
 
             if (!TextUtils.equals("100", msgCode)) {
                 showToast(msg);
@@ -90,8 +90,8 @@ public abstract class StringDialogCallback extends StringCallback {
         try {
             JSONObject obj = new JSONObject(response.body());
 
-            String msgCode = obj.isNull("code") ? obj.getString("msgcode") : obj.getString("code");
-            String msg = obj.isNull("info") ? (obj.isNull("msg") ? "请求成功！" : obj.getString("msg")) : obj.getString("info");
+            String msgCode = obj.optString("msgcode", obj.optString("code"));
+            String msg = obj.optString("msg", obj.optString("info", "请求成功！"));
 
             if (TextUtils.equals("100", msgCode)) onSuccessResponse(response, msg, msgCode);
         } catch (JSONException e) {

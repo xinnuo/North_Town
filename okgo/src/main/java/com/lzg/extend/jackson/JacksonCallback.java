@@ -6,6 +6,7 @@ import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.request.base.Request;
 import com.lzy.okgo.utils.OkLogger;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.ParameterizedType;
@@ -72,7 +73,8 @@ public abstract class JacksonCallback<T> extends AbsCallback<T> {
                             Class<?> clazzArgument = getClass(typeArgumentInner);
 
                             BaseResponse baseResponse = new BaseResponse();
-                            baseResponse.object = JsonUtil.toList(new JSONObject(json).getJSONArray("object").toString(), clazzArgument);
+                            JSONArray jsonArray = new JSONObject(json).optJSONArray("object");
+                            baseResponse.object = JsonUtil.toList(jsonArray == null ? "[]" : jsonArray.toString(), clazzArgument);
 
                             response.close();
                             return (T) baseResponse;
@@ -86,7 +88,8 @@ public abstract class JacksonCallback<T> extends AbsCallback<T> {
                         Class<?> clazzArgument = getClass(typeArgument);
 
                         BaseResponse baseResponse = new BaseResponse();
-                        baseResponse.object = JsonUtil.jsonToBean(new JSONObject(json).getJSONObject("object").toString(), clazzArgument);
+                        JSONObject jsonObject = new JSONObject(json).optJSONObject("object");
+                        baseResponse.object = JsonUtil.jsonToBean(jsonObject == null ? "{}" : jsonObject.toString(), clazzArgument);
 
                         response.close();
                         return (T) baseResponse;
