@@ -84,15 +84,15 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择产品"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择产品" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
                     android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:layout_marginStart="@dimen/dimen_size_5"
                     android:src="@mipmap/arrow_right"
                     tools:ignore="ContentDescription" />
 
@@ -162,15 +162,15 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择出资日期"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择出资日期" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
                     android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:layout_marginStart="@dimen/dimen_size_5"
                     android:src="@mipmap/arrow_right"
                     tools:ignore="ContentDescription" />
 
@@ -204,15 +204,15 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择到期日期"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择到期日期" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
                     android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:layout_marginStart="@dimen/dimen_size_5"
                     android:src="@mipmap/arrow_right"
                     tools:ignore="ContentDescription" />
 
@@ -318,15 +318,15 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择开户行"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择开户行" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
                     android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:layout_marginStart="@dimen/dimen_size_5"
                     android:src="@mipmap/arrow_right"
                     tools:ignore="ContentDescription" />
 
@@ -507,10 +507,10 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择经纪人"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择经纪人" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -549,10 +549,10 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择上级客户信息"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择上级客户信息" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -591,10 +591,10 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择与上级客户关系"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择与上级客户关系" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"

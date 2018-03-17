@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,21 +17,52 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/finance_get"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_46"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="选择收款方式"
-                app:sLineShow="both"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30"
-                app:sTopLineMargin="@dimen/dimen_size_0" />
+                android:layout_height="@dimen/divider_height"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/finance_get_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择收款方式" />
+
+                <TextView
+                    android:id="@+id/finance_get"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择收款方式"
+                    android:layout_marginStart="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,20 +131,89 @@
                 android:layout_marginRight="@dimen/dimen_size_10"
                 android:background="@color/divider" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/finance_shou"
+            <LinearLayout
+                android:id="@+id/finance_shou_ll"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="选择收据类型"
-                app:sLineShow="bottom"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择收据类型" />
+
+                <TextView
+                    android:id="@+id/finance_shou"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择收据类型"
+                    android:layout_marginStart="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/finance_tou_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择投资类型" />
+
+                <TextView
+                    android:id="@+id/finance_tou"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择投资类型"
+                    android:layout_marginStart="@dimen/dimen_size_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"

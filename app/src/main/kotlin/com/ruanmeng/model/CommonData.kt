@@ -74,6 +74,18 @@ data class CommonData(
         var rate: String = "",
         var years: String = "",
 
+        //支付方式
+        var payTypeId: String = "",
+        var payTypeName: String = "",
+
+        //收据类型
+        var receiptTypeId: String = "",
+        var receiptTypeName: String = "",
+
+        //投资类型
+        var investTypeId: String = "",
+        var investTypeName: String = "",
+
         //产品列表
         var img: String = "",
         var productId: String = "",
