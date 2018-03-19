@@ -22,15 +22,15 @@ public class BaseHttp {
     public static String userinfo_update = baseIp + "/userinfo_update.rm"; //修改姓名√
     public static String update_pwd2 = baseIp + "/update_pwd2.rm";         //修改密码√
 
-    public static String customer_list = baseIp + "/customer_list.rm"; //报备列表√
-    public static String other_userinfo = baseIp + "/other_userinfo.rm"; //客户详情√
-    public static String customer_sub = baseIp + "/customer_sub.rm"; //添加客户√
+    public static String customer_list = baseIp + "/customer_list.rm";       //报备列表√
+    public static String other_userinfo = baseIp + "/other_userinfo.rm";     //客户详情√
+    public static String customer_sub = baseIp + "/customer_sub.rm";         //添加客户√
     public static String villagetype_list = baseIp + "/villagetype_list.rm"; //小区类型√
-    public static String preference_list = baseIp + "/preference_list.rm"; //偏好列表√
-    public static String industry_list = baseIp + "/industry_list.rm"; //职业列表√
-    public static String unittype_list = baseIp + "/unittype_list.rm"; //单位类型√
-    public static String purchase_sub = baseIp + "/purchase_sub.rm"; //添加订单√
-    public static String bank_list = baseIp + "/bank_list.rm"; //银行列表√
+    public static String preference_list = baseIp + "/preference_list.rm";   //偏好列表√
+    public static String industry_list = baseIp + "/industry_list.rm";       //职业列表√
+    public static String unittype_list = baseIp + "/unittype_list.rm";       //单位类型√
+    public static String purchase_sub = baseIp + "/purchase_sub.rm";         //添加订单√
+    public static String bank_list = baseIp + "/bank_list.rm";               //银行列表√
 
     public static String customer_list_all = baseIp + "/customer_list_all.rm";                 //资料列表√
     public static String customer_purchase_list = baseIp + "/customer_purchase_list.rm";       //客户订单√
@@ -39,6 +39,14 @@ public class BaseHttp {
     public static String paytype_list = baseIp + "/paytype_list.rm"; //支付方式√
     public static String receipttype_list = baseIp + "/receipttype_list.rm"; //收据类型√
     public static String investtype_list = baseIp + "/investtype_list.rm"; //投资类型√
+
+    public static String achievement_day_list = baseIp + "/achievement_day_list.rm";     //日业绩√
+    public static String achievement_week_list = baseIp + "/achievement_week_list.rm";   //周业绩√
+    public static String achievement_month_list = baseIp + "/achievement_month_list.rm"; //月业绩√
+    public static String achievement_year_list = baseIp + "/achievement_year_list.rm";   //年业绩√
+
+    public static String commission_list = baseIp + "/commission_list.rm"; //经纪人佣金√
+    public static String department_commission_list = baseIp + "/department_commission_list.rm"; //销售部佣金√
 
     public static String product_list = baseIp + "/product_list.rm"; //产品列表√
     public static String get_product = baseIp + "/get_product.rm";   //产品详情√

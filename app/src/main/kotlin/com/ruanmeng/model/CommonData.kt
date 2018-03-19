@@ -86,6 +86,11 @@ data class CommonData(
         var investTypeId: String = "",
         var investTypeName: String = "",
 
+        //经纪人佣金
+        var commission: String = "",
+        var createDate: String = "",
+        var managerInfoName: String = "",
+
         //产品列表
         var img: String = "",
         var productId: String = "",
