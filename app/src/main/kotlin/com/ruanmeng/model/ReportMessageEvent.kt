@@ -32,4 +32,8 @@ package com.ruanmeng.model
  * 创建人：小卷毛
  * 创建时间：2018-03-16 09:34
  */
-data class ReportMessageEvent(var id: String = "", var name: String = "", var type: String = "")
+data class ReportMessageEvent(
+        var id: String = "",
+        var name: String = "",
+        var type: String = "",
+        var items: ArrayList<CommonData> = ArrayList())

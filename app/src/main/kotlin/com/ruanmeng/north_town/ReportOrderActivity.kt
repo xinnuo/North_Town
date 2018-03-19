@@ -3,9 +3,12 @@ package com.ruanmeng.north_town
 import android.os.Bundle
 import android.view.View
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.showToast
 import com.ruanmeng.base.startActivity
+import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.utils.DialogHelper
+import com.ruanmeng.utils.TimeHelper
 import kotlinx.android.synthetic.main.activity_report_order.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -13,7 +16,10 @@ import java.util.*
 
 class ReportOrderActivity : BaseActivity() {
 
+    private val items = ArrayList<CommonData>()
+
     private var bankId = ""
+    private var productId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +52,13 @@ class ReportOrderActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.report_product_ll -> { }
+            R.id.report_product_ll -> startActivity(ReportProductActivity::class.java)
             R.id.report_start_ll -> {
+                if (report_product.text.isEmpty()) {
+                    showToast("请选择投资产品")
+                    return
+                }
+
                 val year_now = Calendar.getInstance().get(Calendar.YEAR)
 
                 DialogHelper.showDateDialog(this@ReportOrderActivity,
@@ -58,19 +69,28 @@ class ReportOrderActivity : BaseActivity() {
                         true,
                         false, { _, _, _, _, _, date ->
                     report_start.text = date
+                    report_end.text = TimeHelper.getInstance().getAnyYear(date, items.first().years.toInt())
                 })
             }
             R.id.report_end_ll -> {
+                if (report_product.text.isEmpty()) {
+                    showToast("请选择投资产品")
+                    return
+                }
+
+                if (report_end.text.isNotEmpty()) return
+
                 val year_now = Calendar.getInstance().get(Calendar.YEAR)
 
                 DialogHelper.showDateDialog(this@ReportOrderActivity,
                         year_now,
                         year_now + 20,
                         3,
-                        "选择到期日期",
+                        "选择出资日期",
                         true,
                         false, { _, _, _, _, _, date ->
                     report_start.text = date
+                    report_end.text = TimeHelper.getInstance().getAnyYear(date, items.first().years.toInt())
                 })
             }
             R.id.report_bank_ll -> startActivity(ReportBankActivity::class.java)
@@ -111,6 +131,12 @@ class ReportOrderActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: ReportMessageEvent) {
         when (event.type) {
+            "产品" -> {
+                productId = event.id
+                items.clear()
+                items.addAll(event.items)
+                report_product.text = event.name
+            }
             "银行" -> {
                 bankId = event.id
                 report_bank.text = event.name

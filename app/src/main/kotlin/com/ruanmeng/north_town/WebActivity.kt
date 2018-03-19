@@ -13,6 +13,9 @@ import com.ruanmeng.base.getString
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_web.*
 import org.json.JSONObject
+import android.content.Intent
+import android.net.Uri
+
 
 class WebActivity : BaseActivity() {
 
@@ -78,6 +81,11 @@ class WebActivity : BaseActivity() {
                             }
 
                         })
+            }
+            "微信支付" -> {
+                val uri = Uri.parse("http://wxpay.wxutil.com/mch/pay/h5.v2.php")
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
             }
         }
     }

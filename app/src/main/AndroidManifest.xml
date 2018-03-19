@@ -79,6 +79,9 @@
             android:name=".ReportAgentActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ReportProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".DataActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
