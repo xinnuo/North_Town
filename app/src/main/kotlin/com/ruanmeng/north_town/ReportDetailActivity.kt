@@ -1,5 +1,6 @@
 package com.ruanmeng.north_town
 
+import android.content.Intent
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -35,7 +36,10 @@ class ReportDetailActivity : BaseActivity() {
                     intent.setClass(baseContext, DataCheckActivity::class.java)
                     startActivity(intent)
                 }
-                false -> startActivity(ReportOrderActivity::class.java)
+                false -> {
+                    intent.setClass(baseContext, ReportOrderActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
     }

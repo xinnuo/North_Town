@@ -12,6 +12,7 @@ import com.ruanmeng.utils.TimeHelper
 import kotlinx.android.synthetic.main.activity_report_order.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import java.text.DecimalFormat
 import java.util.*
 
 class ReportOrderActivity : BaseActivity() {
@@ -34,6 +35,9 @@ class ReportOrderActivity : BaseActivity() {
         report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         report_submit.isClickable = false
 
+        report_name.setRightString(intent.getStringExtra("userName"))
+        report_idcard.setRightString(intent.getStringExtra("cardNo"))
+
         report_product.addTextChangedListener(this@ReportOrderActivity)
         et_money.addTextChangedListener(this@ReportOrderActivity)
         report_start.addTextChangedListener(this@ReportOrderActivity)
@@ -53,35 +57,15 @@ class ReportOrderActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.report_product_ll -> startActivity(ReportProductActivity::class.java)
-            R.id.report_start_ll -> {
+            R.id.report_start_ll, R.id.report_end_ll -> {
                 if (report_product.text.isEmpty()) {
                     showToast("请选择投资产品")
                     return
                 }
 
-                val year_now = Calendar.getInstance().get(Calendar.YEAR)
-
-                DialogHelper.showDateDialog(this@ReportOrderActivity,
-                        year_now,
-                        year_now + 20,
-                        3,
-                        "选择出资日期",
-                        true,
-                        false, { _, _, _, _, _, date ->
-                    report_start.text = date
-                    report_end.text = TimeHelper.getInstance().getAnyYear(date, items.first().years.toInt())
-                })
-            }
-            R.id.report_end_ll -> {
-                if (report_product.text.isEmpty()) {
-                    showToast("请选择投资产品")
-                    return
-                }
-
-                if (report_end.text.isNotEmpty()) return
+                if (v.id == R.id.report_end_ll && report_end.text.isNotEmpty()) return
 
                 val year_now = Calendar.getInstance().get(Calendar.YEAR)
-
                 DialogHelper.showDateDialog(this@ReportOrderActivity,
                         year_now,
                         year_now + 20,
@@ -101,7 +85,7 @@ class ReportOrderActivity : BaseActivity() {
         }
     }
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         if (report_product.text.isNotBlank()
                 && et_money.text.isNotBlank()
                 && report_start.text.isNotBlank()
@@ -121,6 +105,40 @@ class ReportOrderActivity : BaseActivity() {
             report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
             report_submit.isClickable = false
         }
+
+        if (et_money.isFocused && et_money.text.isNotBlank()) calculatedValue(et_money.text.toString().toLong())
+    }
+
+    private fun calculatedValue(value: Long) {
+        if (items.isEmpty()) return
+
+        val minValue = items.first().min.toInt() * 10000
+
+        if (value >= minValue) {
+            items.forEach {
+                val min = it.min.toInt() * 10000
+                val max = it.max.toInt() * 10000
+
+                if (min < max) {
+                    if (value in min..(max - 1)) {
+                        report_expect.setLeftString("利率 ${it.rate}%（起投 ${it.min}万）")
+                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toInt() / 100.0))
+                        report_expect.setRightString("预期收入 ￥$expect")
+                        return
+                    }
+                } else {
+                    if (value >= min) {
+                        report_expect.setLeftString("利率 ${it.rate}%（起投 ${it.min}万）")
+                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toInt() / 100.0))
+                        report_expect.setRightString("预期收入 ￥$expect")
+                        return
+                    }
+                }
+            }
+        } else {
+            report_expect.setLeftString("利率 ${items.first().rate}%（起投 ${items.first().min}万）")
+            report_expect.setRightString("预期收入 ￥0")
+        }
     }
 
     override fun finish() {
@@ -136,6 +154,14 @@ class ReportOrderActivity : BaseActivity() {
                 items.clear()
                 items.addAll(event.items)
                 report_product.text = event.name
+
+                if (et_money.isFocused && et_money.text.isBlank())
+                    report_expect.setLeftString("利率 ${items.first().rate}%（起投 ${items.first().min}万）")
+
+                if (!et_money.isFocused) {
+                    if (et_money.text.isNotBlank()) calculatedValue(et_money.text.toString().toLong())
+                    else report_expect.setLeftString("利率 ${items.first().rate}%（起投 ${items.first().min}万）")
+                }
             }
             "银行" -> {
                 bankId = event.id

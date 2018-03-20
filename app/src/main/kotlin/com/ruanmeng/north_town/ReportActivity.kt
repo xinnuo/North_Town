@@ -71,6 +71,8 @@ class ReportActivity : BaseActivity() {
                             .clicked(R.id.item_report) {
                                 val intent = Intent(baseContext, ReportDetailActivity::class.java)
                                 intent.putExtra("accountInfoId", data.accountInfoId)
+                                intent.putExtra("userName", data.userName)
+                                intent.putExtra("cardNo", data.cardNo)
                                 startActivity(intent)
                             }
                 }
