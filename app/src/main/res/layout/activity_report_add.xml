@@ -23,7 +23,7 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:text="姓名" />
 
                 <EditText
@@ -34,7 +34,8 @@
                     android:background="@android:color/white"
                     android:hint="输入客户姓名"
                     android:maxLength="12"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingLeft="@dimen/dimen_size_10"
+                    android:paddingRight="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -53,7 +54,7 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:text="手机号" />
 
                 <EditText
@@ -65,7 +66,8 @@
                     android:hint="输入客户手机号"
                     android:inputType="phone"
                     android:maxLength="11"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingLeft="@dimen/dimen_size_10"
+                    android:paddingRight="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -84,7 +86,7 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:text="身份证号" />
 
                 <EditText
@@ -97,7 +99,8 @@
                     android:hint="请输入客户身份证号"
                     android:inputType="number"
                     android:maxLength="18"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingLeft="@dimen/dimen_size_10"
+                    android:paddingRight="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -118,7 +121,7 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:text="是否业主" />
 
@@ -155,7 +158,7 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="@dimen/line_height"
-                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:gravity="center_vertical"
                     android:text="住宅名称" />
 
@@ -200,25 +203,25 @@
 
                 <TextView
                     style="@style/Font14_black_dark"
-                    android:layout_width="@dimen/dimen_size_75"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
                     android:gravity="center_vertical"
                     android:text="住宅类型" />
 
                 <TextView
                     android:id="@+id/report_type"
-                    style="@style/Font13_black_dark"
+                    style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择住宅类型"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择住宅类型" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
                     android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:layout_marginStart="@dimen/dimen_size_5"
                     android:src="@mipmap/arrow_right"
                     tools:ignore="ContentDescription" />
 
@@ -239,7 +242,7 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:text="住宅房号" />
 
                 <EditText
@@ -250,7 +253,134 @@
                     android:background="@android:color/white"
                     android:hint="输入住宅房号"
                     android:maxLines="1"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingLeft="@dimen/dimen_size_10"
+                    android:paddingRight="@dimen/dimen_size_10" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_agent_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择经纪人" />
+
+                <TextView
+                    android:id="@+id/report_agent"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择经纪人" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_up_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择上级客户信息" />
+
+                <TextView
+                    android:id="@+id/report_up"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择上级客户信息" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_relation_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="选择与上级客户关系" />
+
+                <TextView
+                    android:id="@+id/report_relation"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择与上级客户关系" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 
@@ -269,7 +399,7 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="@dimen/line_height"
-                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:gravity="center_vertical"
                     android:text="备注" />
 
@@ -314,25 +444,25 @@
 
                 <TextView
                     style="@style/Font14_black_dark"
-                    android:layout_width="@dimen/dimen_size_75"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
                     android:gravity="center_vertical"
                     android:text="偏好设置" />
 
                 <TextView
                     android:id="@+id/report_like"
-                    style="@style/Font13_black_dark"
+                    style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择偏好设置"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择偏好设置" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
                     android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:layout_marginStart="@dimen/dimen_size_5"
                     android:src="@mipmap/arrow_right"
                     tools:ignore="ContentDescription" />
 
@@ -356,25 +486,25 @@
 
                 <TextView
                     style="@style/Font14_black_dark"
-                    android:layout_width="@dimen/dimen_size_75"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
                     android:gravity="center_vertical"
                     android:text="职业" />
 
                 <TextView
                     android:id="@+id/report_work"
-                    style="@style/Font13_black_dark"
+                    style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择职业"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择职业" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
                     android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:layout_marginStart="@dimen/dimen_size_5"
                     android:src="@mipmap/arrow_right"
                     tools:ignore="ContentDescription" />
 
@@ -398,25 +528,25 @@
 
                 <TextView
                     style="@style/Font14_black_dark"
-                    android:layout_width="@dimen/dimen_size_75"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
                     android:gravity="center_vertical"
                     android:text="工作单位" />
 
                 <TextView
                     android:id="@+id/report_unit"
-                    style="@style/Font13_black_dark"
+                    style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择工作单位"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请选择工作单位" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
                     android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:layout_marginStart="@dimen/dimen_size_5"
                     android:src="@mipmap/arrow_right"
                     tools:ignore="ContentDescription" />
 

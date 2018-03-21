@@ -81,13 +81,139 @@
 
                 <TextView
                     android:id="@+id/report_product"
-                    style="@style/Font13_black_dark"
+                    style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:hint="请选择产品" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:paddingStart="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_size_10"
+                    android:text="合同编号" />
+
+                <EditText
+                    android:id="@+id/et_pact"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:gravity="end|center_vertical"
+                    android:hint="输入合同编号"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/news_expand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:paddingStart="@dimen/dimen_size_10">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:text="收据编码" />
+
+                        <EditText
+                            android:id="@+id/et_receipt"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:gravity="end|center_vertical"
+                            android:hint="输入收据编码"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingEnd="@dimen/dimen_size_10"
+                            android:paddingStart="@dimen/dimen_size_10" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                </LinearLayout>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+            <LinearLayout
+                android:id="@+id/report_tou_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="投资类型" />
+
+                <TextView
+                    android:id="@+id/report_tou"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择投资类型" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -159,7 +285,7 @@
 
                 <TextView
                     android:id="@+id/report_start"
-                    style="@style/Font13_black_dark"
+                    style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_size_10"
@@ -201,7 +327,7 @@
 
                 <TextView
                     android:id="@+id/report_end"
-                    style="@style/Font13_black_dark"
+                    style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_size_10"
@@ -288,7 +414,7 @@
                 android:layout_height="@dimen/dimen_size_40"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/dimen_size_10"
-                android:text="开户信息" />
+                android:text="账户信息" />
 
             <View
                 android:layout_width="match_parent"
@@ -315,7 +441,7 @@
 
                 <TextView
                     android:id="@+id/report_bank"
-                    style="@style/Font13_black_dark"
+                    style="@style/Font14_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_size_10"
@@ -476,132 +602,6 @@
                     android:maxLength="18"
                     android:paddingEnd="@dimen/dimen_size_10"
                     android:paddingStart="@dimen/dimen_size_10" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_height"
-                android:layout_marginLeft="@dimen/dimen_size_10"
-                android:layout_marginRight="@dimen/dimen_size_10"
-                android:background="@color/divider" />
-
-            <LinearLayout
-                android:id="@+id/report_agent_ll"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:gravity="center_vertical"
-                android:onClick="doClick"
-                android:paddingLeft="@dimen/dimen_size_10"
-                android:paddingRight="@dimen/dimen_size_10">
-
-                <TextView
-                    style="@style/Font14_black_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/line_height"
-                    android:gravity="center_vertical"
-                    android:text="选择经纪人" />
-
-                <TextView
-                    android:id="@+id/report_agent"
-                    style="@style/Font13_black_dark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_size_10"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="请选择经纪人" />
-
-                <ImageView
-                    android:layout_width="@dimen/dimen_size_13"
-                    android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginStart="@dimen/dimen_size_5"
-                    android:src="@mipmap/arrow_right"
-                    tools:ignore="ContentDescription" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_height"
-                android:layout_marginLeft="@dimen/dimen_size_10"
-                android:layout_marginRight="@dimen/dimen_size_10"
-                android:background="@color/divider" />
-
-            <LinearLayout
-                android:id="@+id/report_up_ll"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:gravity="center_vertical"
-                android:onClick="doClick"
-                android:paddingLeft="@dimen/dimen_size_10"
-                android:paddingRight="@dimen/dimen_size_10">
-
-                <TextView
-                    style="@style/Font14_black_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/line_height"
-                    android:gravity="center_vertical"
-                    android:text="选择上级客户信息" />
-
-                <TextView
-                    android:id="@+id/report_up"
-                    style="@style/Font13_black_dark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_size_10"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="请选择上级客户信息" />
-
-                <ImageView
-                    android:layout_width="@dimen/dimen_size_13"
-                    android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginStart="@dimen/dimen_size_5"
-                    android:src="@mipmap/arrow_right"
-                    tools:ignore="ContentDescription" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_height"
-                android:layout_marginLeft="@dimen/dimen_size_10"
-                android:layout_marginRight="@dimen/dimen_size_10"
-                android:background="@color/divider" />
-
-            <LinearLayout
-                android:id="@+id/report_relation_ll"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:gravity="center_vertical"
-                android:onClick="doClick"
-                android:paddingLeft="@dimen/dimen_size_10"
-                android:paddingRight="@dimen/dimen_size_10">
-
-                <TextView
-                    style="@style/Font14_black_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/line_height"
-                    android:gravity="center_vertical"
-                    android:text="选择与上级客户关系" />
-
-                <TextView
-                    android:id="@+id/report_relation"
-                    style="@style/Font13_black_dark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_size_10"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="请选择与上级客户关系" />
-
-                <ImageView
-                    android:layout_width="@dimen/dimen_size_13"
-                    android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginStart="@dimen/dimen_size_5"
-                    android:src="@mipmap/arrow_right"
-                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 

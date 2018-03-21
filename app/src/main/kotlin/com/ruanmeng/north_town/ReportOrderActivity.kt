@@ -1,5 +1,6 @@
 package com.ruanmeng.north_town
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.ruanmeng.base.BaseActivity
@@ -21,6 +22,7 @@ class ReportOrderActivity : BaseActivity() {
 
     private var bankId = ""
     private var productId = ""
+    private var investTypeId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,9 @@ class ReportOrderActivity : BaseActivity() {
         report_idcard.setRightString(intent.getStringExtra("cardNo"))
 
         report_product.addTextChangedListener(this@ReportOrderActivity)
+        et_pact.addTextChangedListener(this@ReportOrderActivity)
+        et_receipt.addTextChangedListener(this@ReportOrderActivity)
+        report_tou.addTextChangedListener(this@ReportOrderActivity)
         et_money.addTextChangedListener(this@ReportOrderActivity)
         report_start.addTextChangedListener(this@ReportOrderActivity)
         report_end.addTextChangedListener(this@ReportOrderActivity)
@@ -47,9 +52,6 @@ class ReportOrderActivity : BaseActivity() {
         et_phone.addTextChangedListener(this@ReportOrderActivity)
         et_addr.addTextChangedListener(this@ReportOrderActivity)
         et_fax.addTextChangedListener(this@ReportOrderActivity)
-        report_agent.addTextChangedListener(this@ReportOrderActivity)
-        report_up.addTextChangedListener(this@ReportOrderActivity)
-        report_relation.addTextChangedListener(this@ReportOrderActivity)
         et_memo.addTextChangedListener(this@ReportOrderActivity)
     }
 
@@ -57,6 +59,11 @@ class ReportOrderActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.report_product_ll -> startActivity(ReportProductActivity::class.java)
+            R.id.report_tou_ll -> {
+                val intent = Intent(baseContext, FinanceSelectActivity::class.java)
+                intent.putExtra("title", "投资类型")
+                startActivity(intent)
+            }
             R.id.report_start_ll, R.id.report_end_ll -> {
                 if (report_product.text.isEmpty()) {
                     showToast("请选择投资产品")
@@ -78,15 +85,15 @@ class ReportOrderActivity : BaseActivity() {
                 })
             }
             R.id.report_bank_ll -> startActivity(ReportBankActivity::class.java)
-            R.id.report_agent_ll -> startActivity(ReportAgentActivity::class.java)
-            R.id.report_up_ll -> { }
-            R.id.report_relation_ll -> { }
             R.id.report_submit -> { }
         }
     }
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         if (report_product.text.isNotBlank()
+                && et_pact.text.isNotBlank()
+                && et_receipt.text.isNotBlank()
+                && report_tou.text.isNotBlank()
                 && et_money.text.isNotBlank()
                 && report_start.text.isNotBlank()
                 && report_end.text.isNotBlank()
@@ -95,9 +102,6 @@ class ReportOrderActivity : BaseActivity() {
                 && et_phone.text.isNotBlank()
                 && et_addr.text.isNotBlank()
                 && et_fax.text.isNotBlank()
-                && report_agent.text.isNotBlank()
-                && report_up.text.isNotBlank()
-                && report_relation.text.isNotBlank()
                 && et_memo.text.isNotBlank()) {
             report_submit.setBackgroundResource(R.drawable.rec_bg_red)
             report_submit.isClickable = true
@@ -166,6 +170,10 @@ class ReportOrderActivity : BaseActivity() {
             "银行" -> {
                 bankId = event.id
                 report_bank.text = event.name
+            }
+            "投资" -> {
+                investTypeId = event.id
+                report_tou.text = event.name
             }
         }
     }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.getString
 import com.ruanmeng.model.ReportMessageEvent
 import kotlinx.android.synthetic.main.activity_finance_submit.*
 import org.greenrobot.eventbus.EventBus
@@ -13,7 +14,6 @@ class FinanceSubmitActivity : BaseActivity() {
 
     private var payTypeId = ""
     private var receiptTypeId = ""
-    private var investTypeId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,9 @@ class FinanceSubmitActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
+        finance_yin.setRightString(getString("userName"))
+        finance_tel.setRightString(getString("mobile"))
+
         finance_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         finance_submit.isClickable = false
     }
@@ -40,11 +43,6 @@ class FinanceSubmitActivity : BaseActivity() {
             R.id.finance_shou_ll -> {
                 val intent = Intent(baseContext, FinanceSelectActivity::class.java)
                 intent.putExtra("title", "收据类型")
-                startActivity(intent)
-            }
-            R.id.finance_tou_ll -> {
-                val intent = Intent(baseContext, FinanceSelectActivity::class.java)
-                intent.putExtra("title", "投资类型")
                 startActivity(intent)
             }
             R.id.finance_submit -> { }
@@ -66,10 +64,6 @@ class FinanceSubmitActivity : BaseActivity() {
             "收据" -> {
                 receiptTypeId = event.id
                 finance_shou.text = event.name
-            }
-            "投资" -> {
-                investTypeId = event.id
-                finance_tou.text = event.name
             }
         }
     }

@@ -94,6 +94,7 @@ class DataActivity : BaseActivity() {
                                 intent.setClass(baseContext, ReportDetailActivity::class.java)
                                 intent.putExtra("accountInfoId", data.accountInfoId)
                                 intent.putExtra("isData", true)
+                                intent.putExtra("isNew", type == "new")
                                 startActivity(intent)
                             }
                 }

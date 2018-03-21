@@ -1,7 +1,7 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -10,7 +10,6 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
-import com.ruanmeng.base.startActivity
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_report_detail.*
 import org.json.JSONObject
@@ -28,7 +27,12 @@ class ReportDetailActivity : BaseActivity() {
     override fun init_title() {
         super.init_title()
         val isData = intent.getBooleanExtra("isData", false)
-        if (isData) report_input.text = "查看客户投资"
+        if (isData) {
+            report_input.text = "查看客户投资"
+
+            if (intent.getBooleanExtra("isNew", false))
+                report_input.visibility = View.GONE
+        }
 
         report_input.setOnClickListener {
             when (isData) {

@@ -1,5 +1,6 @@
 package com.ruanmeng.north_town
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.ruanmeng.base.BaseActivity
@@ -18,7 +19,7 @@ class FinanceActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finance)
-        init_title("财务录入")
+        init_title("财务录入", "其他录入")
 
         list.add(CommonData("1"))
         list.add(CommonData("2"))
@@ -46,5 +47,10 @@ class FinanceActivity : BaseActivity() {
                             .clicked(R.id.item_finance) { startActivity(FinanceSubmitActivity::class.java) }
                 }
                 .attachTo(recycle_list)
+
+        tvRight.setOnClickListener {
+            val intent = Intent(baseContext, FinanceSubmitActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

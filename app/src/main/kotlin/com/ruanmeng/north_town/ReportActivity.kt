@@ -56,6 +56,7 @@ class ReportActivity : BaseActivity() {
                     injector.text(R.id.item_report_name, getColorText(data.userName, keyWord))
                             .text(R.id.item_report_phone, getColorText("手机 ${data.telephone}", keyWord))
                             .text(R.id.item_report_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
+                            .visibility(R.id.item_report_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .with<RoundedImageView>(R.id.item_report_img) { view ->
                                 Glide.with(baseContext)

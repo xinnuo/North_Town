@@ -51,6 +51,9 @@ class ReportAddActivity : BaseActivity() {
         et_num.addTextChangedListener(this@ReportAddActivity)
         et_memo.addTextChangedListener(this@ReportAddActivity)
         report_type.addTextChangedListener(this@ReportAddActivity)
+        report_agent.addTextChangedListener(this@ReportAddActivity)
+        report_up.addTextChangedListener(this@ReportAddActivity)
+        report_relation.addTextChangedListener(this@ReportAddActivity)
         report_like.addTextChangedListener(this@ReportAddActivity)
         report_work.addTextChangedListener(this@ReportAddActivity)
         report_unit.addTextChangedListener(this@ReportAddActivity)
@@ -80,6 +83,9 @@ class ReportAddActivity : BaseActivity() {
                 intent.putExtra("isType", true)
                 startActivity(intent)
             }
+            R.id.report_agent_ll -> startActivity(ReportAgentActivity::class.java)
+            R.id.report_up_ll -> { }
+            R.id.report_relation_ll -> { }
             R.id.report_submit -> {
                 if (!CommonUtil.isMobileNumber(et_phone.text.toString())) {
                     et_phone.requestFocus()
@@ -133,6 +139,9 @@ class ReportAddActivity : BaseActivity() {
                 && et_num.text.isNotBlank()
                 && et_memo.text.isNotBlank()
                 && report_type.text.isNotBlank()
+                && report_agent.text.isNotBlank()
+                && report_up.text.isNotBlank()
+                && report_relation.text.isNotBlank()
                 && report_like.text.isNotBlank()
                 && report_work.text.isNotBlank()
                 && report_unit.text.isNotBlank()) {
