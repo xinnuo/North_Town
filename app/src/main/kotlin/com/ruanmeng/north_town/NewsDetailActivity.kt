@@ -21,7 +21,7 @@ class NewsDetailActivity : BaseActivity() {
         drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
         tvRight.setCompoundDrawables(drawable, null, null, null)
 
-        tvRight.setOnClickListener { startActivity(ReportAddActivity::class.java) }
+        tvRight.setOnClickListener { startActivity(ReportOrderActivity::class.java) }
         news_look.setOnClickListener { startActivity(DataCheckActivity::class.java) }
     }
 }
