@@ -109,7 +109,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -129,7 +128,8 @@
                     android:gravity="center_vertical|end"
                     android:hint="输入认购金额"
                     android:inputType="number"
-                    android:paddingLeft="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10"
                     app:mask="##########" />
 
             </LinearLayout>
@@ -343,7 +343,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -363,7 +362,8 @@
                     android:gravity="center_vertical|end"
                     android:hint="输入账户号"
                     android:inputType="number"
-                    android:paddingLeft="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10"
                     app:mask="#### #### #### #### ###" />
 
             </LinearLayout>
@@ -378,7 +378,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -398,7 +397,8 @@
                     android:hint="输入联系电话"
                     android:inputType="phone"
                     android:maxLength="11"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -412,8 +412,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/dimen_size_10"
-                android:paddingRight="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
                     style="@style/Font14_black_dark"
@@ -438,7 +437,8 @@
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"
                         android:paddingBottom="@dimen/dimen_size_13"
-                        android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_10"
+                        android:paddingStart="@dimen/dimen_size_10"
                         android:paddingTop="@dimen/dimen_size_13" />
 
                 </LinearLayout>
@@ -455,7 +455,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -475,7 +474,8 @@
                     android:hint="输入传真"
                     android:inputType="phone"
                     android:maxLength="18"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -615,7 +615,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -641,7 +640,8 @@
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"
                         android:paddingBottom="@dimen/dimen_size_13"
-                        android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_10"
+                        android:paddingStart="@dimen/dimen_size_10"
                         android:paddingTop="@dimen/dimen_size_13" />
 
                 </LinearLayout>

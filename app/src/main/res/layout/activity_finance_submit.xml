@@ -43,10 +43,10 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择收款方式"
-                    android:layout_marginStart="@dimen/dimen_size_10" />
+                    android:hint="请选择收款方式" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -67,7 +67,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -86,7 +85,8 @@
                     android:gravity="end|center_vertical"
                     android:hint="输入收据编码"
                     android:maxLines="1"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -100,7 +100,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -120,7 +119,8 @@
                     android:hint="输入金额"
                     android:inputType="number"
                     android:maxLength="9"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -152,10 +152,10 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择收据类型"
-                    android:layout_marginStart="@dimen/dimen_size_10" />
+                    android:hint="请选择收据类型" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -194,10 +194,10 @@
                     style="@style/Font13_black_dark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择投资类型"
-                    android:layout_marginStart="@dimen/dimen_size_10" />
+                    android:hint="请选择投资类型" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -218,7 +218,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -237,7 +236,8 @@
                     android:gravity="end|center_vertical"
                     android:hint="输入客户姓名"
                     android:maxLines="1"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -251,7 +251,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -272,7 +271,8 @@
                     android:hint="请输入客户身份证号"
                     android:inputType="number"
                     android:maxLength="18"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -310,7 +310,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -337,7 +336,8 @@
                         android:minHeight="@dimen/line_height"
                         android:minLines="3"
                         android:paddingBottom="@dimen/dimen_size_13"
-                        android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_10"
+                        android:paddingStart="@dimen/dimen_size_10"
                         android:paddingTop="@dimen/dimen_size_13" />
 
                 </LinearLayout>
