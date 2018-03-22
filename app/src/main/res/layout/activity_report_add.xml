@@ -289,7 +289,7 @@
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择上级客户" />
+                    android:hint="请选择上级客户(选填)" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -331,7 +331,7 @@
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择与上级客户关系" />
+                    android:hint="请选择与上级客户关系(选填)" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
