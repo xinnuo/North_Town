@@ -55,7 +55,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_15"
+                android:layout_height="@dimen/dimen_size_10"
                 android:background="@color/background" />
 
             <View
@@ -481,9 +481,8 @@
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/et_card"
                     style="@style/Font14_black_dark"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:background="@android:color/white"
                     android:gravity="center_vertical|end"
                     android:hint="输入账户号"
@@ -504,6 +503,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -581,6 +581,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -627,7 +628,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    tools:ignore="TooManyViews">
 
                     <EditText
                         android:id="@+id/et_memo"
