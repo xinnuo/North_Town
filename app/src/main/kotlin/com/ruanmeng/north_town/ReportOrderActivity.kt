@@ -23,6 +23,7 @@ class ReportOrderActivity : BaseActivity() {
     private var bankId = ""
     private var productId = ""
     private var investTypeId = ""
+    private var managerInfoId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +53,7 @@ class ReportOrderActivity : BaseActivity() {
         et_phone.addTextChangedListener(this@ReportOrderActivity)
         et_addr.addTextChangedListener(this@ReportOrderActivity)
         et_fax.addTextChangedListener(this@ReportOrderActivity)
+        report_agent.addTextChangedListener(this@ReportOrderActivity)
         et_memo.addTextChangedListener(this@ReportOrderActivity)
     }
 
@@ -85,6 +87,7 @@ class ReportOrderActivity : BaseActivity() {
                 })
             }
             R.id.report_bank_ll -> startActivity(ReportBankActivity::class.java)
+            R.id.report_agent_ll -> startActivity(ReportAgentActivity::class.java)
             R.id.report_submit -> { }
         }
     }
@@ -102,6 +105,7 @@ class ReportOrderActivity : BaseActivity() {
                 && et_phone.text.isNotBlank()
                 && et_addr.text.isNotBlank()
                 && et_fax.text.isNotBlank()
+                && report_agent.text.isNotBlank()
                 && et_memo.text.isNotBlank()) {
             report_submit.setBackgroundResource(R.drawable.rec_bg_red)
             report_submit.isClickable = true
@@ -170,6 +174,10 @@ class ReportOrderActivity : BaseActivity() {
             "银行" -> {
                 bankId = event.id
                 report_bank.text = event.name
+            }
+            "经纪人" -> {
+                managerInfoId = event.id
+                report_agent.text = event.name
             }
             "投资" -> {
                 investTypeId = event.id

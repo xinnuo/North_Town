@@ -68,12 +68,12 @@ class ReportBankActivity : BaseActivity() {
     }
 
     override fun getData() {
-        OkGo.post<BaseResponse<java.util.ArrayList<CommonData>>>(BaseHttp.bank_list)
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.bank_list)
                 .tag(this@ReportBankActivity)
                 .headers("token", getString("token"))
-                .execute(object : JacksonDialogCallback<BaseResponse<java.util.ArrayList<CommonData>>>(baseContext, true) {
+                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext, true) {
 
-                    override fun onSuccess(response: Response<BaseResponse<java.util.ArrayList<CommonData>>>) {
+                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
                         list.apply {
                             clear()
                             addItems(response.body().`object`)

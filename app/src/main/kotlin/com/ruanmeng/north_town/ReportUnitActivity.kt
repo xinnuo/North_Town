@@ -1,5 +1,6 @@
 package com.ruanmeng.north_town
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -27,36 +28,47 @@ class ReportUnitActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_unit)
-        init_title(intent.getStringExtra("title"))
+        init_title()
 
         getData()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun init_title() {
         super.init_title()
-        isType = intent.getBooleanExtra("isType", false)
+        val title = intent.getStringExtra("title")
+        tvTitle.text = "选择$title"
 
         unit_list.load_Linear(baseContext)
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_job_list) { data, injector ->
                     injector.gone(R.id.item_job_arrow)
-                            .text(R.id.item_job_name, if (isType) data.villageTypeName else data.unitTypeName)
+                            .text(R.id.item_job_name, when (intent.getStringExtra("title")) {
+                                "住宅类型" -> data.villageTypeName
+                                "工作单位" -> data.unitTypeName
+                                "客户关系" -> data.relationshipName
+                                else -> ""
+                            })
 
                             .visibility(R.id.item_job_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_job_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
                             .clicked(R.id.item_job) {
-                                if (isType)
-                                    EventBus.getDefault().post(ReportMessageEvent(
+                                when (intent.getStringExtra("title")) {
+                                    "住宅类型" -> EventBus.getDefault().post(ReportMessageEvent(
                                             data.villageTypeId,
                                             data.villageTypeName,
                                             "类型"))
-                                else
-                                    EventBus.getDefault().post(ReportMessageEvent(
+                                    "工作单位" -> EventBus.getDefault().post(ReportMessageEvent(
                                             data.unitTypeId,
                                             data.unitTypeName,
                                             "工作单位"))
+                                    "客户关系" -> EventBus.getDefault().post(ReportMessageEvent(
+                                            data.relationshipId,
+                                            data.relationshipName,
+                                            "关系"))
+                                }
 
                                 ActivityStack.screenManager.popActivities(this@ReportUnitActivity::class.java)
                             }
@@ -65,7 +77,12 @@ class ReportUnitActivity : BaseActivity() {
     }
 
     override fun getData() {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(if (isType) BaseHttp.villagetype_list else BaseHttp.unittype_list)
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(when (intent.getStringExtra("title")) {
+            "住宅类型" -> BaseHttp.villagetype_list
+            "工作单位" -> BaseHttp.unittype_list
+            "客户关系" -> BaseHttp.relationship_list
+            else -> ""
+        })
                 .tag(this@ReportUnitActivity)
                 .headers("token", getString("token"))
                 .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext, true) {

@@ -55,6 +55,10 @@ data class CommonData(
         var villageTypeId: String = "",
         var villageTypeName: String = "",
 
+        //关系列表
+        var relationshipId: String = "",
+        var relationshipName: String = "",
+
         //单位列表
         var unitTypeId: String = "",
         var unitTypeName: String = "",

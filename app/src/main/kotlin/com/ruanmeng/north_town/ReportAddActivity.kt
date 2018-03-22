@@ -23,6 +23,8 @@ import org.greenrobot.eventbus.Subscribe
 class ReportAddActivity : BaseActivity() {
 
     private var villageTypeId = ""
+    private var introducerInfoId = ""
+    private var relationshipId = ""
     private var preferenceId = ""
     private var preferenceName = ""
     private var industryId = ""
@@ -51,9 +53,6 @@ class ReportAddActivity : BaseActivity() {
         et_num.addTextChangedListener(this@ReportAddActivity)
         et_memo.addTextChangedListener(this@ReportAddActivity)
         report_type.addTextChangedListener(this@ReportAddActivity)
-        report_agent.addTextChangedListener(this@ReportAddActivity)
-        report_up.addTextChangedListener(this@ReportAddActivity)
-        report_relation.addTextChangedListener(this@ReportAddActivity)
         report_like.addTextChangedListener(this@ReportAddActivity)
         report_work.addTextChangedListener(this@ReportAddActivity)
         report_unit.addTextChangedListener(this@ReportAddActivity)
@@ -74,18 +73,21 @@ class ReportAddActivity : BaseActivity() {
             R.id.report_work_ll -> startActivity(ReportJobActivity::class.java)
             R.id.report_unit_ll -> {
                 val intent = Intent(baseContext, ReportUnitActivity::class.java)
-                intent.putExtra("title", "选择工作单位")
+                intent.putExtra("title", "工作单位")
                 startActivity(intent)
             }
             R.id.report_type_ll -> {
                 val intent = Intent(baseContext, ReportUnitActivity::class.java)
-                intent.putExtra("title", "选择住宅类型")
+                intent.putExtra("title", "住宅类型")
                 intent.putExtra("isType", true)
                 startActivity(intent)
             }
-            R.id.report_agent_ll -> startActivity(ReportAgentActivity::class.java)
-            R.id.report_up_ll -> { }
-            R.id.report_relation_ll -> { }
+            R.id.report_up_ll -> startActivity(ReportUpActivity::class.java)
+            R.id.report_relation_ll -> {
+                val intent = Intent(baseContext, ReportUnitActivity::class.java)
+                intent.putExtra("title", "客户关系")
+                startActivity(intent)
+            }
             R.id.report_submit -> {
                 if (!CommonUtil.isMobileNumber(et_phone.text.toString())) {
                     et_phone.requestFocus()
@@ -111,6 +113,8 @@ class ReportAddActivity : BaseActivity() {
                         .params("villageName", et_addr.text.trim().toString())
                         .params("villageTypeId", villageTypeId)
                         .params("houseNumber", et_num.text.trim().toString())
+                        .params("introducerInfoId", introducerInfoId)
+                        .params("relationshipId", relationshipId)
                         .params("remark", et_memo.text.trim().toString())
                         .params("preferenceIds", preferenceId)
                         .params("preferences", preferenceName)
@@ -139,9 +143,6 @@ class ReportAddActivity : BaseActivity() {
                 && et_num.text.isNotBlank()
                 && et_memo.text.isNotBlank()
                 && report_type.text.isNotBlank()
-                && report_agent.text.isNotBlank()
-                && report_up.text.isNotBlank()
-                && report_relation.text.isNotBlank()
                 && report_like.text.isNotBlank()
                 && report_work.text.isNotBlank()
                 && report_unit.text.isNotBlank()) {
@@ -164,6 +165,14 @@ class ReportAddActivity : BaseActivity() {
             "类型" -> {
                 villageTypeId = event.id
                 report_type.text = event.name
+            }
+            "上级" -> {
+                introducerInfoId = event.id
+                report_up.text = event.name
+            }
+            "关系" -> {
+                relationshipId = event.id
+                report_relation.text = event.name
             }
             "偏好" -> {
                 preferenceId = event.id

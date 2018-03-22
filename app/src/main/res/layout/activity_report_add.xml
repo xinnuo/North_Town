@@ -265,49 +265,7 @@
                 android:layout_marginRight="@dimen/dimen_size_10"
                 android:background="@color/divider" />
 
-            <LinearLayout
-                android:id="@+id/report_agent_ll"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:gravity="center_vertical"
-                android:onClick="doClick"
-                android:paddingLeft="@dimen/dimen_size_10"
-                android:paddingRight="@dimen/dimen_size_10">
-
-                <TextView
-                    style="@style/Font14_black_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/line_height"
-                    android:gravity="center_vertical"
-                    android:text="选择经纪人" />
-
-                <TextView
-                    android:id="@+id/report_agent"
-                    style="@style/Font14_black_dark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_size_10"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="请选择经纪人" />
-
-                <ImageView
-                    android:layout_width="@dimen/dimen_size_13"
-                    android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginStart="@dimen/dimen_size_5"
-                    android:src="@mipmap/arrow_right"
-                    tools:ignore="ContentDescription" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_height"
-                android:layout_marginLeft="@dimen/dimen_size_10"
-                android:layout_marginRight="@dimen/dimen_size_10"
-                android:background="@color/divider" />
-
-            <LinearLayout
+             <LinearLayout
                 android:id="@+id/report_up_ll"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
@@ -321,7 +279,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
                     android:gravity="center_vertical"
-                    android:text="选择上级客户信息" />
+                    android:text="选择上级客户" />
 
                 <TextView
                     android:id="@+id/report_up"
@@ -331,7 +289,7 @@
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择上级客户信息" />
+                    android:hint="请选择上级客户" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"

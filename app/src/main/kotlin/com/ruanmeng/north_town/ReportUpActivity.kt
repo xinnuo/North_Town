@@ -1,7 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -17,33 +15,33 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.KeyboardHelper
-import kotlinx.android.synthetic.main.activity_report.*
-import kotlinx.android.synthetic.main.layout_empty_add.*
-import kotlinx.android.synthetic.main.layout_title_search.*
+import kotlinx.android.synthetic.main.layout_empty.*
+import kotlinx.android.synthetic.main.layout_list.*
+import kotlinx.android.synthetic.main.layout_search.*
 import net.idik.lib.slimadapter.SlimAdapter
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 
-class ReportActivity : BaseActivity() {
+class ReportUpActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
     private var keyWord = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_report)
-        setToolbarVisibility(false)
-        init_title()
-
-        EventBus.getDefault().register(this@ReportActivity)
+        setContentView(R.layout.activity_report_up)
+        init_title("选择上级客户")
 
         swipe_refresh.isRefreshing = true
         getData(pageNum)
     }
 
-    @Suppress("DEPRECATION")
     override fun init_title() {
+        super.init_title()
+        search_edit.hint = "请输入客户姓名或手机号或身份证号"
+        empty_hint.text = "暂无相关客户信息！"
+
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
             if (!isLoadingMore) {
@@ -70,16 +68,17 @@ class ReportActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_report) {
-                                val intent = Intent(baseContext, ReportDetailActivity::class.java)
-                                intent.putExtra("accountInfoId", data.accountInfoId)
-                                intent.putExtra("userName", data.userName)
-                                intent.putExtra("cardNo", data.cardNo)
-                                startActivity(intent)
+                                EventBus.getDefault().post(ReportMessageEvent(
+                                        data.accountInfoId,
+                                        data.userName,
+                                        "上级"))
+
+                                ActivityStack.screenManager.popActivities(this@ReportUpActivity::class.java)
                             }
                 }
                 .attachTo(recycle_list)
 
-        search_edit.addTextChangedListener(this@ReportActivity)
+        search_edit.addTextChangedListener(this@ReportUpActivity)
         search_edit.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
@@ -93,26 +92,19 @@ class ReportActivity : BaseActivity() {
             }
             return@setOnEditorActionListener false
         }
-    }
 
-    override fun doClick(v: View) {
-        super.doClick(v)
-        when (v.id) {
-            R.id.search_cancel -> search_edit.setText("")
-            R.id.empty_add -> startActivity(ReportAddActivity::class.java)
-        }
+        search_close.setOnClickListener { search_edit.setText("") }
     }
 
     override fun getData(pindex: Int) {
         OkGo.post<BaseResponse<CommonModel>>(BaseHttp.customer_list)
-                .tag(this@ReportActivity)
+                .tag(this@ReportUpActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("searchar", keyWord)
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
 
-                    @SuppressLint("SetTextI18n")
                     override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
 
                         list.apply {
@@ -124,8 +116,6 @@ class ReportActivity : BaseActivity() {
                             if (count(response.body().`object`.accountInfoList) > 0) pageNum++
                         }
                         mAdapter.updateData(list)
-
-                        report_result.text = "搜索结果(${response.body().`object`.count})"
                     }
 
                     override fun onFinish() {
@@ -144,7 +134,6 @@ class ReportActivity : BaseActivity() {
 
         if (list.size > 0) {
             list.clear()
-            report_result.text = "搜索结果(0)"
             mAdapter.notifyDataSetChanged()
             empty_view.visibility = View.GONE
         }
@@ -154,21 +143,10 @@ class ReportActivity : BaseActivity() {
     }
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        search_close.visibility = if (s.isEmpty()) View.GONE else View.VISIBLE
         if (s.isEmpty() && keyWord.isNotEmpty()) {
             keyWord = ""
             updateList()
-        }
-    }
-
-    override fun finish() {
-        EventBus.getDefault().unregister(this@ReportActivity)
-        super.finish()
-    }
-
-    @Subscribe
-    fun onMessageEvent(event: ReportMessageEvent) {
-        when (event.type) {
-            "添加客户" -> updateList()
         }
     }
 }
