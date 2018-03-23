@@ -32,7 +32,6 @@ import android.content.Intent
 import android.support.annotation.IdRes
 import android.view.View
 import android.widget.Toast
-import com.maning.mndialoglibrary.MToast
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.PreferencesUtils
 
