@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dimen_size_5"
-                android:text="收款日期" />
+                android:text="下单日期" />
 
             <TextView
                 android:id="@+id/item_finance_time"
@@ -83,10 +83,10 @@
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="付款人" />
+                        android:text="投资人" />
 
                     <TextView
-                        android:id="@+id/item_finance_pay"
+                        android:id="@+id/item_finance_put"
                         style="@style/Font14_black_dark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,10 +104,10 @@
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="收款人" />
+                        android:text="经纪人" />
 
                     <TextView
-                        android:id="@+id/item_finance_get"
+                        android:id="@+id/item_finance_manage"
                         style="@style/Font14_black_dark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="付款金额(元)" />
+                    android:text="投资金额(元)" />
 
             </LinearLayout>
 

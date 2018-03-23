@@ -98,7 +98,7 @@
                 android:background="@color/divider" />
 
             <net.cachapa.expandablelayout.ExpandableLayout
-                android:id="@+id/news_expand"
+                android:id="@+id/order_expand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:el_duration="300"

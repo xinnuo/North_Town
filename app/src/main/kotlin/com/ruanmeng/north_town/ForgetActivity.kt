@@ -52,7 +52,7 @@ class ForgetActivity : BaseActivity() {
                     return
                 }
 
-                if (!CommonUtil.isMobileNumber(et_tel.text.toString())) {
+                if (!CommonUtil.isMobile(et_tel.text.toString())) {
                     et_tel.requestFocus()
                     et_tel.setText("")
                     showToast("手机号码格式错误，请重新输入")
@@ -103,7 +103,7 @@ class ForgetActivity : BaseActivity() {
                         })
             }
             R.id.btn_sure -> {
-                if (!CommonUtil.isMobileNumber(et_tel.text.toString())) {
+                if (!CommonUtil.isMobile(et_tel.text.toString())) {
                     et_tel.requestFocus()
                     et_tel.setText("")
                     showToast("手机号码格式错误，请重新输入")

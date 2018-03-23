@@ -109,6 +109,7 @@ class ReportActivity : BaseActivity() {
                 .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("searchar", keyWord)
+                .params("accountType", "2")
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
 

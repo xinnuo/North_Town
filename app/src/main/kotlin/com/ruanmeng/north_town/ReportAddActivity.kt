@@ -89,7 +89,7 @@ class ReportAddActivity : BaseActivity() {
                 startActivity(intent)
             }
             R.id.report_submit -> {
-                if (!CommonUtil.isMobileNumber(et_phone.text.toString())) {
+                if (!CommonUtil.isMobile(et_phone.text.toString())) {
                     et_phone.requestFocus()
                     et_phone.setText("")
                     showToast("请输入正确的手机号")

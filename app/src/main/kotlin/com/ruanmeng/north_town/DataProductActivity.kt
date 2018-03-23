@@ -1,6 +1,7 @@
 package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
@@ -14,12 +15,28 @@ import java.text.DecimalFormat
 
 class DataProductActivity : BaseActivity() {
 
+    private var productId = ""
+    private var productName = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_product)
         init_title("订单详情")
 
         getData()
+    }
+
+    override fun init_title() {
+        super.init_title()
+
+        product_detail.setOnClickListener {
+            if (productId.isEmpty()) return@setOnClickListener
+
+            val intent = Intent(baseContext, ManageDetailActivity::class.java)
+            intent.putExtra("title", productName)
+            intent.putExtra("productId", productId)
+            startActivity(intent)
+        }
     }
 
     override fun getData() {
@@ -34,7 +51,10 @@ class DataProductActivity : BaseActivity() {
 
                         val obj = JSONObject(response.body()).getJSONObject("object")
 
-                        product_type.text = obj.optString("productName")
+                        productId = obj.optString("productId")
+                        productName = obj.optString("productName")
+
+                        product_type.text = productName
                         product_name.setRightString(obj.optString("productName"))
                         product_year.text = obj.optString("years", "0")
                         product_start.setRightString(obj.optString("beginDate"))

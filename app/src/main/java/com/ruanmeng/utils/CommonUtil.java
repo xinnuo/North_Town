@@ -67,9 +67,9 @@ public class CommonUtil {
     }
 
     /**
-     * 是否是手机号
+     * 手机号校验
      */
-    public static boolean isMobileNumber(String mobile) {
+    public static boolean isMobile(String mobile) {
         if (mobile.length() != 11) return false;
         Pattern p = Pattern.compile("^((1[3|5|8][0-9])|(14[5|7])|(16[6])|(17[0|1|3|6|7|8])|(19[8|9]))\\d{8}$");
         Matcher m = p.matcher(mobile);
@@ -77,11 +77,20 @@ public class CommonUtil {
     }
 
     /**
-     * 是否是固话
+     * 传真校验
+     */
+    public static boolean isFax(String fax) {
+        Pattern p = Pattern.compile("^((\\d{7,8})|(0\\d{2,3}-\\d{7,8}))$"); //传真
+        Matcher m = p.matcher(fax);
+        return m.matches();
+    }
+
+    /**
+     * 固话校验
      */
     public static boolean isTel(String tel) {
         // Pattern p = Pattern.compile("^((\\d{7,8})|(0\\d{2,3}-\\d{7,8})|(1[34578]\\d{9}))$"); //固话和匹配手机
-        Pattern p = Pattern.compile("^((\\d{7,8})|(0\\d{2,3}-\\d{7,8})|(400-\\d{3}-\\d{4}))$"); ////固话和400固话
+        Pattern p = Pattern.compile("^((\\d{7,8})|(0\\d{2,3}-\\d{7,8})|(400-\\d{3}-\\d{4}))$"); //固话和400固话
         /*String reg = "(?:(\\(\\+?86\\))(0[0-9]{2,3}\\-?)?([2-9][0-9]{6,7})+(\\-[0-9]{1,4})?)|" +
                 "(?:(86-?)?(0[0-9]{2,3}\\-?)?([2-9][0-9]{6,7})+(\\-[0-9]{1,4})?)";
         Pattern p = Pattern.compile(reg);*/
@@ -90,7 +99,7 @@ public class CommonUtil {
     }
 
     /**
-     * 是否是邮箱
+     * 邮箱校验
      */
     public static boolean isEmail(String strEmail) {
         // String strPattern =
@@ -103,7 +112,7 @@ public class CommonUtil {
     }
 
     /**
-     * 是否是网址
+     * 网址校验
      */
     public static boolean isWeb(String strWeb) {
         String strPattern = "(http://|ftp://|https://|www){0,1}[^\u4e00-\u9fa5\\s]*?\\.(com|net|cn|me|tw|fr)[^\u4e00-\u9fa5\\s]*";

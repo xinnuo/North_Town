@@ -49,7 +49,7 @@ class LoginActivity : BaseActivity() {
             R.id.main_close -> onBackPressed()
             R.id.tv_forget -> startActivity(ForgetActivity::class.java)
             R.id.bt_login -> {
-                if (!CommonUtil.isMobileNumber(et_name.text.toString())) {
+                if (!CommonUtil.isMobile(et_name.text.toString())) {
                     et_name.requestFocus()
                     et_name.setText("")
                     showToast("手机号码格式错误，请重新输入")

@@ -67,6 +67,10 @@ data class CommonData(
         var bankId: String = "",
         var bankName: String = "",
 
+        //财务录入列表
+        var managerName: String = "",
+        var remark: String = "",
+
         //资料列表
         var amount: String = "",
 

@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_search.*
 import net.idik.lib.slimadapter.SlimAdapter
+import java.text.DecimalFormat
 
 class DataActivity : BaseActivity() {
 
@@ -74,7 +75,7 @@ class DataActivity : BaseActivity() {
                     injector.text(R.id.item_data_name, getColorText(data.userName, keyWord))
                             .text(R.id.item_data_phone, getColorText("手机 ${data.telephone}", keyWord))
                             .text(R.id.item_data_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
-                            .text(R.id.item_data_num, data.amount)
+                            .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0))
 
                             .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
@@ -123,7 +124,7 @@ class DataActivity : BaseActivity() {
                 .tag(this@DataActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))
-                .params("search", keyWord)
+                .params("searchar", keyWord)
                 .params("type", type)
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {

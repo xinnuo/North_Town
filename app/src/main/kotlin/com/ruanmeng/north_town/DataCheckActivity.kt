@@ -79,7 +79,6 @@ class DataCheckActivity : BaseActivity() {
                         mAdapter.updateData(list)
                     }
 
-                    @SuppressLint("SetTextI18n")
                     override fun onFinish() {
                         super.onFinish()
                         swipe_refresh.isRefreshing = false

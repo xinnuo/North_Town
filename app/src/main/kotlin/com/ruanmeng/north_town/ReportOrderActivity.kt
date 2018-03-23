@@ -3,13 +3,16 @@ package com.ruanmeng.north_town
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.showToast
-import com.ruanmeng.base.startActivity
+import com.lzg.extend.BaseResponse
+import com.lzg.extend.StringDialogCallback
+import com.lzg.extend.jackson.JacksonDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
+import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.ReportMessageEvent
-import com.ruanmeng.utils.DialogHelper
-import com.ruanmeng.utils.TimeHelper
+import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.*
 import kotlinx.android.synthetic.main.activity_report_order.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -18,6 +21,7 @@ import java.util.*
 
 class ReportOrderActivity : BaseActivity() {
 
+    private val list = ArrayList<Any>()
     private val items = ArrayList<CommonData>()
 
     private var bankId = ""
@@ -31,6 +35,8 @@ class ReportOrderActivity : BaseActivity() {
         init_title("添加订单")
 
         EventBus.getDefault().register(this@ReportOrderActivity)
+
+        getData()
     }
 
     override fun init_title() {
@@ -43,7 +49,7 @@ class ReportOrderActivity : BaseActivity() {
 
         report_product.addTextChangedListener(this@ReportOrderActivity)
         et_pact.addTextChangedListener(this@ReportOrderActivity)
-        et_receipt.addTextChangedListener(this@ReportOrderActivity)
+        if (list.isNotEmpty()) et_receipt.addTextChangedListener(this@ReportOrderActivity)
         report_tou.addTextChangedListener(this@ReportOrderActivity)
         et_money.addTextChangedListener(this@ReportOrderActivity)
         report_start.addTextChangedListener(this@ReportOrderActivity)
@@ -88,14 +94,89 @@ class ReportOrderActivity : BaseActivity() {
             }
             R.id.report_bank_ll -> startActivity(ReportBankActivity::class.java)
             R.id.report_agent_ll -> startActivity(ReportAgentActivity::class.java)
-            R.id.report_submit -> { }
+            R.id.report_submit -> {
+                if (!BankcardHelper.checkBankCard(et_card.rawText)) {
+                    et_card.requestFocus()
+                    et_card.setText("")
+                    showToast("请输入正确的银行卡卡号")
+                    return
+                }
+
+                if (BankCardUtil(et_card.rawText).bankName != report_bank.text.toString()) {
+                    showToast("银行卡号与所属银行不符，请重新输入")
+                    return
+                }
+
+                if (!CommonUtil.isMobile(et_phone.text.toString())) {
+                    et_phone.requestFocus()
+                    et_phone.setText("")
+                    showToast("请输入正确的联系电话")
+                    return
+                }
+
+                if (!CommonUtil.isFax(et_fax.text.toString())) {
+                    et_fax.requestFocus()
+                    et_fax.setText("")
+                    showToast("请输入正确的传真号码")
+                    return
+                }
+
+                OkGo.post<String>(BaseHttp.purchase_sub)
+                        .tag(this@ReportOrderActivity)
+                        .isMultipart(true)
+                        .headers("token", getString("token"))
+                        .params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                        .params("contractNo", et_pact.text.trim().toString())
+                        .params("receiptNo", et_receipt.text.trim().toString())
+                        .params("investTypeId", investTypeId)
+                        .params("productId", productId)
+                        .params("years", items.first().years)
+                        .params("amount", et_money.text.trim().toString())
+                        .params("beginDate", report_start.text.toString())
+                        .params("endDate", report_end.text.toString())
+                        .params("bank", bankId)
+                        .params("bankCard", et_card.rawText)
+                        .params("phone", et_phone.text.trim().toString())
+                        .params("address", et_addr.text.trim().toString())
+                        .params("fax", et_fax.text.trim().toString())
+                        .params("managerInfoId", managerInfoId)
+                        .params("remark", et_memo.text.trim().toString())
+                        .execute(object : StringDialogCallback(baseContext) {
+
+                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                                showToast(msg)
+                                ActivityStack.screenManager.popActivities(this@ReportOrderActivity::class.java)
+                            }
+
+                        })
+            }
         }
+    }
+
+    override fun getData() {
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.purchase_by_id)
+                .tag(this@ReportOrderActivity)
+                .headers("token", getString("token"))
+                .params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext, true) {
+
+                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                        list.apply {
+                            clear()
+                            addItems(response.body().`object`)
+                        }
+
+                        if (list.isEmpty()) order_expand.collapse()
+                    }
+
+                })
     }
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         if (report_product.text.isNotBlank()
                 && et_pact.text.isNotBlank()
-                && et_receipt.text.isNotBlank()
+                && (list.isEmpty() || et_receipt.text.isNotBlank())
                 && report_tou.text.isNotBlank()
                 && et_money.text.isNotBlank()
                 && report_start.text.isNotBlank()
