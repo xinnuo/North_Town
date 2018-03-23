@@ -64,7 +64,7 @@ class FinanceActivity : BaseActivity() {
                 }
                 .attachTo(recycle_list)
 
-        tvRight.setOnClickListener { startActivity(FinanceSubmitActivity::class.java) }
+        tvRight.setOnClickListener { startActivity<FinanceSubmitActivity>() }
     }
 
     override fun getData(pindex: Int) {

@@ -66,7 +66,7 @@ class ReportOrderActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.report_product_ll -> startActivity(ReportProductActivity::class.java)
+            R.id.report_product_ll -> startActivity<ReportProductActivity>()
             R.id.report_tou_ll -> {
                 val intent = Intent(baseContext, FinanceSelectActivity::class.java)
                 intent.putExtra("title", "投资类型")
@@ -92,8 +92,8 @@ class ReportOrderActivity : BaseActivity() {
                     report_end.text = TimeHelper.getInstance().getAnyYear(date, items.first().years.toInt())
                 })
             }
-            R.id.report_bank_ll -> startActivity(ReportBankActivity::class.java)
-            R.id.report_agent_ll -> startActivity(ReportAgentActivity::class.java)
+            R.id.report_bank_ll -> startActivity<ReportBankActivity>()
+            R.id.report_agent_ll -> startActivity<ReportAgentActivity>()
             R.id.report_submit -> {
                 if (!BankcardHelper.checkBankCard(et_card.rawText)) {
                     et_card.requestFocus()

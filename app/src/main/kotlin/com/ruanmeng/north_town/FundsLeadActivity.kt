@@ -43,7 +43,7 @@ class FundsLeadActivity : BaseActivity() {
                     injector.visibility(R.id.item_lead_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_lead_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
-                            .clicked(R.id.item_lead) { startActivity(FundsProductActivity::class.java) }
+                            .clicked(R.id.item_lead) { startActivity<FundsProductActivity>() }
                 }
                 .attachTo(recycle_list)
     }

@@ -99,7 +99,7 @@ class ReportActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.search_cancel -> search_edit.setText("")
-            R.id.empty_add -> startActivity(ReportAddActivity::class.java)
+            R.id.empty_add -> startActivity<ReportAddActivity>()
         }
     }
 

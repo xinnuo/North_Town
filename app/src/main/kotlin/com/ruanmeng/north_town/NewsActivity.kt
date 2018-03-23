@@ -50,7 +50,7 @@ class NewsActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_data_list) { data, injector ->
-                    injector.clicked(R.id.item_data) { startActivity(NewsDetailActivity::class.java) }
+                    injector.clicked(R.id.item_data) { startActivity<NewsDetailActivity>() }
                 }
                 .attachTo(recycle_list)
     }

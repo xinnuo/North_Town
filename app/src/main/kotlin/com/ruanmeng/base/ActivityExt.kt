@@ -43,7 +43,7 @@ import com.ruanmeng.utils.PreferencesUtils
  */
 inline fun <reified T : View> Activity.find(@IdRes id: Int): T = findViewById(id)
 
-inline fun Activity.startActivity(activity: Class<*>) = startActivity(Intent(this, activity))
+inline fun <reified T : Activity> Activity.startActivity() = startActivity(Intent(this, T::class.java))
 
 // inline fun Activity.toast(text: CharSequence) = MToast.makeTextShort(this, text).show()
 

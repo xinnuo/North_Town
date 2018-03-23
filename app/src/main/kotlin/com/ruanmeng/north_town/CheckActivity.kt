@@ -43,7 +43,7 @@ class CheckActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_review_list) { data, injector ->
                     injector.visibility(R.id.item_review_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
-                            .clicked(R.id.item_review) { startActivity(CheckDetailActivity::class.java) }
+                            .clicked(R.id.item_review) { startActivity<CheckDetailActivity>() }
                 }
                 .attachTo(recycle_list)
     }

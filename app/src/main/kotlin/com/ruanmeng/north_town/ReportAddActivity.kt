@@ -69,8 +69,8 @@ class ReportAddActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.report_like_ll -> startActivity(ReportLikeActivity::class.java)
-            R.id.report_work_ll -> startActivity(ReportJobActivity::class.java)
+            R.id.report_like_ll -> startActivity<ReportLikeActivity>()
+            R.id.report_work_ll -> startActivity<ReportJobActivity>()
             R.id.report_unit_ll -> {
                 val intent = Intent(baseContext, ReportUnitActivity::class.java)
                 intent.putExtra("title", "工作单位")
@@ -82,7 +82,7 @@ class ReportAddActivity : BaseActivity() {
                 intent.putExtra("isType", true)
                 startActivity(intent)
             }
-            R.id.report_up_ll -> startActivity(ReportUpActivity::class.java)
+            R.id.report_up_ll -> startActivity<ReportUpActivity>()
             R.id.report_relation_ll -> {
                 val intent = Intent(baseContext, ReportUnitActivity::class.java)
                 intent.putExtra("title", "客户关系")

@@ -102,8 +102,8 @@ class InfoActivity : BaseActivity() {
                     // 结果回调onActivityResult code
                     .forResult(PictureConfig.CHOOSE_REQUEST)
         }
-        info_name.setOnClickListener { startActivity(ModifyNameActivity::class.java) }
-        info_pwd.setOnClickListener { startActivity(PasswordActivity::class.java) }
+        info_name.setOnClickListener { startActivity<ModifyNameActivity>() }
+        info_pwd.setOnClickListener { startActivity<PasswordActivity>() }
     }
 
     private fun loadUserHead(path: String) {
