@@ -44,10 +44,10 @@ class MainSecondFragment : BaseFragment() {
                 .into(second_img)
         second_img.setTag(R.id.second_img, getString("userhead"))
 
-        second_info.setOnClickListener { startActivity(InfoActivity::class.java) }
-        second_fold.setOnClickListener { startActivity(PurseActivity::class.java) }
-        second_customer.setOnClickListener { startActivity(ClientActivity::class.java) }
-        second_setting.setOnClickListener { startActivity(SettingActivity::class.java) }
+        second_info.setOnClickListener { startActivity<InfoActivity>() }
+        second_fold.setOnClickListener { startActivity<PurseActivity>() }
+        second_customer.setOnClickListener { startActivity<ClientActivity>() }
+        second_setting.setOnClickListener { startActivity<SettingActivity>() }
     }
 
     override fun onStart() {

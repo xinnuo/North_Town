@@ -58,14 +58,14 @@ class MainFirstFragment : BaseFragment() {
 
                                 .clicked(R.id.item_first) {
                                     when (list.indexOf(data)) {
-                                        0 -> startActivity(ReportActivity::class.java)
-                                        1 -> startActivity(DataActivity::class.java)
-                                        2 -> startActivity(FinanceActivity::class.java)
-                                        3 -> startActivity(NewsActivity::class.java)
-                                        4 -> startActivity(PerformActivity::class.java)
-                                        5 -> startActivity(FundsActivity::class.java)
-                                        6 -> startActivity(ManageActivity::class.java)
-                                        7 -> startActivity(CheckActivity::class.java)
+                                        0 -> startActivity<ReportActivity>()
+                                        1 -> startActivity<DataActivity>()
+                                        2 -> startActivity<FinanceActivity>()
+                                        3 -> startActivity<NewsActivity>()
+                                        4 -> startActivity<PerformActivity>()
+                                        5 -> startActivity<FundsActivity>()
+                                        6 -> startActivity<ManageActivity>()
+                                        7 -> startActivity<CheckActivity>()
                                     }
                                 }
                     }

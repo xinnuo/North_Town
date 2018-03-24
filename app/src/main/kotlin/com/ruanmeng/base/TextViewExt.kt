@@ -25,6 +25,8 @@
  * #          *****       ***        ***      *             #
  * #            **       ****        ****                   #
  */
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.ruanmeng.base
 
 import android.text.Html
@@ -37,12 +39,12 @@ import com.ruanmeng.north_town.R
  * 创建人：小卷毛
  * 创建时间：2018-03-14 17:54
  */
-fun TextView.setColor(text: String, key: String) {
+inline fun TextView.setColor(text: String, key: String) {
     @Suppress("DEPRECATION")
     setText(Html.fromHtml(text.replace(key, "<font color='${resources.getColor(R.color.colorAccent)}'>$key</font>")))
 }
 
-fun TextView.setColor(text: String, key: String, color: String) {
+inline fun TextView.setColor(text: String, key: String, color: String) {
     @Suppress("DEPRECATION")
     setText(Html.fromHtml(text.replace(key, "<font color='$color'>$key</font>")))
 }

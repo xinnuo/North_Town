@@ -25,6 +25,7 @@
  * #          *****       ***        ***      *             #
  * #            **       ****        ****                   #
  */
+
 package com.ruanmeng.base
 
 import android.app.Activity
@@ -44,9 +45,7 @@ inline fun <reified T : View> Activity.find(@IdRes id: Int): T = findViewById(id
 
 inline fun <reified T : Activity> Activity.startActivity() = startActivity(Intent(this, T::class.java))
 
-// inline fun Activity.toast(text: CharSequence) = MToast.makeTextShort(this, text).show()
-
-inline fun Activity.showToast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(this, text, duration).show()
+fun Activity.showToast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(this, text, duration).show()
 
 inline fun Activity.getString(key: String): String = PreferencesUtils.getString(this, key, "")
 
