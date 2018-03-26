@@ -3,26 +3,38 @@ package com.ruanmeng.north_town
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.lzg.extend.BaseResponse
+import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.load_Linear
-import com.ruanmeng.base.refresh
+import com.lzy.okgo.model.Response
+import com.makeramen.roundedimageview.RoundedImageView
+import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_data.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_search.*
 import net.idik.lib.slimadapter.SlimAdapter
+import java.text.DecimalFormat
 
 class PerformActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
+    private var keyWord = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perform)
         init_title("业绩统计")
+
+        swipe_refresh.isRefreshing = true
+        getData(pageNum)
     }
 
     override fun init_title() {
@@ -37,7 +49,7 @@ class PerformActivity : BaseActivity() {
                 override fun onTabUnselected(tab: TabLayout.Tab) {}
 
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    mPosition = tab.position
+                    mPosition = tab.position + 1
                     OkGo.getInstance().cancelTag(this@PerformActivity)
 
                     window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
@@ -64,14 +76,29 @@ class PerformActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_data_list) { data, injector ->
                     injector.gone(R.id.item_data_idcard)
+                            .text(R.id.item_data_name, data.userName)
+                            .text(R.id.item_data_phone, "手机 ${data.telephone}")
+                            .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.sum.toInt() / 10000.0))
+
+                            .with<RoundedImageView>(R.id.item_data_img) { view ->
+                                Glide.with(baseContext)
+                                        .load(BaseHttp.baseImg + data.userhead)
+                                        .apply(RequestOptions
+                                                .centerCropTransform()
+                                                .placeholder(R.mipmap.default_user)
+                                                .error(R.mipmap.default_user)
+                                                .dontAnimate())
+                                        .into(view)
+                            }
+
                             .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
                             .clicked(R.id.item_data) {
                                 val title = when (mPosition) {
-                                    0 -> "日业绩"
-                                    1 -> "周业绩"
-                                    2 -> "月业绩"
-                                    3 -> "年业绩"
+                                    1 -> "日业绩"
+                                    2 -> "周业绩"
+                                    3 -> "月业绩"
+                                    4 -> "年业绩"
                                     else  -> ""
                                 }
                                 intent.setClass(baseContext, PerformCheckActivity::class.java)
@@ -80,24 +107,76 @@ class PerformActivity : BaseActivity() {
                             }
                 }
                 .attachTo(recycle_list)
+
+        search_edit.addTextChangedListener(this@PerformActivity)
+        search_edit.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
+
+                if (search_edit.text.toString().isBlank()) {
+                    showToast("请输入关键字")
+                } else {
+                    keyWord = search_edit.text.toString()
+                    updateList()
+                }
+            }
+            return@setOnEditorActionListener false
+        }
+
+        search_close.setOnClickListener { search_edit.setText("") }
     }
 
-    fun updateList() {
-        /*swipe_refresh.isRefreshing = true
-        if (list.size > 0) {
+    override fun getData(pindex: Int) {
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.achievement_list)
+                .tag(this@PerformActivity)
+                .headers("token", getString("token"))
+                .params("type", mPosition)
+                .params("searchar", keyWord)
+                .params("page", pindex)
+                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
+
+                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+
+                        list.apply {
+                            if (pindex == 1) {
+                                clear()
+                                pageNum = pindex
+                            }
+                            addItems(response.body().`object`)
+                            if (count(response.body().`object`) > 0) pageNum++
+                        }
+                        mAdapter.updateData(list)
+                    }
+
+                    override fun onFinish() {
+                        super.onFinish()
+                        swipe_refresh.isRefreshing = false
+                        isLoadingMore = false
+
+                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                    }
+
+                })
+    }
+
+    private fun updateList() {
+        swipe_refresh.isRefreshing = true
+
+        empty_view.visibility = View.GONE
+        if (list.isNotEmpty()) {
             list.clear()
             mAdapter.notifyDataSetChanged()
         }
-        getData(mPosition)*/
 
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        mAdapter.updateData(list)
+        pageNum = 1
+        getData(pageNum)
+    }
+
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        search_close.visibility = if (s.isEmpty()) View.GONE else View.VISIBLE
+        if (s.isEmpty() && keyWord.isNotEmpty()) {
+            keyWord = ""
+            updateList()
+        }
     }
 }

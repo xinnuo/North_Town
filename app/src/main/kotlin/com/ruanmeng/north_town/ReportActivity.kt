@@ -143,11 +143,11 @@ class ReportActivity : BaseActivity() {
     fun updateList() {
         swipe_refresh.isRefreshing = true
 
-        if (list.size > 0) {
+        empty_view.visibility = View.GONE
+        if (list.isNotEmpty()) {
             list.clear()
             report_result.text = "搜索结果(0)"
             mAdapter.notifyDataSetChanged()
-            empty_view.visibility = View.GONE
         }
 
         pageNum = 1

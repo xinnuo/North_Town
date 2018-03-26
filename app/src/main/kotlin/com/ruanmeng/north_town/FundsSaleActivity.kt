@@ -100,12 +100,12 @@ class FundsSaleActivity : BaseActivity() {
     fun updateList() {
         swipe_refresh.isRefreshing = true
 
-        if (list.size > 0) {
+        empty_view.visibility = View.GONE
+        if (list.isNotEmpty()) {
             funds_total.text = "0"
 
             list.clear()
             mAdapter.notifyDataSetChanged()
-            empty_view.visibility = View.GONE
         }
 
         pageNum = 1

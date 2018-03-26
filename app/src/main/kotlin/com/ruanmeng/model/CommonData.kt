@@ -70,6 +70,7 @@ data class CommonData(
         //财务录入列表
         var managerName: String = "",
         var remark: String = "",
+        var receiptNo: String = "",
 
         //资料列表
         var amount: String = "",
@@ -105,5 +106,11 @@ data class CommonData(
 
         //利率列表
         var max: String = "",
-        var min: String = ""
+        var min: String = "",
+
+        //统计列表
+        var sum: String = "",
+
+        //审核列表
+        var paytypeName: String = ""
 ) : Serializable

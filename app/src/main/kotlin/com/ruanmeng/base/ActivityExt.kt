@@ -26,6 +26,8 @@
  * #            **       ****        ****                   #
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.ruanmeng.base
 
 import android.app.Activity

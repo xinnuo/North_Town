@@ -206,7 +206,7 @@
             app:sBottomLineMargin="@dimen/dimen_size_10"
             app:sLeftTextColor="@color/black_dark"
             app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-            app:sLeftTextString="所属类型"
+            app:sLeftTextString="收据类型"
             app:sLineShow="bottom"
             app:sRightTextColor="@color/gray"
             app:sRightTextMarginRight="@dimen/dimen_size_10" />

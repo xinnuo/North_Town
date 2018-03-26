@@ -21,7 +21,7 @@ import java.util.*
 
 class ReportOrderActivity : BaseActivity() {
 
-    private val list = ArrayList<Any>()
+    private val list = ArrayList<CommonData>()
     private val items = ArrayList<CommonData>()
 
     private var bankId = ""
@@ -95,6 +95,10 @@ class ReportOrderActivity : BaseActivity() {
             R.id.report_bank_ll -> startActivity<ReportBankActivity>()
             R.id.report_agent_ll -> startActivity<ReportAgentActivity>()
             R.id.report_submit -> {
+                if (list.isNotEmpty() && list.none { it.receiptNo == et_receipt.text.toString() }) {
+                    showToast("请输入正确的收据编码")
+                    return
+                }
                 if (!BankcardHelper.checkBankCard(et_card.rawText)) {
                     et_card.requestFocus()
                     et_card.setText("")
@@ -145,7 +149,7 @@ class ReportOrderActivity : BaseActivity() {
 
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                                showToast(msg)
+                                showToast("添加订单信息成功！")
                                 ActivityStack.screenManager.popActivities(this@ReportOrderActivity::class.java)
                             }
 
@@ -168,6 +172,11 @@ class ReportOrderActivity : BaseActivity() {
                         }
 
                         if (list.isEmpty()) order_expand.collapse()
+                        else {
+                            et_receipt.setText(list.first().receiptNo)
+                            et_money.setText(list.first().amount)
+                            et_memo.setText(list.first().remark)
+                        }
                     }
 
                 })
