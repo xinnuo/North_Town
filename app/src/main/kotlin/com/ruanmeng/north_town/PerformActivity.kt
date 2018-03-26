@@ -32,9 +32,6 @@ class PerformActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perform)
         init_title("业绩统计")
-
-        swipe_refresh.isRefreshing = true
-        getData(pageNum)
     }
 
     override fun init_title() {
@@ -76,8 +73,8 @@ class PerformActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_data_list) { data, injector ->
                     injector.gone(R.id.item_data_idcard)
-                            .text(R.id.item_data_name, data.userName)
-                            .text(R.id.item_data_phone, "手机 ${data.telephone}")
+                            .text(R.id.item_data_name, getColorText(data.userName, keyWord))
+                            .text(R.id.item_data_phone, getColorText("手机 ${data.telephone}", keyWord))
                             .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.sum.toInt() / 10000.0))
 
                             .with<RoundedImageView>(R.id.item_data_img) { view ->
