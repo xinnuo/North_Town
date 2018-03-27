@@ -535,7 +535,7 @@ public class TimeHelper {
     }
 
     /**
-     * 得到二个日期间的间隔天数
+     * 得到两个日期间的间隔天数
      */
     public String getTwoDay(String start, String end) {
         if (start == null || TextUtils.isEmpty(start)) return "";

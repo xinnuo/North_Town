@@ -39,6 +39,7 @@
                     android:text="日期" />
 
                 <TextView
+                    android:id="@+id/news_start"
                     style="@style/Font14_gray"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -59,6 +60,7 @@
                     android:text="至" />
 
                 <TextView
+                    android:id="@+id/news_end"
                     style="@style/Font14_gray"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -85,13 +87,16 @@
                     android:layout_marginEnd="@dimen/dimen_size_15"
                     android:text="金额" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/news_min"
                     style="@style/Font14_gray"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/rec_bg_white"
-                    android:hint="最低金额"
+                    android:hint="最低金额(元)"
+                    android:inputType="number"
+                    android:maxLength="9"
                     android:paddingBottom="@dimen/dimen_size_3"
                     android:paddingLeft="@dimen/dimen_size_10"
                     android:paddingRight="@dimen/dimen_size_10"
@@ -105,13 +110,16 @@
                     android:layout_marginStart="@dimen/dimen_size_15"
                     android:text="至" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/news_max"
                     style="@style/Font14_gray"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/rec_bg_white"
-                    android:hint="最高金额"
+                    android:hint="最高金额(元)"
+                    android:inputType="number"
+                    android:maxLength="9"
                     android:paddingBottom="@dimen/dimen_size_3"
                     android:paddingLeft="@dimen/dimen_size_10"
                     android:paddingRight="@dimen/dimen_size_10"

@@ -150,6 +150,7 @@ class ReportOrderActivity : BaseActivity() {
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                                 showToast("添加订单信息成功！")
+                                EventBus.getDefault().post(ReportMessageEvent("", "", "添加订单"))
                                 ActivityStack.screenManager.popActivities(this@ReportOrderActivity::class.java)
                             }
 

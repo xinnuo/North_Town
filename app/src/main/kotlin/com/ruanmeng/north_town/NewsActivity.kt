@@ -13,25 +13,37 @@ import com.lzy.okgo.model.Response
 import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.KeyboardHelper
+import com.ruanmeng.utils.TimeHelper
 import kotlinx.android.synthetic.main.activity_news.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_title_filter.*
 import net.idik.lib.slimadapter.SlimAdapter
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.text.DecimalFormat
+import java.util.*
 
 class NewsActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
     private var keyWord = ""
+    private var date_start = ""
+    private var date_end = ""
+    private var money_min = ""
+    private var money_max = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
         setToolbarVisibility(false)
         init_title()
+
+        EventBus.getDefault().register(this@NewsActivity)
 
         swipe_refresh.isRefreshing = true
         getData(pageNum)
@@ -40,7 +52,26 @@ class NewsActivity : BaseActivity() {
     override fun init_title() {
         filter_check.setOnClickListener {
             when (news_expand.isExpanded) {
-                true -> news_expand.collapse()
+                true -> {
+                    news_expand.collapse()
+
+                    news_start.text = ""
+                    news_end.text = ""
+                    news_min.setText("")
+                    news_max.setText("")
+
+                    if (date_start.isNotEmpty()
+                            || date_end.isNotEmpty()
+                            || money_min.isNotEmpty()
+                            || money_max.isNotEmpty()) {
+                        date_start = ""
+                        date_end = ""
+                        money_min = ""
+                        money_max = ""
+
+                        window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
+                    }
+                }
                 else -> news_expand.expand()
             }
         }
@@ -78,6 +109,8 @@ class NewsActivity : BaseActivity() {
                             .clicked(R.id.item_data) {
                                 val intent = Intent(baseContext, NewsDetailActivity::class.java)
                                 intent.putExtra("accountInfoId", data.accountInfoId)
+                                intent.putExtra("userName", data.userName)
+                                intent.putExtra("cardNo", data.cardNo)
                                 startActivity(intent)
                             }
                 }
@@ -99,6 +132,91 @@ class NewsActivity : BaseActivity() {
         }
 
         filter_close.setOnClickListener { filter_edit.setText("") }
+
+        news_start.setOnClickListener {
+            val year_now = Calendar.getInstance().get(Calendar.YEAR)
+            DialogHelper.showDateDialog(this@NewsActivity,
+                    year_now - 50,
+                    year_now,
+                    3,
+                    "选择起始日期",
+                    true,
+                    false, { _, _, _, _, _, date ->
+                if (news_end.text.isNotEmpty()) {
+                    val days = TimeHelper.getInstance().getDays(date, news_end.text.toString())
+                    if (days < 0) {
+                        showToast("起始日期不能大于结束日期")
+                        return@showDateDialog
+                    }
+                }
+
+                news_start.text = date
+            })
+        }
+
+        news_end.setOnClickListener {
+            val year_now = Calendar.getInstance().get(Calendar.YEAR)
+            DialogHelper.showDateDialog(this@NewsActivity,
+                    year_now - 50,
+                    year_now,
+                    3,
+                    "选择结束日期",
+                    true,
+                    false, { _, _, _, _, _, date ->
+                if (news_start.text.isNotEmpty()) {
+                    val days = TimeHelper.getInstance().getDays(news_start.text.toString(), date)
+                    if (days < 0) {
+                        showToast("结束日期不能小于起始日期")
+                        return@showDateDialog
+                    }
+                }
+
+                news_end.text = date
+            })
+        }
+
+        news_filter.setOnClickListener {
+            money_min = ""
+            money_max = ""
+
+            if (news_start.text.isNotEmpty() && news_end.text.isEmpty()) {
+                showToast("请选择结束日期")
+                return@setOnClickListener
+            }
+            if (news_start.text.isEmpty() && news_end.text.isNotEmpty()) {
+                showToast("请选择起始日期")
+                return@setOnClickListener
+            }
+            if (news_min.text.isEmpty() && news_max.text.isNotEmpty()) {
+                showToast("请输入最低金额")
+                return@setOnClickListener
+            }
+            if (news_min.text.isNotEmpty() && news_max.text.isEmpty()) {
+                showToast("请输入最高金额")
+                return@setOnClickListener
+            }
+
+            if (news_start.text.isNotEmpty() && news_end.text.isNotEmpty()) {
+                date_start = news_start.text.toString()
+                date_end = news_end.text.toString()
+            }
+            if (news_min.text.isNotEmpty() && news_max.text.isNotEmpty()) {
+                if (news_min.text.toString().toInt() > news_max.text.toString().toInt()) {
+                    showToast("最低金额不能大于最高金额")
+                    return@setOnClickListener
+                }
+
+                money_min = news_min.text.toString()
+                money_max = news_max.text.toString()
+            }
+
+            if (date_start.isNotEmpty()
+                    || date_end.isNotEmpty()
+                    || money_min.isNotEmpty()
+                    || money_max.isNotEmpty()) {
+                updateList()
+            }
+        }
     }
 
     override fun getData(pindex: Int) {
@@ -107,10 +225,10 @@ class NewsActivity : BaseActivity() {
                 .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("searchar", keyWord)
-                .params("startDate", "")
-                .params("endDate", "")
-                .params("min", "")
-                .params("max", "")
+                .params("startDate", date_start)
+                .params("endDate", date_end)
+                .params("min", money_min)
+                .params("max", money_max)
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
 
@@ -157,6 +275,18 @@ class NewsActivity : BaseActivity() {
         if (s.isEmpty() && keyWord.isNotEmpty()) {
             keyWord = ""
             updateList()
+        }
+    }
+
+    override fun finish() {
+        EventBus.getDefault().unregister(this@NewsActivity)
+        super.finish()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: ReportMessageEvent) {
+        when (event.type) {
+            "添加订单" -> updateList()
         }
     }
 }

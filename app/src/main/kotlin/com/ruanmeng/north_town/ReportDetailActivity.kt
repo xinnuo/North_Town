@@ -49,7 +49,7 @@ class ReportDetailActivity : BaseActivity() {
     }
 
     override fun getData() {
-        OkGo.post<String>(BaseHttp.other_userinfo)
+        OkGo.post<String>(BaseHttp.customer_details)
                 .tag(this@ReportDetailActivity)
                 .headers("token", getString("token"))
                 .params("accountInfoId", intent.getStringExtra("accountInfoId"))
