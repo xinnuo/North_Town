@@ -110,6 +110,7 @@ data class CommonData(
 
         //统计列表
         var sum: String = "",
+        var managerInfoId: String = "",
 
         //审核列表
         var paytypeName: String = ""

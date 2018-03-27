@@ -40,7 +40,7 @@ fun <T> ArrayList<T>.addItems(items: List<T>? = null): ArrayList<T> {
     return this
 }
 
-fun <T> ArrayList<T>.count(items: List<T>? = null): Int = items?.size ?: 0
+fun <T> count(items: List<T>? = null): Int = items?.size ?: 0
 
 /*
  * 内联函数减少内存开销，却增加代码量。要适当地取舍

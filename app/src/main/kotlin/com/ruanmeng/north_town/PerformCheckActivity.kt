@@ -3,33 +3,58 @@ package com.ruanmeng.north_town
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.load_Linear
-import com.ruanmeng.base.refresh
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.lzg.extend.BaseResponse
+import com.lzg.extend.jackson.JacksonDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
+import com.makeramen.roundedimageview.RoundedImageView
+import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.PurchaseModel
+import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.TimeHelper
 import kotlinx.android.synthetic.main.activity_perform_check.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
+import java.text.DecimalFormat
+import java.util.*
 
 class PerformCheckActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
+    private var mYear = 0
+    private var mMonth = 0
+    private var mWeek = 0
+    private var mDate = ""
+    private var mPatternMonth = ""
+    private var mPatternDate = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perform_check)
         init_title()
 
-        list.add(CommonData("1"))
-        list.add(CommonData("2"))
-        list.add(CommonData("3"))
-        list.add(CommonData("4"))
-        list.add(CommonData("5"))
-        list.add(CommonData("6"))
-        list.add(CommonData("7"))
-        list.add(CommonData("8"))
-        mAdapter.updateData(list)
+        mYear = Calendar.getInstance().get(Calendar.YEAR)
+        mMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
+        mWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR)
+        mDate = TimeHelper.getInstance().stringDateShort
+
+        mPatternMonth = TimeHelper.getInstance().getNowTime("yyyy年MM月")
+        mPatternDate = TimeHelper.getInstance().getNowTime("yyyy年MM月dd日")
+
+        perform_time.text = when (intent.getStringExtra("title")) {
+            "日业绩" -> mPatternDate
+            "周业绩" -> "${mYear}年${mWeek}周"
+            "月业绩" -> mPatternMonth
+            "年业绩" -> "${mYear}年"
+            else -> ""
+        }
+
+        swipe_refresh.isRefreshing = true
+        getData(pageNum)
     }
 
     @SuppressLint("SetTextI18n")
@@ -50,20 +75,167 @@ class PerformCheckActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_perform_list) { data, injector ->
-                    injector.visibility(R.id.item_perform_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                    injector.text(R.id.item_perform_name, data.userName)
+                            .text(R.id.item_perform_tel, "(${data.telephone})")
+                            .text(R.id.item_perform_product, data.productName)
+                            .text(R.id.item_perform_money, "${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万")
+                            .text(R.id.item_perform_limit, "${data.years}年")
+                            .text(R.id.item_perform_date, data.createDate)
+
+                            .with<RoundedImageView>(R.id.item_perform_img) { view ->
+                                Glide.with(baseContext)
+                                        .load(BaseHttp.baseImg + data.userhead)
+                                        .apply(RequestOptions
+                                                .centerCropTransform()
+                                                .placeholder(R.mipmap.default_user)
+                                                .error(R.mipmap.default_user)
+                                                .dontAnimate())
+                                        .into(view)
+                            }
+
+                            .visibility(R.id.item_perform_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_perform_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+
+                            .clicked(R.id.item_perform) { }
                 }
                 .attachTo(recycle_list)
+
+        perform_left.setOnClickListener {
+            when (intent.getStringExtra("title")) {
+                "日业绩" -> {
+                    mDate = TimeHelper.getInstance().getNextDay(mDate, -1)
+                    mPatternDate = TimeHelper.getInstance().getNextDay(mPatternDate, -1, "yyyy年MM月dd日")
+                    perform_time.text = mPatternDate
+                }
+                "周业绩" -> {
+                    mWeek = Calendar.getInstance().apply {
+                        set(Calendar.WEEK_OF_YEAR, mWeek)
+                        add(Calendar.WEEK_OF_YEAR, -1)
+                        mYear = get(Calendar.YEAR)
+                    }.get(Calendar.WEEK_OF_YEAR)
+                    perform_time.text = "${mYear}年${mWeek}周"
+                }
+                "月业绩" -> {
+                    mMonth = Calendar.getInstance().apply {
+                        set(Calendar.MONTH, mMonth)
+                        add(Calendar.MONTH, -1)
+                        mYear = get(Calendar.YEAR)
+                    }.get(Calendar.MONTH)
+                    mPatternMonth = TimeHelper.getInstance().getAfterMonth(mPatternMonth, -1, "yyyy年MM月")
+                    perform_time.text = mPatternMonth
+                }
+                "年业绩" -> {
+                    mYear -= 1
+                    perform_time.text = "${mYear}年"
+                }
+            }
+
+            updateList()
+        }
+        perform_right.setOnClickListener {
+            when (intent.getStringExtra("title")) {
+                "日业绩" -> {
+                    mDate = TimeHelper.getInstance().getNextDay(mDate, 1)
+                    mPatternDate = TimeHelper.getInstance().getNextDay(mPatternDate, 1, "yyyy年MM月dd日")
+                    perform_time.text = mPatternDate
+                }
+                "周业绩" -> {
+                    mWeek = Calendar.getInstance().apply {
+                        set(Calendar.WEEK_OF_YEAR, mWeek)
+                        add(Calendar.WEEK_OF_YEAR, 1)
+                        mYear = get(Calendar.YEAR)
+                    }.get(Calendar.WEEK_OF_YEAR)
+                    perform_time.text = "${mYear}年${mWeek}周"
+                }
+                "月业绩" -> {
+                    mMonth = Calendar.getInstance().apply {
+                        set(Calendar.MONTH, mMonth)
+                        add(Calendar.MONTH, 1)
+                        mYear = get(Calendar.YEAR)
+                    }.get(Calendar.MONTH)
+                    mPatternMonth = TimeHelper.getInstance().getAfterMonth(mPatternMonth, 1, "yyyy年MM月")
+                    perform_time.text = mPatternMonth
+                }
+                "年业绩" -> {
+                    mYear += 1
+                    perform_time.text = "${mYear}年"
+                }
+            }
+
+            updateList()
+        }
     }
 
+    override fun getData(pindex: Int) {
+        OkGo.post<BaseResponse<PurchaseModel>>(when (intent.getStringExtra("title")) {
+            "日业绩" -> BaseHttp.achievement_day_list
+            "周业绩" -> BaseHttp.achievement_week_list
+            "月业绩" -> BaseHttp.achievement_month_list
+            "年业绩" -> BaseHttp.achievement_year_list
+            else -> ""
+        })
+                .tag(this@PerformCheckActivity)
+                .headers("token", getString("token"))
+                .apply {
+                    when (intent.getStringExtra("title")) {
+                        "日业绩" -> params("date", mDate)
+                        "周业绩" -> {
+                            params("year", mYear)
+                            params("week", mWeek)
+                        }
+                        "月业绩" -> {
+                            params("year", mYear)
+                            params("month", mMonth)
+                        }
+                        "年业绩" -> {
+                            params("year", mYear)
+                        }
+                    }
+                }
+                .params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                .params("page", pindex)
+                .execute(object : JacksonDialogCallback<BaseResponse<PurchaseModel>>(baseContext) {
+
+                    override fun onSuccess(response: Response<BaseResponse<PurchaseModel>>) {
+
+                        list.apply {
+                            if (pindex == 1) {
+                                clear()
+                                pageNum = pindex
+                            }
+                            addItems(response.body().`object`.purchaseList)
+                            if (count(response.body().`object`.purchaseList) > 0) pageNum++
+                        }
+                        if (count(response.body().`object`.purchaseList) > 0) mAdapter.updateData(list)
+
+                        val sum = response.body().`object`.sum
+                        if (sum.isNotEmpty())
+                            perform_total.text = DecimalFormat(",##0.00").format(sum.toInt() / 10000.0)
+                    }
+
+                    override fun onFinish() {
+                        super.onFinish()
+                        swipe_refresh.isRefreshing = false
+                        isLoadingMore = false
+
+                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                    }
+
+                })
+    }
+
+    @SuppressLint("SetTextI18n")
     fun updateList() {
         swipe_refresh.isRefreshing = true
 
+        perform_total.text = "0.00"
         empty_view.visibility = View.GONE
         if (list.isNotEmpty()) {
             list.clear()
             mAdapter.notifyDataSetChanged()
         }
-        getData(mPosition)
+
+        pageNum = 1
+        getData(pageNum)
     }
 }

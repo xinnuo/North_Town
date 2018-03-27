@@ -91,15 +91,15 @@ class PerformActivity : BaseActivity() {
                             .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
                             .clicked(R.id.item_data) {
-                                val title = when (mPosition) {
+                                intent.setClass(baseContext, PerformCheckActivity::class.java)
+                                intent.putExtra("accountInfoId", data.managerInfoId)
+                                intent.putExtra("title", when (mPosition) {
                                     1 -> "日业绩"
                                     2 -> "周业绩"
                                     3 -> "月业绩"
                                     4 -> "年业绩"
                                     else  -> ""
-                                }
-                                intent.setClass(baseContext, PerformCheckActivity::class.java)
-                                intent.putExtra("title", title)
+                                })
                                 startActivity(intent)
                             }
                 }
@@ -126,6 +126,7 @@ class PerformActivity : BaseActivity() {
     override fun getData(pindex: Int) {
         OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.achievement_list)
                 .tag(this@PerformActivity)
+                .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("type", mPosition)
                 .params("searchar", keyWord)
@@ -142,7 +143,7 @@ class PerformActivity : BaseActivity() {
                             addItems(response.body().`object`)
                             if (count(response.body().`object`) > 0) pageNum++
                         }
-                        mAdapter.updateData(list)
+                        if (count(response.body().`object`) > 0) mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

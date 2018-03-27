@@ -116,7 +116,7 @@ class ReportUpActivity : BaseActivity() {
                             addItems(response.body().`object`.accountInfoList)
                             if (count(response.body().`object`.accountInfoList) > 0) pageNum++
                         }
-                        mAdapter.updateData(list)
+                        if (count(response.body().`object`.accountInfoList) > 0) mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

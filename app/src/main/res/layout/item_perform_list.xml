@@ -68,7 +68,7 @@
                         android:text="购买产品：" />
 
                     <TextView
-                        android:id="@+id/item_perform_phone"
+                        android:id="@+id/item_perform_product"
                         style="@style/Font14_black_dark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

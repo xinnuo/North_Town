@@ -37,14 +37,25 @@
         <EditText
             android:id="@+id/filter_edit"
             style="@style/Font14_black_dark"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@color/transparent"
-            android:hint="请输入客户姓名或身份证号或银行卡号"
+            android:hint="请输入客户姓名或手机号或身份证号"
             android:imeOptions="actionSearch"
             android:paddingEnd="@dimen/dimen_size_10"
             android:paddingStart="@dimen/dimen_size_10"
             android:singleLine="true" />
+
+        <ImageView
+            android:id="@+id/filter_close"
+            android:layout_width="@dimen/dimen_size_23"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/dimen_size_7"
+            android:paddingEnd="@dimen/dimen_size_5"
+            android:src="@mipmap/ico_close"
+            android:visibility="gone"
+            tools:ignore="ContentDescription,RtlSymmetry" />
 
     </LinearLayout>
 

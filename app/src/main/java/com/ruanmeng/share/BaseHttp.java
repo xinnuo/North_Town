@@ -44,6 +44,8 @@ public class BaseHttp {
     public static String receipttype_list = baseIp + "/receipttype_list.rm";           //收据类型√
     public static String purchase_auditing_add = baseIp + "/purchase_auditing_add.rm"; //录入收款√
 
+    public static String customer_data_list = baseIp + "/customer_data_list.rm"; //数据列表√
+
     public static String achievement_list = baseIp + "/achievement_list.rm";             //统计列表√
     public static String achievement_day_list = baseIp + "/achievement_day_list.rm";     //日业绩√
     public static String achievement_week_list = baseIp + "/achievement_week_list.rm";   //周业绩√

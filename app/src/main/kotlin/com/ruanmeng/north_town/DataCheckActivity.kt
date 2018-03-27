@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -76,7 +75,7 @@ class DataCheckActivity : BaseActivity() {
                             addItems(response.body().`object`)
                             if (count(response.body().`object`) > 0) pageNum++
                         }
-                        mAdapter.updateData(list)
+                        if (count(response.body().`object`) > 0) mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

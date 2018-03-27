@@ -84,7 +84,7 @@ class FinanceActivity : BaseActivity() {
                             addItems(response.body().`object`)
                             if (count(response.body().`object`) > 0) pageNum++
                         }
-                        mAdapter.updateData(list)
+                        if (count(response.body().`object`) > 0) mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

@@ -481,12 +481,48 @@ public class TimeHelper {
     }
 
     /**
+     * 得到一个时间前（后）移几天的时间，nowdate为时间指定格式的时间，delay为前（后）移的日期
+     */
+    public String getNextDay(String nowdate, int day, String pattern) {
+        try {
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat format = new SimpleDateFormat(pattern);
+            String mdate;
+            Date d = strToDate(nowdate);
+            long myTime = (d.getTime() / 1000) + day * 24 * 60 * 60;
+            d.setTime(myTime * 1000);
+            mdate = format.format(d);
+            return mdate;
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    /**
      * 获得指定几个月后（前）的日期 参数负值为月前
      */
     public String getAfterMonth(String str, int month) {
         Calendar c = Calendar.getInstance(); //获得一个日历的实例
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(str); //初始日期
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        c.setTime(date); //设置日历时间
+        c.add(Calendar.MONTH, month);
+        return sdf.format(c.getTime());
+    }
+
+    /**
+     * 获得指定格式的几个月后（前）的日期 参数负值为月前
+     */
+    public String getAfterMonth(String str, int month, String pattern) {
+        Calendar c = Calendar.getInstance(); //获得一个日历的实例
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         Date date = null;
         try {
             date = sdf.parse(str); //初始日期
