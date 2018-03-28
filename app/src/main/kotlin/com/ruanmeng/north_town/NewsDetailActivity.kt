@@ -1,15 +1,12 @@
 package com.ruanmeng.north_town
 
 import android.os.Bundle
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.GlideApp
 import com.ruanmeng.base.getString
-import com.ruanmeng.base.startActivity
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_news_detail.*
 import org.json.JSONObject
@@ -36,7 +33,10 @@ class NewsDetailActivity : BaseActivity() {
             intent.setClass(baseContext, ReportOrderActivity::class.java)
             startActivity(intent)
         }
-        news_look.setOnClickListener { startActivity<DataCheckActivity>() }
+        news_look.setOnClickListener {
+            intent.setClass(baseContext, DataCheckActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun getData() {
@@ -50,13 +50,9 @@ class NewsDetailActivity : BaseActivity() {
 
                         val obj = JSONObject(response.body()).getJSONObject("object")
 
-                        Glide.with(baseContext)
+                        GlideApp.with(baseContext)
                                 .load(BaseHttp.baseImg + obj.optString("userhead"))
-                                .apply(RequestOptions
-                                        .centerCropTransform()
-                                        .placeholder(R.mipmap.default_user)
-                                        .error(R.mipmap.default_user))
-                                .transition(DrawableTransitionOptions.withCrossFade())
+                                .resourceOption(R.mipmap.default_user)
                                 .into(news_img)
 
                         news_name.text = obj.optString("userName", "姓名")

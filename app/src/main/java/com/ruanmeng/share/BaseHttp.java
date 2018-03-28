@@ -52,8 +52,9 @@ public class BaseHttp {
     public static String achievement_month_list = baseIp + "/achievement_month_list.rm"; //月业绩√
     public static String achievement_year_list = baseIp + "/achievement_year_list.rm";   //年业绩√
 
-    public static String commission_list = baseIp + "/commission_list.rm"; //经纪人佣金√
+    public static String commission_list = baseIp + "/commission_list.rm";                       //经纪人佣金√
     public static String department_commission_list = baseIp + "/department_commission_list.rm"; //销售部佣金√
+    public static String department_list = baseIp + "/department_list.rm";                       //部门列表√
 
     public static String product_list = baseIp + "/product_list.rm"; //产品列表√
     public static String get_product = baseIp + "/get_product.rm";   //产品详情√
@@ -61,6 +62,8 @@ public class BaseHttp {
     public static String purchase_auditing_list = baseIp + "/purchase_auditing_list.rm"; //审核列表√
     public static String purchase_auditing_sub = baseIp + "/purchase_auditing_sub.rm";   //提交审核√
 
+    public static String my_customer_list = baseIp + "/my_customer_list.rm";   //我的客户√
+    public static String my_balance_staff = baseIp + "/my_balance_staff.rm";   //我的钱包√
     public static String yjgz_center = baseIp + "/yjgz_center.rm";             //佣金规则√
     public static String about_us = baseIp + "/about_us.rm";                   //关于我们√
     public static String get_version_staff = baseIp + "/get_version_staff.rm"; //版本升级√

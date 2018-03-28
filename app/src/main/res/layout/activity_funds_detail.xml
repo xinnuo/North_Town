@@ -221,6 +221,7 @@
                 app:sLeftTextString="计算详细"
                 app:sLineShow="bottom"
                 app:sRightTextColor="@color/gray"
+                app:sRightTextString="收益 = 投资金额 * 年利率 * 投资期限"
                 app:sRightTextMarginRight="@dimen/dimen_size_10" />
 
         </LinearLayout>

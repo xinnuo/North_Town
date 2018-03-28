@@ -71,8 +71,13 @@ class NewsActivity : BaseActivity() {
 
                         window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
                     }
+
+                    filter_check.text = "筛选"
                 }
-                else -> news_expand.expand()
+                else -> {
+                    news_expand.expand()
+                    filter_check.text = "取消"
+                }
             }
         }
 
