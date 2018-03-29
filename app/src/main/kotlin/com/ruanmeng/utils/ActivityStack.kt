@@ -102,7 +102,7 @@ class ActivityStack private constructor() {
         /**
          * 注意：mActivityStack 中包含已经 finished 的 activity
          */
-        private var mActivityStack: Stack<Activity> = Stack()
+        private val mActivityStack: Stack<Activity> = Stack()
         private var instance: ActivityStack? = null
 
         val screenManager: ActivityStack
