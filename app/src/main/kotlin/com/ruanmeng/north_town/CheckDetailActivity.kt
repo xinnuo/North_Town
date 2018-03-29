@@ -39,7 +39,7 @@ class CheckDetailActivity : BaseActivity() {
                         @SuppressLint("SetTextI18n")
                         override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                            showToast(msg)
+                            showToast("审核对账提交成功！")
                             EventBus.getDefault().post(ReportMessageEvent("", "", "审核通过"))
                             ActivityStack.screenManager.popActivities(this@CheckDetailActivity::class.java)
                         }

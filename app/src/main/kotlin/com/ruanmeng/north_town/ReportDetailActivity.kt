@@ -2,14 +2,12 @@ package com.ruanmeng.north_town
 
 import android.os.Bundle
 import android.view.View
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
+import com.ruanmeng.base.setImageURL
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_report_detail.*
 import org.json.JSONObject
@@ -59,15 +57,7 @@ class ReportDetailActivity : BaseActivity() {
 
                         val obj = JSONObject(response.body()).getJSONObject("object")
 
-                        Glide.with(baseContext)
-                                .load(BaseHttp.baseImg + obj.optString("userhead"))
-                                .apply(RequestOptions
-                                        .centerCropTransform()
-                                        .placeholder(R.mipmap.default_user)
-                                        .error(R.mipmap.default_user))
-                                .transition(DrawableTransitionOptions.withCrossFade())
-                                .into(report_img)
-
+                        report_img.setImageURL(BaseHttp.baseImg + obj.optString("userhead"))
                         report_name.text = obj.optString("userName", "姓名")
                         report_tel.text = obj.optString("telephone", "电话")
                         report_idcard.setRightString(obj.optString("cardNo"))

@@ -106,14 +106,7 @@ class InfoActivity : BaseActivity() {
         info_pwd.setOnClickListener { startActivity<PasswordActivity>() }
     }
 
-    private fun loadUserHead(path: String) {
-        GlideApp.with(this@InfoActivity)
-                .load(BaseHttp.baseImg + path)
-                .placeholder(R.mipmap.default_user) //等待时的图片
-                .error(R.mipmap.default_user)       //加载失败的图片
-                .dontAnimate()
-                .into(info_img)
-    }
+    private fun loadUserHead(path: String) = info_img.setImageURL(BaseHttp.baseImg + path)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

@@ -1,5 +1,5 @@
 /**
- * created by 小卷毛, 2018/3/14 0014
+ * created by 小卷毛, 2018/3/29 0029
  * Copyright (c) 2018, 416143467@qq.com All Rights Reserved.
  * #                   *********                            #
  * #                  ************                          #
@@ -25,25 +25,29 @@
  * #          *****       ***        ***      *             #
  * #            **       ****        ****                   #
  */
-
 package com.ruanmeng.base
 
-import android.text.Html
-import android.text.Spanned
-import android.widget.TextView
+import android.support.annotation.DrawableRes
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.ruanmeng.north_town.R
-fun TextView.setColor(text: String, key: String) {
-    @Suppress("DEPRECATION")
-    setText(Html.fromHtml(text.replace(key, "<font color='${resources.getColor(R.color.colorAccent)}'>$key</font>")))
-}
 
-fun TextView.setColor(text: String, key: String, color: String) {
-    @Suppress("DEPRECATION")
-    setText(Html.fromHtml(text.replace(key, "<font color='$color'>$key</font>")))
-}
+/**
+ * 项目名称：North_Town
+ * 创建人：小卷毛
+ * 创建时间：2018-03-29 12:51
+ */
+fun ImageView.setImageURL(url: String) = GlideApp.with(context)
+        .load(url)
+        .resourceOption(R.mipmap.default_user)
+        .into(this)
 
-@Suppress("DEPRECATION")
-fun getColorText(text: String, key: String): Spanned = Html.fromHtml(text.replace(key, "<font color='#F90629'>$key</font>"))
-
-@Suppress("DEPRECATION")
-fun getColorText(text: String, key: String, color: String): Spanned = Html.fromHtml(text.replace(key, "<font color='$color'>$key</font>"))
+fun ImageView.setImageURL(url: String, @DrawableRes resourceId: Int) = Glide.with(context)
+        .load(url)
+        .apply(RequestOptions
+                .centerCropTransform()
+                .placeholder(resourceId)
+                .error(resourceId)
+                .dontAnimate())
+        .into(this)

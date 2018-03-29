@@ -3,8 +3,6 @@ package com.ruanmeng.north_town
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
@@ -58,14 +56,7 @@ class CheckActivity : BaseActivity() {
                             .visibility(R.id.item_review_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .with<RoundedImageView>(R.id.item_review_img) { view ->
-                                Glide.with(baseContext)
-                                        .load(BaseHttp.baseImg + data.userhead)
-                                        .apply(RequestOptions
-                                                .centerCropTransform()
-                                                .placeholder(R.mipmap.default_user)
-                                                .error(R.mipmap.default_user)
-                                                .dontAnimate())
-                                        .into(view)
+                                view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
                             }
 
                             .clicked(R.id.item_review) {
@@ -108,6 +99,19 @@ class CheckActivity : BaseActivity() {
                 })
     }
 
+    fun updateList() {
+        swipe_refresh.isRefreshing = true
+
+        empty_view.visibility = View.GONE
+        if (list.isNotEmpty()) {
+            list.clear()
+            mAdapter.notifyDataSetChanged()
+        }
+
+        pageNum = 1
+        getData(pageNum)
+    }
+
     override fun finish() {
         EventBus.getDefault().unregister(this@CheckActivity)
         super.finish()
@@ -116,11 +120,7 @@ class CheckActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: ReportMessageEvent) {
         when (event.type) {
-            "审核通过" -> {
-                swipe_refresh.isRefreshing = true
-                pageNum = 1
-                getData(pageNum)
-            }
+            "审核通过" -> updateList()
         }
     }
 }

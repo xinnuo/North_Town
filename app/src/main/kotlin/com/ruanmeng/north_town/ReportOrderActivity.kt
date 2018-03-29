@@ -217,18 +217,19 @@ class ReportOrderActivity : BaseActivity() {
             items.forEach {
                 val min = it.min.toInt() * 10000
                 val max = it.max.toInt() * 10000
+                val year = it.years.toInt()
 
                 if (min < max) {
                     if (value in min..(max - 1)) {
                         report_expect.setLeftString("利率 ${it.rate}%（起投 ${it.min}万）")
-                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toInt() / 100.0))
+                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toInt() * year / 100.0))
                         report_expect.setRightString("预期收入 ￥$expect")
                         return
                     }
                 } else {
                     if (value >= min) {
                         report_expect.setLeftString("利率 ${it.rate}%（起投 ${it.min}万）")
-                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toInt() / 100.0))
+                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toInt() * year / 100.0))
                         report_expect.setRightString("预期收入 ￥$expect")
                         return
                     }

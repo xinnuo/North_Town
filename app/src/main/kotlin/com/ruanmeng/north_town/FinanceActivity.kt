@@ -98,6 +98,19 @@ class FinanceActivity : BaseActivity() {
                 })
     }
 
+    fun updateList() {
+        swipe_refresh.isRefreshing = true
+
+        empty_view.visibility = View.GONE
+        if (list.isNotEmpty()) {
+            list.clear()
+            mAdapter.notifyDataSetChanged()
+        }
+
+        pageNum = 1
+        getData(pageNum)
+    }
+
     override fun finish() {
         EventBus.getDefault().unregister(this@FinanceActivity)
         super.finish()
@@ -106,11 +119,7 @@ class FinanceActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: ReportMessageEvent) {
         when (event.type) {
-            "财务录入" -> {
-                pageNum = 1
-                swipe_refresh.isRefreshing = true
-                getData(pageNum)
-            }
+            "财务录入" -> updateList()
         }
     }
 }

@@ -38,10 +38,7 @@ class MainSecondFragment : BaseFragment() {
 
         second_name.text = getString("userName")
         second_tel.text = getString("mobile")
-        GlideApp.with(activity!!)
-                .load(BaseHttp.baseImg + getString("userhead"))
-                .resourceOption(R.mipmap.default_user)
-                .into(second_img)
+        second_img.setImageURL(BaseHttp.baseImg + getString("userhead"))
         second_img.setTag(R.id.second_img, getString("userhead"))
 
         second_info.setOnClickListener { startActivity<InfoActivity>() }
@@ -74,19 +71,11 @@ class MainSecondFragment : BaseFragment() {
                         second_tel.text = getString("mobile")
 
                         if (second_img.getTag(R.id.second_img) == null) {
-                            GlideApp.with(activity!!)
-                                    .load(BaseHttp.baseImg + getString("userhead"))
-                                    .resourceOption(R.mipmap.default_user)
-                                    .into(second_img)
-
+                            second_img.setImageURL(BaseHttp.baseImg + getString("userhead"))
                             second_img.setTag(R.id.second_img, getString("userhead"))
                         } else {
                             if (second_img.getTag(R.id.second_img) != getString("userhead")) {
-                                GlideApp.with(activity!!)
-                                        .load(BaseHttp.baseImg + getString("userhead"))
-                                        .resourceOption(R.mipmap.default_user)
-                                        .into(second_img)
-
+                                second_img.setImageURL(BaseHttp.baseImg + getString("userhead"))
                                 second_img.setTag(R.id.second_img, getString("userhead"))
                             }
                         }

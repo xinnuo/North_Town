@@ -5,8 +5,8 @@ import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.GlideApp
 import com.ruanmeng.base.getString
+import com.ruanmeng.base.setImageURL
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_news_detail.*
 import org.json.JSONObject
@@ -50,11 +50,7 @@ class NewsDetailActivity : BaseActivity() {
 
                         val obj = JSONObject(response.body()).getJSONObject("object")
 
-                        GlideApp.with(baseContext)
-                                .load(BaseHttp.baseImg + obj.optString("userhead"))
-                                .resourceOption(R.mipmap.default_user)
-                                .into(news_img)
-
+                        news_img.setImageURL(BaseHttp.baseImg + obj.optString("userhead"))
                         news_name.text = obj.optString("userName", "姓名")
                         news_tel.text = obj.optString("telephone", "电话")
                         news_idcard.setRightString(obj.optString("cardNo"))

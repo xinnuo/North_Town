@@ -1,10 +1,9 @@
 package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
@@ -83,20 +82,17 @@ class PerformCheckActivity : BaseActivity() {
                             .text(R.id.item_perform_date, data.createDate)
 
                             .with<RoundedImageView>(R.id.item_perform_img) { view ->
-                                Glide.with(baseContext)
-                                        .load(BaseHttp.baseImg + data.userhead)
-                                        .apply(RequestOptions
-                                                .centerCropTransform()
-                                                .placeholder(R.mipmap.default_user)
-                                                .error(R.mipmap.default_user)
-                                                .dontAnimate())
-                                        .into(view)
+                                view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
                             }
 
                             .visibility(R.id.item_perform_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_perform_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
-                            .clicked(R.id.item_perform) { }
+                            .clicked(R.id.item_perform) {
+                                val intent = Intent(baseContext, FundsDetailActivity::class.java)
+                                intent.putExtra("purchaseId", data.purchaseId)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
 

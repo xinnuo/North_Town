@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
@@ -78,14 +76,7 @@ class PerformActivity : BaseActivity() {
                             .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.sum.toInt() / 10000.0))
 
                             .with<RoundedImageView>(R.id.item_data_img) { view ->
-                                Glide.with(baseContext)
-                                        .load(BaseHttp.baseImg + data.userhead)
-                                        .apply(RequestOptions
-                                                .centerCropTransform()
-                                                .placeholder(R.mipmap.default_user)
-                                                .error(R.mipmap.default_user)
-                                                .dontAnimate())
-                                        .into(view)
+                                view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
                             }
 
                             .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)

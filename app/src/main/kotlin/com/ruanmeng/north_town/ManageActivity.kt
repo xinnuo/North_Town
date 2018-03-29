@@ -4,17 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.addItems
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.load_Linear
+import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_manage.*
@@ -46,14 +40,7 @@ class ManageActivity : BaseActivity() {
                             .visibility(R.id.item_product_divider3, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .with<ImageView>(R.id.item_product_img) { view ->
-                                Glide.with(baseContext)
-                                        .load(BaseHttp.baseImg + data.img)
-                                        .apply(RequestOptions
-                                                .centerCropTransform()
-                                                .placeholder(R.mipmap.default_user)
-                                                .error(R.mipmap.default_user))
-                                        .transition(DrawableTransitionOptions.withCrossFade())
-                                        .into(view)
+                                view.setImageURL(BaseHttp.baseImg + data.img, R.mipmap.default_user)
                             }
 
                             .clicked(R.id.item_product) {

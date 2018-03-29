@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
@@ -59,14 +57,7 @@ class ReportActivity : BaseActivity() {
                             .text(R.id.item_report_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
 
                             .with<RoundedImageView>(R.id.item_report_img) { view ->
-                                Glide.with(baseContext)
-                                        .load(BaseHttp.baseImg + data.userhead)
-                                        .apply(RequestOptions
-                                                .centerCropTransform()
-                                                .placeholder(R.mipmap.default_user)
-                                                .error(R.mipmap.default_user)
-                                                .dontAnimate())
-                                        .into(view)
+                                view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
                             }
 
                             .clicked(R.id.item_report) {
