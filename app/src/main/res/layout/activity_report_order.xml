@@ -81,9 +81,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
+                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:gravity="end|center_vertical"
                     android:hint="输入合同编号"
-                    android:inputType="number"
+                    android:inputType="textVisiblePassword"
                     android:maxLines="1"
                     android:paddingEnd="@dimen/dimen_size_10"
                     android:paddingStart="@dimen/dimen_size_10" />
@@ -127,9 +128,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/white"
+                            android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:gravity="end|center_vertical"
                             android:hint="输入收据编码"
-                            android:inputType="number"
+                            android:inputType="textVisiblePassword"
                             android:maxLines="1"
                             android:paddingEnd="@dimen/dimen_size_10"
                             android:paddingStart="@dimen/dimen_size_10" />

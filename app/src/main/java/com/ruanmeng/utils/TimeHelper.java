@@ -469,12 +469,12 @@ public class TimeHelper {
         try {
             @SuppressLint("SimpleDateFormat")
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            String mdate;
+
             Date d = strToDate(nowdate);
             long myTime = (d.getTime() / 1000) + day * 24 * 60 * 60;
             d.setTime(myTime * 1000);
-            mdate = format.format(d);
-            return mdate;
+
+            return format.format(d);
         } catch (Exception e) {
             return "";
         }
@@ -487,12 +487,11 @@ public class TimeHelper {
         try {
             @SuppressLint("SimpleDateFormat")
             SimpleDateFormat format = new SimpleDateFormat(pattern);
-            String mdate;
-            Date d = strToDate(nowdate);
+            Date d = format.parse(nowdate, new ParsePosition(0));
+
             long myTime = (d.getTime() / 1000) + day * 24 * 60 * 60;
             d.setTime(myTime * 1000);
-            mdate = format.format(d);
-            return mdate;
+            return format.format(d);
         } catch (Exception e) {
             return "";
         }

@@ -83,7 +83,7 @@ class PerformActivity : BaseActivity() {
                             .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
                             .clicked(R.id.item_data) {
                                 intent.setClass(baseContext, PerformCheckActivity::class.java)
-                                intent.putExtra("accountInfoId", data.managerInfoId)
+                                intent.putExtra("managerInfoId", data.managerInfoId)
                                 intent.putExtra("title", when (mPosition) {
                                     1 -> "日业绩"
                                     2 -> "周业绩"

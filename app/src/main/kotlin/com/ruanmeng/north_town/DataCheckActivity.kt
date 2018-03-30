@@ -59,10 +59,15 @@ class DataCheckActivity : BaseActivity() {
 
     override fun getData(pindex: Int) {
         OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_purchase_list)
-                .tag(this@DataCheckActivity)
-                .headers("token", getString("token"))
-                .params("accountInfoId", intent.getStringExtra("accountInfoId"))
-                .params("page", pindex)
+                .apply {
+                    tag(this@DataCheckActivity)
+                    headers("token", getString("token"))
+                    params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                    params("page", pindex)
+
+                    if (intent.getBooleanExtra("isClient", false))
+                        params("managerInfoId", getString("token"))
+                }
                 .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
 
                     override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {

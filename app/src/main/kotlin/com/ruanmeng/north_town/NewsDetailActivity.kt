@@ -54,7 +54,7 @@ class NewsDetailActivity : BaseActivity() {
                         news_name.text = obj.optString("userName", "姓名")
                         news_tel.text = obj.optString("telephone", "电话")
                         news_idcard.setRightString(obj.optString("cardNo"))
-                        news_birthday.setRightString(obj.optString("birthday"))
+                        news_birthday.setRightString(obj.optString("birth"))
                         news_marry.setRightString(when (obj.opt("married")) {
                             "0" -> "未婚"
                             "1" -> "已婚"

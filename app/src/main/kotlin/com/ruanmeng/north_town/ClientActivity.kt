@@ -46,6 +46,7 @@ class ClientActivity : BaseActivity() {
                                 intent.putExtra("accountInfoId", data.accountInfoId)
                                 intent.putExtra("userName", data.userName)
                                 intent.putExtra("cardNo", data.cardNo)
+                                intent.putExtra("isClient", true)
                                 startActivity(intent)
                             }
                 }

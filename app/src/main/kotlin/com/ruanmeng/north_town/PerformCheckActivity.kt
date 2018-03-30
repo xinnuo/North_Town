@@ -188,7 +188,7 @@ class PerformCheckActivity : BaseActivity() {
                         }
                     }
                 }
-                .params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                .params("managerInfoId", intent.getStringExtra("managerInfoId"))
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<PurchaseModel>>(baseContext) {
 
