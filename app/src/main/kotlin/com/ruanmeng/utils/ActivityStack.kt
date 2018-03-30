@@ -17,9 +17,9 @@ class ActivityStack private constructor() {
      * 移除一个activity
      */
     private fun popActivity(activity: Activity?) {
-        if (activity != null) {
-            activity.finish()
-            mActivityStack.remove(activity)
+        activity?.let {
+            it.finish()
+            mActivityStack.remove(it)
         }
     }
 
