@@ -11,6 +11,7 @@ import com.ruanmeng.base.getString
 import com.ruanmeng.fragment.OnFragmentItemSelectListener
 import com.ruanmeng.fragment.ProductFragment
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.ProductModel
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
@@ -78,15 +79,15 @@ class ReportProductActivity : BaseActivity(), OnFragmentItemSelectListener {
     }
 
     override fun getData() {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.product_list)
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.product_list)
                 .tag(this@ReportProductActivity)
                 .headers("token", getString("token"))
-                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext, true) {
+                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext, true) {
 
-                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
                         list_product.apply {
                             clear()
-                            addItems(response.body().`object`)
+                            addItems(response.body().`object`.bl)
                         }
 
                         if (list_product.isNotEmpty()) {

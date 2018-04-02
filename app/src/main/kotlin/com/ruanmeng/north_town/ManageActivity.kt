@@ -10,6 +10,7 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_manage.*
 import net.idik.lib.slimadapter.SlimAdapter
@@ -54,15 +55,15 @@ class ManageActivity : BaseActivity() {
     }
 
     override fun getData() {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.product_list)
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.product_list)
                 .tag(this@ManageActivity)
                 .headers("token", getString("token"))
-                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext, true) {
+                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext, true) {
 
-                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
                         list.apply {
                             clear()
-                            addItems(response.body().`object`)
+                            addItems(response.body().`object`.bl)
                         }
                         mAdapter.updateData(list)
                     }
