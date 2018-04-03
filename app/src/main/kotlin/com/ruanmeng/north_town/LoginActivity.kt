@@ -73,6 +73,7 @@ class LoginActivity : BaseActivity() {
 
                                 putBoolean("isLogin", true)
                                 putString("token", obj.optString("token"))
+                                putString("accountType", obj.optString("accountType"))
                                 putString("mobile", obj.optString("telephone"))
                                 putString("userName", obj.optString("userName"))
                                 putString("userhead", obj.optString("userhead"))

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ruanmeng.base.BaseFragment
+import com.ruanmeng.base.getString
 import com.ruanmeng.base.startActivity
 import com.ruanmeng.north_town.*
 import com.ruanmeng.utils.TopDecoration
@@ -35,7 +36,12 @@ class MainFirstFragment : BaseFragment() {
 
     override fun init_title() {
         main_title.text = "首页"
-        val list = listOf("客户报备", "客户资料", "财务对账", "客户数据", "业绩统计", "佣金统计", "理财产品", "财务审核")
+        val list = when (getString("accountType")) {
+            "App_Staff" -> listOf("客户报备", "客户资料", "客户数据", "财务审核")
+            "App_Staff_Finance" -> listOf("客户报备", "财务对账", "客户数据", "业绩统计", "佣金统计", "理财产品")
+            "App_Staff_Service" -> listOf("客户报备", "客户资料", "客户数据", "业绩统计", "佣金统计", "财务审核")
+            else -> listOf("客户报备", "客户资料", "财务对账", "客户数据", "业绩统计", "佣金统计", "理财产品", "财务审核")
+        }
 
         first_list.apply {
             layoutManager = GridLayoutManager(activity, 3)
@@ -44,28 +50,28 @@ class MainFirstFragment : BaseFragment() {
             adapter = SlimAdapter.create()
                     .register<String>(R.layout.item_first_grid) { data, injector ->
                         injector.text(R.id.item_first_name, data)
-                                .image(R.id.item_first_img, when (list.indexOf(data)) {
-                                    0 -> R.mipmap.list1
-                                    1 -> R.mipmap.list2
-                                    2 -> R.mipmap.list3
-                                    3 -> R.mipmap.list4
-                                    4 -> R.mipmap.list5
-                                    5 -> R.mipmap.list6
-                                    6 -> R.mipmap.list7
-                                    7 -> R.mipmap.list8
+                                .image(R.id.item_first_img, when (data) {
+                                    "客户报备" -> R.mipmap.list1
+                                    "客户资料" -> R.mipmap.list2
+                                    "财务对账" -> R.mipmap.list3
+                                    "客户数据" -> R.mipmap.list4
+                                    "业绩统计" -> R.mipmap.list5
+                                    "佣金统计" -> R.mipmap.list6
+                                    "理财产品" -> R.mipmap.list7
+                                    "财务审核" -> R.mipmap.list8
                                     else -> R.mipmap.default_logo
                                 })
 
                                 .clicked(R.id.item_first) {
-                                    when (list.indexOf(data)) {
-                                        0 -> startActivity<ReportActivity>()
-                                        1 -> startActivity<DataActivity>()
-                                        2 -> startActivity<FinanceActivity>()
-                                        3 -> startActivity<NewsActivity>()
-                                        4 -> startActivity<PerformActivity>()
-                                        5 -> startActivity<FundsActivity>()
-                                        6 -> startActivity<ManageActivity>()
-                                        7 -> startActivity<CheckActivity>()
+                                    when (data) {
+                                        "客户报备" -> startActivity<ReportActivity>()
+                                        "客户资料" -> startActivity<DataActivity>()
+                                        "财务对账" -> startActivity<FinanceActivity>()
+                                        "客户数据" -> startActivity<NewsActivity>()
+                                        "业绩统计" -> startActivity<PerformActivity>()
+                                        "佣金统计" -> startActivity<FundsActivity>()
+                                        "理财产品" -> startActivity<ManageActivity>()
+                                        "财务审核" -> startActivity<CheckActivity>()
                                     }
                                 }
                     }
