@@ -95,41 +95,57 @@
                 android:layout_height="@dimen/divider_height"
                 android:background="@color/divider" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/second_fold"
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/second_expand"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_46"
-                android:layout_marginTop="@dimen/dimen_size_10"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftIconRes="@mipmap/left1"
-                app:sLeftIconSize="@dimen/dimen_size_18"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="我的钱包"
-                app:sLineShow="both"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/gray"
-                app:sRightTextMarginRight="@dimen/dimen_size_30"
-                app:sTopLineMargin="0dp" />
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="false">
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/second_customer"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_0"
-                app:sLeftIconRes="@mipmap/left2"
-                app:sLeftIconSize="@dimen/dimen_size_18"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="我的客户"
-                app:sLineShow="bottom"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconRes="@mipmap/arrow_right"
-                app:sRightIconSize="@dimen/dimen_size_13"
-                app:sRightTextColor="@color/gray"
-                app:sRightTextMarginRight="@dimen/dimen_size_30" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.allen.library.SuperTextView
+                        android:id="@+id/second_fold"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_46"
+                        android:layout_marginTop="@dimen/dimen_size_10"
+                        app:sBottomLineMargin="@dimen/dimen_size_10"
+                        app:sLeftIconRes="@mipmap/left1"
+                        app:sLeftIconSize="@dimen/dimen_size_18"
+                        app:sLeftTextColor="@color/black_dark"
+                        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                        app:sLeftTextString="我的钱包"
+                        app:sLineShow="both"
+                        app:sRightIconMarginRight="@dimen/dimen_size_10"
+                        app:sRightIconRes="@mipmap/arrow_right"
+                        app:sRightIconSize="@dimen/dimen_size_13"
+                        app:sRightTextColor="@color/gray"
+                        app:sRightTextMarginRight="@dimen/dimen_size_30"
+                        app:sTopLineMargin="0dp" />
+
+                    <com.allen.library.SuperTextView
+                        android:id="@+id/second_customer"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_45.5"
+                        app:sBottomLineMargin="@dimen/dimen_size_0"
+                        app:sLeftIconRes="@mipmap/left2"
+                        app:sLeftIconSize="@dimen/dimen_size_18"
+                        app:sLeftTextColor="@color/black_dark"
+                        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                        app:sLeftTextString="我的客户"
+                        app:sLineShow="bottom"
+                        app:sRightIconMarginRight="@dimen/dimen_size_10"
+                        app:sRightIconRes="@mipmap/arrow_right"
+                        app:sRightIconSize="@dimen/dimen_size_13"
+                        app:sRightTextColor="@color/gray"
+                        app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+                </LinearLayout>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
 
             <com.allen.library.SuperTextView
                 android:id="@+id/second_setting"

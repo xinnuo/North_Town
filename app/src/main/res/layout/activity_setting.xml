@@ -50,7 +50,7 @@
 
     <Button
         android:id="@+id/setting_quit"
-        style="@style/Font15_black_dark"
+        style="@style/Font15_black_borderless"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height"
         android:layout_margin="@dimen/dimen_size_20"

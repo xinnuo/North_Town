@@ -36,6 +36,12 @@ class MainSecondFragment : BaseFragment() {
     override fun init_title() {
         main_title.text = "个人中心"
 
+        when (getString("accountType")) {
+            "App_Staff" -> second_expand.expand()
+            "App_Staff_Finance", "App_Staff_Service" -> second_expand.collapse()
+            else -> second_expand.expand()
+        }
+
         second_name.text = getString("userName")
         second_tel.text = getString("mobile")
         second_img.setImageURL(BaseHttp.baseImg + getString("userhead"))

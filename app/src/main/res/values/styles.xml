@@ -23,6 +23,12 @@
         <item name="contentInsetEnd">0dp</item>
     </style>
 
+    <style name="Font15_black_borderless" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorHint">@color/colorControlNormal</item>
+    </style>
+
     <style name="Font15_black_dark">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@android:color/black</item>
