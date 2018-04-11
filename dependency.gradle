@@ -3,7 +3,7 @@ ext.versions = [
         compileSdkVersion: 27,
         minSdkVersion: 17,
         targetSdkVersion: 27,
-        supportLibraryVersion: '27.1.0',
+        supportLibraryVersion: '27.1.1',
         constraintLayoutVersion: '1.0.2',
         kotlin_version: '1.2.31',
         multidexVersion: '1.0.3',
