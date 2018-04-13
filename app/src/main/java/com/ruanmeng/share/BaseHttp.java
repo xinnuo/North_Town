@@ -35,9 +35,10 @@ public class BaseHttp {
     public static String bank_list = baseIp + "/bank_list.rm";                 //银行列表√
     public static String purchase_by_id = baseIp + "/purchase_by_id.rm";       //财务录入订单√
 
-    public static String customer_list_all = baseIp + "/customer_list_all.rm";                 //资料列表√
-    public static String customer_purchase_list = baseIp + "/customer_purchase_list.rm";       //客户订单√
-    public static String customer_purchase_details = baseIp + "/customer_purchase_details.rm"; //订单详情√
+    public static String customer_list_all = baseIp + "/customer_list_all.rm";                     //资料列表√
+    public static String customer_purchase_list = baseIp + "/customer_purchase_list.rm";           //客户订单√
+    public static String customer_purchase_details = baseIp + "/customer_purchase_details.rm";     //订单详情√
+    public static String introducer_purchase_details = baseIp + "/introducer_purchase_details.rm"; //上级订单详情√
 
     public static String purchase_nopay_list = baseIp + "/purchase_nopay_list.rm";     //录入列表√
     public static String paytype_list = baseIp + "/paytype_list.rm";                   //支付方式√
@@ -53,6 +54,7 @@ public class BaseHttp {
     public static String achievement_year_list = baseIp + "/achievement_year_list.rm";   //年业绩√
 
     public static String commission_list = baseIp + "/commission_list.rm";                       //经纪人佣金√
+    public static String introducer_list = baseIp + "/introducer_list.rm";                       //老带新佣金√
     public static String department_commission_list = baseIp + "/department_commission_list.rm"; //销售部佣金√
     public static String department_list = baseIp + "/department_list.rm";                       //部门列表√
 

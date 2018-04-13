@@ -100,6 +100,11 @@ data class CommonData(
         var createDate: String = "",
         var managerInfoName: String = "",
 
+        //老带新佣金
+        var introducerInfoName: String = "",
+        var profitAll: String = "",
+        var sumAll: String = "",
+
         //部门列表
         var departmentCode: String = "",
         var departmentId: String = "",

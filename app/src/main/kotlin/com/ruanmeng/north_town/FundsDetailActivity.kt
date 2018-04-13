@@ -25,7 +25,10 @@ class FundsDetailActivity : BaseActivity() {
     override fun init_title() {
         super.init_title()
         val isLead = intent.getBooleanExtra("isLead", false)
-        if (isLead) funds_expand.expand()
+        if (isLead) {
+            funds_expand.expand()
+            getUpData()
+        }
     }
 
     override fun getData() {
@@ -38,7 +41,7 @@ class FundsDetailActivity : BaseActivity() {
                     @SuppressLint("SetTextI18n")
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        val obj = JSONObject(response.body()).getJSONObject("object")
+                        val obj = JSONObject(response.body()).getJSONObject("object") ?: JSONObject()
 
                         val rate = obj.optString("rate", "0")
                         val productName = obj.optString("productName")
@@ -57,6 +60,30 @@ class FundsDetailActivity : BaseActivity() {
 
                         val profit = obj.optString("profit", "0")
                         funds_get.setRightString("￥ ${DecimalFormat("0.##").format(profit.toDouble())}")
+                    }
+
+                })
+    }
+
+    private fun getUpData() {
+        OkGo.post<String>(BaseHttp.introducer_purchase_details)
+                .tag(this@FundsDetailActivity)
+                .headers("token", getString("token"))
+                .params("purchaseId", intent.getStringExtra("purchaseId"))
+                .execute(object : StringDialogCallback(baseContext, false) {
+
+                    @SuppressLint("SetTextI18n")
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        val obj = JSONObject(response.body()).getJSONObject("object") ?: JSONObject()
+
+                        val data = obj.getJSONObject("introducer") ?: JSONObject()
+                        funds_name2.setRightString(data.optString("introducerName"))
+                        funds_tel2.setRightString(data.optString("introducerTelephone"))
+                        funds_idcard2.setRightString(data.optString("introducerCardNo"))
+
+                        val rate = obj.optString("introducerlv", "0")
+                        funds_detail2.setRightString("收益 = 投资金额 * 老带新利率($rate%)")
                     }
 
                 })

@@ -38,6 +38,8 @@ data class CommonModel(
         var count: String = "",
         var balance: String = "",
         var withdrawDeposit: String = "",
+        var accountInfoCount: String = "",
+        var introducerProfit: String = "0.00",
         var bl: List<CommonData> ?= ArrayList(),
         var accountInfoList: List<CommonData> ?= ArrayList(),
         var balanceLogList: List<CommonData> ?= ArrayList()

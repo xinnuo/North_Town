@@ -50,6 +50,25 @@
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="介绍人：" />
+
+                    <TextView
+                        android:id="@+id/item_lead_jie"
+                        style="@style/Font14_black_dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_size_8">
+
+                    <TextView
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="实际投资总计：" />
 
                     <TextView
@@ -57,7 +76,7 @@
                         style="@style/Font14_black_dark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0万"/>
+                        android:text="0万" />
 
                 </LinearLayout>
 
@@ -77,7 +96,7 @@
                         style="@style/Font14_black_dark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0万"/>
+                        android:text="0万" />
 
                 </LinearLayout>
 

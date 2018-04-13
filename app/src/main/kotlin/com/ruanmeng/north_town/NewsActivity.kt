@@ -220,6 +220,7 @@ class NewsActivity : BaseActivity() {
                 .tag(this@NewsActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))
+                .params("accountType", getString("accountType"))
                 .params("searchar", keyWord)
                 .params("startDate", date_start)
                 .params("endDate", date_end)

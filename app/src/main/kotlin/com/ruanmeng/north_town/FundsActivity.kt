@@ -16,7 +16,6 @@ class FundsActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
-        funds_lead.visibility = View.GONE
 
         funds_agent.setOnClickListener { startActivity<FundsAgentActivity>() }
         funds_lead.setOnClickListener { startActivity<FundsLeadActivity>() }

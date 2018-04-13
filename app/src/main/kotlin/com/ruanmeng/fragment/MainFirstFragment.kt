@@ -37,9 +37,10 @@ class MainFirstFragment : BaseFragment() {
     override fun init_title() {
         main_title.text = "首页"
         val list = when (getString("accountType")) {
-            "App_Staff" -> listOf("客户报备", "客户资料", "客户数据", "财务审核")
-            "App_Staff_Finance" -> listOf("客户报备", "财务对账", "客户数据", "业绩统计", "佣金统计", "理财产品")
-            "App_Staff_Service" -> listOf("客户报备", "客户资料", "客户数据", "业绩统计", "佣金统计", "财务审核")
+            "App_Staff" -> listOf("客户报备", "客户资料", "客户数据", "理财产品")
+            "App_Staff_Service" -> listOf("客户报备", "客户资料", "客户数据", "业绩统计", "佣金统计")
+            "App_Staff_Finance_Collect" -> listOf("客户报备", "财务对账", "客户数据", "业绩统计", "佣金统计", "理财产品")
+            "App_Staff_Finance_Check" -> listOf("客户报备", "财务对账", "客户数据", "业绩统计", "佣金统计", "理财产品", "财务审核")
             else -> listOf("客户报备", "客户资料", "财务对账", "客户数据", "业绩统计", "佣金统计", "理财产品", "财务审核")
         }
 
