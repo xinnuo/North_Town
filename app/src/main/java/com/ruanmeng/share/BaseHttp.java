@@ -35,7 +35,10 @@ public class BaseHttp {
     public static String bank_list = baseIp + "/bank_list.rm";                 //银行列表√
     public static String purchase_by_id = baseIp + "/purchase_by_id.rm";       //财务录入订单√
 
-    public static String customer_list_all = baseIp + "/customer_list_all.rm";                     //资料列表√
+    public static String customer_list_all = baseIp + "/customer_list_all.rm";                     //资料老列表√
+    public static String my_potentialcustomer_list = baseIp + "/my_potentialcustomer_list.rm";     //资料新列表√
+    public static String potentialcustomer_details = baseIp + "/potentialcustomer_details.rm";     //新客户明细√
+    public static String remark_my_potentialcustomer = baseIp + "/remark_my_potentialcustomer.rm"; //新增备注√
     public static String customer_purchase_list = baseIp + "/customer_purchase_list.rm";           //客户订单√
     public static String customer_purchase_details = baseIp + "/customer_purchase_details.rm";     //订单详情√
     public static String introducer_purchase_details = baseIp + "/introducer_purchase_details.rm"; //上级订单详情√
@@ -53,10 +56,11 @@ public class BaseHttp {
     public static String achievement_month_list = baseIp + "/achievement_month_list.rm"; //月业绩√
     public static String achievement_year_list = baseIp + "/achievement_year_list.rm";   //年业绩√
 
-    public static String commission_list = baseIp + "/commission_list.rm";                       //经纪人佣金√
-    public static String introducer_list = baseIp + "/introducer_list.rm";                       //老带新佣金√
-    public static String department_commission_list = baseIp + "/department_commission_list.rm"; //销售部佣金√
-    public static String department_list = baseIp + "/department_list.rm";                       //部门列表√
+    public static String commission_list = baseIp + "/commission_list.rm";                         //经纪人佣金√
+    public static String introducer_list = baseIp + "/introducer_list.rm";                         //老带新佣金√
+    public static String department_commission_list = baseIp + "/department_commission_list.rm";   //销售部佣金√
+    public static String department_list = baseIp + "/department_list.rm";                         //部门列表√
+    public static String my_purchase_introducer_list = baseIp + "/my_purchase_introducer_list.rm"; //投资列表√
 
     public static String product_list = baseIp + "/product_list.rm"; //产品列表√
     public static String get_product = baseIp + "/get_product.rm";   //产品详情√

@@ -28,14 +28,19 @@ class FundsLeadActivity : BaseActivity() {
         init_title("老带新人员统计")
 
         swipe_refresh.isRefreshing = true
-        getData()
+        getData(pageNum)
     }
 
     override fun init_title() {
         super.init_title()
         empty_hint.text = "暂无相关新人信息！"
-        swipe_refresh.refresh { getData() }
-        recycle_list.load_Linear(baseContext, swipe_refresh)
+        swipe_refresh.refresh { getData(1) }
+        recycle_list.load_Linear(baseContext, swipe_refresh) {
+            if (!isLoadingMore) {
+                isLoadingMore = true
+                getData(pageNum)
+            }
+        }
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_lead_list) { data, injector ->
@@ -65,19 +70,25 @@ class FundsLeadActivity : BaseActivity() {
                 .attachTo(recycle_list)
     }
 
-    override fun getData() {
+    override fun getData(pindex: Int) {
         OkGo.post<BaseResponse<CommonModel>>(BaseHttp.introducer_list)
                 .tag(this@FundsLeadActivity)
                 .headers("token", getString("token"))
+                .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
 
                     override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
 
                         list.apply {
-                            clear()
+                            if (pindex == 1) {
+                                clear()
+                                pageNum = pindex
+                            }
                             addItems(response.body().`object`.accountInfoList)
+                            if (count(response.body().`object`.accountInfoList) > 0) pageNum++
                         }
-                        if (list.isNotEmpty()) mAdapter.updateData(list)
+                        if (count(response.body().`object`.accountInfoList) > 0) mAdapter.updateData(list)
+
 
                         val profit = response.body().`object`.introducerProfit
                         funds_get.text = DecimalFormat(",##0.##").format(profit.toDouble())
@@ -87,6 +98,7 @@ class FundsLeadActivity : BaseActivity() {
                     override fun onFinish() {
                         super.onFinish()
                         swipe_refresh.isRefreshing = false
+                        isLoadingMore = false
 
                         empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
                     }

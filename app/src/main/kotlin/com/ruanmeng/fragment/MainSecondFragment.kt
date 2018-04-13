@@ -38,7 +38,7 @@ class MainSecondFragment : BaseFragment() {
 
         when (getString("accountType")) {
             "App_Staff" -> second_expand.expand()
-            "App_Staff_Finance", "App_Staff_Service" -> second_expand.collapse()
+            "App_Staff_Finance_Collect", "App_Staff_Finance_Check", "App_Staff_Service" -> second_expand.collapse()
             else -> second_expand.expand()
         }
 

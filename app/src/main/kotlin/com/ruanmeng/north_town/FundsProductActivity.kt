@@ -50,19 +50,11 @@ class FundsProductActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_detail_list) { data, injector ->
                     injector.text(R.id.item_detail_name, data.productName)
-                            .text(R.id.item_detail_time, "投资周期：${data.beginDate} ~ ${data.endDate}")
+                            .text(R.id.item_detail_time, data.createDate)
+                            .text(R.id.item_detail_money, data.introducerProfit)
 
                             .visibility(R.id.item_detail_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_detail_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
-
-                            .with<TextView>(R.id.item_detail_money) { view ->
-                                val amount = data.amount.toInt()
-                                val rate = data.rate.toDouble()
-                                val years = data.years.toInt()
-                                val profit = amount * rate * years / 100 * 1.0
-
-                                view.text = DecimalFormat(",##0.##").format(profit)
-                            }
 
                             .clicked(R.id.item_detail) {
                                 val intent = Intent(baseContext, FundsDetailActivity::class.java)
@@ -75,7 +67,7 @@ class FundsProductActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_purchase_list)
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.my_purchase_introducer_list)
                 .apply {
                     tag(this@FundsProductActivity)
                     headers("token", getString("token"))

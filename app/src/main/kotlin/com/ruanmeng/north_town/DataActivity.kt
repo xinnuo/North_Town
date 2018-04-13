@@ -12,6 +12,7 @@ import com.lzy.okgo.model.Response
 import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.NewData
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.Tools
@@ -90,6 +91,19 @@ class DataActivity : BaseActivity() {
                                 startActivity(intent)
                             }
                 }
+                .register<NewData>(R.layout.item_data2_list) { data, injector ->
+                    injector.text(R.id.item_data2_name, getColorText(data.userName, keyWord))
+                            .text(R.id.item_data2_phone, getColorText("手机 ${data.telephone}", keyWord))
+
+                            .visibility(R.id.item_data2_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_data2_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+
+                            .clicked(R.id.item_data2) {
+                                intent.setClass(baseContext, DataNewActivity::class.java)
+                                intent.putExtra("potentialCustomerId", data.potentialCustomerId)
+                                startActivity(intent)
+                            }
+                }
                 .attachTo(recycle_list)
 
         search_edit.addTextChangedListener(this@DataActivity)
@@ -111,39 +125,80 @@ class DataActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_list_all)
-                .tag(this@DataActivity)
-                .isMultipart(true)
-                .headers("token", getString("token"))
-                .params("searchar", keyWord)
-                .params("type", type)
-                .params("page", pindex)
-                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
+        when (type) {
+            "old" -> {
+                OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_list_all)
+                        .tag(this@DataActivity)
+                        .isMultipart(true)
+                        .headers("token", getString("token"))
+                        .params("accountType", getString("accountType"))
+                        .params("searchar", keyWord)
+                        .params("type", type)
+                        .params("page", pindex)
+                        .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
 
-                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                            override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
 
-                        list.apply {
-                            if (pindex == 1) {
-                                clear()
-                                pageNum = pindex
+                                list.apply {
+                                    if (pindex == 1) {
+                                        clear()
+                                        pageNum = pindex
+                                    }
+                                    addItems(response.body().`object`)
+                                    if (count(response.body().`object`) > 0) pageNum++
+                                }
+                                if (count(response.body().`object`) > 0) mAdapter.updateData(list)
                             }
-                            addItems(response.body().`object`)
-                            if (count(response.body().`object`) > 0) pageNum++
-                        }
-                        if (count(response.body().`object`) > 0) mAdapter.updateData(list)
-                    }
 
-                    @SuppressLint("SetTextI18n")
-                    override fun onFinish() {
-                        super.onFinish()
-                        swipe_refresh.isRefreshing = false
-                        isLoadingMore = false
+                            @SuppressLint("SetTextI18n")
+                            override fun onFinish() {
+                                super.onFinish()
+                                swipe_refresh.isRefreshing = false
+                                isLoadingMore = false
 
-                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
-                        data_divider.visibility = if (list.size > 0) View.VISIBLE else View.GONE
-                    }
+                                empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                                data_divider.visibility = if (list.size > 0) View.VISIBLE else View.GONE
+                            }
 
-                })
+                        })
+            }
+            "new" -> {
+                OkGo.post<BaseResponse<ArrayList<NewData>>>(BaseHttp.my_potentialcustomer_list)
+                        .tag(this@DataActivity)
+                        .isMultipart(true)
+                        .headers("token", getString("token"))
+                        .params("accountType", getString("accountType"))
+                        .params("searchar", keyWord)
+                        .params("type", type)
+                        .params("page", pindex)
+                        .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<NewData>>>(baseContext) {
+
+                            override fun onSuccess(response: Response<BaseResponse<ArrayList<NewData>>>) {
+
+                                list.apply {
+                                    if (pindex == 1) {
+                                        clear()
+                                        pageNum = pindex
+                                    }
+                                    addItems(response.body().`object`)
+                                    if (count(response.body().`object`) > 0) pageNum++
+                                }
+                                if (count(response.body().`object`) > 0) mAdapter.updateData(list)
+                            }
+
+                            @SuppressLint("SetTextI18n")
+                            override fun onFinish() {
+                                super.onFinish()
+                                swipe_refresh.isRefreshing = false
+                                isLoadingMore = false
+
+                                empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                                data_divider.visibility = if (list.size > 0) View.VISIBLE else View.GONE
+                            }
+
+                        })
+            }
+        }
     }
 
     fun updateList() {

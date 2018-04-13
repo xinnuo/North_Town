@@ -74,6 +74,7 @@ data class CommonData(
 
         //资料列表
         var amount: String = "",
+        var content: String = "",
 
         //客户订单
         var beginDate: String = "",
@@ -102,6 +103,7 @@ data class CommonData(
 
         //老带新佣金
         var introducerInfoName: String = "",
+        var introducerProfit: String = "",
         var profitAll: String = "",
         var sumAll: String = "",
 
