@@ -84,6 +84,7 @@ class FundsDetailActivity : BaseActivity() {
 
                         val rate = obj.optString("introducerlv", "0")
                         funds_detail2.setRightString("收益 = 投资金额 * 老带新利率($rate%)")
+                        funds_get2.setRightString(obj.optString("introducerProfit", "0"))
                     }
 
                 })
