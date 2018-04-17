@@ -1,10 +1,10 @@
 ext.versions = [
-        gradlePluginVersion: '3.0.1',
+        gradlePluginVersion: '3.1.1',
         compileSdkVersion: 27,
         minSdkVersion: 17,
         targetSdkVersion: 27,
         supportLibraryVersion: '27.1.1',
-        constraintLayoutVersion: '1.0.2',
+        constraintLayoutVersion: '1.1.0',
         kotlin_version: '1.2.31',
         multidexVersion: '1.0.3',
         glideVersion: '4.6.1',
