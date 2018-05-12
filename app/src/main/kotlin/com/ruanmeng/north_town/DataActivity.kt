@@ -111,7 +111,7 @@ class DataActivity : BaseActivity() {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
 
-                if (search_edit.text.toString().isBlank()) {
+                if (search_edit.text.isBlank()) {
                     showToast("请输入关键字")
                 } else {
                     keyWord = search_edit.text.toString()
@@ -201,7 +201,7 @@ class DataActivity : BaseActivity() {
         }
     }
 
-    fun updateList() {
+    private fun updateList() {
         swipe_refresh.isRefreshing = true
 
         empty_view.visibility = View.GONE
