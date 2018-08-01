@@ -4,8 +4,8 @@ ext.versions = [
         minSdkVersion: 17,
         targetSdkVersion: 27,
         supportLibraryVersion: '27.1.1',
-        constraintLayoutVersion: '1.1.0',
-        kotlin_version: '1.2.50',
+        constraintLayoutVersion: '1.1.1',
+        kotlin_version: '1.2.51',
         multidexVersion: '1.0.3',
         glideVersion: '4.6.1',
 ]
