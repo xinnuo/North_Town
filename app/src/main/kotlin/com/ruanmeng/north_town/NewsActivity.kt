@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -103,11 +102,10 @@ class NewsActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_data) {
-                                val intent = Intent(baseContext, NewsDetailActivity::class.java)
-                                intent.putExtra("accountInfoId", data.accountInfoId)
-                                intent.putExtra("userName", data.userName)
-                                intent.putExtra("cardNo", data.cardNo)
-                                startActivity(intent)
+                                startActivityEx<NewsDetailActivity>(
+                                        "accountInfoId" to data.accountInfoId,
+                                        "userName" to data.userName,
+                                        "cardNo" to data.cardNo)
                             }
                 }
                 .attachTo(recycle_list)

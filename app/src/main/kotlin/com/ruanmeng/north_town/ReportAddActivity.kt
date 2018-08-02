@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
@@ -10,7 +9,7 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.showToast
-import com.ruanmeng.base.startActivity
+import com.ruanmeng.base.startActivityEx
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
@@ -69,25 +68,16 @@ class ReportAddActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.report_like_ll -> startActivity<ReportLikeActivity>()
-            R.id.report_work_ll -> startActivity<ReportJobActivity>()
-            R.id.report_unit_ll -> {
-                val intent = Intent(baseContext, ReportUnitActivity::class.java)
-                intent.putExtra("title", "工作单位")
-                startActivity(intent)
-            }
+            R.id.report_like_ll -> startActivityEx<ReportLikeActivity>()
+            R.id.report_work_ll -> startActivityEx<ReportJobActivity>()
+            R.id.report_unit_ll -> startActivityEx<ReportUnitActivity>("title" to "工作单位")
             R.id.report_type_ll -> {
-                val intent = Intent(baseContext, ReportUnitActivity::class.java)
-                intent.putExtra("title", "住宅类型")
-                intent.putExtra("isType", true)
-                startActivity(intent)
+                startActivityEx<ReportUnitActivity>(
+                        "title" to "住宅类型",
+                        "isType" to true)
             }
-            R.id.report_up_ll -> startActivity<ReportUpActivity>()
-            R.id.report_relation_ll -> {
-                val intent = Intent(baseContext, ReportUnitActivity::class.java)
-                intent.putExtra("title", "客户关系")
-                startActivity(intent)
-            }
+            R.id.report_up_ll -> startActivityEx<ReportUpActivity>()
+            R.id.report_relation_ll -> startActivityEx<ReportUnitActivity>("title" to "客户关系")
             R.id.report_submit -> {
                 if (!CommonUtil.isMobile(et_phone.text.toString())) {
                     et_phone.requestFocus()

@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -49,9 +48,7 @@ class DataCheckActivity : BaseActivity() {
                             .visibility(R.id.item_check_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .clicked(R.id.item_check) {
-                                val intent = Intent(baseContext, DataProductActivity::class.java)
-                                intent.putExtra("purchaseId", data.purchaseId)
-                                startActivity(intent)
+                                startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
                             }
                 }
                 .attachTo(recycle_list)

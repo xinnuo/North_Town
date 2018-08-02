@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -54,17 +53,16 @@ class FinanceActivity : BaseActivity() {
                             .visibility(R.id.item_finance_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .clicked(R.id.item_finance) {
-                                val intent = Intent(baseContext, FinanceSubmitActivity::class.java)
-                                intent.putExtra("userName", data.userName)
-                                intent.putExtra("cardNo", data.cardNo)
-                                intent.putExtra("amount", data.amount)
-                                intent.putExtra("remark", data.remark)
-                                startActivity(intent)
+                                startActivityEx<FinanceSubmitActivity>(
+                                        "userName" to data.userName,
+                                        "cardNo" to data.cardNo,
+                                        "amount" to data.amount,
+                                        "remark" to data.remark)
                             }
                 }
                 .attachTo(recycle_list)
 
-        tvRight.setOnClickListener { startActivity<FinanceSubmitActivity>() }
+        tvRight.setOnClickListener { startActivityEx<FinanceSubmitActivity>() }
     }
 
     override fun getData(pindex: Int) {

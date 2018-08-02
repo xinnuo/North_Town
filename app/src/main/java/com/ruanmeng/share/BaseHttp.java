@@ -31,6 +31,7 @@ public class BaseHttp {
     public static String preference_list = baseIp + "/preference_list.rm";     //偏好列表√
     public static String industry_list = baseIp + "/industry_list.rm";         //职业列表√
     public static String unittype_list = baseIp + "/unittype_list.rm";         //单位类型√
+    public static String get_company_list = baseIp + "/get_company_list.rm";   //公司列表√
     public static String purchase_sub = baseIp + "/purchase_sub.rm";           //添加订单√
     public static String bank_list = baseIp + "/bank_list.rm";                 //银行列表√
     public static String purchase_by_id = baseIp + "/purchase_by_id.rm";       //财务录入订单√

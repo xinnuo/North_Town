@@ -50,8 +50,8 @@ class GuideActivity : BaseActivity() {
     }
 
     private fun quitGuide() {
-        if (getBoolean("isLogin")) startActivity<MainActivity>()
-        else startActivity<LoginActivity>()
+        if (getBoolean("isLogin")) startActivityEx<MainActivity>()
+        else startActivityEx<LoginActivity>()
         ActivityStack.screenManager.popActivities(this@GuideActivity::class.java)
     }
 }

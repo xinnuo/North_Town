@@ -34,14 +34,10 @@ class ReportDetailActivity : BaseActivity() {
 
         report_input.setOnClickListener {
             when (isData) {
-                true -> {
-                    intent.setClass(baseContext, DataCheckActivity::class.java)
-                    startActivity(intent)
-                }
-                false -> {
-                    intent.setClass(baseContext, ReportOrderActivity::class.java)
-                    startActivity(intent)
-                }
+            //客户资料
+                true -> startActivity(intent.apply { setClass(baseContext, DataCheckActivity::class.java) })
+            //客户报备
+                false -> startActivity(intent.apply { setClass(baseContext, ReportSelectActivity::class.java) })
             }
         }
     }
@@ -55,7 +51,10 @@ class ReportDetailActivity : BaseActivity() {
 
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        val obj = JSONObject(response.body()).getJSONObject("object")
+                        val obj = JSONObject(response.body())
+                                .optJSONObject("object")
+                                .optJSONObject("accountInfo")
+                                ?: JSONObject()
 
                         report_img.setImageURL(BaseHttp.baseImg + obj.optString("userhead"))
                         report_name.text = obj.optString("userName", "姓名")
@@ -66,7 +65,13 @@ class ReportDetailActivity : BaseActivity() {
                             else -> "否"
                         })
                         report_house.text = obj.optString("villageName")
+                        report_type.setRightString(obj.optString("villageTypeName"))
                         report_num.setRightString(obj.optString("houseNumber"))
+                        report_up.setRightString(obj.optString("introducerName"))
+                        report_relation.setRightString(obj.optString("relationshipName"))
+                        report_like.text = obj.optString("preferences")
+                        report_job.setRightString(obj.optString("industryName"))
+                        report_unit.setRightString(obj.optString("unitName"))
                         report_memo.text = obj.optString("remark")
                     }
 

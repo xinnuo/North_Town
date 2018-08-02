@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -66,12 +65,8 @@ class ReportOrderActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.report_product_ll -> startActivity<ReportProductActivity>()
-            R.id.report_tou_ll -> {
-                val intent = Intent(baseContext, FinanceSelectActivity::class.java)
-                intent.putExtra("title", "投资类型")
-                startActivity(intent)
-            }
+            R.id.report_product_ll -> startActivityEx<ReportProductActivity>()
+            R.id.report_tou_ll -> startActivityEx<FinanceSelectActivity>("title" to "投资类型")
             R.id.report_start_ll, R.id.report_end_ll -> {
                 if (report_product.text.isEmpty()) {
                     showToast("请选择投资产品")
@@ -92,8 +87,8 @@ class ReportOrderActivity : BaseActivity() {
                     report_end.text = TimeHelper.getInstance().getAnyYear(date, items.first().years.toInt())
                 })
             }
-            R.id.report_bank_ll -> startActivity<ReportBankActivity>()
-            R.id.report_agent_ll -> startActivity<ReportAgentActivity>()
+            R.id.report_bank_ll -> startActivityEx<ReportBankActivity>()
+            R.id.report_agent_ll -> startActivityEx<ReportAgentActivity>()
             R.id.report_submit -> {
                 if (list.isNotEmpty() && list.none { it.receiptNo == et_receipt.text.toString() }) {
                     showToast("请输入正确的收据编码")

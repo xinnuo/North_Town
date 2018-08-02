@@ -42,5 +42,6 @@ data class CommonModel(
         var introducerProfit: String = "0.00",
         var bl: List<CommonData> ?= ArrayList(),
         var accountInfoList: List<CommonData> ?= ArrayList(),
-        var balanceLogList: List<CommonData> ?= ArrayList()
+        var balanceLogList: List<CommonData> ?= ArrayList(),
+        var companyList: List<CommonData> ?= ArrayList()
 ): Serializable

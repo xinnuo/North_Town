@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -45,10 +44,9 @@ class ManageActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_product) {
-                                val intent = Intent(baseContext, ManageDetailActivity::class.java)
-                                intent.putExtra("title", data.productName)
-                                intent.putExtra("productId", data.productId)
-                                startActivity(intent)
+                                startActivityEx<ManageDetailActivity>(
+                                        "title" to data.productName,
+                                        "productId" to data.productId)
                             }
                 }
                 .attachTo(manage_list)

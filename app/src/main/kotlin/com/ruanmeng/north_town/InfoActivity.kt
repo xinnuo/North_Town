@@ -102,8 +102,8 @@ class InfoActivity : BaseActivity() {
                     // 结果回调onActivityResult code
                     .forResult(PictureConfig.CHOOSE_REQUEST)
         }
-        info_name.setOnClickListener { startActivity<ModifyNameActivity>() }
-        info_pwd.setOnClickListener { startActivity<PasswordActivity>() }
+        info_name.setOnClickListener { startActivityEx<ModifyNameActivity>() }
+        info_pwd.setOnClickListener { startActivityEx<PasswordActivity>() }
     }
 
     private fun loadUserHead(path: String) = info_img.setImageURL(BaseHttp.baseImg + path)

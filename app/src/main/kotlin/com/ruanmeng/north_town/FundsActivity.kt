@@ -1,9 +1,8 @@
 package com.ruanmeng.north_town
 
 import android.os.Bundle
-import android.view.View
 import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.startActivity
+import com.ruanmeng.base.startActivityEx
 import kotlinx.android.synthetic.main.activity_funds.*
 
 class FundsActivity : BaseActivity() {
@@ -17,8 +16,8 @@ class FundsActivity : BaseActivity() {
     override fun init_title() {
         super.init_title()
 
-        funds_agent.setOnClickListener { startActivity<FundsAgentActivity>() }
-        funds_lead.setOnClickListener { startActivity<FundsLeadActivity>() }
-        funds_sale.setOnClickListener { startActivity<FundsSaleActivity>() }
+        funds_agent.setOnClickListener { startActivityEx<FundsAgentActivity>() }
+        funds_lead.setOnClickListener { startActivityEx<FundsLeadActivity>() }
+        funds_sale.setOnClickListener { startActivityEx<FundsSaleActivity>() }
     }
 }

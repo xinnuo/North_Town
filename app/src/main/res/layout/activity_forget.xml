@@ -24,7 +24,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="@dimen/dimen_size_65"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_size_10"
                 android:text="手机号" />
@@ -38,7 +38,8 @@
                 android:hint="请输入手机号码"
                 android:inputType="phone"
                 android:maxLength="11"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingStart="@dimen/dimen_size_15"
+                android:paddingEnd="@dimen/dimen_size_0"/>
 
         </LinearLayout>
 
@@ -55,7 +56,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="@dimen/dimen_size_65"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_size_10"
                 android:text="验证码" />
@@ -70,7 +71,8 @@
                 android:hint="请输入验证码"
                 android:inputType="number"
                 android:maxLength="6"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingStart="@dimen/dimen_size_15"
+                android:paddingEnd="@dimen/dimen_size_0" />
 
             <Button
                 android:id="@+id/bt_yzm"
@@ -99,7 +101,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="@dimen/dimen_size_65"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_size_10"
                 android:text="新密码" />
@@ -113,7 +115,8 @@
                 android:hint="设置6-20位字母、数字或符号组合"
                 android:inputType="textWebPassword"
                 android:maxLength="20"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingStart="@dimen/dimen_size_15"
+                android:paddingEnd="@dimen/dimen_size_0" />
 
         </LinearLayout>
 

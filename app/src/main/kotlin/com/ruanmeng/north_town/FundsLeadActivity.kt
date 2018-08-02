@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -57,14 +56,13 @@ class FundsLeadActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_lead) {
-                                val intent = Intent(baseContext, FundsProductActivity::class.java)
-                                intent.putExtra("accountInfoId", data.accountInfoId)
-                                intent.putExtra("userName", data.userName)
-                                intent.putExtra("userhead", data.userhead)
-                                intent.putExtra("introducerInfoName", data.introducerInfoName)
-                                intent.putExtra("sumAll", "${DecimalFormat(",##0.##").format(data.sumAll.toDouble() / 10000.0)}万")
-                                intent.putExtra("profitAll", "${DecimalFormat(",##0.##").format(data.profitAll.toDouble() / 10000.0)}万")
-                                startActivity(intent)
+                                startActivityEx<FundsProductActivity>(
+                                        "accountInfoId" to data.accountInfoId,
+                                        "userName" to data.userName,
+                                        "userhead" to data.userhead,
+                                        "introducerInfoName" to data.introducerInfoName,
+                                        "sumAll" to "${DecimalFormat(",##0.##").format(data.sumAll.toDouble() / 10000.0)}万",
+                                        "profitAll" to "${DecimalFormat(",##0.##").format(data.profitAll.toDouble() / 10000.0)}万")
                             }
                 }
                 .attachTo(recycle_list)

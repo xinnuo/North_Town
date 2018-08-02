@@ -1,7 +1,6 @@
 package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -51,9 +50,7 @@ class PurseActivity : BaseActivity() {
                             .text(R.id.item_purse_yong, "￥${if (data.amount.isEmpty()) "0" else data.amount}")
 
                             .clicked(R.id.item_purse) {
-                                val intent = Intent(baseContext, FundsDetailActivity::class.java)
-                                intent.putExtra("purchaseId", data.purchaseId)
-                                startActivity(intent)
+                                startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                             }
                 }
                 .attachTo(recycle_list)

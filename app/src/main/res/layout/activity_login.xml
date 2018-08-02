@@ -86,7 +86,7 @@
                 android:onClick="doClick"
                 android:paddingTop="@dimen/dimen_size_10"
                 android:paddingBottom="@dimen/dimen_size_10"
-                android:text="找回密码？"
+                android:text="忘记密码？"
                 android:textColor="@color/tv_login_selector_color" />
 
         </RelativeLayout>

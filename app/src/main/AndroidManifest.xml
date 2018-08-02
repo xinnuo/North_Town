@@ -18,6 +18,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -70,6 +71,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ReportUnitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportPartnerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ReportOrderActivity"
@@ -165,6 +172,7 @@
             android:name=".DataAddActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+
     </application>
 
 </manifest>

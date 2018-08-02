@@ -47,7 +47,7 @@ class LoginActivity : BaseActivity() {
     override fun doClick(v: View) {
         when (v.id) {
             R.id.main_close -> onBackPressed()
-            R.id.tv_forget -> startActivity<ForgetActivity>()
+            R.id.tv_forget -> startActivityEx<ForgetActivity>()
             R.id.bt_login -> {
                 if (!CommonUtil.isMobile(et_name.text.toString())) {
                     et_name.requestFocus()
@@ -79,7 +79,7 @@ class LoginActivity : BaseActivity() {
                                 putString("userhead", obj.optString("userhead"))
                                 putString("cardNo", obj.optString("cardNo"))
 
-                                startActivity<MainActivity>()
+                                startActivityEx<MainActivity>()
                                 ActivityStack.screenManager.popActivities(this@LoginActivity::class.java)
                             }
 

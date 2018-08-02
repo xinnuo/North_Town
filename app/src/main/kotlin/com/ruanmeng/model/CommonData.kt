@@ -124,6 +124,12 @@ data class CommonData(
         var sum: String = "",
         var managerInfoId: String = "",
 
+        //公司列表
+        var compName: String = "",
+        var companyId: String = "",
+        var numPeople: String = "",
+        var surplus: String = "",
+
         //审核列表
         var paytypeName: String = ""
 ) : Serializable

@@ -1,9 +1,7 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
@@ -15,7 +13,6 @@ import kotlinx.android.synthetic.main.activity_funds_product.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
-import java.text.DecimalFormat
 
 class FundsProductActivity : BaseActivity() {
 
@@ -57,10 +54,9 @@ class FundsProductActivity : BaseActivity() {
                             .visibility(R.id.item_detail_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
                             .clicked(R.id.item_detail) {
-                                val intent = Intent(baseContext, FundsDetailActivity::class.java)
-                                intent.putExtra("purchaseId", data.purchaseId)
-                                intent.putExtra("isLead", true)
-                                startActivity(intent)
+                                startActivityEx<FundsDetailActivity>(
+                                        "purchaseId" to data.purchaseId,
+                                        "isLead" to true)
                             }
                 }
                 .attachTo(recycle_list)

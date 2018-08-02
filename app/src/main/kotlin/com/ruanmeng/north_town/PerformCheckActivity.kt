@@ -89,9 +89,7 @@ class PerformCheckActivity : BaseActivity() {
                             .visibility(R.id.item_perform_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
                             .clicked(R.id.item_perform) {
-                                val intent = Intent(baseContext, FundsDetailActivity::class.java)
-                                intent.putExtra("purchaseId", data.purchaseId)
-                                startActivity(intent)
+                                startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                             }
                 }
                 .attachTo(recycle_list)

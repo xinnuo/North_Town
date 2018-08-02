@@ -47,10 +47,10 @@ class MainSecondFragment : BaseFragment() {
         second_img.setImageURL(BaseHttp.baseImg + getString("userhead"))
         second_img.setTag(R.id.second_img, getString("userhead"))
 
-        second_info.setOnClickListener { startActivity<InfoActivity>() }
-        second_fold.setOnClickListener { startActivity<PurseActivity>() }
-        second_customer.setOnClickListener { startActivity<ClientActivity>() }
-        second_setting.setOnClickListener { startActivity<SettingActivity>() }
+        second_info.setOnClickListener { startActivityEx<InfoActivity>() }
+        second_fold.setOnClickListener { startActivityEx<PurseActivity>() }
+        second_customer.setOnClickListener { startActivityEx<ClientActivity>() }
+        second_setting.setOnClickListener { startActivityEx<SettingActivity>() }
     }
 
     override fun onStart() {

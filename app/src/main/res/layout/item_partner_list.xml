@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/item_partner_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_10"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/item_partner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_size_10"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:background="@drawable/rec_bg_white_stroke_divider"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_size_15">
+
+        <TextView
+            android:id="@+id/item_partner_name"
+            style="@style/Font15_black_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="企业名称" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_15"
+            android:layout_marginRight="@dimen/dimen_size_15"
+            android:layout_marginTop="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总需：" />
+
+            <TextView
+                android:id="@+id/item_partner_need"
+                style="@style/Font14_black_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/orange" />
+
+            <TextView
+                style="@style/Font14_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_20"
+                android:text="已投人数：" />
+
+            <TextView
+                android:id="@+id/item_partner_put"
+                style="@style/Font14_black_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/orange" />
+
+            <TextView
+                style="@style/Font14_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_20"
+                android:text="剩余人数：" />
+
+            <TextView
+                android:id="@+id/item_partner_left"
+                style="@style/Font14_black_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/orange" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

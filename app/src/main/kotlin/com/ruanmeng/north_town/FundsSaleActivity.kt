@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -67,17 +66,13 @@ class FundsSaleActivity : BaseActivity() {
                             .text(R.id.item_purse_yong, "￥${if (data.commission.isEmpty()) "0" else data.commission}")
 
                             .clicked(R.id.item_purse) {
-                                val intent = Intent(baseContext, FundsDetailActivity::class.java)
-                                intent.putExtra("purchaseId", data.purchaseId)
-                                startActivity(intent)
+                                startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                             }
                 }
                 .attachTo(recycle_list)
 
         tvRight.setOnClickListener {
-            val intent = Intent(baseContext, WebActivity::class.java)
-            intent.putExtra("title", "佣金规则")
-            startActivity(intent)
+            startActivityEx<WebActivity>("title" to "佣金规则")
         }
 
         dropPopWindowLeft = object : DropPopWindow(

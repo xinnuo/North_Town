@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/report_partner"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="@dimen/dimen_size_30"
+        android:background="@mipmap/bj03"
+        android:onClick="doClick">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_size_10"
+            android:layout_marginEnd="@dimen/dimen_size_50"
+            android:layout_marginStart="@dimen/dimen_size_50"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Font15_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="有限合伙人" />
+
+                <TextView
+                    style="@style/Font13_white"
+                    android:layout_width="@dimen/dimen_size_75"
+                    android:layout_height="@dimen/dimen_size_26"
+                    android:layout_marginTop="@dimen/dimen_size_10"
+                    android:background="@mipmap/btn01"
+                    android:gravity="center"
+                    android:text="立即查看" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_size_1"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_size_60"
+                android:layout_height="@dimen/dimen_size_60"
+                android:src="@mipmap/icon03"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/report_vip"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@mipmap/bj04"
+        android:onClick="doClick">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_size_10"
+            android:layout_marginEnd="@dimen/dimen_size_50"
+            android:layout_marginStart="@dimen/dimen_size_50"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Font15_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="会员卡" />
+
+                <TextView
+                    style="@style/Font13_white"
+                    android:layout_width="@dimen/dimen_size_75"
+                    android:layout_height="@dimen/dimen_size_26"
+                    android:layout_marginTop="@dimen/dimen_size_10"
+                    android:background="@mipmap/btn01"
+                    android:gravity="center"
+                    android:text="立即查看" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_size_1"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_size_60"
+                android:layout_height="@dimen/dimen_size_60"
+                android:src="@mipmap/icon04"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -60,9 +59,7 @@ class CheckActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_review) {
-                                val intent = Intent(baseContext, CheckDetailActivity::class.java)
-                                intent.putExtra("purchaseId", data.purchaseId)
-                                startActivity(intent)
+                                startActivityEx<CheckDetailActivity>("purchaseId" to data.purchaseId)
                             }
                 }
                 .attachTo(recycle_list)

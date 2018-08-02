@@ -1,7 +1,6 @@
 package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -61,11 +60,10 @@ class ReportActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_report) {
-                                val intent = Intent(baseContext, ReportDetailActivity::class.java)
-                                intent.putExtra("accountInfoId", data.accountInfoId)
-                                intent.putExtra("userName", data.userName)
-                                intent.putExtra("cardNo", data.cardNo)
-                                startActivity(intent)
+                                startActivityEx<ReportDetailActivity>(
+                                        "accountInfoId" to data.accountInfoId,
+                                        "userName" to data.userName,
+                                        "cardNo" to data.cardNo)
                             }
                 }
                 .attachTo(recycle_list)
@@ -78,7 +76,7 @@ class ReportActivity : BaseActivity() {
                 if (search_edit.text.toString().isBlank()) {
                     showToast("请输入关键字")
                 } else {
-                    keyWord = search_edit.text.toString()
+                    keyWord = search_edit.text.trim().toString()
                     updateList()
                 }
             }
@@ -90,7 +88,7 @@ class ReportActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.search_cancel -> search_edit.setText("")
-            R.id.empty_add -> startActivity<ReportAddActivity>()
+            R.id.empty_add -> startActivityEx<ReportAddActivity>()
         }
     }
 

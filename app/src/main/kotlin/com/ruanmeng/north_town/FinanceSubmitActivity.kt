@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.StringDialogCallback
@@ -9,6 +8,7 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.showToast
+import com.ruanmeng.base.startActivityEx
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
@@ -65,16 +65,8 @@ class FinanceSubmitActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.finance_get_ll -> {
-                val intent = Intent(baseContext, FinanceSelectActivity::class.java)
-                intent.putExtra("title", "收款方式")
-                startActivity(intent)
-            }
-            R.id.finance_shou_ll -> {
-                val intent = Intent(baseContext, FinanceSelectActivity::class.java)
-                intent.putExtra("title", "收据类型")
-                startActivity(intent)
-            }
+            R.id.finance_get_ll -> startActivityEx<FinanceSelectActivity>("title" to "收款方式")
+            R.id.finance_shou_ll -> startActivityEx<FinanceSelectActivity>("title" to "收据类型")
             R.id.finance_submit -> {
                 if (!CommonUtil.IDCardValidate(et_idcard.text.trim().toString())) {
                     et_idcard.requestFocus()

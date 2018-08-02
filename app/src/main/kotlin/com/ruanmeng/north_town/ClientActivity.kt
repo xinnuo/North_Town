@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -42,12 +41,11 @@ class ClientActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_client) {
-                                val intent = Intent(baseContext, NewsDetailActivity::class.java)
-                                intent.putExtra("accountInfoId", data.accountInfoId)
-                                intent.putExtra("userName", data.userName)
-                                intent.putExtra("cardNo", data.cardNo)
-                                intent.putExtra("isClient", true)
-                                startActivity(intent)
+                                startActivityEx<NewsDetailActivity>(
+                                        "accountInfoId" to data.accountInfoId,
+                                        "userName" to data.userName,
+                                        "cardNo" to data.cardNo,
+                                        "isClient" to true)
                             }
                 }
                 .attachTo(recycle_list)

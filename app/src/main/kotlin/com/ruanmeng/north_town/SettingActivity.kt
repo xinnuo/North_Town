@@ -1,6 +1,5 @@
 package com.ruanmeng.north_town
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AlertDialog
@@ -32,9 +31,7 @@ class SettingActivity : BaseActivity() {
         setting_version.setRightString("v" + Tools.getVersion(baseContext))
 
         setting_about.setOnClickListener {
-            val intent = Intent(baseContext, WebActivity::class.java)
-            intent.putExtra("title", "关于我们")
-            startActivity(intent)
+            startActivityEx<WebActivity>("title" to "关于我们")
         }
         setting_cache.setOnClickListener {
             AlertDialog.Builder(this)
@@ -57,9 +54,7 @@ class SettingActivity : BaseActivity() {
                     .setTitle("退出登录")
                     .setMessage("确定要退出当前账号吗？")
                     .setPositiveButton("退出") { _, _ ->
-                        val intent = Intent(baseContext, LoginActivity::class.java)
-                        intent.putExtra("offLine", true)
-                        startActivity(intent)
+                        startActivityEx<LoginActivity>("offLine" to true)
                     }
                     .setNegativeButton("取消") { _, _ -> }
                     .create()
