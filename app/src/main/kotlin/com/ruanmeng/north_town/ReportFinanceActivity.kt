@@ -2,9 +2,17 @@ package com.ruanmeng.north_town
 
 import android.os.Bundle
 import android.view.View
+import com.lzg.extend.StringDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.getString
+import com.ruanmeng.base.showToast
 import com.ruanmeng.base.startActivityEx
 import com.ruanmeng.model.ReportMessageEvent
+import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
+import com.ruanmeng.utils.CommonUtil
 import kotlinx.android.synthetic.main.activity_report_finance.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -13,6 +21,9 @@ class ReportFinanceActivity : BaseActivity() {
 
     private var payTypeId = ""
     private var receiptTypeId = ""
+    private var cashierInfoId = ""
+    private var managerInfoId = ""
+    private var nonManagerInfoId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +62,41 @@ class ReportFinanceActivity : BaseActivity() {
             R.id.finance_yin_ll -> startActivityEx<ReportAgentActivity>("type" to "2")
             R.id.finance_manager_ll -> startActivityEx<ReportAgentActivity>("type" to "3")
             R.id.finance_non_ll -> startActivityEx<ReportAgentActivity>("type" to "1")
+            R.id.finance_submit -> {
+                if (!CommonUtil.IDCardValidate(et_idcard.text.trim().toString())) {
+                    et_idcard.requestFocus()
+                    et_idcard.setText("")
+                    showToast("请输入正确的身份证号")
+                    return
+                }
+
+                OkGo.post<String>(BaseHttp.purchase_auditing_add)
+                        .tag(this@ReportFinanceActivity)
+                        .isMultipart(true)
+                        .headers("token", getString("token"))
+                        .apply {
+                            params("purchaseId", intent.getStringExtra("purchaseId"))
+                            params("payTypeId", payTypeId)
+                            params("receiptNo", et_code.text.trim().toString())
+                            params("amount", et_num.text.trim().toString())
+                            params("receiptTypeId", receiptTypeId)
+                            params("userName", et_name.text.trim().toString())
+                            params("cardNo", et_idcard.text.trim().toString())
+                            params("cashierInfoId", cashierInfoId)
+                            params("managerInfoId", managerInfoId)
+                            params("nonManagerInfoId", nonManagerInfoId)
+                            params("financeRemark", et_memo.text.trim().toString())
+                        }
+                        .execute(object : StringDialogCallback(baseContext) {
+
+                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                                showToast(msg)
+                                ActivityStack.screenManager.popActivities(this@ReportFinanceActivity::class.java)
+                            }
+
+                        })
+            }
         }
     }
 
@@ -86,6 +132,18 @@ class ReportFinanceActivity : BaseActivity() {
             "收据" -> {
                 receiptTypeId = event.id
                 finance_shou.text = event.name
+            }
+            "非基金" -> {
+                nonManagerInfoId = event.id
+                finance_non.text = event.name
+            }
+            "收银员" -> {
+                cashierInfoId = event.id
+                finance_yin.text = event.name
+            }
+            "经纪人" -> {
+                managerInfoId = event.id
+                finance_manager.text = event.name
             }
         }
     }
