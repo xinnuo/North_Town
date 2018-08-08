@@ -19,6 +19,8 @@ class NewsDetailActivity : BaseActivity() {
         init_title("客户详情", "添加订单")
 
         getData()
+
+        TODO("无用的页面")
     }
 
     @Suppress("DEPRECATION")

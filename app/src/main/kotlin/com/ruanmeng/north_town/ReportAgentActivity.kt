@@ -56,14 +56,22 @@ class ReportAgentActivity : BaseActivity() {
                             .visibility(R.id.item_client_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
                             .with<RoundedImageView>(R.id.item_client_img) { view ->
-                                view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
+                                view.setImageURL(when (intent.getStringExtra("type")) {
+                                    "1", "2", "3" -> BaseHttp.baseImg + data.userHead
+                                    else -> BaseHttp.baseImg + data.userhead
+                                }, R.mipmap.default_user)
                             }
 
                             .clicked(R.id.item_client) {
                                 EventBus.getDefault().post(ReportMessageEvent(
                                         data.accountInfoId,
                                         data.userName,
-                                        "经纪人"))
+                                        when (intent.getStringExtra("type")) {
+                                            "1" -> "非基金"
+                                            "2" -> "收银员"
+                                            "3" -> "经纪人"
+                                            else -> ""
+                                        }))
 
                                 ActivityStack.screenManager.popActivities(this@ReportAgentActivity::class.java)
                             }
@@ -78,7 +86,7 @@ class ReportAgentActivity : BaseActivity() {
                 if (search_edit.text.toString().isBlank()) {
                     showToast("请输入关键字")
                 } else {
-                    keyWord = search_edit.text.toString()
+                    keyWord = search_edit.text.trim().toString()
                     updateList()
                 }
             }
@@ -89,38 +97,107 @@ class ReportAgentActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.customer_list)
-                .tag(this@ReportAgentActivity)
-                .isMultipart(true)
-                .headers("token", getString("token"))
-                .params("searchar", keyWord)
-                .params("accountType", "3")
-                .params("page", pindex)
-                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
+        when (intent.getStringExtra("type")) {
+            "1" -> OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.non_manager_list)
+                    .tag(this@ReportAgentActivity)
+                    .isMultipart(true)
+                    .headers("token", getString("token"))
+                    .params("keyWord", keyWord)
+                    .params("page", pindex)
+                    .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
 
-                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
+                        override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
 
-                        list.apply {
-                            if (pindex == 1) {
-                                clear()
-                                pageNum = pindex
+                            list.apply {
+                                if (pindex == 1) {
+                                    clear()
+                                    pageNum = pindex
+                                }
+                                addItems(response.body().`object`)
+                                if (count(response.body().`object`) > 0) pageNum++
                             }
-                            addItems(response.body().`object`.accountInfoList)
-                            if (count(response.body().`object`.accountInfoList) > 0) pageNum++
+                            if (count(response.body().`object`) > 0) mAdapter.updateData(list)
                         }
-                        if (count(response.body().`object`.accountInfoList) > 0) mAdapter.updateData(list)
-                    }
 
-                    override fun onFinish() {
-                        super.onFinish()
-                        swipe_refresh.isRefreshing = false
-                        isLoadingMore = false
+                        override fun onFinish() {
+                            super.onFinish()
+                            swipe_refresh.isRefreshing = false
+                            isLoadingMore = false
 
-                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
-                        reprot_divider.visibility = if (list.size > 0) View.VISIBLE else View.GONE
-                    }
+                            empty_view.visibility = if (list.isNotEmpty()) View.GONE else View.VISIBLE
+                            reprot_divider.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+                        }
 
-                })
+                    })
+            "2", "3" -> OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.staff_type_list)
+                    .tag(this@ReportAgentActivity)
+                    .isMultipart(true)
+                    .headers("token", getString("token"))
+                    .params("keyWord", keyWord)
+                    .params("page", pindex)
+                    .params("accountType", when (intent.getStringExtra("type")) {
+                        "2" -> "App_Staff_Finance_Collect"
+                        "3" -> "App_Staff"
+                        else -> ""
+                    })
+                    .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
+
+                        override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+
+                            list.apply {
+                                if (pindex == 1) {
+                                    clear()
+                                    pageNum = pindex
+                                }
+                                addItems(response.body().`object`)
+                                if (count(response.body().`object`) > 0) pageNum++
+                            }
+                            if (count(response.body().`object`) > 0) mAdapter.updateData(list)
+                        }
+
+                        override fun onFinish() {
+                            super.onFinish()
+                            swipe_refresh.isRefreshing = false
+                            isLoadingMore = false
+
+                            empty_view.visibility = if (list.isNotEmpty()) View.GONE else View.VISIBLE
+                            reprot_divider.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+                        }
+
+                    })
+            else -> OkGo.post<BaseResponse<CommonModel>>(BaseHttp.customer_list)
+                    .tag(this@ReportAgentActivity)
+                    .isMultipart(true)
+                    .headers("token", getString("token"))
+                    .params("searchar", keyWord)
+                    .params("accountType", "3")
+                    .params("page", pindex)
+                    .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
+
+                        override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
+
+                            list.apply {
+                                if (pindex == 1) {
+                                    clear()
+                                    pageNum = pindex
+                                }
+                                addItems(response.body().`object`.accountInfoList)
+                                if (count(response.body().`object`.accountInfoList) > 0) pageNum++
+                            }
+                            if (count(response.body().`object`.accountInfoList) > 0) mAdapter.updateData(list)
+                        }
+
+                        override fun onFinish() {
+                            super.onFinish()
+                            swipe_refresh.isRefreshing = false
+                            isLoadingMore = false
+
+                            empty_view.visibility = if (list.isNotEmpty()) View.GONE else View.VISIBLE
+                            reprot_divider.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+                        }
+
+                    })
+        }
     }
 
     fun updateList() {

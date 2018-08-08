@@ -61,9 +61,8 @@ class ReportActivity : BaseActivity() {
 
                             .clicked(R.id.item_report) {
                                 startActivityEx<ReportDetailActivity>(
-                                        "accountInfoId" to data.accountInfoId,
-                                        "userName" to data.userName,
-                                        "cardNo" to data.cardNo)
+                                        "type" to "1",
+                                        "accountInfoId" to data.accountInfoId)
                             }
                 }
                 .attachTo(recycle_list)

@@ -40,6 +40,7 @@ data class CommonData(
         var cardNo: String = "",
         var telephone: String = "",
         var userhead: String = "",
+        var userHead: String = "",
         var userName: String = "",
 
         //偏好列表
@@ -125,7 +126,9 @@ data class CommonData(
         var managerInfoId: String = "",
 
         //公司列表
+        var commponyName: String = "",
         var compName: String = "",
+        var legalMan: String = "",
         var companyId: String = "",
         var numPeople: String = "",
         var surplus: String = "",

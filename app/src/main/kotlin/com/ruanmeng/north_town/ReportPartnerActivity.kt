@@ -10,6 +10,7 @@ import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
 
@@ -43,7 +44,26 @@ class ReportPartnerActivity : BaseActivity() {
                             .visibility(R.id.item_partner_divider, if (index == 0) View.VISIBLE else View.GONE)
 
                             .clicked(R.id.item_partner) {
-                                startActivityEx<ReportOrderActivity>()
+                                val count = data.surplus.toInt()
+                                if (count < 1) {
+                                    showToast("投资人数已满，请选择其他合伙企业")
+                                    return@clicked
+                                }
+
+                                startActivityEx<ReportOrderActivity>(
+                                        "accountInfoId" to intent.getStringExtra("accountInfoId"),
+                                        "productId" to intent.getStringExtra("productId"),
+                                        "userName" to intent.getStringExtra("userName"),
+                                        "companyId" to data.companyId,
+                                        "companyName" to data.compName,
+                                        "companySkipName" to data.commponyName,
+                                        "legalMan" to data.legalMan,
+                                        "amount" to data.amount,
+                                        "put" to data.numPeople,
+                                        "left" to data.surplus,
+                                        "type" to "合伙人")
+
+                                ActivityStack.screenManager.popActivities(this@ReportPartnerActivity::class.java)
                             }
                 }
                 .attachTo(recycle_list)

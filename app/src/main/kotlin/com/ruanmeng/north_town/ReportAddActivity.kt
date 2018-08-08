@@ -77,7 +77,14 @@ class ReportAddActivity : BaseActivity() {
                         "isType" to true)
             }
             R.id.report_up_ll -> startActivityEx<ReportUpActivity>()
-            R.id.report_relation_ll -> startActivityEx<ReportUnitActivity>("title" to "客户关系")
+            R.id.report_relation_ll -> {
+                if (introducerInfoId.isEmpty()) {
+                    showToast("请选择上级客户信息")
+                    return
+                }
+
+                startActivityEx<ReportUnitActivity>("title" to "客户关系")
+            }
             R.id.report_submit -> {
                 if (!CommonUtil.isMobile(et_phone.text.toString())) {
                     et_phone.requestFocus()
@@ -85,10 +92,16 @@ class ReportAddActivity : BaseActivity() {
                     showToast("请输入正确的手机号")
                     return
                 }
+
                 if (!CommonUtil.IDCardValidate(et_card.text.trim().toString())) {
                     et_card.requestFocus()
                     et_card.setText("")
                     showToast("请输入正确的身份证号")
+                    return
+                }
+
+                if (introducerInfoId.isNotEmpty() && relationshipId.isEmpty()) {
+                    showToast("请选择与上级客户关系")
                     return
                 }
 

@@ -79,7 +79,7 @@ class MainFirstFragment : BaseFragment() {
                                     when (data) {
                                         "客户报备" -> startActivityEx<ReportActivity>()
                                         "客户资料" -> startActivityEx<DataActivity>()
-                                        "客户数据" -> startActivityEx<NewsActivity>()
+                                        "客户数据" -> startActivityEx<NewsSelectActivity>()
                                         "业绩统计" -> startActivityEx<PerformActivity>()
                                         "佣金统计" -> startActivityEx<FundsActivity>()
                                         "理财产品" -> startActivityEx<ManageActivity>()

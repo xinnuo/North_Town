@@ -12,7 +12,8 @@ public class BaseHttp {
 
     private static String baseUrl = BuildConfig.API_HOST;
     private static String baseIp = baseUrl + "/api";
-    public static String baseImg = baseUrl + "/";
+    // public static String baseImg = baseUrl + "/";
+    public static String baseImg = "http://122.114.212.120:8082/";
 
     public static String account_login = baseIp + "/account_login.rm";     //登录√
     public static String get_smscode = baseIp + "/get_smscode.rm";         //获取验证码√
@@ -34,10 +35,14 @@ public class BaseHttp {
     public static String get_company_list = baseIp + "/get_company_list.rm";   //公司列表√
     public static String purchase_sub = baseIp + "/purchase_sub.rm";           //添加订单√
     public static String bank_list = baseIp + "/bank_list.rm";                 //银行列表√
-    public static String purchase_by_id = baseIp + "/purchase_by_id.rm";       //财务录入订单√
+    public static String customer_introducer_relationship = baseIp + "/customer_introducer_relationship.rm"; //上级信息√
+    public static String customer_last_purchase_msg = baseIp + "/customer_last_purchase_msg.rm";             //客户订单信息√
+    public static String customer_vip_no = baseIp + "/customer_vip_no.rm";                                   //客户VIP信息√
+    public static String past_due_purchase_list = baseIp + "/past_due_purchase_list.rm";                     //续投订单列表√
+    public static String non_manager_list = baseIp + "/non_manager_list.rm";                                 //非基金经纪人列表√
+    public static String staff_type_list = baseIp + "/staff_type_list.rm";                                   //各类员工列表√
 
     public static String customer_list_all = baseIp + "/customer_list_all.rm";                     //资料老列表√
-    public static String my_potentialcustomer_list = baseIp + "/my_potentialcustomer_list.rm";     //资料新列表√
     public static String potentialcustomer_details = baseIp + "/potentialcustomer_details.rm";     //新客户明细√
     public static String remark_my_potentialcustomer = baseIp + "/remark_my_potentialcustomer.rm"; //新增备注√
     public static String customer_purchase_list = baseIp + "/customer_purchase_list.rm";           //客户订单√
@@ -49,7 +54,8 @@ public class BaseHttp {
     public static String receipttype_list = baseIp + "/receipttype_list.rm";           //收据类型√
     public static String purchase_auditing_add = baseIp + "/purchase_auditing_add.rm"; //录入收款√
 
-    public static String customer_data_list = baseIp + "/customer_data_list.rm"; //数据列表√
+    public static String customer_data_list = baseIp + "/customer_data_list.rm";                   //客户数据列表√
+    public static String customer_purchase_data_list = baseIp + "/customer_purchase_data_list.rm"; //订单数据列表√
 
     public static String achievement_list = baseIp + "/achievement_list.rm";             //统计列表√
     public static String achievement_day_list = baseIp + "/achievement_day_list.rm";     //日业绩√

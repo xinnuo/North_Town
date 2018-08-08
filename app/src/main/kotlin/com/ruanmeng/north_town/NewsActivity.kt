@@ -3,6 +3,7 @@ package com.ruanmeng.north_town
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import com.flyco.dialog.widget.ActionSheetDialog
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
@@ -18,7 +19,7 @@ import com.ruanmeng.utils.TimeHelper
 import kotlinx.android.synthetic.main.activity_news.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
-import kotlinx.android.synthetic.main.layout_title_filter.*
+import kotlinx.android.synthetic.main.layout_search.*
 import net.idik.lib.slimadapter.SlimAdapter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -37,8 +38,10 @@ class NewsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
-        setToolbarVisibility(false)
-        init_title()
+        when (intent.getStringExtra("type")) {
+            "1" -> init_title(intent.getStringExtra("title"))
+            "2" -> init_title(intent.getStringExtra("title"), "类别")
+        }
 
         EventBus.getDefault().register(this@NewsActivity)
 
@@ -47,38 +50,9 @@ class NewsActivity : BaseActivity() {
     }
 
     override fun init_title() {
-        filter_check.setOnClickListener {
-            when (news_expand.isExpanded) {
-                true -> {
-                    news_expand.collapse()
-
-                    news_start.text = ""
-                    news_end.text = ""
-                    news_min.setText("")
-                    news_max.setText("")
-
-                    if (date_start.isNotEmpty()
-                            || date_end.isNotEmpty()
-                            || money_min.isNotEmpty()
-                            || money_max.isNotEmpty()) {
-                        date_start = ""
-                        date_end = ""
-                        money_min = ""
-                        money_max = ""
-
-                        window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
-                    }
-
-                    filter_check.text = "筛选"
-                }
-                else -> {
-                    news_expand.expand()
-                    filter_check.text = "取消"
-                }
-            }
-        }
-
+        super.init_title()
         empty_hint.text = "暂无相关客户信息！"
+        search_edit.hint = "请输入客户姓名或手机号或身份证号"
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
             if (!isLoadingMore) {
@@ -89,7 +63,8 @@ class NewsActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_data_list) { data, injector ->
-                    injector.text(R.id.item_data_name, getColorText(data.userName, keyWord))
+                    injector.visible(R.id.item_data_vip)
+                            .text(R.id.item_data_name, getColorText(data.userName, keyWord))
                             .text(R.id.item_data_phone, getColorText("手机 ${data.telephone}", keyWord))
                             .text(R.id.item_data_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
                             .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0))
@@ -102,30 +77,29 @@ class NewsActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_data) {
-                                startActivityEx<NewsDetailActivity>(
-                                        "accountInfoId" to data.accountInfoId,
-                                        "userName" to data.userName,
-                                        "cardNo" to data.cardNo)
+                                startActivityEx<ReportDetailActivity>(
+                                        "type" to "3",
+                                        "accountInfoId" to data.accountInfoId)
                             }
                 }
                 .attachTo(recycle_list)
 
-        filter_edit.addTextChangedListener(this@NewsActivity)
-        filter_edit.setOnEditorActionListener { _, actionId, _ ->
+        search_edit.addTextChangedListener(this@NewsActivity)
+        search_edit.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
 
-                if (filter_edit.text.toString().isBlank()) {
+                if (search_edit.text.toString().isBlank()) {
                     showToast("请输入关键字")
                 } else {
-                    keyWord = filter_edit.text.toString()
+                    keyWord = search_edit.text.trim().toString()
                     updateList()
                 }
             }
             return@setOnEditorActionListener false
         }
 
-        filter_close.setOnClickListener { filter_edit.setText("") }
+        search_close.setOnClickListener { search_edit.setText("") }
 
         news_start.setOnClickListener {
             val year_now = Calendar.getInstance().get(Calendar.YEAR)
@@ -211,6 +185,29 @@ class NewsActivity : BaseActivity() {
                 updateList()
             }
         }
+
+        tvRight.setOnClickListener {
+            val arrHint = arrayOf("会员卡", "有限合伙人")
+            val dialog = ActionSheetDialog(this, arrHint, null)
+            @Suppress("DEPRECATION")
+            dialog.isTitleShow(false)
+                    .lvBgColor(resources.getColor(R.color.white))
+                    .dividerColor(resources.getColor(R.color.divider))
+                    .dividerHeight(0.5f)
+                    .itemTextColor(resources.getColor(R.color.black_dark))
+                    .itemHeight(40f)
+                    .itemTextSize(15f)
+                    .cancelText(resources.getColor(R.color.light))
+                    .cancelTextSize(15f)
+                    .layoutAnimation(null)
+                    .show()
+            dialog.setOnOperItemClickL { _, _, position, _ ->
+                dialog.dismiss()
+
+                tvRight.text = arrHint[position]
+                updateList()
+            }
+        }
     }
 
     override fun getData(pindex: Int) {
@@ -266,7 +263,7 @@ class NewsActivity : BaseActivity() {
     }
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        filter_close.visibility = if (s.isEmpty()) View.GONE else View.VISIBLE
+        search_close.visibility = if (s.isEmpty()) View.GONE else View.VISIBLE
         if (s.isEmpty() && keyWord.isNotEmpty()) {
             keyWord = ""
             updateList()

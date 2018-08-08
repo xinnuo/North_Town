@@ -10,93 +10,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            style="@style/Font13_gray"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_size_40"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/dimen_size_10"
-            android:text="客户信息" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:background="@color/divider" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
-
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_name"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/gray"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="本有限合伙人名称"
-                app:sLineShow="bottom"
-                app:sRightTextColor="@color/gray"
-                app:sRightTextMarginRight="@dimen/dimen_size_10" />
-
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_idcard"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_0"
-                app:sLeftTextColor="@color/gray"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="身份证号码"
-                app:sLineShow="bottom"
-                app:sRightTextColor="@color/gray"
-                app:sRightTextMarginRight="@dimen/dimen_size_10" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_10"
-                android:background="@color/background" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_height"
-                android:background="@color/divider" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:paddingStart="@dimen/dimen_size_10">
-
-                <TextView
-                    style="@style/Font14_black_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dimen_size_10"
-                    android:text="合同编号" />
-
-                <EditText
-                    android:id="@+id/et_pact"
-                    style="@style/Font14_black_dark"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white"
-                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:gravity="end|center_vertical"
-                    android:hint="输入合同编号"
-                    android:inputType="textVisiblePassword"
-                    android:maxLines="1"
-                    android:paddingEnd="@dimen/dimen_size_10"
-                    android:paddingStart="@dimen/dimen_size_10" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_height"
-                android:layout_marginLeft="@dimen/dimen_size_10"
-                android:layout_marginRight="@dimen/dimen_size_10"
-                android:background="@color/divider" />
 
             <net.cachapa.expandablelayout.ExpandableLayout
                 android:id="@+id/order_expand"
@@ -110,9 +28,148 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/report_company"
+                        style="@style/Font15_black_dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_40"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="@dimen/dimen_size_10"
+                        android:paddingStart="@dimen/dimen_size_10"
+                        android:text="公司名称" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/Font14_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_size_10"
+                            android:text="普通合伙人：" />
+
+                        <TextView
+                            android:id="@+id/report_partner"
+                            style="@style/Font14_gray"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_size_10"
+                        android:layout_marginEnd="@dimen/dimen_size_10"
+                        android:layout_marginStart="@dimen/dimen_size_10"
+                        android:layout_marginTop="@dimen/dimen_size_5">
+
+                        <TextView
+                            style="@style/Font14_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="总需：" />
+
+                        <TextView
+                            android:id="@+id/report_need"
+                            style="@style/Font14_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0人"
+                            android:textColor="@color/orange" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dimen_size_1"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/Font14_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已投人数：" />
+
+                        <TextView
+                            android:id="@+id/report_put"
+                            style="@style/Font14_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0人"
+                            android:textColor="@color/orange" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dimen_size_1"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/Font14_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="剩余人数：" />
+
+                        <TextView
+                            android:id="@+id/report_left"
+                            style="@style/Font14_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0人"
+                            android:textColor="@color/orange" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:background="@color/divider" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_size_10"
+                        android:background="@color/background" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:background="@color/divider" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_height"
+                        android:paddingEnd="@dimen/dimen_size_0"
+                        android:paddingStart="@dimen/dimen_size_10">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:gravity="center_vertical"
+                            android:text="本有限合伙人名称为" />
+
+                        <TextView
+                            android:id="@+id/report_name"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:background="@android:color/white"
+                            android:gravity="end|center_vertical" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:paddingEnd="@dimen/dimen_size_0"
                         android:paddingStart="@dimen/dimen_size_10">
 
                         <TextView
@@ -120,7 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dimen_size_10"
-                            android:text="收据编码" />
+                            android:text="身份证号码(营业执照编号)" />
 
                         <EditText
                             android:id="@+id/et_receipt"
@@ -130,7 +187,7 @@
                             android:background="@android:color/white"
                             android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:gravity="end|center_vertical"
-                            android:hint="输入收据编码"
+                            android:hint="输入身份证或编号"
                             android:inputType="textVisiblePassword"
                             android:maxLines="1"
                             android:paddingEnd="@dimen/dimen_size_10"
@@ -149,47 +206,164 @@
 
             </net.cachapa.expandablelayout.ExpandableLayout>
 
-            <LinearLayout
-                android:id="@+id/report_tou_ll"
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/vip_expand"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:gravity="center_vertical"
-                android:onClick="doClick"
-                android:paddingLeft="@dimen/dimen_size_10"
-                android:paddingRight="@dimen/dimen_size_10">
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="false">
 
-                <TextView
-                    style="@style/Font14_black_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/line_height"
-                    android:gravity="center_vertical"
-                    android:text="投资类型" />
-
-                <TextView
-                    android:id="@+id/report_tou"
-                    style="@style/Font14_black_dark"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_size_10"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="请选择投资类型" />
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="@dimen/dimen_size_13"
-                    android:layout_height="@dimen/dimen_size_13"
-                    android:layout_marginStart="@dimen/dimen_size_5"
-                    android:src="@mipmap/arrow_right"
-                    tools:ignore="ContentDescription" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:paddingEnd="@dimen/dimen_size_0"
+                        android:paddingStart="@dimen/dimen_size_10">
 
-            </LinearLayout>
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:gravity="center_vertical"
+                            android:text="VIP持卡人" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_height"
-                android:layout_marginLeft="@dimen/dimen_size_10"
-                android:layout_marginRight="@dimen/dimen_size_10"
-                android:background="@color/divider" />
+                        <EditText
+                            android:id="@+id/vip_name"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:gravity="end|center_vertical"
+                            android:hint="输入持卡人姓名"
+                            android:maxLength="12"
+                            android:paddingEnd="@dimen/dimen_size_10"
+                            android:paddingStart="@dimen/dimen_size_10"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:paddingEnd="@dimen/dimen_size_0"
+                        android:paddingStart="@dimen/dimen_size_10">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:gravity="center_vertical"
+                            android:text="VIP编号" />
+
+                        <EditText
+                            android:id="@+id/vip_num"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:gravity="end|center_vertical"
+                            android:hint="输入编号"
+                            android:inputType="number"
+                            android:maxLength="12"
+                            android:paddingEnd="@dimen/dimen_size_10"
+                            android:paddingStart="@dimen/dimen_size_10"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:paddingEnd="@dimen/dimen_size_0"
+                        android:paddingStart="@dimen/dimen_size_10">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:gravity="center_vertical"
+                            android:text="身份证号" />
+
+                        <EditText
+                            android:id="@+id/vip_card"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:digits="0123456789Xx"
+                            android:gravity="end|center_vertical"
+                            android:hint="输入身份证号"
+                            android:inputType="number"
+                            android:maxLength="18"
+                            android:paddingEnd="@dimen/dimen_size_10"
+                            android:paddingStart="@dimen/dimen_size_10"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_size_10"
+                            android:layout_marginTop="@dimen/dimen_size_10"
+                            android:text="持卡人地址" />
+
+                        <EditText
+                            android:id="@+id/vip_addr"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white"
+                            android:hint="输入持卡人地址"
+                            android:lineSpacingExtra="@dimen/dimen_size_3"
+                            android:padding="@dimen/dimen_size_10" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                </LinearLayout>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
 
             <LinearLayout
                 android:id="@+id/report_product_ll"
@@ -205,7 +379,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
                     android:gravity="center_vertical"
-                    android:text="选择产品" />
+                    android:text="转投或续投" />
 
                 <TextView
                     android:id="@+id/report_product"
@@ -215,7 +389,7 @@
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择产品" />
+                    android:hint="请选择关联投资" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -237,6 +411,86 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_size_0"
+                android:paddingStart="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_size_10"
+                    android:text="转投或续投金额" />
+
+                <com.santalu.maskedittext.MaskEditText
+                    android:id="@+id/et_put"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical|end"
+                    android:hint="请输入金额"
+                    android:inputType="number"
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    android:paddingStart="@dimen/dimen_size_10"
+                    app:mask="##########" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/report_year_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10">
+
+                <TextView
+                    style="@style/Font14_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text="投资期限" />
+
+                <TextView
+                    android:id="@+id/report_year"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:hint="请选择投资期限" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_13"
+                    android:layout_height="@dimen/dimen_size_13"
+                    android:layout_marginStart="@dimen/dimen_size_5"
+                    android:src="@mipmap/arrow_right"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_size_0"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -353,18 +607,37 @@
                 android:layout_marginRight="@dimen/dimen_size_10"
                 android:background="@color/divider" />
 
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_expect"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_0"
-                app:sLeftTextColor="@color/orange"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="利率 0%"
-                app:sLineShow="bottom"
-                app:sRightTextColor="@color/orange"
-                app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="预期收入 ￥0" />
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_size_10"
+                android:paddingStart="@dimen/dimen_size_10">
+
+                <TextView
+                    android:id="@+id/report_expect1"
+                    style="@style/Font14_gray"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_size_15"
+                    android:layout_weight="1"
+                    android:text="利率 0%"
+                    android:textColor="@color/orange" />
+
+                <TextView
+                    android:id="@+id/report_expect2"
+                    style="@style/Font14_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预期收入 ￥0"
+                    android:textColor="@color/orange" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:background="@color/divider" />
 
             <View
                 android:layout_width="match_parent"
@@ -415,6 +688,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_40"
                 android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10"
                 android:text="账户信息" />
 
@@ -471,6 +745,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_size_0"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -506,6 +781,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_size_0"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -540,6 +816,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/dimen_size_0"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -584,6 +861,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_size_0"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -629,7 +907,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
                     android:gravity="center_vertical"
-                    android:text="选择经纪人" />
+                    android:text="选择非基金经纪人" />
+
+                <TextView
+                    style="@style/Font14_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/line_height"
+                    android:gravity="center_vertical"
+                    android:text=" (选填)" />
 
                 <TextView
                     android:id="@+id/report_agent"
@@ -639,7 +924,7 @@
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择经纪人" />
+                    android:hint="请选择" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"
@@ -657,9 +942,110 @@
                 android:layout_marginRight="@dimen/dimen_size_10"
                 android:background="@color/divider" />
 
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/relation_expand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/report_up_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:gravity="center_vertical"
+                        android:onClick="doClick"
+                        android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingRight="@dimen/dimen_size_10">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/line_height"
+                            android:gravity="center_vertical"
+                            android:text="选择上级客户信息" />
+
+                        <TextView
+                            android:id="@+id/report_up"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:hint="请选择" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_size_13"
+                            android:layout_height="@dimen/dimen_size_13"
+                            android:layout_marginStart="@dimen/dimen_size_5"
+                            android:src="@mipmap/arrow_right"
+                            tools:ignore="ContentDescription" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:id="@+id/report_relation_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:gravity="center_vertical"
+                        android:onClick="doClick"
+                        android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingRight="@dimen/dimen_size_10">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/line_height"
+                            android:gravity="center_vertical"
+                            android:text="选择与上级客户关系" />
+
+                        <TextView
+                            android:id="@+id/report_relation"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:hint="请选择" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_size_13"
+                            android:layout_height="@dimen/dimen_size_13"
+                            android:layout_marginStart="@dimen/dimen_size_5"
+                            android:src="@mipmap/arrow_right"
+                            tools:ignore="ContentDescription" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                </LinearLayout>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/dimen_size_0"
                 android:paddingStart="@dimen/dimen_size_10">
 
                 <TextView
@@ -681,7 +1067,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
-                        android:gravity="top"
                         android:hint="填写备注"
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"

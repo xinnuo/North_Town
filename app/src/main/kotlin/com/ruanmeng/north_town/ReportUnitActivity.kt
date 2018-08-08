@@ -23,7 +23,6 @@ import java.util.ArrayList
 class ReportUnitActivity : BaseActivity() {
 
     private val list = ArrayList<CommonData>()
-    private var isType = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -36,6 +36,8 @@ class ReportProductActivity : BaseActivity(), OnFragmentItemSelectListener {
         setContentView(R.layout.activity_report_product)
         init_title("选择产品")
 
+        TODO("无用页面")
+
         supportFragmentManager.addOnBackStackChangedListener {
             tvTitle.text = when (supportFragmentManager.backStackEntryCount) {
                 0 -> "选择产品"

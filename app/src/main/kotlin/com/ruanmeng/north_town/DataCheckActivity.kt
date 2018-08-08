@@ -8,15 +8,19 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
+import org.greenrobot.eventbus.EventBus
 import java.text.DecimalFormat
 
 class DataCheckActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
+    private var isOrder = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,8 @@ class DataCheckActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
+        isOrder = intent.getBooleanExtra("isOrder", false)
+
         empty_hint.text = "暂无相关订单信息！"
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
@@ -48,14 +54,23 @@ class DataCheckActivity : BaseActivity() {
                             .visibility(R.id.item_check_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .clicked(R.id.item_check) {
-                                startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
+                                if (isOrder) {
+                                    EventBus.getDefault().post(ReportMessageEvent(
+                                            data.purchaseId,
+                                            "${data.productName}(${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万)",
+                                            "转续投"))
+
+                                    ActivityStack.screenManager.popActivities(this@DataCheckActivity::class.java)
+                                } else startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
                             }
                 }
                 .attachTo(recycle_list)
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_purchase_list)
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(
+                if (isOrder) BaseHttp.past_due_purchase_list
+                else BaseHttp.customer_purchase_list)
                 .apply {
                     tag(this@DataCheckActivity)
                     headers("token", getString("token"))

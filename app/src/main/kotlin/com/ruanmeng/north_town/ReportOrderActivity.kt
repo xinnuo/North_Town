@@ -1,5 +1,6 @@
 package com.ruanmeng.north_town
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -9,74 +10,99 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.ProductModel
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.*
 import kotlinx.android.synthetic.main.activity_report_order.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.json.JSONObject
 import java.text.DecimalFormat
 import java.util.*
 
 class ReportOrderActivity : BaseActivity() {
 
-    private val list = ArrayList<CommonData>()
+    private val listRate = ArrayList<CommonData>()
+    private val listYear = ArrayList<String>()
     private val items = ArrayList<CommonData>()
 
-    private var bankId = ""
+    private var putType = ""
     private var productId = ""
-    private var investTypeId = ""
+    private var previousPurchaseId = ""
     private var managerInfoId = ""
+    private var introducerInfoId = ""
+    private var relationshipId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_order)
-        init_title("添加订单")
+        init_title()
 
         EventBus.getDefault().register(this@ReportOrderActivity)
 
         getData()
+        getMessage()
+        getProductDetail()
+        if (putType == "会员卡") getVipMessage()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun init_title() {
         super.init_title()
+        putType = intent.getStringExtra("type")
+        productId = intent.getStringExtra("productId")
+        report_name.text = intent.getStringExtra("userName")
+
         report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         report_submit.isClickable = false
 
-        report_name.setRightString(intent.getStringExtra("userName"))
-        report_idcard.setRightString(intent.getStringExtra("cardNo"))
+        when (putType) {
+            "会员卡" -> {
+                order_expand.collapse()
+                vip_expand.expand()
+                tvTitle.text = "会员卡"
 
-        report_product.addTextChangedListener(this@ReportOrderActivity)
-        et_pact.addTextChangedListener(this@ReportOrderActivity)
-        if (list.isNotEmpty()) et_receipt.addTextChangedListener(this@ReportOrderActivity)
-        report_tou.addTextChangedListener(this@ReportOrderActivity)
+                vip_name.addTextChangedListener(this@ReportOrderActivity)
+                vip_num.addTextChangedListener(this@ReportOrderActivity)
+                vip_card.addTextChangedListener(this@ReportOrderActivity)
+                vip_addr.addTextChangedListener(this@ReportOrderActivity)
+            }
+            else -> {
+                order_expand.expand()
+                vip_expand.collapse()
+                tvTitle.text = "有限合伙人"
+                report_company.text = intent.getStringExtra("companyName")
+                report_partner.text = intent.getStringExtra("legalMan")
+                report_need.text = "${intent.getStringExtra("amount")}人"
+                report_put.text = "${intent.getStringExtra("put")}人"
+                report_left.text = "${intent.getStringExtra("left")}人"
+
+                et_receipt.addTextChangedListener(this@ReportOrderActivity)
+            }
+        }
+
         et_money.addTextChangedListener(this@ReportOrderActivity)
         report_start.addTextChangedListener(this@ReportOrderActivity)
         report_end.addTextChangedListener(this@ReportOrderActivity)
         report_bank.addTextChangedListener(this@ReportOrderActivity)
         et_card.addTextChangedListener(this@ReportOrderActivity)
         et_phone.addTextChangedListener(this@ReportOrderActivity)
-        et_addr.addTextChangedListener(this@ReportOrderActivity)
-        et_fax.addTextChangedListener(this@ReportOrderActivity)
-        report_agent.addTextChangedListener(this@ReportOrderActivity)
-        et_memo.addTextChangedListener(this@ReportOrderActivity)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.report_product_ll -> startActivityEx<ReportProductActivity>()
-            R.id.report_tou_ll -> startActivityEx<FinanceSelectActivity>("title" to "投资类型")
+            R.id.report_product_ll -> startActivityEx<DataCheckActivity>(
+                    "accountInfoId" to intent.getStringExtra("accountInfoId"),
+                    "isOrder" to true)
             R.id.report_start_ll, R.id.report_end_ll -> {
-                if (report_product.text.isEmpty()) {
-                    showToast("请选择投资产品")
-                    return
-                }
-
                 if (v.id == R.id.report_end_ll && report_end.text.isNotEmpty()) return
 
                 val year_now = Calendar.getInstance().get(Calendar.YEAR)
-                DialogHelper.showDateDialog(this@ReportOrderActivity,
+                DialogHelper.showDateDialog(
+                        baseContext,
                         year_now,
                         year_now + 20,
                         3,
@@ -88,21 +114,58 @@ class ReportOrderActivity : BaseActivity() {
                 })
             }
             R.id.report_bank_ll -> startActivityEx<ReportBankActivity>()
-            R.id.report_agent_ll -> startActivityEx<ReportAgentActivity>()
-            R.id.report_submit -> {
-                if (list.isNotEmpty() && list.none { it.receiptNo == et_receipt.text.toString() }) {
-                    showToast("请输入正确的收据编码")
+            R.id.report_agent_ll -> startActivityEx<ReportAgentActivity>("type" to "1")
+            R.id.report_up_ll -> startActivityEx<ReportUpActivity>()
+            R.id.report_year_ll -> {
+                if (listYear.size < 2) return
+
+                DialogHelper.showItemDialog(
+                        baseContext,
+                        "选择投资期限",
+                        listYear.indexOf(report_year.text.toString()),
+                        listYear) { position, name ->
+
+                    report_year.text = name
+                    items.clear()
+                    listRate.mapTo(items) {
+                        val rates = it.rate.split(",")
+                        val mYears = it.years.split(",")
+
+                        CommonData().apply {
+                            min = it.min
+                            max = it.max
+                            years = mYears[position]
+                            rate = rates[position]
+                        }
+                    }
+
+                    if (et_money.text.isNotBlank()) {
+                        calculatedValue(et_money.text.toString().toLong())
+                    } else {
+                        report_expect1.text = "利率 ${items.first().rate}%（起投 ${items.first().min}万）"
+                    }
+
+                    if (report_start.text.isNotEmpty()) {
+                        report_end.text = TimeHelper.getInstance()
+                                .getAnyYear(
+                                        report_start.text.toString(),
+                                        items.first().years.toInt())
+                    }
+                }
+            }
+            R.id.report_relation_ll -> {
+                if (introducerInfoId.isEmpty()) {
+                    showToast("请选择上级客户信息")
                     return
                 }
+
+                startActivityEx<ReportUnitActivity>("title" to "客户关系")
+            }
+            R.id.report_submit -> {
                 if (!BankcardHelper.checkBankCard(et_card.rawText)) {
                     et_card.requestFocus()
                     et_card.setText("")
                     showToast("请输入正确的银行卡卡号")
-                    return
-                }
-
-                if (BankCardUtil(et_card.rawText).bankName != report_bank.text.toString()) {
-                    showToast("银行卡号与所属银行不符，请重新输入")
                     return
                 }
 
@@ -113,10 +176,8 @@ class ReportOrderActivity : BaseActivity() {
                     return
                 }
 
-                if (!CommonUtil.isFax(et_fax.text.toString())) {
-                    et_fax.requestFocus()
-                    et_fax.setText("")
-                    showToast("请输入正确的传真号码")
+                if (introducerInfoId.isNotEmpty() && relationshipId.isEmpty()) {
+                    showToast("请选择与上级客户关系")
                     return
                 }
 
@@ -124,29 +185,57 @@ class ReportOrderActivity : BaseActivity() {
                         .tag(this@ReportOrderActivity)
                         .isMultipart(true)
                         .headers("token", getString("token"))
-                        .params("accountInfoId", intent.getStringExtra("accountInfoId"))
-                        .params("contractNo", et_pact.text.trim().toString())
-                        .params("receiptNo", et_receipt.text.trim().toString())
-                        .params("investTypeId", investTypeId)
+                        .apply {
+                            when (putType) {
+                                "会员卡" -> {
+                                    params("vipNo", vip_num.text.toString())
+                                    params("cardNo", vip_card.text.toString())
+                                }
+                                else -> {
+                                    params("companyId", intent.getStringExtra("companyId"))
+                                    params("commponyName", intent.getStringExtra("companySkipName"))
+                                    params("cardNo", et_receipt.text.toString())
+                                }
+                            }
+                        }
+                        .params("managerInfoId", getString("token"))
                         .params("productId", productId)
-                        .params("years", items.first().years)
-                        .params("amount", et_money.text.trim().toString())
+                        .params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                        .params("previousPurchaseId", previousPurchaseId)
+                        .params("stock", et_put.text.toString())
+                        .params("years", report_year.text.trimEnd('年').toString())
+                        .params("amount", et_money.text.toString())
                         .params("beginDate", report_start.text.toString())
                         .params("endDate", report_end.text.toString())
-                        .params("bank", bankId)
+                        .params("bank", report_bank.text.toString())
                         .params("bankCard", et_card.rawText)
                         .params("phone", et_phone.text.trim().toString())
                         .params("address", et_addr.text.trim().toString())
                         .params("fax", et_fax.text.trim().toString())
-                        .params("managerInfoId", managerInfoId)
+                        .params("nonManagerInfoId", managerInfoId)
+                        .params("introducerInfoId", introducerInfoId)
+                        .params("relationshipId", relationshipId)
                         .params("remark", et_memo.text.trim().toString())
                         .execute(object : StringDialogCallback(baseContext) {
 
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                                showToast("添加订单信息成功！")
-                                EventBus.getDefault().post(ReportMessageEvent("", "", "添加订单"))
-                                ActivityStack.screenManager.popActivities(this@ReportOrderActivity::class.java)
+                                showToast(msg)
+                                val obj = JSONObject(response.body())
+                                        .optJSONObject("object")
+                                        ?: JSONObject()
+
+                                if (relation_expand.isExpanded)
+                                    EventBus.getDefault().post(ReportMessageEvent("", "", "添加订单"))
+
+                                startActivityEx<ReportFinanceActivity>(
+                                        "purchaseId" to obj.optString("purchaseId"),
+                                        "accountName" to obj.optString("accountName"),
+                                        "cardNo" to obj.optString("cardNo"))
+
+                                ActivityStack.screenManager.popActivities(
+                                        this@ReportOrderActivity::class.java,
+                                        ReportSelectActivity::class.java)
                             }
 
                         })
@@ -155,23 +244,108 @@ class ReportOrderActivity : BaseActivity() {
     }
 
     override fun getData() {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.purchase_by_id)
+        OkGo.post<String>(BaseHttp.customer_introducer_relationship)
                 .tag(this@ReportOrderActivity)
                 .headers("token", getString("token"))
                 .params("accountInfoId", intent.getStringExtra("accountInfoId"))
-                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext, true) {
+                .execute(object : StringDialogCallback(baseContext, false) {
 
-                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
-                        list.apply {
-                            clear()
-                            addItems(response.body().`object`)
-                        }
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        if (list.isEmpty()) order_expand.collapse()
-                        else {
-                            et_receipt.setText(list.first().receiptNo)
-                            et_money.setText(list.first().amount)
-                            et_memo.setText(list.first().remark)
+                        val obj = JSONObject(response.body())
+                                .optJSONObject("object")
+                                ?: JSONObject()
+
+                        introducerInfoId = obj.optString("introducerInfoId")
+                        relationshipId = obj.optString("relationshipId")
+                        if (relationshipId.isNotEmpty()) relation_expand.collapse()
+                        else relation_expand.expand()
+                    }
+
+                })
+    }
+
+    private fun getMessage() {
+        OkGo.post<String>(BaseHttp.customer_last_purchase_msg)
+                .tag(this@ReportOrderActivity)
+                .headers("token", getString("token"))
+                .params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                .execute(object : StringDialogCallback(baseContext, false) {
+
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        val obj = JSONObject(response.body())
+                                .optJSONObject("object")
+                                ?: JSONObject()
+
+                        et_receipt.setText(obj.optString("cardNo"))
+                        et_receipt.setSelection(et_receipt.text.length)
+                        report_bank.text = obj.optString("bank")
+                        et_card.setText(obj.optString("bankCard"))
+                        et_phone.setText(obj.optString("phone"))
+                        et_addr.setText(obj.optString("address"))
+                        et_fax.setText(obj.optString("fax"))
+                    }
+
+                })
+    }
+
+    private fun getVipMessage() {
+        OkGo.post<String>(BaseHttp.customer_vip_no)
+                .tag(this@ReportOrderActivity)
+                .headers("token", getString("token"))
+                .params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                .execute(object : StringDialogCallback(baseContext, false) {
+
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        val obj = JSONObject(response.body())
+                                .optJSONObject("object")
+                                ?: JSONObject()
+
+                        vip_name.setText(obj.optString("userName"))
+                        vip_name.setSelection(vip_name.text.length)
+                        vip_num.setText(obj.optString("vipNo"))
+                        vip_card.setText(obj.optString("cardNo"))
+                        vip_addr.setText(obj.optString("villageName"))
+                    }
+
+                })
+    }
+
+    private fun getProductDetail() {
+        OkGo.post<BaseResponse<ProductModel>>(BaseHttp.get_product)
+                .tag(this@ReportOrderActivity)
+                .headers("token", getString("token"))
+                .params("productId", intent.getStringExtra("productId"))
+                .execute(object : JacksonDialogCallback<BaseResponse<ProductModel>>(baseContext, true) {
+
+                    @SuppressLint("SetTextI18n")
+                    override fun onSuccess(response: Response<BaseResponse<ProductModel>>) {
+
+                        listRate.clear()
+                        listRate.addItems(response.body().`object`.rateList)
+                        if (listRate.isNotEmpty()) {
+                            val minYears = listRate.first().years.split(",")
+                            minYears.mapTo(listYear.apply { clear() }) { "${it}年" }
+
+                            if (listYear.isNotEmpty()) {
+                                report_year.text = listYear.first()
+
+                                listRate.mapTo(items) {
+                                    val rates = it.rate.split(",")
+                                    val mYears = it.years.split(",")
+
+                                    CommonData().apply {
+                                        min = it.min
+                                        max = it.max
+                                        years = mYears.first()
+                                        rate = rates.first()
+                                    }
+                                }
+
+                                report_expect1.text = "利率 ${items.first().rate}%（起投 ${items.first().min}万）"
+                            }
                         }
                     }
 
@@ -179,30 +353,46 @@ class ReportOrderActivity : BaseActivity() {
     }
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        if (report_product.text.isNotBlank()
-                && et_pact.text.isNotBlank()
-                && (list.isEmpty() || et_receipt.text.isNotBlank())
-                && report_tou.text.isNotBlank()
-                && et_money.text.isNotBlank()
-                && report_start.text.isNotBlank()
-                && report_end.text.isNotBlank()
-                && report_bank.text.isNotBlank()
-                && et_card.text.isNotBlank()
-                && et_phone.text.isNotBlank()
-                && et_addr.text.isNotBlank()
-                && et_fax.text.isNotBlank()
-                && report_agent.text.isNotBlank()
-                && et_memo.text.isNotBlank()) {
-            report_submit.setBackgroundResource(R.drawable.rec_bg_red)
-            report_submit.isClickable = true
-        } else {
-            report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
-            report_submit.isClickable = false
+        when (putType) {
+            "会员卡" -> {
+                if (vip_name.text.isNotBlank()
+                        && vip_num.text.isNotBlank()
+                        && vip_card.text.isNotBlank()
+                        && vip_addr.text.isNotBlank()
+                        && et_money.text.isNotBlank()
+                        && report_start.text.isNotBlank()
+                        && report_end.text.isNotBlank()
+                        && report_bank.text.isNotBlank()
+                        && et_card.text.isNotBlank()
+                        && et_phone.text.isNotBlank()) {
+                    report_submit.setBackgroundResource(R.drawable.rec_bg_red)
+                    report_submit.isClickable = true
+                } else {
+                    report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
+                    report_submit.isClickable = false
+                }
+            }
+            else -> {
+                if (et_receipt.text.isNotBlank()
+                        && et_money.text.isNotBlank()
+                        && report_start.text.isNotBlank()
+                        && report_end.text.isNotBlank()
+                        && report_bank.text.isNotBlank()
+                        && et_card.text.isNotBlank()
+                        && et_phone.text.isNotBlank()) {
+                    report_submit.setBackgroundResource(R.drawable.rec_bg_red)
+                    report_submit.isClickable = true
+                } else {
+                    report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
+                    report_submit.isClickable = false
+                }
+            }
         }
 
         if (et_money.isFocused && et_money.text.isNotBlank()) calculatedValue(et_money.text.toString().toLong())
     }
 
+    @SuppressLint("SetTextI18n")
     private fun calculatedValue(value: Long) {
         if (items.isEmpty()) return
 
@@ -216,23 +406,23 @@ class ReportOrderActivity : BaseActivity() {
 
                 if (min < max) {
                     if (value in min..(max - 1)) {
-                        report_expect.setLeftString("利率 ${it.rate}%（起投 ${it.min}万）")
-                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toInt() * year / 100.0))
-                        report_expect.setRightString("预期收入 ￥$expect")
+                        report_expect1.text = "利率 ${it.rate}%（起投 ${it.min}万）"
+                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toDouble() * year / 100.0))
+                        report_expect2.text = "预期收入 ￥$expect"
                         return
                     }
                 } else {
                     if (value >= min) {
-                        report_expect.setLeftString("利率 ${it.rate}%（起投 ${it.min}万）")
-                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toInt() * year / 100.0))
-                        report_expect.setRightString("预期收入 ￥$expect")
+                        report_expect1.text = "利率 ${it.rate}%（起投 ${it.min}万）"
+                        val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toDouble() * year / 100.0))
+                        report_expect2.text = "预期收入 ￥$expect"
                         return
                     }
                 }
             }
         } else {
-            report_expect.setLeftString("利率 ${items.first().rate}%（起投 ${items.first().min}万）")
-            report_expect.setRightString("预期收入 ￥0")
+            report_expect1.text = "利率 ${items.first().rate}%（起投 ${items.first().min}万）"
+            report_expect2.text = "预期收入 ￥0"
         }
     }
 
@@ -241,34 +431,26 @@ class ReportOrderActivity : BaseActivity() {
         super.finish()
     }
 
+    @SuppressLint("SetTextI18n")
     @Subscribe
     fun onMessageEvent(event: ReportMessageEvent) {
         when (event.type) {
-            "产品" -> {
-                productId = event.id
-                items.clear()
-                items.addAll(event.items)
+            "转续投" -> {
+                previousPurchaseId = event.id
                 report_product.text = event.name
-
-                if (et_money.isFocused && et_money.text.isBlank())
-                    report_expect.setLeftString("利率 ${items.first().rate}%（起投 ${items.first().min}万）")
-
-                if (!et_money.isFocused) {
-                    if (et_money.text.isNotBlank()) calculatedValue(et_money.text.toString().toLong())
-                    else report_expect.setLeftString("利率 ${items.first().rate}%（起投 ${items.first().min}万）")
-                }
             }
-            "银行" -> {
-                bankId = event.id
-                report_bank.text = event.name
-            }
-            "经纪人" -> {
+            "银行" -> report_bank.text = event.name
+            "非基金" -> {
                 managerInfoId = event.id
                 report_agent.text = event.name
             }
-            "投资" -> {
-                investTypeId = event.id
-                report_tou.text = event.name
+            "上级" -> {
+                introducerInfoId = event.id
+                report_up.text = event.name
+            }
+            "关系" -> {
+                relationshipId = event.id
+                report_relation.text = event.name
             }
         }
     }

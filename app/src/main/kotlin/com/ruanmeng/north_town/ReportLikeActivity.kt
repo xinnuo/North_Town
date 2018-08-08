@@ -47,7 +47,7 @@ class ReportLikeActivity : BaseActivity() {
                 }
                 .attachTo(recycle_list)
 
-        tvRight.setOnClickListener {
+        tvRight.setOnClickListener { _ ->
             var preferenceId = ""
             var preferenceName = ""
 

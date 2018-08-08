@@ -14,7 +14,7 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.Tools
-import kotlinx.android.synthetic.main.activity_data.*
+import kotlinx.android.synthetic.main.activity_perform.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_search.*

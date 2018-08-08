@@ -1,15 +1,18 @@
 package com.ruanmeng.north_town
 
 import android.os.Bundle
-import android.view.View
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.setImageURL
+import com.ruanmeng.base.startActivityEx
+import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_report_detail.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 
 class ReportDetailActivity : BaseActivity() {
@@ -19,26 +22,38 @@ class ReportDetailActivity : BaseActivity() {
         setContentView(R.layout.activity_report_detail)
         init_title("客户详情")
 
+        EventBus.getDefault().register(this@ReportDetailActivity)
+
         getData()
     }
 
     override fun init_title() {
         super.init_title()
-        val isData = intent.getBooleanExtra("isData", false)
-        if (isData) {
-            report_input.text = "查看客户投资"
-
-            if (intent.getBooleanExtra("isNew", false))
-                report_input.visibility = View.GONE
+        val accountInfoId = intent.getStringExtra("accountInfoId")
+        when (intent.getStringExtra("type")) {
+            "1" -> report_input.text = "录入合同"
+            "2" -> report_input.text = "查看客户投资"
+            "3" -> {
+                if (getString("accountType") == "App_Staff")
+                    changeTitle("客户详情", "添加订单")
+                report_input.text = "查看客户订单"
+            }
         }
 
         report_input.setOnClickListener {
-            when (isData) {
-            //客户资料
-                true -> startActivity(intent.apply { setClass(baseContext, DataCheckActivity::class.java) })
-            //客户报备
-                false -> startActivity(intent.apply { setClass(baseContext, ReportSelectActivity::class.java) })
+            when (intent.getStringExtra("type")) {
+                "1" -> startActivityEx<ReportSelectActivity>(
+                        "accountInfoId" to accountInfoId,
+                        "userName" to report_name.text.toString())  //客户报备
+                "2" -> startActivityEx<DataCheckActivity>("accountInfoId" to accountInfoId)     //客户资料
+                "3" -> startActivityEx<DataCheckActivity>("accountInfoId" to accountInfoId)
             }
+        }
+
+        tvRight.setOnClickListener {
+            startActivityEx<ReportSelectActivity>(
+                    "accountInfoId" to accountInfoId,
+                    "userName" to report_name.text.toString())
         }
     }
 
@@ -76,5 +91,17 @@ class ReportDetailActivity : BaseActivity() {
                     }
 
                 })
+    }
+
+    override fun finish() {
+        EventBus.getDefault().unregister(this@ReportDetailActivity)
+        super.finish()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: ReportMessageEvent) {
+        when (event.type) {
+            "添加订单" -> getData()
+        }
     }
 }
