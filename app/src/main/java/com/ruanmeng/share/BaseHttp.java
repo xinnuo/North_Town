@@ -41,6 +41,7 @@ public class BaseHttp {
     public static String past_due_purchase_list = baseIp + "/past_due_purchase_list.rm";                     //续投订单列表√
     public static String non_manager_list = baseIp + "/non_manager_list.rm";                                 //非基金经纪人列表√
     public static String staff_type_list = baseIp + "/staff_type_list.rm";                                   //各类员工列表√
+    public static String customer_investment_past_record = baseIp + "/customer_investment_past_record.rm";   //历史投资记录√
 
     public static String customer_list_all = baseIp + "/customer_list_all.rm";                     //资料老列表√
     public static String potentialcustomer_details = baseIp + "/potentialcustomer_details.rm";     //新客户明细√

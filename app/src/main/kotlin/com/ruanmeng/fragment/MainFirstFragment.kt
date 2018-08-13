@@ -79,12 +79,13 @@ class MainFirstFragment : BaseFragment() {
                                     when (data) {
                                         "客户报备" -> startActivityEx<ReportActivity>()
                                         "客户资料" -> startActivityEx<DataActivity>()
+                                        "客服审核" -> startActivityEx<CheckActivity>()
                                         "客户数据" -> startActivityEx<NewsSelectActivity>()
                                         "业绩统计" -> startActivityEx<PerformActivity>()
                                         "佣金统计" -> startActivityEx<FundsActivity>()
                                         "理财产品" -> startActivityEx<ManageActivity>()
                                         "财务审核(1)" -> startActivityEx<FinanceActivity>()
-                                        "财务审核(2)" -> startActivityEx<CheckActivity>()
+                                        "财务审核(2)" -> startActivityEx<FinanceActivity>()
                                     }
                                 }
                     }

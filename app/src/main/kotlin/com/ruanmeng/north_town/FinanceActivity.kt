@@ -24,7 +24,7 @@ class FinanceActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finance)
-        init_title("财务录入", "其他录入")
+        init_title("财务录入")
 
         EventBus.getDefault().register(this@FinanceActivity)
 
@@ -61,8 +61,6 @@ class FinanceActivity : BaseActivity() {
                             }
                 }
                 .attachTo(recycle_list)
-
-        tvRight.setOnClickListener { startActivityEx<FinanceSubmitActivity>() }
     }
 
     override fun getData(pindex: Int) {

@@ -44,8 +44,8 @@ class ReportDetailActivity : BaseActivity() {
             when (intent.getStringExtra("type")) {
                 "1" -> startActivityEx<ReportSelectActivity>(
                         "accountInfoId" to accountInfoId,
-                        "userName" to report_name.text.toString())  //客户报备
-                "2" -> startActivityEx<DataCheckActivity>("accountInfoId" to accountInfoId)     //客户资料
+                        "userName" to report_name.text.toString())
+                "2" -> startActivityEx<DataCheckActivity>("accountInfoId" to accountInfoId)
                 "3" -> startActivityEx<DataCheckActivity>("accountInfoId" to accountInfoId)
             }
         }

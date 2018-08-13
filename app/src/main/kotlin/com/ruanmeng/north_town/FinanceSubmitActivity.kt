@@ -25,7 +25,7 @@ class FinanceSubmitActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finance_submit)
-        init_title("录入收款信息")
+        init_title("财务对账", "浏览合同信息")
 
         EventBus.getDefault().register(this@FinanceSubmitActivity)
     }
@@ -47,7 +47,7 @@ class FinanceSubmitActivity : BaseActivity() {
             et_idcard.isFocusable = false
         }
 
-        finance_yin.setRightString(getString("userName"))
+        finance_yin.text = getString("userName")
         finance_tel.setRightString(getString("mobile"))
 
         finance_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
@@ -60,6 +60,8 @@ class FinanceSubmitActivity : BaseActivity() {
         et_name.addTextChangedListener(this@FinanceSubmitActivity)
         et_idcard.addTextChangedListener(this@FinanceSubmitActivity)
         et_memo.addTextChangedListener(this@FinanceSubmitActivity)
+
+        tvRight.setOnClickListener { startActivityEx<FinanceScanActivity>() }
     }
 
     override fun doClick(v: View) {

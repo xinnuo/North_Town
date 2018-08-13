@@ -25,7 +25,8 @@ class DataCheckActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_check)
-        init_title("客户订单")
+        init_title("客户订单", "历史投资")
+        if (isOrder) tvRight.visibility = View.INVISIBLE
 
         swipe_refresh.isRefreshing = true
         getData(pageNum)
@@ -65,6 +66,10 @@ class DataCheckActivity : BaseActivity() {
                             }
                 }
                 .attachTo(recycle_list)
+
+        tvRight.setOnClickListener {
+            startActivityEx<DataHistoryActivity>("accountInfoId" to intent.getStringExtra("accountInfoId"))
+        }
     }
 
     override fun getData(pindex: Int) {

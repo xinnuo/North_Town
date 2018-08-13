@@ -209,9 +209,9 @@ class ReportOrderActivity : BaseActivity() {
                         .params("endDate", report_end.text.toString())
                         .params("bank", report_bank.text.toString())
                         .params("bankCard", et_card.rawText)
-                        .params("phone", et_phone.text.trim().toString())
+                        .params("phone", et_phone.text.toString())
                         .params("address", et_addr.text.trim().toString())
-                        .params("fax", et_fax.text.trim().toString())
+                        .params("fax", et_fax.text.toString())
                         .params("nonManagerInfoId", managerInfoId)
                         .params("introducerInfoId", introducerInfoId)
                         .params("relationshipId", relationshipId)
@@ -222,8 +222,7 @@ class ReportOrderActivity : BaseActivity() {
 
                                 showToast(msg)
                                 val obj = JSONObject(response.body())
-                                        .optJSONObject("object")
-                                        ?: JSONObject()
+                                        .optJSONObject("object") ?: JSONObject()
 
                                 if (relation_expand.isExpanded)
                                     EventBus.getDefault().post(ReportMessageEvent("", "", "添加订单"))

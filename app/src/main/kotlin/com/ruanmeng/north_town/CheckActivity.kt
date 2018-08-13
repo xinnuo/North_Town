@@ -90,7 +90,7 @@ class CheckActivity : BaseActivity() {
                         swipe_refresh.isRefreshing = false
                         isLoadingMore = false
 
-                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                        empty_view.visibility = if (list.isNotEmpty()) View.GONE else View.VISIBLE
                     }
 
                 })
@@ -117,7 +117,7 @@ class CheckActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: ReportMessageEvent) {
         when (event.type) {
-            "审核通过" -> updateList()
+            "合同审核" -> updateList()
         }
     }
 }

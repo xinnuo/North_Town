@@ -34,6 +34,7 @@ class NewsActivity : BaseActivity() {
     private var date_end = ""
     private var money_min = ""
     private var money_max = ""
+    private var productType = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,25 +63,47 @@ class NewsActivity : BaseActivity() {
         }
 
         mAdapter = SlimAdapter.create()
-                .register<CommonData>(R.layout.item_data_list) { data, injector ->
-                    injector.visible(R.id.item_data_vip)
-                            .text(R.id.item_data_name, getColorText(data.userName, keyWord))
-                            .text(R.id.item_data_phone, getColorText("手机 ${data.telephone}", keyWord))
-                            .text(R.id.item_data_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
-                            .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0))
+                .apply {
+                    when (intent.getStringExtra("type")) {
+                        "1" -> register<CommonData>(R.layout.item_data_list) { data, injector ->
+                            injector.text(R.id.item_data_name, getColorText(data.userName, keyWord))
+                                    .text(R.id.item_data_phone, getColorText("手机 ${data.telephone}", keyWord))
+                                    .text(R.id.item_data_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
+                                    .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0))
+                                    .text(R.id.item_data_vip, "VIP号：${data.vipNo}")
 
-                            .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
-                            .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+                                    .visibility(R.id.item_data_vip, if (data.vipNo.isEmpty()) View.GONE else View.VISIBLE)
+                                    .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                                    .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
-                            .with<RoundedImageView>(R.id.item_data_img) { view ->
-                                view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
-                            }
+                                    .with<RoundedImageView>(R.id.item_data_img) { view ->
+                                        view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
+                                    }
 
-                            .clicked(R.id.item_data) {
-                                startActivityEx<ReportDetailActivity>(
-                                        "type" to "3",
-                                        "accountInfoId" to data.accountInfoId)
-                            }
+                                    .clicked(R.id.item_data) {
+                                        startActivityEx<ReportDetailActivity>(
+                                                "type" to "3",
+                                                "accountInfoId" to data.accountInfoId)
+                                    }
+                        }
+                        "2" -> register<CommonData>(R.layout.item_data3_list) { data, injector ->
+                            injector.text(R.id.item_data_name, getColorText(data.userName, keyWord))
+                                    .text(R.id.item_data_phone, "产品名称：${data.productName}")
+                                    .text(R.id.item_data_idcard, "投资周期：${data.beginDate} ~ ${data.endDate}")
+                                    .text(R.id.item_data_num, data.amount)
+
+                                    .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                                    .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+
+                                    .with<RoundedImageView>(R.id.item_data_img) { view ->
+                                        view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
+                                    }
+
+                                    .clicked(R.id.item_data) {
+                                        startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
+                                    }
+                        }
+                    }
                 }
                 .attachTo(recycle_list)
 
@@ -151,14 +174,17 @@ class NewsActivity : BaseActivity() {
                 showToast("请选择结束日期")
                 return@setOnClickListener
             }
+
             if (news_start.text.isEmpty() && news_end.text.isNotEmpty()) {
                 showToast("请选择起始日期")
                 return@setOnClickListener
             }
+
             if (news_min.text.isEmpty() && news_max.text.isNotEmpty()) {
                 showToast("请输入最低金额")
                 return@setOnClickListener
             }
+
             if (news_min.text.isNotEmpty() && news_max.text.isEmpty()) {
                 showToast("请输入最高金额")
                 return@setOnClickListener
@@ -168,6 +194,7 @@ class NewsActivity : BaseActivity() {
                 date_start = news_start.text.toString()
                 date_end = news_end.text.toString()
             }
+
             if (news_min.text.isNotEmpty() && news_max.text.isNotEmpty()) {
                 if (news_min.text.toString().toInt() > news_max.text.toString().toInt()) {
                     showToast("最低金额不能大于最高金额")
@@ -178,12 +205,7 @@ class NewsActivity : BaseActivity() {
                 money_max = news_max.text.toString()
             }
 
-            if (date_start.isNotEmpty()
-                    || date_end.isNotEmpty()
-                    || money_min.isNotEmpty()
-                    || money_max.isNotEmpty()) {
-                updateList()
-            }
+            updateList()
         }
 
         tvRight.setOnClickListener {
@@ -204,6 +226,7 @@ class NewsActivity : BaseActivity() {
             dialog.setOnOperItemClickL { _, _, position, _ ->
                 dialog.dismiss()
 
+                productType = "${position + 1}"
                 tvRight.text = arrHint[position]
                 updateList()
             }
@@ -211,7 +234,11 @@ class NewsActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_data_list)
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(when (intent.getStringExtra("type")) {
+            "1" -> BaseHttp.customer_data_list
+            "2" -> BaseHttp.customer_purchase_data_list
+            else -> ""
+        })
                 .tag(this@NewsActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))
@@ -222,6 +249,7 @@ class NewsActivity : BaseActivity() {
                 .params("min", money_min)
                 .params("max", money_max)
                 .params("page", pindex)
+                .params("productType", productType)
                 .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
 
                     override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {

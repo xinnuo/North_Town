@@ -16,6 +16,7 @@ class NewsSelectActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
+            R.id.tv_nav_right -> startActivityEx<DataHistoryActivity>()
             R.id.news_customer -> startActivityEx<NewsActivity>(
                     "title" to "客户统计",
                     "type" to "1")

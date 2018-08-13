@@ -277,6 +277,8 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:lineSpacingExtra="@dimen/dimen_size_3"
+                    android:paddingBottom="@dimen/dimen_size_10"
+                    android:paddingTop="@dimen/dimen_size_10"
                     android:minHeight="@dimen/line_height" />
 
             </LinearLayout>
@@ -286,8 +288,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
-            android:layout_marginLeft="@dimen/dimen_size_10"
-            android:layout_marginRight="@dimen/dimen_size_10"
             android:background="@color/divider" />
 
         <Button

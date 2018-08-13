@@ -13,13 +13,13 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/item_data"
+            android:id="@+id/item_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_size_15">
 
             <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/item_data_img"
+                android:id="@+id/item_history_img"
                 android:layout_width="@dimen/dimen_size_55"
                 android:layout_height="@dimen/dimen_size_55"
                 android:layout_marginStart="@dimen/dimen_size_5"
@@ -30,7 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dimen_size_15"
+                android:layout_marginEnd="@dimen/dimen_size_15"
                 android:layout_marginStart="@dimen/dimen_size_15"
                 android:orientation="vertical">
 
@@ -40,74 +40,107 @@
                     android:gravity="center_vertical">
 
                     <TextView
-                        android:id="@+id/item_data_name"
+                        android:id="@+id/item_history_name"
                         style="@style/Font15_black_dark"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="姓名" />
 
                     <TextView
-                        android:id="@+id/item_data_vip"
-                        style="@style/Font14_black"
+                        android:id="@+id/item_history_type"
+                        style="@style/Font13_black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="VIP号："
-                        android:visibility="gone" />
+                        android:layout_marginStart="@dimen/dimen_size_15"
+                        android:background="@drawable/rec_bg_trans_stroke_orange"
+                        android:paddingBottom="@dimen/dimen_size_2"
+                        android:paddingEnd="@dimen/dimen_size_5"
+                        android:paddingStart="@dimen/dimen_size_5"
+                        android:paddingTop="@dimen/dimen_size_2"
+                        android:text="续投"
+                        android:textColor="@color/orange"
+                        android:textSize="@dimen/sp_size_12" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/item_data_phone"
+                    android:id="@+id/item_history_phone"
                     style="@style/Font14_gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_size_8"
-                    android:text="手机 " />
-
-                <TextView
-                    android:id="@+id/item_data_idcard"
-                    style="@style/Font14_gray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_size_8"
-                    android:text="身份证号 " />
+                    android:text="产品名称：" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_size_5">
+                    android:layout_marginTop="@dimen/dimen_size_8">
 
                     <TextView
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="总投资金额  " />
+                        android:text="投资金额：" />
 
                     <TextView
-                        android:id="@+id/item_data_num"
+                        android:id="@+id/item_history_num"
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/orange"
-                        android:textSize="@dimen/sp_size_20" />
+                        android:textColor="@color/orange" />
 
                     <TextView
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="万"
+                        android:text="元"
                         android:textColor="@color/orange" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_size_8">
+
+                    <TextView
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="投资期限：" />
+
+                    <TextView
+                        android:id="@+id/item_history_limit"
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/orange" />
+
+                    <TextView
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="年"
+                        android:textColor="@color/orange" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/item_history_idcard"
+                    style="@style/Font14_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_size_8"
+                    android:text="投资周期：" />
 
             </LinearLayout>
 
         </LinearLayout>
 
         <View
-            android:id="@+id/item_data_divider1"
+            android:id="@+id/item_history_divider1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
             android:layout_marginLeft="@dimen/dimen_size_10"
@@ -117,7 +150,7 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/item_data_divider2"
+        android:id="@+id/item_history_divider2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:background="@color/divider"
