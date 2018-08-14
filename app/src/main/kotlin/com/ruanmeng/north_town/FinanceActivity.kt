@@ -53,7 +53,12 @@ class FinanceActivity : BaseActivity() {
                             .visibility(R.id.item_finance_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .clicked(R.id.item_finance) {
-                                startActivityEx<FinanceSubmitActivity>("purchaseId" to data.purchaseId)
+                                when (getString("accountType")) {
+                                    "App_Staff_Finance_Collect" -> startActivityEx<FinanceSubmitActivity>(
+                                            "purchaseId" to data.purchaseId)
+                                    "App_Staff_Finance_Check" -> startActivityEx<FinanceAllActivity>(
+                                            "purchaseId" to data.purchaseId)
+                                }
                             }
                 }
                 .attachTo(recycle_list)
@@ -111,7 +116,7 @@ class FinanceActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: ReportMessageEvent) {
         when (event.type) {
-            "财务录入" -> updateList()
+            "财务审核" -> updateList()
         }
     }
 }

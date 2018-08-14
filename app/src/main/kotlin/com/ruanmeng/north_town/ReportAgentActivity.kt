@@ -30,7 +30,7 @@ class ReportAgentActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_agent)
-        init_title("选择经纪人")
+        init_title(intent.getStringExtra("title"))
 
         swipe_refresh.isRefreshing = true
         getData(pageNum)
@@ -38,8 +38,16 @@ class ReportAgentActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
-        search_edit.hint = "请输入经纪人姓名或手机号或身份证号"
-        empty_hint.text = "暂无相关经纪人信息！"
+        when (intent.getStringExtra("type")) {
+            "1", "3" -> {
+                search_edit.hint = "请输入经纪人姓名或手机号或身份证号"
+                empty_hint.text = "暂无相关经纪人信息！"
+            }
+            "2" -> {
+                search_edit.hint = "请输入收银员姓名或手机号或身份证号"
+                empty_hint.text = "暂无相关收银员信息！"
+            }
+        }
 
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {

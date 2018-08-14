@@ -114,7 +114,9 @@ class ReportOrderActivity : BaseActivity() {
                 })
             }
             R.id.report_bank_ll -> startActivityEx<ReportBankActivity>()
-            R.id.report_agent_ll -> startActivityEx<ReportAgentActivity>("type" to "1")
+            R.id.report_agent_ll -> startActivityEx<ReportAgentActivity>(
+                    "title" to "选择非基金经纪人",
+                    "type" to "1")
             R.id.report_up_ll -> startActivityEx<ReportUpActivity>()
             R.id.report_year_ll -> {
                 if (listYear.size < 2) return

@@ -61,9 +61,15 @@ class FinanceSubmitActivity : BaseActivity() {
             R.id.tv_nav_right -> startActivityEx<FinanceScanActivity>("purchaseId" to purchaseId)
             R.id.finance_get_ll -> startActivityEx<FinanceSelectActivity>("title" to "收款方式")
             R.id.finance_shou_ll -> startActivityEx<FinanceSelectActivity>("title" to "收据类型")
-            R.id.finance_yin_ll -> startActivityEx<ReportAgentActivity>("type" to "2")
-            R.id.finance_manager_ll -> startActivityEx<ReportAgentActivity>("type" to "3")
-            R.id.finance_non_ll -> startActivityEx<ReportAgentActivity>("type" to "1")
+            R.id.finance_yin_ll -> startActivityEx<ReportAgentActivity>(
+                    "title" to "选择收银员",
+                    "type" to "2")
+            R.id.finance_manager_ll -> startActivityEx<ReportAgentActivity>(
+                    "title" to "选择经纪人",
+                    "type" to "3")
+            R.id.finance_non_ll -> startActivityEx<ReportAgentActivity>(
+                    "title" to "选择非基金经纪人",
+                    "type" to "1")
             R.id.finance_submit -> {
                 if (!CommonUtil.IDCardValidate(et_idcard.text.toString())) {
                     et_idcard.requestFocus()
@@ -94,7 +100,7 @@ class FinanceSubmitActivity : BaseActivity() {
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                                 showToast(msg)
-                                EventBus.getDefault().post(ReportMessageEvent("", "", "财务录入"))
+                                EventBus.getDefault().post(ReportMessageEvent("", "", "财务审核"))
                                 ActivityStack.screenManager.popActivities(this@FinanceSubmitActivity::class.java)
                             }
 

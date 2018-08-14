@@ -76,7 +76,9 @@ class CheckDetailActivity : BaseActivity() {
                 })
             }
             R.id.check_bank_ll -> startActivityEx<ReportBankActivity>()
-            R.id.check_agent_ll -> startActivityEx<ReportAgentActivity>("type" to "1")
+            R.id.check_agent_ll -> startActivityEx<ReportAgentActivity>(
+                    "title" to "选择非基金经纪人",
+                    "type" to "1")
             R.id.check_pass -> {
                 if (productId.isEmpty() || accountInfoId.isEmpty()) {
                     showToast("数据获取失败")
@@ -112,7 +114,6 @@ class CheckDetailActivity : BaseActivity() {
                         .params("bankCard", check_card.rawText)
                         .params("phone", check_phone.text.toString())
                         .params("address", check_addr.text.trim().toString())
-                        .params("fax", check_fax.text.toString())
                         .params("fax", check_fax.text.toString())
                         .params("nonManagerInfoId", nonManagerInfoId)
                         .params("remark", check_memo.text.trim().toString())

@@ -12,8 +12,7 @@ public class BaseHttp {
 
     private static String baseUrl = BuildConfig.API_HOST;
     private static String baseIp = baseUrl + "/api";
-    // public static String baseImg = baseUrl + "/";
-    public static String baseImg = "http://122.114.212.120:8082/";
+    public static String baseImg = baseUrl + "/";
 
     public static String account_login = baseIp + "/account_login.rm";     //登录√
     public static String get_smscode = baseIp + "/get_smscode.rm";         //获取验证码√
@@ -50,10 +49,11 @@ public class BaseHttp {
     public static String customer_purchase_details = baseIp + "/customer_purchase_details.rm";     //订单详情√
     public static String introducer_purchase_details = baseIp + "/introducer_purchase_details.rm"; //上级订单详情√
 
-    public static String paytype_list = baseIp + "/paytype_list.rm";                   //支付方式√
-    public static String receipttype_list = baseIp + "/receipttype_list.rm";           //收据类型√
-    public static String purchase_auditing_add = baseIp + "/purchase_auditing_add.rm"; //录入收款√
-    public static String cashier_auditing_sub = baseIp + "/cashier_auditing_sub.rm";   //财务审核√
+    public static String paytype_list = baseIp + "/paytype_list.rm";                       //支付方式√
+    public static String receipttype_list = baseIp + "/receipttype_list.rm";               //收据类型√
+    public static String purchase_auditing_add = baseIp + "/purchase_auditing_add.rm";     //录入收款√
+    public static String cashier_auditing_sub = baseIp + "/cashier_auditing_sub.rm";       //财务审核1√
+    public static String accountant_auditing_sub = baseIp + "/accountant_auditing_sub.rm"; //财务审核2√
 
     public static String customer_data_list = baseIp + "/customer_data_list.rm";                   //客户数据列表√
     public static String customer_purchase_data_list = baseIp + "/customer_purchase_data_list.rm"; //订单数据列表√

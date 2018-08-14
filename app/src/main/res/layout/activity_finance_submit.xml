@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
-                    android:text="付款金额(元)" />
+                    android:text="收款金额(元)" />
 
                 <EditText
                     android:id="@+id/et_num"

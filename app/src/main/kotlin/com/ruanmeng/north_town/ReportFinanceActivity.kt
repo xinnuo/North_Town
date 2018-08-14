@@ -59,9 +59,15 @@ class ReportFinanceActivity : BaseActivity() {
         when (v.id) {
             R.id.finance_get_ll -> startActivityEx<FinanceSelectActivity>("title" to "收款方式")
             R.id.finance_shou_ll -> startActivityEx<FinanceSelectActivity>("title" to "收据类型")
-            R.id.finance_yin_ll -> startActivityEx<ReportAgentActivity>("type" to "2")
-            R.id.finance_manager_ll -> startActivityEx<ReportAgentActivity>("type" to "3")
-            R.id.finance_non_ll -> startActivityEx<ReportAgentActivity>("type" to "1")
+            R.id.finance_yin_ll -> startActivityEx<ReportAgentActivity>(
+                    "title" to "选择收银员",
+                    "type" to "2")
+            R.id.finance_manager_ll -> startActivityEx<ReportAgentActivity>(
+                    "title" to "选择经纪人",
+                    "type" to "3")
+            R.id.finance_non_ll -> startActivityEx<ReportAgentActivity>(
+                    "title" to "选择非基金经纪人",
+                    "type" to "1")
             R.id.finance_submit -> {
                 if (!CommonUtil.IDCardValidate(et_idcard.text.trim().toString())) {
                     et_idcard.requestFocus()

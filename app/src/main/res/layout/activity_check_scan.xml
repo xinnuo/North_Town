@@ -42,7 +42,7 @@
             app:sBottomLineMargin="@dimen/dimen_size_10"
             app:sLeftTextColor="@color/black_dark"
             app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-            app:sLeftTextString="付款金额(元)"
+            app:sLeftTextString="收款金额(元)"
             app:sLineShow="bottom"
             app:sRightTextColor="@color/gray"
             app:sRightTextMarginRight="@dimen/dimen_size_10" />

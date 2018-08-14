@@ -41,11 +41,9 @@ class ClientActivity : BaseActivity() {
                             }
 
                             .clicked(R.id.item_client) {
-                                startActivityEx<NewsDetailActivity>(
-                                        "accountInfoId" to data.accountInfoId,
-                                        "userName" to data.userName,
-                                        "cardNo" to data.cardNo,
-                                        "isClient" to true)
+                                startActivityEx<ReportDetailActivity>(
+                                        "type" to "3",
+                                        "accountInfoId" to data.accountInfoId)
                             }
                 }
                 .attachTo(recycle_list)
