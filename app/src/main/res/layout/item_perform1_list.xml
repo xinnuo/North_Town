@@ -30,120 +30,134 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_size_15"
                 android:layout_marginRight="@dimen/dimen_size_15"
+                android:layout_marginStart="@dimen/dimen_size_15"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/item_perform_name"
+                    style="@style/Font15_black_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="姓名" />
+
+                <TextView
+                    android:id="@+id/item_perform_phone"
+                    style="@style/Font14_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_size_8"
+                    android:text="手机：" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:layout_marginTop="@dimen/dimen_size_5">
 
                     <TextView
-                        android:id="@+id/item_perform_name"
-                        style="@style/Font15_black_dark"
+                        style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="姓名" />
+                        android:text="总投资金额：" />
 
                     <TextView
-                        android:id="@+id/item_perform_tel"
-                        style="@style/Font14_light"
+                        android:id="@+id/item_perform_total"
+                        style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimen_size_10"
-                        android:text="(电话)" />
+                        android:text="0"
+                        android:textColor="@color/orange" />
 
                     <TextView
-                        android:id="@+id/item_perform_type"
-                        style="@style/Font13_black"
+                        style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimen_size_15"
-                        android:background="@drawable/rec_bg_trans_stroke_orange"
-                        android:paddingBottom="@dimen/dimen_size_2"
-                        android:paddingEnd="@dimen/dimen_size_5"
-                        android:paddingStart="@dimen/dimen_size_5"
-                        android:paddingTop="@dimen/dimen_size_2"
-                        android:text="续投"
-                        android:textColor="@color/orange"
-                        android:textSize="@dimen/sp_size_12" />
+                        android:text="万"
+                        android:textColor="@color/orange" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_size_8">
+                    android:layout_marginTop="@dimen/dimen_size_5">
 
                     <TextView
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="购买产品：" />
+                        android:text="新增：" />
 
                     <TextView
-                        android:id="@+id/item_perform_product"
-                        style="@style/Font14_black_dark"
+                        android:id="@+id/item_perform_new"
+                        style="@style/Font14_gray"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/orange" />
+
+                    <TextView
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="万"
+                        android:textColor="@color/orange" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_size_8">
+                    android:layout_marginTop="@dimen/dimen_size_5">
 
                     <TextView
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="投资金额：" />
+                        android:text="转投：" />
 
                     <TextView
-                        android:id="@+id/item_perform_money"
-                        style="@style/Font14_black_dark"
+                        android:id="@+id/item_perform_trans"
+                        style="@style/Font14_gray"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/orange" />
+
+                    <TextView
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="万"
+                        android:textColor="@color/orange" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_size_8">
+                    android:layout_marginTop="@dimen/dimen_size_5">
 
                     <TextView
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="投资期限：" />
+                        android:text="退会：" />
 
                     <TextView
-                        android:id="@+id/item_perform_limit"
-                        style="@style/Font14_black_dark"
+                        android:id="@+id/item_perform_quit"
+                        style="@style/Font14_gray"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_size_8">
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/orange" />
 
                     <TextView
                         style="@style/Font14_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="购买日期：" />
-
-                    <TextView
-                        android:id="@+id/item_perform_date"
-                        style="@style/Font14_black_dark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:text="万"
+                        android:textColor="@color/orange" />
 
                 </LinearLayout>
 

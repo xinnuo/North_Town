@@ -11,6 +11,7 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.KeyboardHelper
@@ -237,7 +238,7 @@ class FundsAgentActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.commission_list)
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.commission_list)
                 .tag(this@FundsAgentActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))
@@ -247,19 +248,19 @@ class FundsAgentActivity : BaseActivity() {
                 .params("min", money_min)
                 .params("max", money_max)
                 .params("page", pindex)
-                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
+                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
 
-                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
 
                         list.apply {
                             if (pindex == 1) {
                                 clear()
                                 pageNum = pindex
                             }
-                            addItems(response.body().`object`)
-                            if (count(response.body().`object`) > 0) pageNum++
+                            addItems(response.body().`object`.purchaseList)
+                            if (count(response.body().`object`.purchaseList) > 0) pageNum++
                         }
-                        if (count(response.body().`object`) > 0) mAdapter.updateData(list)
+                        if (count(response.body().`object`.purchaseList) > 0) mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

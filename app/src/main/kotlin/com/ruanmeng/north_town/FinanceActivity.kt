@@ -24,7 +24,7 @@ class FinanceActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finance)
-        init_title("财务录入")
+        init_title("财务审核")
 
         EventBus.getDefault().register(this@FinanceActivity)
 
@@ -48,23 +48,19 @@ class FinanceActivity : BaseActivity() {
                     injector.text(R.id.item_finance_name, data.productName)
                             .text(R.id.item_finance_time, data.createDate)
                             .text(R.id.item_finance_put, data.userName)
-                            .text(R.id.item_finance_manage, data.managerName)
+                            .text(R.id.item_finance_manage, data.managerInfoName)
                             .text(R.id.item_finance_money, NumberHelper.fmtMicrometer(data.amount))
                             .visibility(R.id.item_finance_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .clicked(R.id.item_finance) {
-                                startActivityEx<FinanceSubmitActivity>(
-                                        "userName" to data.userName,
-                                        "cardNo" to data.cardNo,
-                                        "amount" to data.amount,
-                                        "remark" to data.remark)
+                                startActivityEx<FinanceSubmitActivity>("purchaseId" to data.purchaseId)
                             }
                 }
                 .attachTo(recycle_list)
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.purchase_nopay_list)
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.purchase_auditing_list)
                 .tag(this@FinanceActivity)
                 .headers("token", getString("token"))
                 .params("page", pindex)

@@ -1,7 +1,6 @@
 package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzg.extend.BaseResponse
@@ -74,19 +73,31 @@ class PerformCheckActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_perform_list) { data, injector ->
+                    @Suppress("DEPRECATION")
                     injector.text(R.id.item_perform_name, data.userName)
                             .text(R.id.item_perform_tel, "(${data.telephone})")
                             .text(R.id.item_perform_product, data.productName)
                             .text(R.id.item_perform_money, "${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万")
                             .text(R.id.item_perform_limit, "${data.years}年")
                             .text(R.id.item_perform_date, data.createDate)
+                            .text(R.id.item_perform_type, when (data.investType) {
+                                "1" -> "转投"
+                                "2" -> "续投"
+                                "3" -> "新增"
+                                else -> ""
+                            })
+                            .textColor(R.id.item_perform_type,
+                                    resources.getColor(if (data.investType == "3") R.color.colorAccent else R.color.orange))
+                            .background(R.id.item_perform_type,
+                                    if (data.investType == "3") R.drawable.rec_bg_trans_stroke_red else R.drawable.rec_bg_trans_stroke_orange)
 
-                            .with<RoundedImageView>(R.id.item_perform_img) { view ->
-                                view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
-                            }
-
+                            .visibility(R.id.item_perform_type, if (data.investType.isEmpty()) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_perform_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_perform_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+
+                            .with<RoundedImageView>(R.id.item_perform_img) {
+                                it.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
+                            }
 
                             .clicked(R.id.item_perform) {
                                 startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
@@ -190,6 +201,7 @@ class PerformCheckActivity : BaseActivity() {
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<PurchaseModel>>(baseContext) {
 
+                    @SuppressLint("SetTextI18n")
                     override fun onSuccess(response: Response<BaseResponse<PurchaseModel>>) {
 
                         list.apply {
@@ -202,9 +214,14 @@ class PerformCheckActivity : BaseActivity() {
                         }
                         if (count(response.body().`object`.purchaseList) > 0) mAdapter.updateData(list)
 
-                        val sum = response.body().`object`.sum
-                        if (sum.isNotEmpty())
-                            perform_total.text = DecimalFormat(",##0.00").format(sum.toInt() / 10000.0)
+                        val data = response.body().`object`.performanceData
+                        val managerSum = if (data.managerSum.isEmpty()) "0" else data.managerSum
+                        val managerContinueRate = if (data.managerContinueRate.isEmpty()) "0" else data.managerContinueRate
+                        val managerQuitRate = if (data.managerQuitRate.isEmpty()) "0" else data.managerQuitRate
+
+                        perform_total.text = DecimalFormat(",##0.00").format(managerSum.toInt() / 10000.0)
+                        perform_trans.text = "$managerContinueRate%"
+                        perform_quit.text = "$managerQuitRate%"
                     }
 
                     override fun onFinish() {

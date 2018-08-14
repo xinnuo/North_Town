@@ -126,6 +126,17 @@ data class CommonData(
         //统计列表
         var sum: String = "",
         var managerInfoId: String = "",
+        var incrementAmount: String = "",
+        var retreatAmount: String = "",
+        var stockAmount: String = "",
+
+        //统计详情
+        var managerContinueRate: String = "0",
+        var managerQuitRate: String = "0",
+        var managerSum: String = "0",
+        var managerSumContinue: String = "0",
+        var managerSumIncreased: String = "0",
+        var managerSumOut: String = "0",
 
         //公司列表
         var commponyName: String = "",

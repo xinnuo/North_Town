@@ -225,7 +225,6 @@ class FundsSaleActivity : BaseActivity() {
         OkGo.post<BaseResponse<CommissionModel>>(BaseHttp.department_commission_list)
                 .tag(this@FundsSaleActivity)
                 .headers("token", getString("token"))
-                .params("departmentId", departmentId)
                 .params("startDate", date_start)
                 .params("endDate", date_end)
                 .params("min", money_min)
@@ -307,7 +306,7 @@ class FundsSaleActivity : BaseActivity() {
                                                                                 R.id.item_depart_divider2,
                                                                                 if (list_depart.indexOf(data) != list_depart.size - 1) View.GONE else View.VISIBLE)
 
-                                                                        .clicked(R.id.item_depart) {
+                                                                        .clicked(R.id.item_depart) { _ ->
                                                                             list_depart.filter { it.isChecked }.forEach { it.isChecked = false }
                                                                             data.isChecked = true
                                                                             funds_depart_hint.text = data.departmentName

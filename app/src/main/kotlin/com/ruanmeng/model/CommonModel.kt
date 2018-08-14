@@ -40,8 +40,10 @@ data class CommonModel(
         var withdrawDeposit: String = "",
         var accountInfoCount: String = "",
         var introducerProfit: String = "0.00",
+        var totalAmount: String = "0",
         var bl: List<CommonData> ?= ArrayList(),
         var accountInfoList: List<CommonData> ?= ArrayList(),
         var balanceLogList: List<CommonData> ?= ArrayList(),
+        var purchaseList: List<CommonData> ?= ArrayList(),
         var companyList: List<CommonData> ?= ArrayList()
 ): Serializable

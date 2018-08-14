@@ -73,6 +73,7 @@ class ReportProductActivity : BaseActivity(), OnFragmentItemSelectListener {
                         productId,
                         "$productName(${name}年)",
                         "产品",
+                        "",
                         items))
 
                 ActivityStack.screenManager.popActivities(this@ReportProductActivity::class.java)

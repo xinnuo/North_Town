@@ -54,7 +54,16 @@ class DataProductActivity : BaseActivity() {
                         productName = obj.optString("productName")
 
                         product_type.text = productName
+                        product_customer.setRightString(obj.optString("userName"))
+                        product_tel.setRightString(obj.optString("telephone"))
+                        product_idcard.setRightString(obj.optString("cardNo"))
                         product_name.setRightString(obj.optString("productName"))
+                        product_way.setRightString(when (obj.optString("investType")) {
+                            "1" -> "转投"
+                            "2" -> "续投"
+                            "3" -> "新增"
+                            else -> ""
+                        })
                         product_year.text = obj.optString("years", "0")
                         product_start.setRightString(obj.optString("beginDate"))
                         product_end.setRightString(obj.optString("endDate"))

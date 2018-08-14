@@ -36,4 +36,5 @@ data class ReportMessageEvent(
         var id: String = "",
         var name: String = "",
         var type: String = "",
+        var extend: String = "",
         var items: ArrayList<CommonData> = ArrayList())

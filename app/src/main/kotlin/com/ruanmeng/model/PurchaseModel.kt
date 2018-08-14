@@ -36,5 +36,6 @@ import java.io.Serializable
  */
 data class PurchaseModel(
         var sum: String = "",
+        var performanceData: CommonData = CommonData(),
         var purchaseList: List<CommonData> ?= ArrayList()
 ): Serializable

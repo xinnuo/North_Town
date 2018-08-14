@@ -35,7 +35,7 @@
             android:id="@+id/scan_money"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_size_45.5"
-            app:sBottomLineMargin="@dimen/dimen_size_0"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
             app:sLeftTextColor="@color/black_dark"
             app:sLeftTextMarginLeft="@dimen/dimen_size_10"
             app:sLeftTextString="投资金额(万)"
@@ -44,10 +44,22 @@
             app:sRightTextMarginRight="@dimen/dimen_size_10" />
 
         <com.allen.library.SuperTextView
+            android:id="@+id/scan_year"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="投资期限(年)"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
             android:id="@+id/scan_begin"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_size_45.5"
-            app:sBottomLineMargin="@dimen/dimen_size_0"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
             app:sLeftTextColor="@color/black_dark"
             app:sLeftTextMarginLeft="@dimen/dimen_size_10"
             app:sLeftTextString="出资日期"
@@ -63,18 +75,6 @@
             app:sLeftTextColor="@color/black_dark"
             app:sLeftTextMarginLeft="@dimen/dimen_size_10"
             app:sLeftTextString="到期日期"
-            app:sLineShow="bottom"
-            app:sRightTextColor="@color/gray"
-            app:sRightTextMarginRight="@dimen/dimen_size_10" />
-
-        <com.allen.library.SuperTextView
-            android:id="@+id/scan_year"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_size_45.5"
-            app:sBottomLineMargin="@dimen/dimen_size_10"
-            app:sLeftTextColor="@color/black_dark"
-            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-            app:sLeftTextString="投资期限(年)"
             app:sLineShow="bottom"
             app:sRightTextColor="@color/gray"
             app:sRightTextMarginRight="@dimen/dimen_size_10" />
@@ -215,7 +215,7 @@
             android:id="@+id/scan_none"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_size_45.5"
-            app:sBottomLineMargin="@dimen/dimen_size_0"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
             app:sLeftTextColor="@color/black_dark"
             app:sLeftTextMarginLeft="@dimen/dimen_size_10"
             app:sLeftTextString="非基金经纪人"

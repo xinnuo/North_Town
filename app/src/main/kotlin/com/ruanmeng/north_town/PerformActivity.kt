@@ -69,29 +69,30 @@ class PerformActivity : BaseActivity() {
         }
 
         mAdapter = SlimAdapter.create()
-                .register<CommonData>(R.layout.item_data_list) { data, injector ->
-                    injector.gone(R.id.item_data_idcard)
-                            .text(R.id.item_data_name, getColorText(data.userName, keyWord))
-                            .text(R.id.item_data_phone, getColorText("手机 ${data.telephone}", keyWord))
-                            .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.sum.toInt() / 10000.0))
+                .register<CommonData>(R.layout.item_perform1_list) { data, injector ->
+                    injector.text(R.id.item_perform_name, getColorText(data.userName, keyWord))
+                            .text(R.id.item_perform_phone, getColorText("手机：${data.telephone}", keyWord))
+                            .text(R.id.item_perform_total, DecimalFormat(",##0.##").format(data.sum.toInt() / 10000.0))
+                            .text(R.id.item_perform_new, DecimalFormat(",##0.##").format(data.incrementAmount.toInt() / 10000.0))
+                            .text(R.id.item_perform_trans, DecimalFormat(",##0.##").format(data.stockAmount.toInt() / 10000.0))
+                            .text(R.id.item_perform_quit, DecimalFormat(",##0.##").format(data.retreatAmount.toInt() / 10000.0))
 
-                            .with<RoundedImageView>(R.id.item_data_img) { view ->
+                            .with<RoundedImageView>(R.id.item_perform_img) { view ->
                                 view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
                             }
 
-                            .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
-                            .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
-                            .clicked(R.id.item_data) {
-                                intent.setClass(baseContext, PerformCheckActivity::class.java)
-                                intent.putExtra("managerInfoId", data.managerInfoId)
-                                intent.putExtra("title", when (mPosition) {
-                                    1 -> "日业绩"
-                                    2 -> "周业绩"
-                                    3 -> "月业绩"
-                                    4 -> "年业绩"
-                                    else  -> ""
-                                })
-                                startActivity(intent)
+                            .visibility(R.id.item_perform_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_perform_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+                            .clicked(R.id.item_perform) {
+                                startActivityEx<PerformCheckActivity>(
+                                        "managerInfoId" to data.managerInfoId,
+                                        "title" to when (mPosition) {
+                                            1 -> "日业绩"
+                                            2 -> "周业绩"
+                                            3 -> "月业绩"
+                                            4 -> "年业绩"
+                                            else -> ""
+                                        })
                             }
                 }
                 .attachTo(recycle_list)

@@ -54,7 +54,12 @@ class FundsDetailActivity : BaseActivity() {
                         funds_name.setRightString(obj.optString("userName"))
                         funds_tel.setRightString(obj.optString("telephone"))
                         funds_idcard.setRightString(obj.optString("cardNo"))
-                        funds_attribute.setRightString(obj.optString("investTypeName"))
+                        funds_attribute.setRightString(when (obj.optString("investType")) {
+                            "1" -> "转投"
+                            "2" -> "续投"
+                            "3" -> "新增"
+                            else -> ""
+                        })
                         funds_start.setRightString(obj.optString("beginDate"))
                         funds_end.setRightString(obj.optString("endDate"))
 

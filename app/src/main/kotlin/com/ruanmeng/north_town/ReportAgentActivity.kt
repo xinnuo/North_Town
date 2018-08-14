@@ -71,7 +71,8 @@ class ReportAgentActivity : BaseActivity() {
                                             "2" -> "收银员"
                                             "3" -> "经纪人"
                                             else -> ""
-                                        }))
+                                        },
+                                        data.telephone))
 
                                 ActivityStack.screenManager.popActivities(this@ReportAgentActivity::class.java)
                             }
