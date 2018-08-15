@@ -143,7 +143,8 @@ class PerformActivity : BaseActivity() {
                         swipe_refresh.isRefreshing = false
                         isLoadingMore = false
 
-                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                        empty_view.visibility = if (list.isNotEmpty()) View.GONE else View.VISIBLE
+                        data_divider.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
                     }
 
                 })
