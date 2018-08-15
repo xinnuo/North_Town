@@ -25,7 +25,7 @@ class CheckActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check)
-        init_title("审核对账")
+        init_title("审核对账", "历史审核")
 
         EventBus.getDefault().register(this@CheckActivity)
 
@@ -63,6 +63,8 @@ class CheckActivity : BaseActivity() {
                             }
                 }
                 .attachTo(recycle_list)
+
+        tvRight.setOnClickListener { startActivityEx<FinanceHistoryActivity>("type" to "1") }
     }
 
     override fun getData(pindex: Int) {
@@ -82,7 +84,7 @@ class CheckActivity : BaseActivity() {
                             addItems(response.body().`object`)
                             if (count(response.body().`object`) > 0) pageNum++
                         }
-                        if (count(response.body().`object`) > 0) mAdapter.updateData(list)
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

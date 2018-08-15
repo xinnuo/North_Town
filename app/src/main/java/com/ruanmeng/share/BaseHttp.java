@@ -73,8 +73,9 @@ public class BaseHttp {
     public static String product_list = baseIp + "/product_list.rm"; //产品列表√
     public static String get_product = baseIp + "/get_product.rm";   //产品详情√
 
-    public static String purchase_auditing_list = baseIp + "/purchase_auditing_list.rm"; //审核列表√
-    public static String purchase_auditing_sub = baseIp + "/purchase_auditing_sub.rm";   //提交审核√
+    public static String purchase_auditing_list = baseIp + "/purchase_auditing_list.rm";           //审核列表√
+    public static String purchase_past_auditing_list = baseIp + "/purchase_past_auditing_list.rm"; //历史审核列表√
+    public static String purchase_auditing_sub = baseIp + "/purchase_auditing_sub.rm";             //提交审核√
 
     public static String my_customer_list = baseIp + "/my_customer_list.rm";   //我的客户√
     public static String my_balance_staff = baseIp + "/my_balance_staff.rm";   //我的钱包√

@@ -242,7 +242,7 @@ class FundsSaleActivity : BaseActivity() {
                             addItems(response.body().`object`.purchaseList)
                             if (count(response.body().`object`.purchaseList) > 0) pageNum++
                         }
-                        if (count(response.body().`object`.purchaseList) > 0) mAdapter.updateData(list)
+                        mAdapter.updateData(list)
 
                         funds_total.text = response.body().`object`.commissionSum
                     }

@@ -191,6 +191,9 @@
             android:name=".FinanceAllActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".FinanceHistoryActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

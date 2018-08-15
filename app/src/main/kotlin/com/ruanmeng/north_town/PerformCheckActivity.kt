@@ -212,7 +212,7 @@ class PerformCheckActivity : BaseActivity() {
                             addItems(response.body().`object`.purchaseList)
                             if (count(response.body().`object`.purchaseList) > 0) pageNum++
                         }
-                        if (count(response.body().`object`.purchaseList) > 0) mAdapter.updateData(list)
+                        mAdapter.updateData(list)
 
                         val data = response.body().`object`.performanceData
                         val managerSum = if (data.managerSum.isEmpty()) "0" else data.managerSum

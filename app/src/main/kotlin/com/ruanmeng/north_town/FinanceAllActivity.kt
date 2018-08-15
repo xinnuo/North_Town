@@ -187,6 +187,11 @@ class FinanceAllActivity : BaseActivity() {
                         finance_begin.text = obj.optString("beginDate")
                         finance_end.text = obj.optString("endDate")
 
+                        val compName = obj.optString("compName")
+                        val vipNo = obj.optString("vipNo")
+                        finance_company.setLeftString(if (vipNo.isEmpty()) "企业名称" else "VIP编号")
+                        finance_company.setRightString(if (vipNo.isEmpty()) compName else vipNo)
+
                         finance_name.setRightString(obj.optString("userName"))
                         finance_idcard.setRightString(obj.optString("cardNo"))
                         finance_bank.text = obj.optString("bank")

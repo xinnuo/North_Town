@@ -38,6 +38,11 @@ class FinanceScanActivity : BaseActivity() {
                         scan_begin.setRightString(obj.optString("beginDate"))
                         scan_end.setRightString(obj.optString("endDate"))
 
+                        val compName = obj.optString("compName")
+                        val vipNo = obj.optString("vipNo")
+                        scan_company.setLeftString(if (vipNo.isEmpty()) "企业名称" else "VIP编号")
+                        scan_company.setRightString(if (vipNo.isEmpty()) compName else vipNo)
+
                         scan_name.setRightString(obj.optString("userName"))
                         scan_idcard.setRightString(obj.optString("cardNo"))
                         scan_bank.setRightString(obj.optString("bank"))

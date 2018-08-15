@@ -263,7 +263,7 @@ class NewsActivity : BaseActivity() {
                             if (count(response.body().`object`) > 0) pageNum++
                         }
 
-                        if (count(response.body().`object`) > 0) mAdapter.updateData(list)
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

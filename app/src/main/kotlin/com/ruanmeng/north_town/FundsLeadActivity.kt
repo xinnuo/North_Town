@@ -85,7 +85,7 @@ class FundsLeadActivity : BaseActivity() {
                             addItems(response.body().`object`.accountInfoList)
                             if (count(response.body().`object`.accountInfoList) > 0) pageNum++
                         }
-                        if (count(response.body().`object`.accountInfoList) > 0) mAdapter.updateData(list)
+                        mAdapter.updateData(list)
 
 
                         val profit = response.body().`object`.introducerProfit

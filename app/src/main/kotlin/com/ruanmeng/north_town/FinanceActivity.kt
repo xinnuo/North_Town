@@ -24,7 +24,7 @@ class FinanceActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finance)
-        init_title("财务审核")
+        init_title("财务审核", "历史审核")
 
         EventBus.getDefault().register(this@FinanceActivity)
 
@@ -62,6 +62,8 @@ class FinanceActivity : BaseActivity() {
                             }
                 }
                 .attachTo(recycle_list)
+
+        tvRight.setOnClickListener { startActivityEx<FinanceHistoryActivity>("type" to "2") }
     }
 
     override fun getData(pindex: Int) {
@@ -81,7 +83,7 @@ class FinanceActivity : BaseActivity() {
                             addItems(response.body().`object`)
                             if (count(response.body().`object`) > 0) pageNum++
                         }
-                        if (count(response.body().`object`) > 0) mAdapter.updateData(list)
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {
@@ -89,7 +91,7 @@ class FinanceActivity : BaseActivity() {
                         swipe_refresh.isRefreshing = false
                         isLoadingMore = false
 
-                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                        empty_view.visibility = if (list.isNotEmpty()) View.GONE else View.VISIBLE
                     }
 
                 })

@@ -156,6 +156,11 @@ class CheckDetailActivity : BaseActivity() {
                         check_begin.text = obj.optString("beginDate")
                         check_end.text = obj.optString("endDate")
 
+                        val compName = obj.optString("compName")
+                        val vipNo = obj.optString("vipNo")
+                        check_company.setLeftString(if (vipNo.isEmpty()) "企业名称" else "VIP编号")
+                        check_company.setRightString(if (vipNo.isEmpty()) compName else vipNo)
+
                         check_name.setRightString(obj.optString("userName"))
                         check_idcard.setRightString(obj.optString("cardNo"))
                         check_bank.text = obj.optString("bank")

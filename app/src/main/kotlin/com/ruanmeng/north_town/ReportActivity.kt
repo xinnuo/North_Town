@@ -112,7 +112,7 @@ class ReportActivity : BaseActivity() {
                             addItems(response.body().`object`.accountInfoList)
                             if (count(response.body().`object`.accountInfoList) > 0) pageNum++
                         }
-                        if (count(response.body().`object`.accountInfoList) > 0) mAdapter.updateData(list)
+                        mAdapter.updateData(list)
 
                         report_result.text = "搜索结果(${response.body().`object`.count})"
                     }

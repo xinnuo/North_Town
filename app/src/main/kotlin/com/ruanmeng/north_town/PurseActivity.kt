@@ -74,7 +74,7 @@ class PurseActivity : BaseActivity() {
                             addItems(response.body().`object`.balanceLogList)
                             if (count(response.body().`object`.balanceLogList) > 0) pageNum++
                         }
-                        if (count(response.body().`object`.balanceLogList) > 0) mAdapter.updateData(list)
+                        mAdapter.updateData(list)
 
                         purse_total.text = response.body().`object`.balance
                         purse_withdraw.text = "￥" + response.body().`object`.withdrawDeposit
