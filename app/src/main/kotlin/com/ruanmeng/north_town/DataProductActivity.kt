@@ -17,6 +17,7 @@ class DataProductActivity : BaseActivity() {
 
     private var productId = ""
     private var productName = ""
+    private var previousPurchaseId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,8 @@ class DataProductActivity : BaseActivity() {
                     "title" to productName,
                     "productId" to productId)
         }
+
+        tvRight.setOnClickListener { startActivityEx<DataProductActivity>("purchaseId" to previousPurchaseId) }
     }
 
     override fun getData() {
@@ -52,6 +55,8 @@ class DataProductActivity : BaseActivity() {
 
                         productId = obj.optString("productId")
                         productName = obj.optString("productName")
+                        previousPurchaseId = obj.optString("previousPurchaseId")
+                        if (previousPurchaseId.isNotEmpty()) tvRight.text = "历史订单"
 
                         product_type.text = productName
                         product_customer.setRightString(obj.optString("userName"))

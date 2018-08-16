@@ -7,12 +7,15 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
+import com.ruanmeng.base.startActivityEx
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_funds_detail.*
 import org.json.JSONObject
 import java.text.DecimalFormat
 
 class FundsDetailActivity : BaseActivity() {
+
+    private var previousPurchaseId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,10 @@ class FundsDetailActivity : BaseActivity() {
             funds_expand.expand()
             getUpData()
         }
+
+        tvRight.setOnClickListener {
+            startActivityEx<FundsDetailActivity>("purchaseId" to previousPurchaseId)
+        }
     }
 
     override fun getData() {
@@ -41,7 +48,11 @@ class FundsDetailActivity : BaseActivity() {
                     @SuppressLint("SetTextI18n")
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        val obj = JSONObject(response.body()).getJSONObject("object") ?: JSONObject()
+                        val obj = JSONObject(response.body())
+                                .optJSONObject("object") ?: JSONObject()
+
+                        previousPurchaseId = obj.optString("previousPurchaseId")
+                        if (previousPurchaseId.isNotEmpty()) tvRight.text = "历史订单"
 
                         val rate = obj.optString("rate", "0")
                         val productName = obj.optString("productName")
