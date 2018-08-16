@@ -189,8 +189,31 @@ class FinanceAllActivity : BaseActivity() {
 
                         val compName = obj.optString("compName")
                         val vipNo = obj.optString("vipNo")
+                        val investType = obj.optString("investType")
+                        val previousName = obj.optString("previousProductName")
+                        var previousAmount = obj.optString("previousAmount")
+                        val previousYears = obj.optString("previousPurchaseYears")
+                        val stock = obj.optString("stock")
                         finance_company.setLeftString(if (vipNo.isEmpty()) "企业名称" else "VIP编号")
                         finance_company.setRightString(if (vipNo.isEmpty()) compName else vipNo)
+                        when (investType) {
+                            "1" -> {
+                                finance_trans_name.visibility = View.VISIBLE
+                                finance_trans_money.visibility = View.VISIBLE
+                                finance_trans_name.setLeftString("转投产品")
+                                finance_trans_money.setLeftString("转投金额(元)")
+                            }
+                            "2" -> {
+                                finance_trans_name.visibility = View.VISIBLE
+                                finance_trans_money.visibility = View.VISIBLE
+                                finance_trans_name.setLeftString("续投产品")
+                                finance_trans_money.setLeftString("续投金额(元)")
+                            }
+                        }
+                        if (previousAmount.isEmpty()) previousAmount = "0"
+                        val str = "$previousName(金额:${DecimalFormat(",##0.##").format(previousAmount.toDouble() / 10000.0)}万  期限:${previousYears}年)"
+                        finance_trans_name.setRightString(str)
+                        finance_trans_money.setRightString(stock)
 
                         finance_name.setRightString(obj.optString("userName"))
                         finance_idcard.setRightString(obj.optString("cardNo"))

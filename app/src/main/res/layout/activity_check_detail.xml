@@ -56,6 +56,32 @@
             app:sRightTextColor="@color/gray"
             app:sRightTextMarginRight="@dimen/dimen_size_10" />
 
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_trans_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            android:visibility="gone"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="转投或续投产品"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/check_trans_money"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            android:visibility="gone"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="转投或续投金额(元)"
+            app:sLineShow="bottom"
+            app:sRightTextColor="@color/gray"
+            app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

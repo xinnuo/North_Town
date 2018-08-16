@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_check_detail.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
+import java.text.DecimalFormat
 import java.util.*
 
 class CheckDetailActivity : BaseActivity() {
@@ -158,8 +159,31 @@ class CheckDetailActivity : BaseActivity() {
 
                         val compName = obj.optString("compName")
                         val vipNo = obj.optString("vipNo")
+                        val investType = obj.optString("investType")
+                        val previousName = obj.optString("previousProductName")
+                        var previousAmount = obj.optString("previousAmount")
+                        val previousYears = obj.optString("previousPurchaseYears")
+                        val stock = obj.optString("stock")
                         check_company.setLeftString(if (vipNo.isEmpty()) "企业名称" else "VIP编号")
                         check_company.setRightString(if (vipNo.isEmpty()) compName else vipNo)
+                        when (investType) {
+                            "1" -> {
+                                check_trans_name.visibility = View.VISIBLE
+                                check_trans_money.visibility = View.VISIBLE
+                                check_trans_name.setLeftString("转投产品")
+                                check_trans_money.setLeftString("转投金额(元)")
+                            }
+                            "2" -> {
+                                check_trans_name.visibility = View.VISIBLE
+                                check_trans_money.visibility = View.VISIBLE
+                                check_trans_name.setLeftString("续投产品")
+                                check_trans_money.setLeftString("续投金额(元)")
+                            }
+                        }
+                        if (previousAmount.isEmpty()) previousAmount = "0"
+                        val str = "$previousName(金额:${DecimalFormat(",##0.##").format(previousAmount.toDouble() / 10000.0)}万  期限:${previousYears}年)"
+                        check_trans_name.setRightString(str)
+                        check_trans_money.setRightString(stock)
 
                         check_name.setRightString(obj.optString("userName"))
                         check_idcard.setRightString(obj.optString("cardNo"))

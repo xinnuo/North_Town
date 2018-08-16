@@ -44,6 +44,7 @@ data class CommonData(
         var userName: String = "",
         var vipNo: String = "",
         var investType: String = "",
+        var status: String = "",
 
         //偏好列表
         var isChecked: Boolean = false,

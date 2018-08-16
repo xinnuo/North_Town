@@ -77,10 +77,10 @@ class PerformCheckActivity : BaseActivity() {
                     injector.text(R.id.item_perform_name, data.userName)
                             .text(R.id.item_perform_tel, "(${data.telephone})")
                             .text(R.id.item_perform_product, data.productName)
-                            .text(R.id.item_perform_money, "${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万")
+                            .text(R.id.item_perform_money, "${DecimalFormat(",##0.##").format(data.amount.toDouble() / 10000.0)}万")
                             .text(R.id.item_perform_limit, "${data.years}年")
                             .text(R.id.item_perform_date, data.createDate)
-                            .text(R.id.item_perform_type, when (data.investType) {
+                            .text(R.id.item_perform_type, if (data.status == "0") "退会" else when (data.investType) {
                                 "1" -> "转投"
                                 "2" -> "续投"
                                 "3" -> "新增"
