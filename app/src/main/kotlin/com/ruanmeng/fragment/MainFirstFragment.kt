@@ -40,7 +40,7 @@ class MainFirstFragment : BaseFragment() {
         val list = when (getString("accountType")) {
             "App_Staff" -> listOf(
                     "客户报备", "客户资料", "客户数据",
-                    "理财产品")
+                    "业绩统计", "理财产品")
             "App_Staff_Service" -> listOf(
                     "客户资料", "客服审核", "客户数据",
                     "业绩统计", "佣金统计")

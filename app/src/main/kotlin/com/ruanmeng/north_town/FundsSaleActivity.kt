@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_funds_sale.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
+import java.text.DecimalFormat
 import java.util.*
 
 class FundsSaleActivity : BaseActivity() {
@@ -43,21 +44,16 @@ class FundsSaleActivity : BaseActivity() {
         init_title("销售部佣金", "佣金规则")
 
         swipe_refresh.isRefreshing = true
-        getData(pageNum)
+        getData()
     }
 
     override fun init_title() {
         super.init_title()
         empty_hint.text = "暂无相关佣金信息！"
-        swipe_refresh.refresh { getData(1) }
-        recycle_list.load_Linear(baseContext, swipe_refresh) {
-            if (!isLoadingMore) {
-                isLoadingMore = true
-                getData(pageNum)
-            }
-        }
+        swipe_refresh.refresh { getData() }
+        recycle_list.load_Linear(baseContext, swipe_refresh)
 
-        mAdapter = SlimAdapter.create()
+        /*mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_purse_list) { data, injector ->
                     injector.text(R.id.item_purse_name, data.userName)
                             .text(R.id.item_purse_product, data.productName)
@@ -68,6 +64,17 @@ class FundsSaleActivity : BaseActivity() {
                             .clicked(R.id.item_purse) {
                                 startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                             }
+                }
+                .attachTo(recycle_list)*/
+
+        mAdapter = SlimAdapter.create()
+                .register<CommonData>(R.layout.item_sale_list) { data, injector ->
+                    injector.text(R.id.item_sale_name, data.departmentName)
+                            .text(R.id.item_sale_money, "￥${if (data.amount.isEmpty()) "0" else data.amount}")
+
+                            .visibility(R.id.item_sale_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
+                            .visibility(R.id.item_sale_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_sale_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
                 }
                 .attachTo(recycle_list)
 
@@ -221,36 +228,35 @@ class FundsSaleActivity : BaseActivity() {
         }
     }
 
-    override fun getData(pindex: Int) {
+    override fun getData() {
         OkGo.post<BaseResponse<CommissionModel>>(BaseHttp.department_commission_list)
                 .tag(this@FundsSaleActivity)
                 .headers("token", getString("token"))
+                .params("departmentId", departmentId)
                 .params("startDate", date_start)
                 .params("endDate", date_end)
-                .params("min", money_min)
-                .params("max", money_max)
-                .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<CommissionModel>>(baseContext) {
 
                     override fun onSuccess(response: Response<BaseResponse<CommissionModel>>) {
 
                         list.apply {
-                            if (pindex == 1) {
-                                clear()
-                                pageNum = pindex
-                            }
+                            clear()
                             addItems(response.body().`object`.purchaseList)
-                            if (count(response.body().`object`.purchaseList) > 0) pageNum++
                         }
                         mAdapter.updateData(list)
 
-                        funds_total.text = response.body().`object`.commissionSum
+                        var totalAmount = 0.0
+                        list.forEach {
+                            it as CommonData
+                            val amount = it.amount.toDouble()
+                            totalAmount += amount
+                        }
+                        funds_total.text = DecimalFormat(",##0.##").format(totalAmount)
                     }
 
                     override fun onFinish() {
                         super.onFinish()
                         swipe_refresh.isRefreshing = false
-                        isLoadingMore = false
 
                         empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
                     }
@@ -353,7 +359,6 @@ class FundsSaleActivity : BaseActivity() {
             mAdapter.notifyDataSetChanged()
         }
 
-        pageNum = 1
-        getData(pageNum)
+        getData()
     }
 }
