@@ -91,7 +91,23 @@ class NewsActivity : BaseActivity() {
                                     .text(R.id.item_data_phone, "产品名称：${data.productName}")
                                     .text(R.id.item_data_idcard, "投资周期：${data.beginDate} ~ ${data.endDate}")
                                     .text(R.id.item_data_num, data.amount)
+                                    .text(R.id.item_data_trans, when (data.investType) {
+                                        "1" -> {
+                                            val stockAmount = DecimalFormat("##0.##").format(data.stock.toDouble())
+                                            "转投金额：${stockAmount}元"
+                                        }
+                                        "2" -> {
+                                            val stockAmount = DecimalFormat("##0.##").format(data.stock.toDouble())
+                                            "续投金额：${stockAmount}元"
+                                        }
+                                        else -> ""
+                                    })
 
+                                    .visibility(R.id.item_data_trans,
+                                            when (data.investType) {
+                                                "1", "2" -> View.VISIBLE
+                                                else -> View.GONE
+                                            })
                                     .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                                     .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 

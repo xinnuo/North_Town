@@ -53,7 +53,7 @@ class DataActivity : BaseActivity() {
                     injector.text(R.id.item_data_name, getColorText(data.userName, keyWord))
                             .text(R.id.item_data_phone, getColorText("手机 ${data.telephone}", keyWord))
                             .text(R.id.item_data_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
-                            .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0))
+                            .text(R.id.item_data_num, DecimalFormat(",##0.##").format(data.amount.toDouble() / 10000.0))
 
                             .visibility(R.id.item_data_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_data_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)

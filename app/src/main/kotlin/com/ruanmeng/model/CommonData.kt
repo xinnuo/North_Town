@@ -87,6 +87,7 @@ data class CommonData(
         var purchaseId: String = "",
         var rate: String = "",
         var years: String = "",
+        var stock: String = "",
 
         //支付方式
         var payTypeId: String = "",
@@ -104,6 +105,7 @@ data class CommonData(
         var commission: String = "",
         var createDate: String = "",
         var managerInfoName: String = "",
+        var ispay: String = "",
 
         //老带新佣金
         var introducerInfoName: String = "",

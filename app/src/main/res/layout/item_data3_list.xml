@@ -77,6 +77,14 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/item_data_trans"
+                    style="@style/Font14_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_size_8"
+                    android:text="转投/续投金额："
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/item_data_idcard"

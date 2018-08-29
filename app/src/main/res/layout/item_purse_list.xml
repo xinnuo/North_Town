@@ -40,10 +40,20 @@
             <TextView
                 android:id="@+id/item_purse_product"
                 style="@style/Font14_gray"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_size_5"
+                android:layout_weight="1"
                 android:text="产品名称" />
+
+            <TextView
+                android:id="@+id/item_purse_withdraw"
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已提现"
+                android:textColor="@color/orange"
+                android:visibility="gone" />
 
         </LinearLayout>
 

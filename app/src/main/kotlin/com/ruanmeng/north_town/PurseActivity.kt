@@ -49,6 +49,8 @@ class PurseActivity : BaseActivity() {
                             .text(R.id.item_purse_agent, data.managerInfoName)
                             .text(R.id.item_purse_yong, "￥${if (data.amount.isEmpty()) "0" else data.amount}")
 
+                            .visibility(R.id.item_purse_withdraw, if (data.ispay == "1") View.VISIBLE else View.GONE)
+
                             .clicked(R.id.item_purse) {
                                 startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                             }

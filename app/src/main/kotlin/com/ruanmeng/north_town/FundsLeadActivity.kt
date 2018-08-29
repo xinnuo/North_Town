@@ -46,7 +46,7 @@ class FundsLeadActivity : BaseActivity() {
                     injector.text(R.id.item_lead_name, data.userName)
                             .text(R.id.item_lead_jie, data.introducerInfoName)
                             .text(R.id.item_lead_total, "${DecimalFormat(",##0.##").format(data.sumAll.toDouble() / 10000.0)}万")
-                            .text(R.id.item_lead_get, "${DecimalFormat(",##0.##").format(data.profitAll.toDouble() / 10000.0)}万")
+                            .text(R.id.item_lead_get, "${DecimalFormat(",##0.##").format(data.profitAll.toDouble())}元")
 
                             .visibility(R.id.item_lead_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_lead_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
@@ -62,7 +62,7 @@ class FundsLeadActivity : BaseActivity() {
                                         "userhead" to data.userhead,
                                         "introducerInfoName" to data.introducerInfoName,
                                         "sumAll" to "${DecimalFormat(",##0.##").format(data.sumAll.toDouble() / 10000.0)}万",
-                                        "profitAll" to "${DecimalFormat(",##0.##").format(data.profitAll.toDouble() / 10000.0)}万")
+                                        "profitAll" to "${DecimalFormat(",##0.##").format(data.profitAll.toDouble())}元")
                             }
                 }
                 .attachTo(recycle_list)

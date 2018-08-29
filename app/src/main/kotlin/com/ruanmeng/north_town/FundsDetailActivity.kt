@@ -2,6 +2,7 @@ package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
@@ -59,23 +60,38 @@ class FundsDetailActivity : BaseActivity() {
                         funds_product.text = "$productName(${DecimalFormat("0.##").format(rate.toDouble())}%)"
 
                         val amount = obj.optString("amount", "0")
-                        funds_money.text = DecimalFormat(",##0.##").format(amount.toInt() / 10000.0)
+                        funds_money.text = DecimalFormat(",##0.##").format(amount.toDouble() / 10000.0)
 
                         funds_year.text = obj.optString("years", "0")
                         funds_name.setRightString(obj.optString("userName"))
                         funds_tel.setRightString(obj.optString("telephone"))
                         funds_idcard.setRightString(obj.optString("cardNo"))
-                        funds_attribute.setRightString(when (obj.optString("investType")) {
-                            "1" -> "转投"
-                            "2" -> "续投"
-                            "3" -> "新增"
-                            else -> ""
-                        })
+                        when (obj.optString("investType")) {
+                            "1" -> {
+                                funds_attribute.setRightString("转投")
+                                funds_trans.visibility = View.VISIBLE
+                                funds_trans.setLeftString("转投金额(元)")
+
+                                val stock = obj.optString("stock", "0")
+                                val strAmount = DecimalFormat(",##0.##").format(stock.toDouble())
+                                funds_trans.setRightString(strAmount)
+                            }
+                            "2" -> {
+                                funds_attribute.setRightString("续投")
+                                funds_trans.visibility = View.VISIBLE
+                                funds_trans.setLeftString("续投金额(元)")
+
+                                val stock = obj.optString("stock", "0")
+                                val strAmount = DecimalFormat(",##0.##").format(stock.toDouble())
+                                funds_trans.setRightString(strAmount)
+                            }
+                            "3" -> funds_attribute.setRightString("新增")
+                        }
                         funds_start.setRightString(obj.optString("beginDate"))
                         funds_end.setRightString(obj.optString("endDate"))
 
                         val profit = obj.optString("profit", "0")
-                        funds_get.setRightString("￥ ${DecimalFormat("0.##").format(profit.toDouble())}")
+                        funds_get.setRightString("￥ ${DecimalFormat(",##0.##").format(profit.toDouble())}")
                     }
 
                 })
@@ -100,7 +116,9 @@ class FundsDetailActivity : BaseActivity() {
 
                         val rate = obj.optString("introducerlv", "0")
                         funds_detail2.setRightString("收益 = 投资金额 * 老带新利率($rate%)")
-                        funds_get2.setRightString(obj.optString("introducerProfit", "0"))
+
+                        val profit = obj.optString("introducerProfit", "0")
+                        funds_get2.setRightString(DecimalFormat(",##0.##").format(profit.toDouble()))
                     }
 
                 })

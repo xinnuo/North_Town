@@ -47,10 +47,21 @@ class DataCheckActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_check_list) { data, injector ->
-                    injector.text(R.id.item_check_name, data.productName)
+                    injector.text(R.id.item_check_name,
+                            data.productName + when (data.investType) {
+                                "1" -> {
+                                    val stockAmount = DecimalFormat(",##0.##").format(data.stock.toDouble() / 10000)
+                                    "（转投:${stockAmount}万）"
+                                }
+                                "2" -> {
+                                    val stockAmount = DecimalFormat(",##0.##").format(data.stock.toDouble() / 10000)
+                                    "（续投:${stockAmount}万）"
+                                }
+                                else -> ""
+                            })
                             .text(R.id.item_check_limit, "${data.beginDate} ~ ${data.endDate}")
                             .text(R.id.item_check_range, "${data.rate}%")
-                            .text(R.id.item_check_money, "${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万")
+                            .text(R.id.item_check_money, "${DecimalFormat(",##0.##").format(data.amount.toDouble() / 10000.0)}万")
                             .text(R.id.item_check_long, "${data.years}年")
                             .visibility(R.id.item_check_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
@@ -58,7 +69,7 @@ class DataCheckActivity : BaseActivity() {
                                 if (isOrder) {
                                     EventBus.getDefault().post(ReportMessageEvent(
                                             data.purchaseId,
-                                            "${data.productName}(${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万)",
+                                            "${data.productName}(${DecimalFormat(",##0.##").format(data.amount.toDouble() / 10000.0)}万)",
                                             "转续投"))
 
                                     ActivityStack.screenManager.popActivities(this@DataCheckActivity::class.java)

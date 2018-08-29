@@ -46,7 +46,7 @@ class FundsProductActivity : BaseActivity() {
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_detail_list) { data, injector ->
-                    injector.text(R.id.item_detail_name, data.productName)
+                    injector.text(R.id.item_detail_name, data.productName + if (data.ispay == "1") "（已提现）" else "")
                             .text(R.id.item_detail_time, data.createDate)
                             .text(R.id.item_detail_money, data.introducerProfit)
 

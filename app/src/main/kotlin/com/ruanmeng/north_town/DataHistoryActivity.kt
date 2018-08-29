@@ -77,7 +77,12 @@ class DataHistoryActivity : BaseActivity() {
                         }
                     } else {
                         register<CommonData>(R.layout.item_check_list) { data, injector ->
-                            injector.text(R.id.item_check_name, data.productName)
+                            injector.text(R.id.item_check_name,
+                                    data.productName + when (data.status) {
+                                        "-10" -> "（到期）"
+                                        "0" -> "（退会）"
+                                        else -> ""
+                                    })
                                     .text(R.id.item_check_limit, "${data.beginDate} ~ ${data.endDate}")
                                     .text(R.id.item_check_range, "${data.rate}%")
                                     .text(R.id.item_check_money, "${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万")

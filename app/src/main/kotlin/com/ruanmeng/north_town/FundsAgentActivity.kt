@@ -64,6 +64,8 @@ class FundsAgentActivity : BaseActivity() {
                             .text(R.id.item_purse_agent, getColorText(data.managerInfoName, keyWord))
                             .text(R.id.item_purse_yong, "￥${if (data.commission.isEmpty()) "0" else data.commission}")
 
+                            .visibility(R.id.item_purse_withdraw, if (data.ispay == "1") View.VISIBLE else View.GONE)
+
                             .clicked(R.id.item_purse) {
                                 startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                             }
