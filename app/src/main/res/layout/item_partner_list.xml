@@ -32,8 +32,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_size_15"
-            android:layout_marginRight="@dimen/dimen_size_15"
+            android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginEnd="@dimen/dimen_size_15"
             android:layout_marginTop="@dimen/dimen_size_10">
 
             <TextView
@@ -50,11 +50,15 @@
                 android:text="0"
                 android:textColor="@color/orange" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_size_1"
+                android:layout_weight="1"/>
+
             <TextView
                 style="@style/Font14_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_size_20"
                 android:text="已投人数：" />
 
             <TextView
@@ -65,11 +69,15 @@
                 android:text="0"
                 android:textColor="@color/orange" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_size_1"
+                android:layout_weight="1"/>
+
             <TextView
                 style="@style/Font14_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_size_20"
                 android:text="剩余人数：" />
 
             <TextView
