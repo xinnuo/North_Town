@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -35,6 +34,8 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:gravity="center_vertical"
                     android:text="选择收款方式" />
 
@@ -74,6 +75,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="收据编码" />
 
                 <EditText
@@ -87,8 +90,8 @@
                     android:hint="输入收据编码"
                     android:inputType="textVisiblePassword"
                     android:maxLines="1"
-                    android:paddingEnd="@dimen/dimen_size_10"
-                    android:paddingStart="@dimen/dimen_size_10" />
+                    android:paddingStart="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -109,7 +112,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
-                    android:text="收款金额(元)" />
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
+                    android:text="收款金额(万元)" />
 
                 <EditText
                     android:id="@+id/et_num"
@@ -121,8 +126,8 @@
                     android:hint="输入金额"
                     android:inputType="number"
                     android:maxLength="9"
-                    android:paddingEnd="@dimen/dimen_size_10"
-                    android:paddingStart="@dimen/dimen_size_10" />
+                    android:paddingStart="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -146,6 +151,8 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:gravity="center_vertical"
                     android:text="选择收据类型" />
 
@@ -185,6 +192,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="客户姓名" />
 
                 <EditText
@@ -196,8 +205,8 @@
                     android:gravity="end|center_vertical"
                     android:hint="输入客户姓名"
                     android:maxLines="1"
-                    android:paddingEnd="@dimen/dimen_size_10"
-                    android:paddingStart="@dimen/dimen_size_10" />
+                    android:paddingStart="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -218,6 +227,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="客户身份证号" />
 
                 <EditText
@@ -231,8 +242,8 @@
                     android:hint="请输入客户身份证号"
                     android:inputType="number"
                     android:maxLength="18"
-                    android:paddingEnd="@dimen/dimen_size_10"
-                    android:paddingStart="@dimen/dimen_size_10" />
+                    android:paddingStart="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -256,6 +267,8 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:gravity="center_vertical"
                     android:text="收银员姓名" />
 
@@ -298,6 +311,8 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:gravity="center_vertical"
                     android:text="所属经纪人" />
 
@@ -397,10 +412,10 @@
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"
                         android:minLines="3"
-                        android:paddingBottom="@dimen/dimen_size_13"
-                        android:paddingEnd="@dimen/dimen_size_10"
                         android:paddingStart="@dimen/dimen_size_10"
-                        android:paddingTop="@dimen/dimen_size_13" />
+                        android:paddingTop="@dimen/dimen_size_13"
+                        android:paddingEnd="@dimen/dimen_size_10"
+                        android:paddingBottom="@dimen/dimen_size_13" />
 
                 </LinearLayout>
 

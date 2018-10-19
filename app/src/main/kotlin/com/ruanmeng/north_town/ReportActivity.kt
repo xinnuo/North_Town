@@ -143,8 +143,13 @@ class ReportActivity : BaseActivity() {
     }
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        if (s.isEmpty() && keyWord.isNotEmpty()) {
-            keyWord = ""
+        if (s.trim().isEmpty()) {
+            if (keyWord.isNotEmpty()) {
+                keyWord = ""
+                updateList()
+            }
+        } else {
+            keyWord = s.trim().toString()
             updateList()
         }
     }

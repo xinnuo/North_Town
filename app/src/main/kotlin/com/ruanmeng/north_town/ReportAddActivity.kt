@@ -48,13 +48,6 @@ class ReportAddActivity : BaseActivity() {
         et_name.addTextChangedListener(this@ReportAddActivity)
         et_phone.addTextChangedListener(this@ReportAddActivity)
         et_card.addTextChangedListener(this@ReportAddActivity)
-        et_addr.addTextChangedListener(this@ReportAddActivity)
-        et_num.addTextChangedListener(this@ReportAddActivity)
-        et_memo.addTextChangedListener(this@ReportAddActivity)
-        report_type.addTextChangedListener(this@ReportAddActivity)
-        report_like.addTextChangedListener(this@ReportAddActivity)
-        report_work.addTextChangedListener(this@ReportAddActivity)
-        report_unit.addTextChangedListener(this@ReportAddActivity)
 
         rg_check.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
@@ -141,14 +134,7 @@ class ReportAddActivity : BaseActivity() {
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         if (et_name.text.isNotBlank()
                 && et_phone.text.isNotBlank()
-                && et_card.text.isNotBlank()
-                && et_addr.text.isNotBlank()
-                && et_num.text.isNotBlank()
-                && et_memo.text.isNotBlank()
-                && report_type.text.isNotBlank()
-                && report_like.text.isNotBlank()
-                && report_work.text.isNotBlank()
-                && report_unit.text.isNotBlank()) {
+                && et_card.text.isNotBlank()) {
             report_submit.setBackgroundResource(R.drawable.rec_bg_red)
             report_submit.isClickable = true
         } else {

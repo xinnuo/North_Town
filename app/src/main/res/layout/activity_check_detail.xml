@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
-                    android:text="认购金额：人民币(元)" />
+                    android:text="认购金额(万元)" />
 
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/check_money"
@@ -316,7 +316,7 @@
                     android:inputType="number"
                     android:paddingEnd="@dimen/dimen_size_10"
                     android:paddingStart="@dimen/dimen_size_10"
-                    app:mask="#### #### #### #### ###" />
+                    app:mask="#### #### #### #### #### ####" />
 
             </LinearLayout>
 

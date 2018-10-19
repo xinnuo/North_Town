@@ -24,6 +24,8 @@
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_size_10"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="姓名" />
 
                 <EditText
@@ -55,6 +57,8 @@
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_size_10"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="手机号" />
 
                 <EditText
@@ -87,6 +91,8 @@
                     android:layout_width="@dimen/dimen_size_75"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_size_10"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="身份证号" />
 
                 <EditText
@@ -123,6 +129,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="是否业主" />
 
                 <RadioButton
@@ -176,10 +184,10 @@
                         android:hint="输入住宅名称"
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"
-                        android:paddingBottom="@dimen/dimen_size_13"
                         android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingTop="@dimen/dimen_size_13"
                         android:paddingRight="@dimen/dimen_size_10"
-                        android:paddingTop="@dimen/dimen_size_13" />
+                        android:paddingBottom="@dimen/dimen_size_13" />
 
                 </LinearLayout>
 
@@ -265,7 +273,7 @@
                 android:layout_marginRight="@dimen/dimen_size_10"
                 android:background="@color/divider" />
 
-             <LinearLayout
+            <LinearLayout
                 android:id="@+id/report_up_ll"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
@@ -375,10 +383,10 @@
                         android:hint="填写备注"
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"
-                        android:paddingBottom="@dimen/dimen_size_13"
                         android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingTop="@dimen/dimen_size_13"
                         android:paddingRight="@dimen/dimen_size_10"
-                        android:paddingTop="@dimen/dimen_size_13" />
+                        android:paddingBottom="@dimen/dimen_size_13" />
 
                 </LinearLayout>
 
@@ -405,7 +413,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
                     android:gravity="center_vertical"
-                    android:text="偏好设置" />
+                    android:text="兴趣爱好" />
 
                 <TextView
                     android:id="@+id/report_like"
@@ -415,7 +423,7 @@
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:hint="请选择偏好设置" />
+                    android:hint="请选择兴趣爱好" />
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_13"

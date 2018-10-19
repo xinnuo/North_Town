@@ -86,12 +86,12 @@ class CheckDetailActivity : BaseActivity() {
                     return
                 }
 
-                if (!BankcardHelper.checkBankCard(check_card.rawText)) {
+                /*if (!BankcardHelper.checkBankCard(check_card.rawText)) {
                     check_card.requestFocus()
                     check_card.setText("")
                     showToast("请输入正确的银行卡卡号")
                     return
-                }
+                }*/
 
                 if (!CommonUtil.isMobile(check_phone.text.toString())) {
                     check_phone.requestFocus()
@@ -108,7 +108,7 @@ class CheckDetailActivity : BaseActivity() {
                         .params("productId", productId)
                         .params("accountInfoId", accountInfoId)
                         .params("years", mYears)
-                        .params("amount", check_money.text.toString())
+                        .params("amount", check_money.text.toString().toInt() * 10000)
                         .params("beginDate", check_begin.text.toString())
                         .params("endDate", check_end.text.toString())
                         .params("bank", check_bank.text.toString())

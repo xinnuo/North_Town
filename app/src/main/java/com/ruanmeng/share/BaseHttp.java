@@ -37,7 +37,7 @@ public class BaseHttp {
     public static String customer_introducer_relationship = baseIp + "/customer_introducer_relationship.rm"; //上级信息√
     public static String customer_last_purchase_msg = baseIp + "/customer_last_purchase_msg.rm";             //客户订单信息√
     public static String customer_vip_no = baseIp + "/customer_vip_no.rm";                                   //客户VIP信息√
-    public static String past_due_purchase_list = baseIp + "/past_due_purchase_list.rm";                     //续投订单列表√
+    public static String past_due_purchase_list_by_type = baseIp + "/past_due_purchase_list_by_type.rm";     //续投订单列表√
     public static String non_manager_list = baseIp + "/non_manager_list.rm";                                 //非基金经纪人列表√
     public static String staff_type_list = baseIp + "/staff_type_list.rm";                                   //各类员工列表√
     public static String customer_investment_past_record = baseIp + "/customer_investment_past_record.rm";   //历史投资记录√

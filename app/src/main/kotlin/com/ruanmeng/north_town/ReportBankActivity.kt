@@ -52,6 +52,12 @@ class ReportBankActivity : BaseActivity() {
                                     "浦发银行" -> view.setImageResource(R.mipmap.bank14)
                                     "广发银行" -> view.setImageResource(R.mipmap.bank15)
                                     "邮政储蓄" -> view.setImageResource(R.mipmap.bank16)
+                                    "南昌银行" -> view.setImageResource(R.mipmap.bank17)
+                                    "江西银行" -> view.setImageResource(R.mipmap.bank17)
+                                    "农村信用社" -> view.setImageResource(R.mipmap.bank18)
+                                    "农商银行" -> view.setImageResource(R.mipmap.bank18)
+                                    "富民银行" -> view.setImageResource(R.mipmap.bank19)
+                                    else -> view.setImageResource(R.mipmap.default_bank)
                                 }
                             }
 

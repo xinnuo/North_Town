@@ -42,8 +42,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dimen_size_10"
                     android:layout_marginTop="@dimen/dimen_size_5"
+                    android:layout_marginEnd="@dimen/dimen_size_10"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -83,8 +83,8 @@
                 style="@style/Font13_black_dark"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_40"
-                android:drawablePadding="@dimen/dimen_size_5"
                 android:drawableStart="@drawable/rec_bg_line"
+                android:drawablePadding="@dimen/dimen_size_5"
                 android:gravity="center_vertical"
                 android:text="客户信息" />
 
@@ -138,10 +138,10 @@
                         android:gravity="end"
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"
-                        android:paddingBottom="@dimen/dimen_size_13"
                         android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingTop="@dimen/dimen_size_13"
                         android:paddingRight="@dimen/dimen_size_10"
-                        android:paddingTop="@dimen/dimen_size_13" />
+                        android:paddingBottom="@dimen/dimen_size_13" />
 
                 </LinearLayout>
 
@@ -213,16 +213,26 @@
                     android:layout_marginStart="@dimen/dimen_size_10"
                     android:layout_marginEnd="@dimen/dimen_size_20"
                     android:gravity="center_vertical"
-                    android:text="偏好" />
+                    android:text="兴趣爱好" />
 
-                <TextView
-                    android:id="@+id/report_like"
-                    style="@style/Font14_gray"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:lineSpacingExtra="@dimen/dimen_size_3"
-                    android:minHeight="@dimen/line_height"/>
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/report_like"
+                        style="@style/Font14_gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_size_10"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:lineSpacingExtra="@dimen/dimen_size_3"
+                        android:minHeight="@dimen/line_height"
+                        android:paddingTop="@dimen/dimen_size_13"
+                        android:paddingBottom="@dimen/dimen_size_13" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -265,8 +275,8 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
-                    android:layout_marginEnd="@dimen/dimen_size_20"
                     android:layout_marginStart="@dimen/dimen_size_10"
+                    android:layout_marginEnd="@dimen/dimen_size_20"
                     android:gravity="center_vertical"
                     android:text="备注" />
 
@@ -277,9 +287,9 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:lineSpacingExtra="@dimen/dimen_size_3"
-                    android:paddingBottom="@dimen/dimen_size_10"
+                    android:minHeight="@dimen/line_height"
                     android:paddingTop="@dimen/dimen_size_10"
-                    android:minHeight="@dimen/line_height" />
+                    android:paddingBottom="@dimen/dimen_size_10" />
 
             </LinearLayout>
 

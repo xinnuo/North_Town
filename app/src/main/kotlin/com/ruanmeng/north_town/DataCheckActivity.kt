@@ -84,41 +84,72 @@ class DataCheckActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(
-                if (isOrder) BaseHttp.past_due_purchase_list
-                else BaseHttp.customer_purchase_list)
-                .apply {
-                    tag(this@DataCheckActivity)
-                    headers("token", getString("token"))
-                    params("accountInfoId", intent.getStringExtra("accountInfoId"))
-                    params("page", pindex)
+        if (isOrder) {
+            OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.past_due_purchase_list_by_type)
+                    .apply {
+                        tag(this@DataCheckActivity)
+                        headers("token", getString("token"))
+                        params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                        params("productId", intent.getStringExtra("productId"))
+                        params("investType", intent.getStringExtra("previousType"))
+                        params("page", pindex)
+                    }
+                    .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
 
-                    if (intent.getBooleanExtra("isClient", false))
-                        params("managerInfoId", getString("token"))
-                }
-                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
-
-                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
-
-                        list.apply {
-                            if (pindex == 1) {
-                                clear()
-                                pageNum = pindex
+                        override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                            list.apply {
+                                if (pindex == 1) {
+                                    clear()
+                                    pageNum = pindex
+                                }
+                                addItems(response.body().`object`)
+                                if (count(response.body().`object`) > 0) pageNum++
                             }
-                            addItems(response.body().`object`)
-                            if (count(response.body().`object`) > 0) pageNum++
+
+                            mAdapter.updateData(list)
                         }
-                        mAdapter.updateData(list)
+
+                        override fun onFinish() {
+                            super.onFinish()
+                            swipe_refresh.isRefreshing = false
+                            isLoadingMore = false
+
+                            empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                        }
+
+                    })
+        } else {
+            OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.customer_purchase_list)
+                    .apply {
+                        tag(this@DataCheckActivity)
+                        headers("token", getString("token"))
+                        params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                        params("page", pindex)
                     }
+                    .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
 
-                    override fun onFinish() {
-                        super.onFinish()
-                        swipe_refresh.isRefreshing = false
-                        isLoadingMore = false
+                        override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                            list.apply {
+                                if (pindex == 1) {
+                                    clear()
+                                    pageNum = pindex
+                                }
+                                addItems(response.body().`object`)
+                                if (count(response.body().`object`) > 0) pageNum++
+                            }
 
-                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
-                    }
+                            mAdapter.updateData(list)
+                        }
 
-                })
+                        override fun onFinish() {
+                            super.onFinish()
+                            swipe_refresh.isRefreshing = false
+                            isLoadingMore = false
+
+                            empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                        }
+
+                    })
+        }
     }
 }

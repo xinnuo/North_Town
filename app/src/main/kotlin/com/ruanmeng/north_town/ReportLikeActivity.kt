@@ -23,7 +23,7 @@ class ReportLikeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_like)
-        init_title("选择偏好", "确定")
+        init_title("选择兴趣爱好", "确定")
 
         getData()
     }

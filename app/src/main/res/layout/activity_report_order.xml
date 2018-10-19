@@ -34,8 +34,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_size_40"
                         android:gravity="center_vertical"
-                        android:paddingEnd="@dimen/dimen_size_10"
                         android:paddingStart="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_10"
                         android:text="公司名称" />
 
                     <LinearLayout
@@ -60,10 +60,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dimen_size_10"
-                        android:layout_marginEnd="@dimen/dimen_size_10"
                         android:layout_marginStart="@dimen/dimen_size_10"
-                        android:layout_marginTop="@dimen/dimen_size_5">
+                        android:layout_marginTop="@dimen/dimen_size_5"
+                        android:layout_marginEnd="@dimen/dimen_size_10"
+                        android:layout_marginBottom="@dimen/dimen_size_10">
 
                         <TextView
                             style="@style/Font14_gray"
@@ -137,14 +137,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_height"
-                        android:paddingEnd="@dimen/dimen_size_0"
-                        android:paddingStart="@dimen/dimen_size_10">
+                        android:paddingStart="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_0">
 
                         <TextView
                             style="@style/Font14_black_dark"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:drawableStart="@mipmap/icon_dot"
+                            android:drawablePadding="@dimen/dimen_size_3"
                             android:gravity="center_vertical"
                             android:text="本有限合伙人名称为" />
 
@@ -169,14 +171,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_height"
-                        android:paddingEnd="@dimen/dimen_size_0"
-                        android:paddingStart="@dimen/dimen_size_10">
+                        android:paddingStart="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_0">
 
                         <TextView
                             style="@style/Font14_black_dark"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:drawableStart="@mipmap/icon_dot"
+                            android:drawablePadding="@dimen/dimen_size_3"
                             android:text="身份证号码(营业执照编号)" />
 
                         <EditText
@@ -190,8 +194,8 @@
                             android:hint="输入身份证或编号"
                             android:inputType="textVisiblePassword"
                             android:maxLines="1"
-                            android:paddingEnd="@dimen/dimen_size_10"
-                            android:paddingStart="@dimen/dimen_size_10" />
+                            android:paddingStart="@dimen/dimen_size_10"
+                            android:paddingEnd="@dimen/dimen_size_10" />
 
                     </LinearLayout>
 
@@ -221,14 +225,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_height"
-                        android:paddingEnd="@dimen/dimen_size_0"
-                        android:paddingStart="@dimen/dimen_size_10">
+                        android:paddingStart="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_0">
 
                         <TextView
                             style="@style/Font14_black_dark"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:drawableStart="@mipmap/icon_dot"
+                            android:drawablePadding="@dimen/dimen_size_3"
                             android:gravity="center_vertical"
                             android:text="VIP持卡人" />
 
@@ -241,8 +247,8 @@
                             android:gravity="end|center_vertical"
                             android:hint="输入持卡人姓名"
                             android:maxLength="12"
-                            android:paddingEnd="@dimen/dimen_size_10"
                             android:paddingStart="@dimen/dimen_size_10"
+                            android:paddingEnd="@dimen/dimen_size_10"
                             android:singleLine="true" />
 
                     </LinearLayout>
@@ -257,14 +263,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_height"
-                        android:paddingEnd="@dimen/dimen_size_0"
-                        android:paddingStart="@dimen/dimen_size_10">
+                        android:paddingStart="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_0">
 
                         <TextView
                             style="@style/Font14_black_dark"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:drawableStart="@mipmap/icon_dot"
+                            android:drawablePadding="@dimen/dimen_size_3"
                             android:gravity="center_vertical"
                             android:text="VIP编号" />
 
@@ -278,8 +286,8 @@
                             android:hint="输入编号"
                             android:inputType="number"
                             android:maxLength="12"
-                            android:paddingEnd="@dimen/dimen_size_10"
                             android:paddingStart="@dimen/dimen_size_10"
+                            android:paddingEnd="@dimen/dimen_size_10"
                             android:singleLine="true" />
 
                     </LinearLayout>
@@ -294,14 +302,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_height"
-                        android:paddingEnd="@dimen/dimen_size_0"
-                        android:paddingStart="@dimen/dimen_size_10">
+                        android:paddingStart="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_0">
 
                         <TextView
                             style="@style/Font14_black_dark"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:drawableStart="@mipmap/icon_dot"
+                            android:drawablePadding="@dimen/dimen_size_3"
                             android:gravity="center_vertical"
                             android:text="身份证号" />
 
@@ -316,8 +326,8 @@
                             android:hint="输入身份证号"
                             android:inputType="number"
                             android:maxLength="18"
-                            android:paddingEnd="@dimen/dimen_size_10"
                             android:paddingStart="@dimen/dimen_size_10"
+                            android:paddingEnd="@dimen/dimen_size_10"
                             android:singleLine="true" />
 
                     </LinearLayout>
@@ -340,6 +350,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dimen_size_10"
                             android:layout_marginTop="@dimen/dimen_size_10"
+                            android:drawableStart="@mipmap/icon_dot"
+                            android:drawablePadding="@dimen/dimen_size_3"
                             android:text="持卡人地址" />
 
                         <EditText
@@ -411,15 +423,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_0"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
-                    android:text="转投或续投金额" />
+                    android:text="转投或续投金额(万元)" />
 
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/et_put"
@@ -431,8 +443,8 @@
                     android:gravity="center_vertical|end"
                     android:hint="请输入金额"
                     android:inputType="number"
-                    android:paddingEnd="@dimen/dimen_size_10"
                     android:paddingStart="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10"
                     app:mask="##########" />
 
             </LinearLayout>
@@ -457,6 +469,8 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:gravity="center_vertical"
                     android:text="投资期限" />
 
@@ -490,15 +504,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_0"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
-                    android:text="认购金额：人民币(元)" />
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
+                    android:text="认购金额(万元)" />
 
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/et_money"
@@ -510,8 +526,8 @@
                     android:gravity="center_vertical|end"
                     android:hint="输入认购金额"
                     android:inputType="number"
-                    android:paddingEnd="@dimen/dimen_size_10"
                     android:paddingStart="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10"
                     app:mask="##########" />
 
             </LinearLayout>
@@ -536,6 +552,8 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:gravity="center_vertical"
                     android:text="出资日期" />
 
@@ -578,6 +596,8 @@
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/line_height"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:gravity="center_vertical"
                     android:text="到期日期" />
 
@@ -611,8 +631,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_10"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_10">
 
                 <TextView
                     android:id="@+id/report_expect1"
@@ -658,8 +678,8 @@
                 <ImageView
                     android:layout_width="@dimen/dimen_size_18"
                     android:layout_height="@dimen/dimen_size_18"
-                    android:layout_marginEnd="@dimen/dimen_size_5"
                     android:layout_marginTop="@dimen/dimen_size_1"
+                    android:layout_marginEnd="@dimen/dimen_size_5"
                     android:src="@mipmap/icon_warn"
                     tools:ignore="ContentDescription" />
 
@@ -688,8 +708,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_40"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_10"
                 android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_10"
                 android:text="账户信息" />
 
             <View
@@ -745,14 +765,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_0"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="账户号" />
 
                 <com.santalu.maskedittext.MaskEditText
@@ -764,9 +786,9 @@
                     android:gravity="center_vertical|end"
                     android:hint="输入账户号"
                     android:inputType="number"
-                    android:paddingEnd="@dimen/dimen_size_10"
                     android:paddingStart="@dimen/dimen_size_10"
-                    app:mask="#### #### #### #### ###" />
+                    android:paddingEnd="@dimen/dimen_size_10"
+                    app:mask="#### #### #### #### #### ####" />
 
             </LinearLayout>
 
@@ -781,14 +803,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_0"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_size_10"
+                    android:drawableStart="@mipmap/icon_dot"
+                    android:drawablePadding="@dimen/dimen_size_3"
                     android:text="联系电话" />
 
                 <EditText
@@ -801,8 +825,8 @@
                     android:hint="输入联系电话"
                     android:inputType="phone"
                     android:maxLength="11"
-                    android:paddingEnd="@dimen/dimen_size_10"
-                    android:paddingStart="@dimen/dimen_size_10" />
+                    android:paddingStart="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -816,8 +840,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/dimen_size_0"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"
@@ -841,10 +865,10 @@
                         android:hint="输入邮寄地址"
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"
-                        android:paddingBottom="@dimen/dimen_size_13"
-                        android:paddingEnd="@dimen/dimen_size_10"
                         android:paddingStart="@dimen/dimen_size_10"
-                        android:paddingTop="@dimen/dimen_size_13" />
+                        android:paddingTop="@dimen/dimen_size_13"
+                        android:paddingEnd="@dimen/dimen_size_10"
+                        android:paddingBottom="@dimen/dimen_size_13" />
 
                 </LinearLayout>
 
@@ -861,8 +885,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/dimen_size_0"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"
@@ -881,8 +905,8 @@
                     android:hint="输入传真"
                     android:inputType="phone"
                     android:maxLength="18"
-                    android:paddingEnd="@dimen/dimen_size_10"
-                    android:paddingStart="@dimen/dimen_size_10" />
+                    android:paddingStart="@dimen/dimen_size_10"
+                    android:paddingEnd="@dimen/dimen_size_10" />
 
             </LinearLayout>
 
@@ -1045,8 +1069,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/dimen_size_0"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"
@@ -1070,10 +1094,10 @@
                         android:hint="填写备注"
                         android:lineSpacingExtra="@dimen/dimen_size_3"
                         android:minHeight="@dimen/line_height"
-                        android:paddingBottom="@dimen/dimen_size_13"
-                        android:paddingEnd="@dimen/dimen_size_10"
                         android:paddingStart="@dimen/dimen_size_10"
-                        android:paddingTop="@dimen/dimen_size_13" />
+                        android:paddingTop="@dimen/dimen_size_13"
+                        android:paddingEnd="@dimen/dimen_size_10"
+                        android:paddingBottom="@dimen/dimen_size_13" />
 
                 </LinearLayout>
 

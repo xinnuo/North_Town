@@ -29,7 +29,9 @@ class ReportOrderActivity : BaseActivity() {
 
     private var putType = ""
     private var productId = ""
+    private var accountInfoId = ""
     private var previousPurchaseId = ""
+    private var previousPurchasePos = 0
     private var managerInfoId = ""
     private var introducerInfoId = ""
     private var relationshipId = ""
@@ -52,6 +54,7 @@ class ReportOrderActivity : BaseActivity() {
         super.init_title()
         putType = intent.getStringExtra("type")
         productId = intent.getStringExtra("productId")
+        accountInfoId = intent.getStringExtra("accountInfoId")
         report_name.text = intent.getStringExtra("userName")
 
         report_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
@@ -85,7 +88,6 @@ class ReportOrderActivity : BaseActivity() {
         et_money.addTextChangedListener(this@ReportOrderActivity)
         report_start.addTextChangedListener(this@ReportOrderActivity)
         report_end.addTextChangedListener(this@ReportOrderActivity)
-        report_bank.addTextChangedListener(this@ReportOrderActivity)
         et_card.addTextChangedListener(this@ReportOrderActivity)
         et_phone.addTextChangedListener(this@ReportOrderActivity)
     }
@@ -94,9 +96,28 @@ class ReportOrderActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.report_product_ll -> startActivityEx<DataCheckActivity>(
-                    "accountInfoId" to intent.getStringExtra("accountInfoId"),
-                    "isOrder" to true)
+            R.id.report_product_ll -> {
+                DialogHelper.showItemDialog(
+                        baseContext,
+                        "请选择",
+                        previousPurchasePos,
+                        listOf("新增", "转投", "续投")) { position, name ->
+                    previousPurchasePos = position
+                    when (position) {
+                        0 -> report_product.text = name
+                        1 -> startActivityEx<DataCheckActivity>(
+                                "accountInfoId" to accountInfoId,
+                                "productId" to productId,
+                                "isOrder" to true,
+                                "previousType" to "1")
+                        2 -> startActivityEx<DataCheckActivity>(
+                                "accountInfoId" to accountInfoId,
+                                "productId" to productId,
+                                "isOrder" to true,
+                                "previousType" to "2")
+                    }
+                }
+            }
             R.id.report_start_ll, R.id.report_end_ll -> {
                 if (v.id == R.id.report_end_ll && report_end.text.isNotEmpty()) return
 
@@ -164,12 +185,12 @@ class ReportOrderActivity : BaseActivity() {
                 startActivityEx<ReportUnitActivity>("title" to "客户关系")
             }
             R.id.report_submit -> {
-                if (!BankcardHelper.checkBankCard(et_card.rawText)) {
+                /*if (!BankcardHelper.checkBankCard(et_card.rawText)) {
                     et_card.requestFocus()
                     et_card.setText("")
                     showToast("请输入正确的银行卡卡号")
                     return
-                }
+                }*/
 
                 if (!CommonUtil.isMobile(et_phone.text.toString())) {
                     et_phone.requestFocus()
@@ -202,11 +223,11 @@ class ReportOrderActivity : BaseActivity() {
                         }
                         .params("managerInfoId", getString("token"))
                         .params("productId", productId)
-                        .params("accountInfoId", intent.getStringExtra("accountInfoId"))
+                        .params("accountInfoId", accountInfoId)
                         .params("previousPurchaseId", previousPurchaseId)
-                        .params("stock", et_put.text.toString())
+                        .params("stock", et_put.text.toString().toInt() * 10000)
                         .params("years", report_year.text.trimEnd('年').toString())
-                        .params("amount", et_money.text.toString())
+                        .params("amount", et_money.text.toString().toInt() * 10000)
                         .params("beginDate", report_start.text.toString())
                         .params("endDate", report_end.text.toString())
                         .params("bank", report_bank.text.toString())
@@ -363,7 +384,6 @@ class ReportOrderActivity : BaseActivity() {
                         && et_money.text.isNotBlank()
                         && report_start.text.isNotBlank()
                         && report_end.text.isNotBlank()
-                        && report_bank.text.isNotBlank()
                         && et_card.text.isNotBlank()
                         && et_phone.text.isNotBlank()) {
                     report_submit.setBackgroundResource(R.drawable.rec_bg_red)
@@ -378,7 +398,6 @@ class ReportOrderActivity : BaseActivity() {
                         && et_money.text.isNotBlank()
                         && report_start.text.isNotBlank()
                         && report_end.text.isNotBlank()
-                        && report_bank.text.isNotBlank()
                         && et_card.text.isNotBlank()
                         && et_phone.text.isNotBlank()) {
                     report_submit.setBackgroundResource(R.drawable.rec_bg_red)
@@ -390,7 +409,7 @@ class ReportOrderActivity : BaseActivity() {
             }
         }
 
-        if (et_money.isFocused && et_money.text.isNotBlank()) calculatedValue(et_money.text.toString().toLong())
+        if (et_money.isFocused && et_money.text.isNotBlank()) calculatedValue(et_money.text.toString().toLong() * 10000)
     }
 
     @SuppressLint("SetTextI18n")

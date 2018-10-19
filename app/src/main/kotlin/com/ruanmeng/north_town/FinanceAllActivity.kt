@@ -52,7 +52,6 @@ class FinanceAllActivity : BaseActivity() {
         finance_money.addTextChangedListener(this@FinanceAllActivity)
         finance_begin.addTextChangedListener(this@FinanceAllActivity)
         finance_end.addTextChangedListener(this@FinanceAllActivity)
-        finance_bank.addTextChangedListener(this@FinanceAllActivity)
         finance_card.addTextChangedListener(this@FinanceAllActivity)
         finance_phone.addTextChangedListener(this@FinanceAllActivity)
 
@@ -104,12 +103,12 @@ class FinanceAllActivity : BaseActivity() {
                     return
                 }
 
-                if (!BankcardHelper.checkBankCard(finance_card.rawText)) {
+                /*if (!BankcardHelper.checkBankCard(finance_card.rawText)) {
                     finance_card.requestFocus()
                     finance_card.setText("")
                     showToast("请输入正确的银行卡卡号")
                     return
-                }
+                }*/
 
                 if (!CommonUtil.isMobile(finance_phone.text.toString())) {
                     finance_phone.requestFocus()
@@ -127,7 +126,7 @@ class FinanceAllActivity : BaseActivity() {
                             params("productId", productId)
                             params("accountInfoId", accountInfoId)
                             params("years", mYears)
-                            params("amount", finance_money.text.toString())
+                            params("amount", finance_money.text.toString().toInt() * 10000)
                             params("beginDate", finance_begin.text.toString())
                             params("endDate", finance_end.text.toString())
                             params("bank", finance_bank.text.toString())
@@ -138,7 +137,7 @@ class FinanceAllActivity : BaseActivity() {
                             params("remark", finance_memo.text.trim().toString())
                             params("payTypeId", payTypeId)
                             params("receiptNo", et_code.text.toString())
-                            params("receivedAmount", et_num.text.toString())
+                            params("receivedAmount", et_num.text.toString().toInt() * 10000)
                             params("receiptTypeId", receiptTypeId)
                             params("cashierInfoId", cashierInfoId)
                             params("managerInfoId", managerInfoId)
@@ -245,7 +244,6 @@ class FinanceAllActivity : BaseActivity() {
         if (finance_money.text.isNotBlank()
                 && finance_begin.text.isNotBlank()
                 && finance_end.text.isNotBlank()
-                && finance_bank.text.isNotBlank()
                 && finance_card.text.isNotBlank()
                 && finance_phone.text.isNotBlank()
                 && finance_get.text.isNotBlank()

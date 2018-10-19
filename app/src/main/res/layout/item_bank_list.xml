@@ -18,7 +18,7 @@
             android:layout_width="@dimen/dimen_size_35"
             android:layout_height="@dimen/dimen_size_35"
             android:adjustViewBounds="true"
-            android:src="@mipmap/default_logo"
+            android:src="@mipmap/default_bank"
             tools:ignore="ContentDescription" />
 
         <TextView
