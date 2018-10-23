@@ -147,3 +147,5 @@ fun RecyclerView.load_Grid(refreshLayout: SwipeRefreshLayout? = null,
         setOnTouchListener { _, _ -> return@setOnTouchListener refreshLayout.isRefreshing }
     }
 }
+
+fun String.toNotInt(): Int = if (isEmpty()) "0".toInt() else toInt()

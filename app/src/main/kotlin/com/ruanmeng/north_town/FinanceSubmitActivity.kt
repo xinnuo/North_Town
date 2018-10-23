@@ -5,10 +5,7 @@ import android.view.View
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.showToast
-import com.ruanmeng.base.startActivityEx
+import com.ruanmeng.base.*
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
@@ -129,8 +126,7 @@ class FinanceSubmitActivity : BaseActivity() {
 
                         finance_get.text = obj.optString("paytypeName")
                         et_code.setText(obj.optString("receiptNo"))
-                        val receivedAmount = DecimalFormat("#").format(obj.optDouble("receivedAmount", 0.0))
-                        et_num.setText(receivedAmount)
+                        et_num.setText((obj.optString("receivedAmount").toNotInt() / 10000).toString())
                         finance_shou.text = obj.optString("receiptTypeName")
                         et_name.setText(obj.optString("userName"))
                         et_idcard.setText(obj.optString("cardNo"))

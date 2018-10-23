@@ -6,10 +6,7 @@ import android.view.View
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.showToast
-import com.ruanmeng.base.startActivityEx
+import com.ruanmeng.base.*
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.*
@@ -182,7 +179,7 @@ class FinanceAllActivity : BaseActivity() {
 
                         finance_product.setRightString(obj.optString("productName"))
                         finance_year.setRightString("${mYears}年")
-                        finance_money.setText(obj.optString("amount"))
+                        finance_money.setText((obj.optString("amount").toNotInt() / 10000).toString())
                         finance_begin.text = obj.optString("beginDate")
                         finance_end.text = obj.optString("endDate")
 
@@ -226,8 +223,7 @@ class FinanceAllActivity : BaseActivity() {
 
                         finance_get.text = obj.optString("paytypeName")
                         et_code.setText(obj.optString("receiptNo"))
-                        val receivedAmount = DecimalFormat("#").format(obj.optDouble("receivedAmount", 0.0))
-                        et_num.setText(receivedAmount)
+                        et_num.setText((obj.optString("receivedAmount").toNotInt() / 10000).toString())
                         finance_shou.text = obj.optString("receiptTypeName")
                         finance_yin.text = obj.optString("cashierInfoName")
                         finance_tel.setRightString(obj.optString("cashierInfoTelephone"))

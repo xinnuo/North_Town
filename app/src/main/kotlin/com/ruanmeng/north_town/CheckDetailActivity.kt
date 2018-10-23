@@ -6,10 +6,7 @@ import android.view.View
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.showToast
-import com.ruanmeng.base.startActivityEx
+import com.ruanmeng.base.*
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.*
@@ -153,7 +150,7 @@ class CheckDetailActivity : BaseActivity() {
 
                         check_product.setRightString(obj.optString("productName"))
                         check_year.setRightString("${mYears}年")
-                        check_money.setText(obj.optString("amount"))
+                        check_money.setText((obj.optString("amount").toNotInt() / 10000).toString())
                         check_begin.text = obj.optString("beginDate")
                         check_end.text = obj.optString("endDate")
 
