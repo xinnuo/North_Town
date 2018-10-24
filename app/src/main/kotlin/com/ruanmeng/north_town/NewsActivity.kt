@@ -212,7 +212,7 @@ class NewsActivity : BaseActivity() {
             }
 
             if (news_min.text.isNotEmpty() && news_max.text.isNotEmpty()) {
-                if (news_min.text.toString().toInt() > news_max.text.toString().toInt()) {
+                if (news_min.text.toNoInt() > news_max.text.toNoInt()) {
                     showToast("最低金额不能大于最高金额")
                     return@setOnClickListener
                 }

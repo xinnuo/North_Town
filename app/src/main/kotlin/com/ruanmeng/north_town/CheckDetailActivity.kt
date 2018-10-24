@@ -105,7 +105,7 @@ class CheckDetailActivity : BaseActivity() {
                         .params("productId", productId)
                         .params("accountInfoId", accountInfoId)
                         .params("years", mYears)
-                        .params("amount", check_money.text.toString().toInt() * 10000)
+                        .params("amount", check_money.text.toNoInt() * 10000)
                         .params("beginDate", check_begin.text.toString())
                         .params("endDate", check_end.text.toString())
                         .params("bank", check_bank.text.toString())

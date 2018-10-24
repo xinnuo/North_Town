@@ -196,7 +196,7 @@ class FundsSaleActivity : BaseActivity() {
                         return@setOnClickListener
                     }
                     if (pop_min.text.isNotEmpty() && pop_max.text.isNotEmpty()) {
-                        if (pop_min.text.toString().toInt() > pop_max.text.toString().toInt()) {
+                        if (pop_min.text.toNoInt() > pop_max.text.toNoInt()) {
                             showToast("最低金额不能大于最高金额")
                             return@setOnClickListener
                         }

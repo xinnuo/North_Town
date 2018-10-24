@@ -5,10 +5,7 @@ import android.view.View
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.showToast
-import com.ruanmeng.base.startActivityEx
+import com.ruanmeng.base.*
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
@@ -84,7 +81,7 @@ class ReportFinanceActivity : BaseActivity() {
                             params("purchaseId", intent.getStringExtra("purchaseId"))
                             params("payTypeId", payTypeId)
                             params("receiptNo", et_code.text.toString())
-                            params("receivedAmount", et_num.text.toString().toInt() * 10000)
+                            params("receivedAmount", et_num.text.toNoInt() * 10000)
                             params("receiptTypeId", receiptTypeId)
                             params("userName", et_name.text.trim().toString())
                             params("cardNo", et_idcard.text.toString())
