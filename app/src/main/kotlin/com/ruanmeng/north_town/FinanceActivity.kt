@@ -54,10 +54,8 @@ class FinanceActivity : BaseActivity() {
 
                             .clicked(R.id.item_finance) {
                                 when (getString("accountType")) {
-                                    "App_Staff_Finance_Collect" -> startActivityEx<FinanceSubmitActivity>(
-                                            "purchaseId" to data.purchaseId)
-                                    "App_Staff_Finance_Check" -> startActivityEx<FinanceAllActivity>(
-                                            "purchaseId" to data.purchaseId)
+                                    "App_Staff_Finance_Collect" -> startActivityEx<FinanceSubmitActivity>("purchaseId" to data.purchaseId)
+                                    "App_Staff_Finance_Check" -> startActivityEx<FinanceAllActivity>("purchaseId" to data.purchaseId)
                                 }
                             }
                 }

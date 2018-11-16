@@ -2,6 +2,7 @@ package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.StringDialogCallback
@@ -10,27 +11,32 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.OrderData
 import com.ruanmeng.model.ProductModel
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.*
+import com.ruanmeng.view.OnTextWatcher
 import kotlinx.android.synthetic.main.activity_report_order.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 import java.text.DecimalFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ReportOrderActivity : BaseActivity() {
 
     private val listRate = ArrayList<CommonData>()
     private val listYear = ArrayList<String>()
     private val items = ArrayList<CommonData>()
+    private val listOrder = ArrayList<OrderData>()
 
     private var putType = ""
     private var productId = ""
     private var accountInfoId = ""
     private var previousPurchaseId = ""
+    private var previousFlowAmount = ""
     private var previousPurchasePos = 0
     private var managerInfoId = ""
     private var introducerInfoId = ""
@@ -64,6 +70,7 @@ class ReportOrderActivity : BaseActivity() {
             "会员卡" -> {
                 order_expand.collapse()
                 vip_expand.expand()
+                back_ll.visibility = View.VISIBLE
                 tvTitle.text = "会员卡"
 
                 vip_name.addTextChangedListener(this@ReportOrderActivity)
@@ -74,6 +81,7 @@ class ReportOrderActivity : BaseActivity() {
             else -> {
                 order_expand.expand()
                 vip_expand.collapse()
+                back_ll.visibility = View.GONE
                 tvTitle.text = "有限合伙人"
                 report_company.text = intent.getStringExtra("companyName")
                 report_partner.text = intent.getStringExtra("legalMan")
@@ -85,11 +93,23 @@ class ReportOrderActivity : BaseActivity() {
             }
         }
 
+        et_money.filters = arrayOf<InputFilter>(DecimalNumberFilter())
+
         et_money.addTextChangedListener(this@ReportOrderActivity)
         report_start.addTextChangedListener(this@ReportOrderActivity)
         report_end.addTextChangedListener(this@ReportOrderActivity)
         et_card.addTextChangedListener(this@ReportOrderActivity)
         et_phone.addTextChangedListener(this@ReportOrderActivity)
+
+        val watcher = object : OnTextWatcher() {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (s.isNotEmpty()) report_expect2.text = "预期收入 ￥0"
+                else {
+                    if (et_money.text.isNotBlank()) calculatedValue(doubleToLong(et_money.text))
+                }
+            }
+        }
+        et_profit.addTextChangedListener(watcher)
     }
 
     @SuppressLint("SetTextI18n")
@@ -104,17 +124,17 @@ class ReportOrderActivity : BaseActivity() {
                         listOf("新增", "转投", "续投")) { position, name ->
                     previousPurchasePos = position
                     when (position) {
-                        0 -> report_product.text = name
-                        1 -> startActivityEx<DataCheckActivity>(
-                                "accountInfoId" to accountInfoId,
+                        0 -> {
+                            listOrder.clear()
+                            previousPurchaseId = ""
+                            previousFlowAmount = ""
+                            report_product.text = name
+                            report_total.text = ""
+                        }
+                        1, 2 -> startActivityEx<ReportListActivity>(
                                 "productId" to productId,
-                                "isOrder" to true,
-                                "previousType" to "1")
-                        2 -> startActivityEx<DataCheckActivity>(
-                                "accountInfoId" to accountInfoId,
-                                "productId" to productId,
-                                "isOrder" to true,
-                                "previousType" to "2")
+                                "previousId" to previousPurchaseId,
+                                "previousType" to position.toString())
                     }
                 }
             }
@@ -163,7 +183,7 @@ class ReportOrderActivity : BaseActivity() {
                     }
 
                     if (et_money.text.isNotBlank()) {
-                        calculatedValue(et_money.text.toString().toLong())
+                        calculatedValue(doubleToLong(et_money.text))
                     } else {
                         report_expect1.text = "利率 ${items.first().rate}%（起投 ${items.first().min}万）"
                     }
@@ -213,6 +233,7 @@ class ReportOrderActivity : BaseActivity() {
                                 "会员卡" -> {
                                     params("vipNo", vip_num.text.toString())
                                     params("cardNo", vip_card.text.toString())
+                                    params("prepaidAmount", et_back.text.toString())
                                 }
                                 else -> {
                                     params("companyId", intent.getStringExtra("companyId"))
@@ -221,13 +242,15 @@ class ReportOrderActivity : BaseActivity() {
                                 }
                             }
                         }
+                        .params("profit", et_profit.text.toString())
                         .params("managerInfoId", getString("token"))
                         .params("productId", productId)
                         .params("accountInfoId", accountInfoId)
                         .params("previousPurchaseId", previousPurchaseId)
-                        .params("stock", et_put.text.toNoInt() * 10000)
+                        .params("previousFlowAmount", previousFlowAmount)
+                        .params("stock", doubleToLong(report_total.text))
                         .params("years", report_year.text.trimEnd('年').toString())
-                        .params("amount", et_money.text.toNoInt() * 10000)
+                        .params("amount", doubleToLong(et_money.text))
                         .params("beginDate", report_start.text.toString())
                         .params("endDate", report_end.text.toString())
                         .params("bank", report_bank.text.toString())
@@ -275,8 +298,7 @@ class ReportOrderActivity : BaseActivity() {
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                         val obj = JSONObject(response.body())
-                                .optJSONObject("object")
-                                ?: JSONObject()
+                                .optJSONObject("object") ?: JSONObject()
 
                         introducerInfoId = obj.optString("introducerInfoId")
                         relationshipId = obj.optString("relationshipId")
@@ -297,8 +319,7 @@ class ReportOrderActivity : BaseActivity() {
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                         val obj = JSONObject(response.body())
-                                .optJSONObject("object")
-                                ?: JSONObject()
+                                .optJSONObject("object") ?: JSONObject()
 
                         et_receipt.setText(obj.optString("cardNo"))
                         et_receipt.setSelection(et_receipt.text.length)
@@ -322,8 +343,7 @@ class ReportOrderActivity : BaseActivity() {
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                         val obj = JSONObject(response.body())
-                                .optJSONObject("object")
-                                ?: JSONObject()
+                                .optJSONObject("object") ?: JSONObject()
 
                         vip_name.setText(obj.optString("userName"))
                         vip_name.setSelection(vip_name.text.length)
@@ -409,12 +429,14 @@ class ReportOrderActivity : BaseActivity() {
             }
         }
 
-        if (et_money.isFocused && et_money.text.isNotBlank()) calculatedValue(et_money.text.toString().toLong() * 10000)
+        if (et_money.isFocused && et_money.text.isNotBlank()) calculatedValue(doubleToLong(et_money.text))
     }
+
+    private fun doubleToLong(edit: CharSequence) = (edit.toNoDouble() * 10000).toLong()
 
     @SuppressLint("SetTextI18n")
     private fun calculatedValue(value: Long) {
-        if (items.isEmpty()) return
+        if (items.isEmpty() || et_profit.text.isNotEmpty()) return
 
         val minValue = items.first().min.toInt() * 10000
 
@@ -456,8 +478,29 @@ class ReportOrderActivity : BaseActivity() {
     fun onMessageEvent(event: ReportMessageEvent) {
         when (event.type) {
             "转续投" -> {
-                previousPurchaseId = event.id
-                report_product.text = event.name
+                if (listOrder.any { it.orderId == event.id }) {
+                    listOrder.first { it.orderId == event.id }.apply {
+                        orderName = event.name
+                        orderAmount = event.extend
+                    }
+                } else listOrder.add(OrderData(event.id, event.name, event.extend))
+
+                val itemsName = ArrayList<String>()
+                val itemsId = ArrayList<String>()
+                val itemsAmount = ArrayList<String>()
+                var totalAmount = 0.0
+
+                listOrder.forEach {
+                    itemsName.add(it.orderName)
+                    itemsId.add(it.orderId)
+                    itemsAmount.add(doubleToLong(it.orderAmount).toString())
+                    totalAmount += it.orderAmount.toDouble()
+                }
+
+                previousPurchaseId = itemsId.joinToString(",")
+                previousFlowAmount = itemsAmount.joinToString(",")
+                report_product.text = itemsName.joinToString(", ")
+                report_total.text = DecimalFormat("0.##").format(totalAmount)
             }
             "银行" -> report_bank.text = event.name
             "非基金" -> {

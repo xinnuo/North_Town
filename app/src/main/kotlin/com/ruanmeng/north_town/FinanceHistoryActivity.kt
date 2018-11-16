@@ -49,7 +49,7 @@ class FinanceHistoryActivity : BaseActivity() {
                                     .text(R.id.item_review_product, data.productName)
                                     .text(R.id.item_review_year, "${data.years}年")
                                     .text(R.id.item_review_money,  "${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万")
-                                    .text(R.id.item_review_pay, data.paytypeName)
+                                    .text(R.id.item_review_pay, data.paytypeName.trimEnd('、'))
                                     .visibility(R.id.item_review_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                                     .with<RoundedImageView>(R.id.item_review_img) { view ->

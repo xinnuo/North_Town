@@ -2,11 +2,15 @@ package com.ruanmeng.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.InputFilter;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flyco.dialog.widget.base.BottomBaseDialog;
 import com.maning.mndialoglibrary.MProgressDialog;
+import com.ruanmeng.base.BaseDialog;
 import com.ruanmeng.north_town.R;
 import com.weigan.loopview.LoopView;
 import com.weigan.loopview.OnItemSelectedListener;
@@ -40,6 +44,77 @@ public class DialogHelper {
     public static void dismissDialog() {
         if (mMProgressDialog != null && mMProgressDialog.isShowing())
             mMProgressDialog.dismiss();
+    }
+
+    public static void showInputDialog(
+            final Context context,
+            final String title,
+            final String hint,
+            final String limitAmout,
+            final ClickCallBack callBack) {
+        showInputDialog(context, title, "", hint, limitAmout, callBack);
+    }
+
+    public static void showInputDialog(
+            final Context context,
+            final String title,
+            final String content,
+            final String hint,
+            final String limitAmout,
+            final ClickCallBack callBack) {
+        BaseDialog dialog = new BaseDialog(context, true) {
+            @Override
+            public View onCreateView() {
+                widthScale(0.85f);
+                View view = View.inflate(context, R.layout.dialog_report_order, null);
+
+                TextView tvTitle = view.findViewById(R.id.dialog_title);
+                final EditText etName = view.findViewById(R.id.dialog_name);
+                TextView tvCancel = view.findViewById(R.id.dialog_cancel);
+                TextView tvSure = view.findViewById(R.id.dialog_sure);
+
+                tvTitle.setText(title);
+                etName.setText(content);
+                etName.setHint(hint);
+                etName.setFilters(new InputFilter[]{ new DecimalNumberFilter(), new InputFilter.LengthFilter(6) });
+                etName.setSelection(etName.getText().length());
+
+                tvCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                });
+                tvSure.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (etName.getText().toString().trim().isEmpty()) {
+                            Toast.makeText(context, hint, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (!limitAmout.isEmpty()) {
+                            Double inputValue = Double.parseDouble(etName.getText().toString());
+                            Double limitValue = Double.parseDouble(limitAmout) / 10000;
+
+                            if (inputValue > limitValue) {
+                                Toast.makeText(context, "输入金额应不大于投资金额", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+
+                        dismiss();
+
+                        callBack.onClick(etName.getText().toString().trim());
+                    }
+                });
+
+                return view;
+            }
+        };
+
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
     }
 
     public static void showItemDialog(
@@ -323,6 +398,10 @@ public class DialogHelper {
         }
 
         return items;
+    }
+
+    public interface ClickCallBack {
+        void onClick(String hint);
     }
 
     public interface ItemCallBack {

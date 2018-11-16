@@ -148,5 +148,8 @@ fun RecyclerView.load_Grid(refreshLayout: SwipeRefreshLayout? = null,
     }
 }
 
+fun String.toNotDouble(): Double = if (isEmpty()) "0".toDouble() else toDouble()
+fun CharSequence.toNoDouble(): Double = toString().toNotDouble()
+
 fun String.toNotInt(): Int = if (isEmpty()) "0".toInt() else toInt()
 fun CharSequence.toNoInt(): Int = toString().toNotInt()
