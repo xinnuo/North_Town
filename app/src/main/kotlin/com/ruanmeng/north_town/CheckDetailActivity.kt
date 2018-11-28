@@ -21,6 +21,7 @@ class CheckDetailActivity : BaseActivity() {
 
     private var purchaseId = ""
     private var productId = ""
+    private var productName = ""
     private var accountInfoId = ""
     private var mYears = ""
     private var nonManagerInfoId = ""
@@ -108,13 +109,16 @@ class CheckDetailActivity : BaseActivity() {
                         .params("amount", doubleToLong(check_money.text))
                         .params("beginDate", check_begin.text.toString())
                         .params("endDate", check_end.text.toString())
+                        .params("profit", et_profit.text.toString())
                         .params("bank", check_bank.text.toString())
                         .params("bankCard", check_card.rawText)
                         .params("phone", check_phone.text.toString())
                         .params("address", check_addr.text.trim().toString())
                         .params("fax", check_fax.text.toString())
                         .params("nonManagerInfoId", nonManagerInfoId)
-                        .params("remark", check_memo.text.trim().toString())
+                        .params("remark", check_memo.text.trim().toString()).apply {
+                            if (productName == "会员卡投资") params("prepaidAmount", et_back.text.toString())
+                        }
                         .execute(object : StringDialogCallback(baseContext) {
 
                             @SuppressLint("SetTextI18n")
@@ -144,15 +148,22 @@ class CheckDetailActivity : BaseActivity() {
 
                         purchaseId = obj.optString("purchaseId")
                         productId = obj.optString("productId")
+                        productName = obj.optString("productName")
                         accountInfoId = obj.optString("accountInfoId")
                         mYears = obj.optString("years")
                         nonManagerInfoId = obj.optString("nonManagerInfoId")
 
-                        check_product.setRightString(obj.optString("productName"))
+                        check_product.setRightString(productName)
                         check_year.setRightString("${mYears}年")
                         check_money.setText((obj.optString("amount").toNotInt() / 10000).toString())
                         check_begin.text = obj.optString("beginDate")
                         check_end.text = obj.optString("endDate")
+
+                        et_profit.setText(obj.optString("profit"))
+                        if (productName == "会员卡投资") {
+                            back_ll.visibility = View.VISIBLE
+                            et_back.setText(obj.optString("prepaidAmount"))
+                        }
 
                         val compName = obj.optString("compName")
                         val vipNo = obj.optString("vipNo")

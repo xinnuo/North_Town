@@ -100,6 +100,9 @@ class DataProductActivity : BaseActivity() {
 
                         val profit = obj.optString("profit", "0")
                         product_income.setRightString("+${DecimalFormat("0.##").format(profit.toDouble())}(元)")
+
+                        val muchYears = obj.optString("muchYears", "1")
+                        product_count.setRightString("第${muchYears}年")
                     }
 
                 })

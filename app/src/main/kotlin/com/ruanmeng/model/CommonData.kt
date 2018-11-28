@@ -59,6 +59,10 @@ data class CommonData(
         var villageTypeId: String = "",
         var villageTypeName: String = "",
 
+        //住宅名称
+        var villageId: String = "",
+        var villageName: String = "",
+
         //关系列表
         var relationshipId: String = "",
         var relationshipName: String = "",
@@ -150,5 +154,6 @@ data class CommonData(
         var surplus: String = "",
 
         //审核列表
+        var serviceCheckDate: String = "",
         var paytypeName: String = ""
 ) : Serializable

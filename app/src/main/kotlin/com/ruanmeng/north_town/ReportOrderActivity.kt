@@ -219,6 +219,15 @@ class ReportOrderActivity : BaseActivity() {
                     return
                 }
 
+                if (report_total.text.isNotEmpty()) {
+                    val trans = report_total.text.toNoDouble()
+                    val total = et_money.text.toNoDouble()
+                    if (trans > total) {
+                        showToast("转投续投金额不能超过认购金额")
+                        return
+                    }
+                }
+
                 if (introducerInfoId.isNotEmpty() && relationshipId.isEmpty()) {
                     showToast("请选择与上级客户关系")
                     return

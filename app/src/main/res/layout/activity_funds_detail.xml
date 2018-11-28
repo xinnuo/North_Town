@@ -164,6 +164,18 @@
                 app:sRightTextMarginRight="@dimen/dimen_size_10" />
 
             <com.allen.library.SuperTextView
+                android:id="@+id/funds_count"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="年限"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
                 android:id="@+id/funds_attribute"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_45.5"

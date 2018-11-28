@@ -44,7 +44,7 @@ class ReportUnitActivity : BaseActivity() {
                 .register<CommonData>(R.layout.item_job_list) { data, injector ->
                     injector.gone(R.id.item_job_arrow)
                             .text(R.id.item_job_name, when (intent.getStringExtra("title")) {
-                                "住宅类型" -> data.villageTypeName
+                                "住宅类型" -> data.villageName
                                 "工作单位" -> data.unitTypeName
                                 "客户关系" -> data.relationshipName
                                 else -> ""
@@ -56,8 +56,8 @@ class ReportUnitActivity : BaseActivity() {
                             .clicked(R.id.item_job) {
                                 when (intent.getStringExtra("title")) {
                                     "住宅类型" -> EventBus.getDefault().post(ReportMessageEvent(
-                                            data.villageTypeId,
-                                            data.villageTypeName,
+                                            data.villageId,
+                                            data.villageName,
                                             "类型"))
                                     "工作单位" -> EventBus.getDefault().post(ReportMessageEvent(
                                             data.unitTypeId,
@@ -77,7 +77,7 @@ class ReportUnitActivity : BaseActivity() {
 
     override fun getData() {
         OkGo.post<BaseResponse<ArrayList<CommonData>>>(when (intent.getStringExtra("title")) {
-            "住宅类型" -> BaseHttp.villagetype_list
+            "住宅类型" -> BaseHttp.village_list
             "工作单位" -> BaseHttp.unittype_list
             "客户关系" -> BaseHttp.relationship_list
             else -> ""

@@ -12,6 +12,7 @@ import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.PurchaseModel
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.TimeHelper
 import kotlinx.android.synthetic.main.activity_perform_check.*
 import kotlinx.android.synthetic.main.layout_empty.*
@@ -23,33 +24,18 @@ import java.util.*
 class PerformCheckActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
-    private var mYear = 0
-    private var mMonth = 0
-    private var mWeek = 0
-    private var mDate = ""
-    private var mPatternMonth = ""
-    private var mPatternDate = ""
+    private var date_start = ""
+    private var date_end = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perform_check)
-        init_title()
+        init_title("业绩统计")
 
-        mYear = Calendar.getInstance().get(Calendar.YEAR)
-        mMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
-        mWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR)
-        mDate = TimeHelper.getInstance().stringDateShort
-
-        mPatternMonth = TimeHelper.getInstance().getNowTime("yyyy年MM月")
-        mPatternDate = TimeHelper.getInstance().getNowTime("yyyy年MM月dd日")
-
-        perform_time.text = when (intent.getStringExtra("title")) {
-            "日业绩" -> mPatternDate
-            "周业绩" -> "${mYear}年${mWeek}周"
-            "月业绩" -> mPatternMonth
-            "年业绩" -> "${mYear}年"
-            else -> ""
-        }
+        date_start = intent.getStringExtra("start")
+        date_end = intent.getStringExtra("end")
+        perform_start.text = date_start
+        perform_end.text = date_end
 
         swipe_refresh.isRefreshing = true
         getData(pageNum)
@@ -58,10 +44,6 @@ class PerformCheckActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     override fun init_title() {
         super.init_title()
-        val title = intent.getStringExtra("title")
-        tvTitle.text = title
-        perform_hint.text = "按${title.substring(0, 1)}查询业绩"
-
         empty_hint.text = "暂无相关业绩信息！"
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
@@ -105,66 +87,63 @@ class PerformCheckActivity : BaseActivity() {
                 }
                 .attachTo(recycle_list)
 
-        perform_left.setOnClickListener {
-            when (intent.getStringExtra("title")) {
-                "日业绩" -> {
-                    mDate = TimeHelper.getInstance().getNextDay(mDate, -1)
-                    mPatternDate = TimeHelper.getInstance().getNextDay(mPatternDate, -1, "yyyy年MM月dd日")
-                    perform_time.text = mPatternDate
+        perform_start.setOnClickListener {
+            val year_now = Calendar.getInstance().get(Calendar.YEAR)
+            DialogHelper.showDateDialog(this@PerformCheckActivity,
+                    year_now - 50,
+                    year_now,
+                    3,
+                    "选择起始日期",
+                    true,
+                    false, { _, _, _, _, _, date ->
+                if (perform_end.text.isNotEmpty()) {
+                    val days = TimeHelper.getInstance().getDays(date, perform_end.text.toString())
+                    if (days < 0) {
+                        showToast("起始日期不能大于结束日期")
+                        return@showDateDialog
+                    }
                 }
-                "周业绩" -> {
-                    mWeek = Calendar.getInstance().apply {
-                        set(Calendar.WEEK_OF_YEAR, mWeek)
-                        add(Calendar.WEEK_OF_YEAR, -1)
-                        mYear = get(Calendar.YEAR)
-                    }.get(Calendar.WEEK_OF_YEAR)
-                    perform_time.text = "${mYear}年${mWeek}周"
+
+                perform_start.text = date
+            })
+        }
+
+        perform_end.setOnClickListener {
+            val year_now = Calendar.getInstance().get(Calendar.YEAR)
+            DialogHelper.showDateDialog(this@PerformCheckActivity,
+                    year_now - 50,
+                    year_now,
+                    3,
+                    "选择结束日期",
+                    true,
+                    false, { _, _, _, _, _, date ->
+                if (perform_start.text.isNotEmpty()) {
+                    val days = TimeHelper.getInstance().getDays(perform_start.text.toString(), date)
+                    if (days < 0) {
+                        showToast("结束日期不能小于起始日期")
+                        return@showDateDialog
+                    }
                 }
-                "月业绩" -> {
-                    mMonth = Calendar.getInstance().apply {
-                        set(Calendar.MONTH, mMonth)
-                        add(Calendar.MONTH, -1)
-                        mYear = get(Calendar.YEAR)
-                    }.get(Calendar.MONTH)
-                    mPatternMonth = TimeHelper.getInstance().getAfterMonth(mPatternMonth, -1, "yyyy年MM月")
-                    perform_time.text = mPatternMonth
-                }
-                "年业绩" -> {
-                    mYear -= 1
-                    perform_time.text = "${mYear}年"
-                }
+
+                perform_end.text = date
+            })
+        }
+
+        perform_filter.setOnClickListener {
+
+            if (perform_start.text.isNotEmpty() && perform_end.text.isEmpty()) {
+                showToast("请选择结束日期")
+                return@setOnClickListener
             }
 
-            updateList()
-        }
-        perform_right.setOnClickListener {
-            when (intent.getStringExtra("title")) {
-                "日业绩" -> {
-                    mDate = TimeHelper.getInstance().getNextDay(mDate, 1)
-                    mPatternDate = TimeHelper.getInstance().getNextDay(mPatternDate, 1, "yyyy年MM月dd日")
-                    perform_time.text = mPatternDate
-                }
-                "周业绩" -> {
-                    mWeek = Calendar.getInstance().apply {
-                        set(Calendar.WEEK_OF_YEAR, mWeek)
-                        add(Calendar.WEEK_OF_YEAR, 1)
-                        mYear = get(Calendar.YEAR)
-                    }.get(Calendar.WEEK_OF_YEAR)
-                    perform_time.text = "${mYear}年${mWeek}周"
-                }
-                "月业绩" -> {
-                    mMonth = Calendar.getInstance().apply {
-                        set(Calendar.MONTH, mMonth)
-                        add(Calendar.MONTH, 1)
-                        mYear = get(Calendar.YEAR)
-                    }.get(Calendar.MONTH)
-                    mPatternMonth = TimeHelper.getInstance().getAfterMonth(mPatternMonth, 1, "yyyy年MM月")
-                    perform_time.text = mPatternMonth
-                }
-                "年业绩" -> {
-                    mYear += 1
-                    perform_time.text = "${mYear}年"
-                }
+            if (perform_start.text.isEmpty() && perform_end.text.isNotEmpty()) {
+                showToast("请选择起始日期")
+                return@setOnClickListener
+            }
+
+            if (perform_start.text.isNotEmpty() && perform_end.text.isNotEmpty()) {
+                date_start = perform_start.text.toString()
+                date_end = perform_end.text.toString()
             }
 
             updateList()
@@ -172,32 +151,12 @@ class PerformCheckActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<PurchaseModel>>(when (intent.getStringExtra("title")) {
-            "日业绩" -> BaseHttp.achievement_day_list
-            "周业绩" -> BaseHttp.achievement_week_list
-            "月业绩" -> BaseHttp.achievement_month_list
-            "年业绩" -> BaseHttp.achievement_year_list
-            else -> ""
-        })
+        OkGo.post<BaseResponse<PurchaseModel>>(BaseHttp.achievement_date_list)
                 .tag(this@PerformCheckActivity)
                 .headers("token", getString("token"))
-                .apply {
-                    when (intent.getStringExtra("title")) {
-                        "日业绩" -> params("date", mDate)
-                        "周业绩" -> {
-                            params("year", mYear)
-                            params("week", mWeek)
-                        }
-                        "月业绩" -> {
-                            params("year", mYear)
-                            params("month", mMonth)
-                        }
-                        "年业绩" -> {
-                            params("year", mYear)
-                        }
-                    }
-                }
                 .params("managerInfoId", intent.getStringExtra("managerInfoId"))
+                .params("beginDate", date_start)
+                .params("endDate", date_end)
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<PurchaseModel>>(baseContext) {
 

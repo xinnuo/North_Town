@@ -89,11 +89,6 @@ class FinanceSubmitActivity : BaseActivity() {
                     return
                 }
 
-                if (et_other.text.toNoDouble() > finance_total.text.toNoDouble()) {
-                    showToast("请输入正确的身份证号")
-                    return
-                }
-
                 OkGo.post<String>(BaseHttp.cashier_auditing_sub)
                         .tag(this@FinanceSubmitActivity)
                         .isMultipart(true)
@@ -164,6 +159,12 @@ class FinanceSubmitActivity : BaseActivity() {
                         et_bank.setText(DecimalFormat("0.##").format(receivedBank.toNotDouble() / 10000))
                         et_tran.setText(DecimalFormat("0.##").format(receivedTran.toNotDouble() / 10000))
                         et_other.setText(DecimalFormat("0.##").format(receivedOther.toNotDouble() / 10000))
+                        finance_total.text = DecimalFormat("0.##").format((
+                                receivedCash.toNotDouble()
+                                        + receivedBank.toNotDouble()
+                                        + receivedTran.toNotDouble()
+                                        + receivedOther.toNotDouble()
+                                ) / 10000)
 
                         et_code.setText(obj.optString("receiptNo"))
                         finance_shou.text = obj.optString("receiptTypeName")

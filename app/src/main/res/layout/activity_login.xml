@@ -25,12 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
             android:layout_marginLeft="@dimen/dimen_size_20"
-            android:layout_marginRight="@dimen/dimen_size_20"
             android:layout_marginTop="@dimen/dimen_size_50"
+            android:layout_marginRight="@dimen/dimen_size_20"
             android:background="@android:color/white"
-            android:hint="请输入手机号"
+            android:digits="0123456789xX"
+            android:hint="请输入手机号或身份证号"
             android:inputType="number"
-            android:maxLength="11"
+            android:maxLength="18"
             android:maxLines="1" />
 
         <View
@@ -65,8 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/rec_bg_red"
             android:onClick="doClick"
             android:text="登录" />

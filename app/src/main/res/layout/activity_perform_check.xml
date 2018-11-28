@@ -59,8 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dimen_size_2"
                 android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginBottom="@dimen/dimen_size_2"
                 android:text="退会率：" />
 
             <TextView
@@ -83,50 +83,82 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/perform_hint"
-            style="@style/Font14_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_size_15"
-            android:text="按日查询业绩" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_size_15"
-            android:layout_marginTop="@dimen/dimen_size_10"
+            android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginTop="@dimen/dimen_size_15"
+            android:layout_marginEnd="@dimen/dimen_size_15"
             android:gravity="center_vertical">
 
-            <ImageView
-                android:id="@+id/perform_left"
-                android:layout_width="@dimen/dimen_size_35"
-                android:layout_height="@dimen/dimen_size_35"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/iv_perform_selector_1"
-                tools:ignore="ContentDescription" />
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_size_15"
+                android:text="日期" />
 
             <TextView
-                android:id="@+id/perform_time"
+                android:id="@+id/perform_start"
                 style="@style/Font14_gray"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dimen_size_10"
-                android:layout_marginStart="@dimen/dimen_size_10"
-                android:gravity="center"
-                android:text="2017年11月20日"
-                android:textColor="@color/orange"
-                android:textSize="@dimen/sp_size_20" />
+                android:layout_weight="1"
+                android:background="@drawable/rec_bg_background"
+                android:hint="起始日期"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
+                android:paddingRight="@dimen/dimen_size_10"
+                android:paddingBottom="@dimen/dimen_size_3" />
 
-            <ImageView
-                android:id="@+id/perform_right"
-                android:layout_width="@dimen/dimen_size_35"
-                android:layout_height="@dimen/dimen_size_35"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/iv_perform_selector_2"
-                tools:ignore="ContentDescription" />
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginEnd="@dimen/dimen_size_15"
+                android:text="至" />
+
+            <TextView
+                android:id="@+id/perform_end"
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rec_bg_background"
+                android:hint="结束日期"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
+                android:paddingRight="@dimen/dimen_size_10"
+                android:paddingBottom="@dimen/dimen_size_3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_size_15"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_size_15"
+                android:text="金额"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/perform_filter"
+                style="@style/Font15_black_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rec_bg_white_stroke_light"
+                android:paddingLeft="@dimen/dimen_size_20"
+                android:paddingTop="@dimen/dimen_size_5"
+                android:paddingRight="@dimen/dimen_size_20"
+                android:paddingBottom="@dimen/dimen_size_5"
+                android:text="筛选" />
 
         </LinearLayout>
 

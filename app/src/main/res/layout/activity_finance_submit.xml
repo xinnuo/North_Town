@@ -525,7 +525,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"
@@ -560,7 +561,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:paddingStart="@dimen/dimen_size_10">
+                android:paddingStart="@dimen/dimen_size_10"
+                android:paddingEnd="@dimen/dimen_size_0">
 
                 <TextView
                     style="@style/Font14_black_dark"

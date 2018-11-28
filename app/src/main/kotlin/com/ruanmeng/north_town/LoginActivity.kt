@@ -49,10 +49,11 @@ class LoginActivity : BaseActivity() {
             R.id.main_close -> onBackPressed()
             R.id.tv_forget -> startActivityEx<ForgetActivity>()
             R.id.bt_login -> {
-                if (!CommonUtil.isMobile(et_name.text.toString())) {
+                if (!CommonUtil.isMobile(et_name.text.toString())
+                        && !CommonUtil.IDCardValidate(et_name.text.toString())) {
                     et_name.requestFocus()
                     et_name.setText("")
-                    showToast("手机号码格式错误，请重新输入")
+                    showToast("请输入正确的手机号或身份证号")
                     return
                 }
                 if (et_pwd.text.length < 6) {

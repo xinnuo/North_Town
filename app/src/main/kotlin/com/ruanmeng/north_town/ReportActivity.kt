@@ -2,6 +2,9 @@ package com.ruanmeng.north_town
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputType
+import android.text.method.DigitsKeyListener
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.lzg.extend.BaseResponse
@@ -14,6 +17,7 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.KeyboardHelper
 import kotlinx.android.synthetic.main.activity_report.*
 import kotlinx.android.synthetic.main.layout_empty_add.*
@@ -41,7 +45,10 @@ class ReportActivity : BaseActivity() {
 
     @Suppress("DEPRECATION")
     override fun init_title() {
-        swipe_refresh.refresh { getData(1) }
+        swipe_refresh.refresh {
+            if (keyWord.isEmpty()) getData(1)
+            else getCardData()
+        }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
             if (!isLoadingMore) {
                 isLoadingMore = true
@@ -54,6 +61,7 @@ class ReportActivity : BaseActivity() {
                     injector.text(R.id.item_report_name, getColorText(data.userName, keyWord))
                             .text(R.id.item_report_phone, getColorText("手机 ${data.telephone}", keyWord))
                             .text(R.id.item_report_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
+                            .visibility(R.id.item_report_divider, if(list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .with<RoundedImageView>(R.id.item_report_img) { view ->
                                 view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
@@ -67,19 +75,30 @@ class ReportActivity : BaseActivity() {
                 }
                 .attachTo(recycle_list)
 
-        search_edit.addTextChangedListener(this@ReportActivity)
-        search_edit.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
+        search_edit.apply {
+            hint = "请输入客户身份证号"
+            inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
+            keyListener = DigitsKeyListener.getInstance("1234567890xX")
+            filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18))
+            addTextChangedListener(this@ReportActivity)
 
-                if (search_edit.text.toString().isBlank()) {
-                    showToast("请输入关键字")
-                } else {
-                    keyWord = search_edit.text.trim().toString()
-                    updateList()
+            setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
+
+                    if (search_edit.text.toString().isBlank()) {
+                        showToast("请输入身份证号")
+                    } else {
+                        if (CommonUtil.IDCardValidate(search_edit.text.toString().toUpperCase())) {
+                            keyWord = search_edit.text.trim().toString()
+                            updateSearchList()
+                        } else {
+                            showToast("请输入正确的身份证号")
+                        }
+                    }
                 }
+                return@setOnEditorActionListener false
             }
-            return@setOnEditorActionListener false
         }
     }
 
@@ -92,12 +111,9 @@ class ReportActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.customer_list)
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.my_report_customer_list)
                 .tag(this@ReportActivity)
-                .isMultipart(true)
                 .headers("token", getString("token"))
-                .params("searchar", keyWord)
-                .params("accountType", "2")
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
 
@@ -113,8 +129,6 @@ class ReportActivity : BaseActivity() {
                             if (count(response.body().`object`.accountInfoList) > 0) pageNum++
                         }
                         mAdapter.updateData(list)
-
-                        report_result.text = "搜索结果(${response.body().`object`.count})"
                     }
 
                     override fun onFinish() {
@@ -128,13 +142,51 @@ class ReportActivity : BaseActivity() {
                 })
     }
 
-    fun updateList() {
+    private fun getCardData() {
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.search_customer_by_cardno)
+                .tag(this@ReportActivity)
+                .params("cardNo", keyWord)
+                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
+
+                    @SuppressLint("SetTextI18n")
+                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
+
+                        list.apply {
+                            clear()
+                            addItems(response.body().`object`.accountInfoList)
+                        }
+                        mAdapter.updateData(list)
+                    }
+
+                    override fun onFinish() {
+                        super.onFinish()
+                        swipe_refresh.isRefreshing = false
+                        isLoadingMore = false
+
+                        empty_view.visibility = if (list.size > 0) View.GONE else View.VISIBLE
+                    }
+
+                })
+    }
+
+    private fun updateSearchList() {
         swipe_refresh.isRefreshing = true
 
         empty_view.visibility = View.GONE
         if (list.isNotEmpty()) {
             list.clear()
-            report_result.text = "搜索结果(0)"
+            mAdapter.notifyDataSetChanged()
+        }
+
+        getCardData()
+    }
+
+    private fun updateList() {
+        swipe_refresh.isRefreshing = true
+
+        empty_view.visibility = View.GONE
+        if (list.isNotEmpty()) {
+            list.clear()
             mAdapter.notifyDataSetChanged()
         }
 
@@ -148,9 +200,6 @@ class ReportActivity : BaseActivity() {
                 keyWord = ""
                 updateList()
             }
-        } else {
-            keyWord = s.trim().toString()
-            updateList()
         }
     }
 

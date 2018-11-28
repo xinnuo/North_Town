@@ -1,7 +1,6 @@
 package com.ruanmeng.north_town
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.lzg.extend.BaseResponse
@@ -12,55 +11,38 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.KeyboardHelper
-import com.ruanmeng.utils.Tools
+import com.ruanmeng.utils.TimeHelper
 import kotlinx.android.synthetic.main.activity_perform.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_search.*
 import net.idik.lib.slimadapter.SlimAdapter
 import java.text.DecimalFormat
+import java.util.*
 
 class PerformActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
     private var keyWord = ""
+    private var date_start = ""
+    private var date_end = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perform)
         init_title("业绩统计")
+
+        swipe_refresh.isRefreshing = true
+        getData(pageNum)
     }
 
     override fun init_title() {
         super.init_title()
-        search_edit.hint = "请输入业务人员姓名或手机号"
         empty_hint.text = "暂无相关业绩信息！"
-
-        data_tab.apply {
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-                override fun onTabReselected(tab: TabLayout.Tab) {}
-                override fun onTabUnselected(tab: TabLayout.Tab) {}
-
-                override fun onTabSelected(tab: TabLayout.Tab) {
-                    mPosition = tab.position + 1
-                    OkGo.getInstance().cancelTag(this@PerformActivity)
-
-                    window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
-                }
-
-            })
-
-            addTab(this.newTab().setText("日业绩"), true)
-            addTab(this.newTab().setText("周业绩"), false)
-            addTab(this.newTab().setText("月业绩"), false)
-            addTab(this.newTab().setText("年业绩"), false)
-
-            post { Tools.setIndicator(this, 15, 15) }
-        }
-
-        swipe_refresh.refresh { getData(mPosition) }
+        search_edit.hint = "请输入业务人员姓名或手机号"
+        swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
             if (!isLoadingMore) {
                 isLoadingMore = true
@@ -86,13 +68,8 @@ class PerformActivity : BaseActivity() {
                             .clicked(R.id.item_perform) {
                                 startActivityEx<PerformCheckActivity>(
                                         "managerInfoId" to data.managerInfoId,
-                                        "title" to when (mPosition) {
-                                            1 -> "日业绩"
-                                            2 -> "周业绩"
-                                            3 -> "月业绩"
-                                            4 -> "年业绩"
-                                            else -> ""
-                                        })
+                                        "start" to date_start,
+                                        "end" to date_end)
                             }
                 }
                 .attachTo(recycle_list)
@@ -113,14 +90,77 @@ class PerformActivity : BaseActivity() {
         }
 
         search_close.setOnClickListener { search_edit.setText("") }
+
+        perform_start.setOnClickListener {
+            val year_now = Calendar.getInstance().get(Calendar.YEAR)
+            DialogHelper.showDateDialog(this@PerformActivity,
+                    year_now - 50,
+                    year_now,
+                    3,
+                    "选择起始日期",
+                    true,
+                    false, { _, _, _, _, _, date ->
+                if (perform_end.text.isNotEmpty()) {
+                    val days = TimeHelper.getInstance().getDays(date, perform_end.text.toString())
+                    if (days < 0) {
+                        showToast("起始日期不能大于结束日期")
+                        return@showDateDialog
+                    }
+                }
+
+                perform_start.text = date
+            })
+        }
+
+        perform_end.setOnClickListener {
+            val year_now = Calendar.getInstance().get(Calendar.YEAR)
+            DialogHelper.showDateDialog(this@PerformActivity,
+                    year_now - 50,
+                    year_now,
+                    3,
+                    "选择结束日期",
+                    true,
+                    false, { _, _, _, _, _, date ->
+                if (perform_start.text.isNotEmpty()) {
+                    val days = TimeHelper.getInstance().getDays(perform_start.text.toString(), date)
+                    if (days < 0) {
+                        showToast("结束日期不能小于起始日期")
+                        return@showDateDialog
+                    }
+                }
+
+                perform_end.text = date
+            })
+        }
+
+        perform_filter.setOnClickListener {
+
+            if (perform_start.text.isNotEmpty() && perform_end.text.isEmpty()) {
+                showToast("请选择结束日期")
+                return@setOnClickListener
+            }
+
+            if (perform_start.text.isEmpty() && perform_end.text.isNotEmpty()) {
+                showToast("请选择起始日期")
+                return@setOnClickListener
+            }
+
+            if (perform_start.text.isNotEmpty() && perform_end.text.isNotEmpty()) {
+                date_start = perform_start.text.toString()
+                date_end = perform_end.text.toString()
+            }
+
+            updateList()
+        }
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.achievement_list)
+        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.achievement_statistics_list)
                 .tag(this@PerformActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))
-                .params("type", mPosition)
+                .params("beginDate", date_start)
+                .params("endDate", date_end)
                 .params("searchar", keyWord)
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
@@ -144,7 +184,6 @@ class PerformActivity : BaseActivity() {
                         isLoadingMore = false
 
                         empty_view.visibility = if (list.isNotEmpty()) View.GONE else View.VISIBLE
-                        data_divider.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
                     }
 
                 })

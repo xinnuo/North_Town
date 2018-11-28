@@ -216,13 +216,14 @@ public class CommonUtil {
         }
         // ================ 数字 除最后一位都为数字 ================
         if (IDStr.length() == 18) Ai = IDStr.substring(0, 17);
-        else if (IDStr.length() == 15)
-            Ai = IDStr.substring(0, 6) + "19" + IDStr.substring(6, 15);
+        else Ai = IDStr.substring(0, 6) + "19" + IDStr.substring(6, 15);
+
         if (!isNumeric(Ai)) {
             errorInfo = "身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字";
             Log.e("IDCard", errorInfo);
             return false;
         }
+
         // ================ 出生年月是否有效 ================
         String strYear = Ai.substring(6, 10);// 年份
         String strMonth = Ai.substring(10, 12);// 月份
@@ -255,6 +256,7 @@ public class CommonUtil {
             Log.e("IDCard", errorInfo);
             return false;
         }
+
         // ================ 地区码时候有效 ================
         @SuppressWarnings("rawtypes")
         Hashtable h = GetAreaCode();
@@ -263,6 +265,7 @@ public class CommonUtil {
             Log.e("IDCard", errorInfo);
             return false;
         }
+
         // ================ 判断最后一位的值 ================
         int TotalmulAiWi = 0;
         for (int i = 0; i < 17; i++) {

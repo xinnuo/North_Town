@@ -92,6 +92,9 @@ class FundsDetailActivity : BaseActivity() {
 
                         val profit = obj.optString("profit", "0")
                         funds_get.setRightString("￥ ${DecimalFormat(",##0.##").format(profit.toDouble())}")
+
+                        val muchYears = obj.optString("muchYears", "1")
+                        funds_count.setRightString("第${muchYears}年")
                     }
 
                 })

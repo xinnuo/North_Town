@@ -52,6 +52,29 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/item_finance_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_size_5"
+            android:gravity="center_vertical|end">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_size_5"
+                android:text="客服审核" />
+
+            <TextView
+                android:id="@+id/item_finance_time2"
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017-07-09" />
+
+        </LinearLayout>
+
         <com.fang.dashview.DashView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

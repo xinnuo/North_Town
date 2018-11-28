@@ -89,6 +89,18 @@
                 android:text="客户信息" />
 
             <com.allen.library.SuperTextView
+                android:id="@+id/report_total"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="在投总金额"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
                 android:id="@+id/report_idcard"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_45.5"
@@ -153,18 +165,6 @@
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:layout_marginRight="@dimen/dimen_size_10"
                 android:background="@color/divider" />
-
-            <com.allen.library.SuperTextView
-                android:id="@+id/report_type"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_10"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="住宅类型"
-                app:sLineShow="bottom"
-                app:sRightTextColor="@color/gray"
-                app:sRightTextMarginRight="@dimen/dimen_size_10" />
 
             <com.allen.library.SuperTextView
                 android:id="@+id/report_num"

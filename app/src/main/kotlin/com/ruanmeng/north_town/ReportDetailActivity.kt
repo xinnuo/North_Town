@@ -4,16 +4,14 @@ import android.os.Bundle
 import com.lzg.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.setImageURL
-import com.ruanmeng.base.startActivityEx
+import com.ruanmeng.base.*
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_report_detail.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
+import java.text.DecimalFormat
 
 class ReportDetailActivity : BaseActivity() {
 
@@ -71,6 +69,9 @@ class ReportDetailActivity : BaseActivity() {
                                 .optJSONObject("accountInfo")
                                 ?: JSONObject()
 
+                        val total = obj.optString("aggregateInvestment").toNotDouble()
+                        if (total > 0) report_total.setRightString(DecimalFormat("0.##").format(total / 10000.0) + "万")
+
                         report_img.setImageURL(BaseHttp.baseImg + obj.optString("userhead"))
                         report_name.text = obj.optString("userName", "姓名")
                         report_tel.text = obj.optString("telephone", "电话")
@@ -80,7 +81,6 @@ class ReportDetailActivity : BaseActivity() {
                             else -> "否"
                         })
                         report_house.text = obj.optString("villageName")
-                        report_type.setRightString(obj.optString("villageTypeName"))
                         report_num.setRightString(obj.optString("houseNumber"))
                         report_up.setRightString(obj.optString("introducerName"))
                         report_relation.setRightString(obj.optString("relationshipName"))
