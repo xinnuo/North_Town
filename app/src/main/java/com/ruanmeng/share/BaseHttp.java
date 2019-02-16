@@ -21,6 +21,7 @@ public class BaseHttp {
     public static String userhead_update = baseIp + "/userhead_update.rm"; //上传头像√
     public static String userinfo_update = baseIp + "/userinfo_update.rm"; //修改姓名√
     public static String update_pwd2 = baseIp + "/update_pwd2.rm";         //修改密码√
+    public static String equipment_check = baseIp + "/equipment_check.rm"; //设备检查√
 
     public static String customer_list = baseIp + "/customer_list.rm";                         //报备列表√
     public static String my_report_customer_list = baseIp + "/my_report_customer_list.rm";     //我的报备列表√

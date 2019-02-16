@@ -10,6 +10,7 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.getDateFormat
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
@@ -50,7 +51,7 @@ class DataHistoryActivity : BaseActivity() {
                             injector.text(R.id.item_history_name, data.userName)
                                     .text(R.id.item_history_phone, "产品名称：${data.productName}")
                                     .text(R.id.item_history_idcard, "投资周期：${data.beginDate} ~ ${data.endDate}")
-                                    .text(R.id.item_history_limit, data.years)
+                                    .text(R.id.item_history_limit, data.years.getDateFormat())
                                     .text(R.id.item_history_num, data.amount)
                                     .text(R.id.item_history_type, when (data.investType) {
                                         "1" -> "转投"
@@ -86,7 +87,7 @@ class DataHistoryActivity : BaseActivity() {
                                     .text(R.id.item_check_limit, "${data.beginDate} ~ ${data.endDate}")
                                     .text(R.id.item_check_range, "${data.rate}%")
                                     .text(R.id.item_check_money, "${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万")
-                                    .text(R.id.item_check_long, "${data.years}年")
+                                    .text(R.id.item_check_long, data.years.getDateFormat())
                                     .visibility(R.id.item_check_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                                     .clicked(R.id.item_check) {

@@ -62,10 +62,19 @@ class FundsDetailActivity : BaseActivity() {
                         val amount = obj.optString("amount", "0")
                         funds_money.text = DecimalFormat(",##0.##").format(amount.toDouble() / 10000.0)
 
-                        funds_year.text = obj.optString("years", "0")
                         funds_name.setRightString(obj.optString("userName"))
                         funds_tel.setRightString(obj.optString("telephone"))
                         funds_idcard.setRightString(obj.optString("cardNo"))
+
+                        val year = obj.optString("years", "0").toInt()
+                        if (year < 12) {
+                            funds_year.text = year.toString()
+                            funds_year_hint.text = "投资周期(月)"
+                        } else {
+                            funds_year.text = DecimalFormat("0.##").format(year / 12.0)
+                            funds_year_hint.text = "投资周期(年)"
+                        }
+
                         when (obj.optString("investType")) {
                             "1" -> {
                                 funds_attribute.setRightString("转投")
@@ -93,7 +102,8 @@ class FundsDetailActivity : BaseActivity() {
                         val profit = obj.optString("profit", "0")
                         funds_get.setRightString("￥ ${DecimalFormat(",##0.##").format(profit.toDouble())}")
 
-                        val muchYears = obj.optString("muchYears", "1")
+                        var muchYears = obj.optString("muchYears", "1")
+                        if (muchYears.isEmpty()) muchYears = "1"
                         funds_count.setRightString("第${muchYears}年")
                     }
 

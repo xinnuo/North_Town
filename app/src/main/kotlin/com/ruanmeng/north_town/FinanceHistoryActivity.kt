@@ -13,6 +13,7 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.NumberHelper
+import com.ruanmeng.utils.getDateFormat
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_search.*
@@ -56,7 +57,7 @@ class FinanceHistoryActivity : BaseActivity() {
                             injector.text(R.id.item_review_name, getColorText(data.userName, keyWord))
                                     .text(R.id.item_review_time, data.createDate)
                                     .text(R.id.item_review_product, data.productName)
-                                    .text(R.id.item_review_year, "${data.years}年")
+                                    .text(R.id.item_review_year, data.years.getDateFormat())
                                     .text(R.id.item_review_money,  "${DecimalFormat(",##0.##").format(data.amount.toInt() / 10000.0)}万")
                                     .text(R.id.item_review_pay, data.paytypeName.trimEnd('、'))
                                     .gone(R.id.item_review_divider)

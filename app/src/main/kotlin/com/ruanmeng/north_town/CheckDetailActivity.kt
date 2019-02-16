@@ -64,14 +64,14 @@ class CheckDetailActivity : BaseActivity() {
                 val year_now = Calendar.getInstance().get(Calendar.YEAR)
                 DialogHelper.showDateDialog(
                         baseContext,
-                        year_now,
+                        year_now - 5,
                         year_now + 20,
                         3,
                         "选择出资日期",
                         true,
                         false, { _, _, _, _, _, date ->
                     check_begin.text = date
-                    check_end.text = TimeHelper.getInstance().getAnyYear(date, mYears.toInt())
+                    check_end.text = TimeHelper.getInstance().getAnyMonthAny(date, mYears.toInt())
                 })
             }
             R.id.check_bank_ll -> startActivityEx<ReportBankActivity>()
@@ -154,7 +154,7 @@ class CheckDetailActivity : BaseActivity() {
                         nonManagerInfoId = obj.optString("nonManagerInfoId")
 
                         check_product.setRightString(productName)
-                        check_year.setRightString("${mYears}年")
+                        check_year.setRightString(mYears.getDateFormat())
                         check_money.setText((obj.optString("amount").toNotInt() / 10000).toString())
                         check_begin.text = obj.optString("beginDate")
                         check_end.text = obj.optString("endDate")

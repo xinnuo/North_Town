@@ -144,14 +144,14 @@ class ReportOrderActivity : BaseActivity() {
                 val year_now = Calendar.getInstance().get(Calendar.YEAR)
                 DialogHelper.showDateDialog(
                         baseContext,
-                        year_now,
+                        year_now - 5,
                         year_now + 20,
                         3,
                         "选择出资日期",
                         true,
                         false, { _, _, _, _, _, date ->
                     report_start.text = date
-                    report_end.text = TimeHelper.getInstance().getAnyYear(date, items.first().years.toInt())
+                    report_end.text = TimeHelper.getInstance().getAnyMonthAny(date, items.first().years.toInt())
                 })
             }
             R.id.report_bank_ll -> startActivityEx<ReportBankActivity>()
@@ -190,7 +190,7 @@ class ReportOrderActivity : BaseActivity() {
 
                     if (report_start.text.isNotEmpty()) {
                         report_end.text = TimeHelper.getInstance()
-                                .getAnyYear(
+                                .getAnyMonthAny(
                                         report_start.text.toString(),
                                         items.first().years.toInt())
                     }
@@ -258,7 +258,7 @@ class ReportOrderActivity : BaseActivity() {
                         .params("previousPurchaseId", previousPurchaseId)
                         .params("previousFlowAmount", previousFlowAmount)
                         .params("stock", doubleToLong(report_total.text))
-                        .params("years", report_year.text.trimEnd('年').toString())
+                        .params("years", items[listYear.indexOf(report_year.text.toString())].years)
                         .params("amount", doubleToLong(et_money.text))
                         .params("beginDate", report_start.text.toString())
                         .params("endDate", report_end.text.toString())
@@ -378,7 +378,7 @@ class ReportOrderActivity : BaseActivity() {
                         listRate.addItems(response.body().`object`.rateList)
                         if (listRate.isNotEmpty()) {
                             val minYears = listRate.first().years.split(",")
-                            minYears.mapTo(listYear.apply { clear() }) { "${it}年" }
+                            minYears.mapTo(listYear.apply { clear() }) { it.getDateFormat() }
 
                             if (listYear.isNotEmpty()) {
                                 report_year.text = listYear.first()

@@ -14,6 +14,7 @@ import com.ruanmeng.model.PurchaseModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.TimeHelper
+import com.ruanmeng.utils.getDateFormat
 import kotlinx.android.synthetic.main.activity_perform_check.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
@@ -60,7 +61,7 @@ class PerformCheckActivity : BaseActivity() {
                             .text(R.id.item_perform_tel, "(${data.telephone})")
                             .text(R.id.item_perform_product, data.productName)
                             .text(R.id.item_perform_money, "${DecimalFormat(",##0.##").format(data.amount.toDouble() / 10000.0)}万")
-                            .text(R.id.item_perform_limit, "${data.years}年")
+                            .text(R.id.item_perform_limit, data.years.getDateFormat())
                             .text(R.id.item_perform_date, data.createDate)
                             .text(R.id.item_perform_type, if (data.status == "0") "退会" else when (data.investType) {
                                 "1" -> "转投"

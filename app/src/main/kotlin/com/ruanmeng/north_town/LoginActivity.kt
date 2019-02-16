@@ -9,6 +9,7 @@ import com.ruanmeng.base.*
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
+import com.ruanmeng.utils.DeviceHelper
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.layout_title_main.*
 import org.json.JSONObject
@@ -66,6 +67,7 @@ class LoginActivity : BaseActivity() {
                         .tag(this@LoginActivity)
                         .params("accountName", et_name.text.trim().toString())
                         .params("password", et_pwd.text.trim().toString())
+                        .params("equipment", DeviceHelper.getDeviceIdIMEI(baseContext))
                         .params("accountType", "App_Staff")
                         .execute(object : StringDialogCallback(this@LoginActivity) {
 

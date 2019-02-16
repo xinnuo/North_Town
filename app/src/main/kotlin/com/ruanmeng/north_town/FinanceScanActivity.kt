@@ -7,6 +7,7 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.getDateFormat
 import kotlinx.android.synthetic.main.activity_finance_scan.*
 import org.json.JSONObject
 
@@ -34,7 +35,7 @@ class FinanceScanActivity : BaseActivity() {
 
                         scan_product.setRightString(obj.optString("productName"))
                         scan_money.setRightString(obj.optString("amount"))
-                        scan_year.setRightString("${obj.optString("years")}年")
+                        scan_year.setRightString(obj.optString("years").getDateFormat())
                         scan_begin.setRightString(obj.optString("beginDate"))
                         scan_end.setRightString(obj.optString("endDate"))
 

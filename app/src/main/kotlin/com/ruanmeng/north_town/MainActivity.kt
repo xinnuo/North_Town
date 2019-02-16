@@ -5,13 +5,28 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.KeyEvent
 import android.widget.CompoundButton
+import com.lzg.extend.StringDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.getString
 import com.ruanmeng.base.showToast
+import com.ruanmeng.base.startActivityEx
 import com.ruanmeng.fragment.MainFirstFragment
 import com.ruanmeng.fragment.MainSecondFragment
+import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.DeviceHelper
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
+import java.util.concurrent.TimeUnit
 
 class MainActivity : BaseActivity() {
+
+    private val mCompositeDisposable by lazy { CompositeDisposable() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +35,8 @@ class MainActivity : BaseActivity() {
         init_title()
 
         main_check1.performClick()
+
+        checkState()
     }
 
     override fun init_title() {
@@ -48,6 +65,33 @@ class MainActivity : BaseActivity() {
         }
 
         override fun getCount(): Int = 2
+    }
+
+    private fun checkState() {
+        mCompositeDisposable.add(
+                Observable.interval(5, 5, TimeUnit.SECONDS)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            OkGo.post<String>(BaseHttp.equipment_check)
+                                    .tag(this@MainActivity)
+                                    .headers("token", getString("token"))
+                                    .params("equipment", DeviceHelper.getDeviceIdIMEI(baseContext))
+                                    .execute(object : StringDialogCallback(baseContext, false) {
+
+                                        override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                            val obj = JSONObject(response.body()).optString("object")
+                                            if (obj == "1")  startActivityEx<LoginActivity>("offLine" to true)
+                                        }
+
+                                    })
+                        }
+        )
+    }
+
+    override fun finish() {
+        super.finish()
+        mCompositeDisposable.clear()
     }
 
     private var exitTime: Long = 0

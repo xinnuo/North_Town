@@ -17,6 +17,7 @@ import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.KeyboardHelper
+import com.ruanmeng.utils.getDateFormat
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_search.*
@@ -71,7 +72,7 @@ class ReportListActivity : BaseActivity() {
                             .text(R.id.item_check_limit, "${data.beginDate} ~ ${data.endDate}")
                             .text(R.id.item_check_range, "${data.rate}%")
                             .text(R.id.item_check_money, "${DecimalFormat(",##0.##").format(data.amount.toDouble() / 10000.0)}万")
-                            .text(R.id.item_check_long, "${data.years}年")
+                            .text(R.id.item_check_long, data.years.getDateFormat())
                             .text(R.id.item_check_user, data.userName)
                             .gone(R.id.item_check_divider)
 

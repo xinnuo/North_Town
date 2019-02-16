@@ -88,9 +88,17 @@ class DataProductActivity : BaseActivity() {
                             }
                             "3" -> product_way.setRightString("新增")
                         }
-                        product_year.text = obj.optString("years", "0")
                         product_start.setRightString(obj.optString("beginDate"))
                         product_end.setRightString(obj.optString("endDate"))
+
+                        val year = obj.optString("years", "0").toInt()
+                        if (year < 12) {
+                            product_year.text = year.toString()
+                            product_year_hint.text = "投资周期(月)"
+                        } else {
+                            product_year.text = DecimalFormat("0.##").format(year / 12.0)
+                            product_year_hint.text = "投资周期(年)"
+                        }
 
                         val amount = obj.optString("amount", "0")
                         product_money.text = DecimalFormat(",##0.##").format(amount.toDouble() / 10000.0)
@@ -101,7 +109,8 @@ class DataProductActivity : BaseActivity() {
                         val profit = obj.optString("profit", "0")
                         product_income.setRightString("+${DecimalFormat("0.##").format(profit.toDouble())}(元)")
 
-                        val muchYears = obj.optString("muchYears", "1")
+                        var muchYears = obj.optString("muchYears", "1")
+                        if (muchYears.isEmpty()) muchYears = "1"
                         product_count.setRightString("第${muchYears}年")
                     }
 

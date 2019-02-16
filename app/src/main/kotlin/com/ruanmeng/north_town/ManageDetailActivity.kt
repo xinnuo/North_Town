@@ -15,9 +15,11 @@ import com.ruanmeng.base.getString
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.ProductModel
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.getDateFormat
 import com.ruanmeng.view.FullyLinearLayoutManager
 import kotlinx.android.synthetic.main.activity_manage_detail.*
 import net.idik.lib.slimadapter.SlimAdapter
+import java.text.DecimalFormat
 
 class ManageDetailActivity : BaseActivity() {
 
@@ -78,7 +80,9 @@ class ManageDetailActivity : BaseActivity() {
                                     view.visibility = if (rates.size > 1) View.VISIBLE else View.GONE
 
                                     var hint = "利率"
-                                    (0 until rates.size).forEach { hint += "  ${years[it]}年(${rates[it]}%)" }
+                                    (0 until rates.size).forEach {
+                                        hint += "  ${years[it].getDateFormat()}(${rates[it]}%)"
+                                    }
                                     view.text = hint
                                 }
                     }
@@ -108,8 +112,16 @@ class ManageDetailActivity : BaseActivity() {
                         val maxRates = list.last().rate.split(",")
 
                         manage_percent.text = "${minRates.first()}%~${maxRates.last()}%"
-                        manage_year.text = minYears.first()
                         manage_money.text = data.minAmount
+
+                        val year = minYears.first().toInt()
+                        if (year < 12) {
+                            manage_year.text = year.toString()
+                            manage_year_hint.text = "投资周期(月)"
+                        } else {
+                            manage_year.text = DecimalFormat("0.##").format(year / 12.0)
+                            manage_year_hint.text = "投资周期(年)"
+                        }
 
                         val str = "<meta " +
                                 "name=\"viewport\" " +

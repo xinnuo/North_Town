@@ -1067,6 +1067,19 @@ public class TimeHelper {
     }
 
     /**
+     * 获得指定几个月后（前）的当天天日期
+     */
+    public String getAnyMonthNow(int amount) {
+        Calendar lastDate = Calendar.getInstance();
+
+        lastDate.add(Calendar.MONTH, amount); //正数为月后，负数为月前
+
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(lastDate.getTime());
+    }
+
+    /**
      * 获得指定几个月后（前）的最后一天日期
      */
     public String getAnyMonthEnd(int amount) {
@@ -1079,6 +1092,26 @@ public class TimeHelper {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(lastDate.getTime());
+    }
+
+    /**
+     * 获得指定日期指定几个月后（前）的日期
+     */
+    public String getAnyMonthAny(String time, int amount) {
+        Calendar lastDate = Calendar.getInstance();
+
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            lastDate.setTime(sdf.parse(time));
+            lastDate.add(Calendar.MONTH, amount); //正数为月后，负数为月前
+            return sdf.format(lastDate.getTime());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return time;
+        }
     }
 
     /**
