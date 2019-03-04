@@ -32,8 +32,8 @@ class ReportSelectActivity : BaseActivity() {
         val accountInfoId = intent.getStringExtra("accountInfoId")
         when (v.id) {
             R.id.report_partner -> {
-                if (list.any { it.productName == "有限合伙人投资" }) {
-                    val productId = list.first { it.productName == "有限合伙人投资" }.productId
+                if (list.any { it.productType == "有限合伙人" }) {
+                    val productId = list.first { it.productType == "有限合伙人" }.productId
 
                     startActivityEx<ReportPartnerActivity>(
                             "accountInfoId" to accountInfoId,
@@ -42,8 +42,8 @@ class ReportSelectActivity : BaseActivity() {
                 }
             }
             R.id.report_vip -> {
-                if (list.any { it.productName == "会员卡投资" }) {
-                    val productId = list.first { it.productName == "会员卡投资" }.productId
+                if (list.any { it.productType == "会员卡" }) {
+                    val productId = list.first { it.productType == "会员卡" }.productId
 
                     startActivityEx<ReportOrderActivity>(
                             "accountInfoId" to accountInfoId,

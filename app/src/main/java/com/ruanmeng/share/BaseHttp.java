@@ -23,7 +23,7 @@ public class BaseHttp {
     public static String update_pwd2 = baseIp + "/update_pwd2.rm";         //修改密码√
     public static String equipment_check = baseIp + "/equipment_check.rm"; //设备检查√
 
-    public static String customer_list = baseIp + "/customer_list.rm";                         //报备列表√
+    public static String staff_customer_list = baseIp + "/staff_customer_list.rm";             //上级列表√
     public static String my_report_customer_list = baseIp + "/my_report_customer_list.rm";     //我的报备列表√
     public static String search_customer_by_cardno = baseIp + "/search_customer_by_cardno.rm"; //报备列表搜索√
     public static String customer_details = baseIp + "/customer_details.rm";                   //客户详情√

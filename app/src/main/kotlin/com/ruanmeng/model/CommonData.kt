@@ -125,6 +125,8 @@ data class CommonData(
         //产品列表
         var img: String = "",
         var productId: String = "",
+        var productType: String = "",
+        var isApp: String = "",
 
         //利率列表
         var max: String = "",

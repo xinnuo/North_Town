@@ -40,7 +40,7 @@ class ManageActivity : BaseActivity() {
                             .visibility(R.id.item_product_divider3, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .with<ImageView>(R.id.item_product_img) { view ->
-                                view.setImageURL(BaseHttp.baseImg + data.img, R.mipmap.default_user)
+                                view.setImageURL(BaseHttp.baseImg + data.img, R.mipmap.default_logo)
                             }
 
                             .clicked(R.id.item_product) {

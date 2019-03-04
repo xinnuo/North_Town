@@ -88,7 +88,7 @@ class ReportUpActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.customer_list)
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.staff_customer_list)
                 .tag(this@ReportUpActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))

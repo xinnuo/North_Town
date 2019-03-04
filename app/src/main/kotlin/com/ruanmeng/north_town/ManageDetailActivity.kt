@@ -107,20 +107,22 @@ class ManageDetailActivity : BaseActivity() {
 
                         val data = response.body().`object`.product
 
-                        val minYears = list.first().years.split(",")
-                        val minRates = list.first().rate.split(",")
-                        val maxRates = list.last().rate.split(",")
+                        if (list.isNotEmpty()) {
+                            val minYears = list.first().years.split(",")
+                            val minRates = list.first().rate.split(",")
+                            val maxRates = list.last().rate.split(",")
 
-                        manage_percent.text = "${minRates.first()}%~${maxRates.last()}%"
-                        manage_money.text = data.minAmount
+                            manage_percent.text = "${minRates.first()}%~${maxRates.last()}%"
+                            manage_money.text = data.minAmount
 
-                        val year = minYears.first().toInt()
-                        if (year < 12) {
-                            manage_year.text = year.toString()
-                            manage_year_hint.text = "投资周期(月)"
-                        } else {
-                            manage_year.text = DecimalFormat("0.##").format(year / 12.0)
-                            manage_year_hint.text = "投资周期(年)"
+                            val year = minYears.first().toInt()
+                            if (year < 12) {
+                                manage_year.text = year.toString()
+                                manage_year_hint.text = "投资周期(月)"
+                            } else {
+                                manage_year.text = DecimalFormat("0.##").format(year / 12.0)
+                                manage_year_hint.text = "投资周期(年)"
+                            }
                         }
 
                         val str = "<meta " +

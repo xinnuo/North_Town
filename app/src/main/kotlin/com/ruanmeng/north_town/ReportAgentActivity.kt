@@ -174,7 +174,7 @@ class ReportAgentActivity : BaseActivity() {
                         }
 
                     })
-            else -> OkGo.post<BaseResponse<CommonModel>>(BaseHttp.customer_list)
+            else -> OkGo.post<BaseResponse<CommonModel>>(BaseHttp.staff_customer_list)
                     .tag(this@ReportAgentActivity)
                     .isMultipart(true)
                     .headers("token", getString("token"))
