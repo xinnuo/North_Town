@@ -131,21 +131,8 @@ class PerformCheckActivity : BaseActivity() {
         }
 
         perform_filter.setOnClickListener {
-
-            if (perform_start.text.isNotEmpty() && perform_end.text.isEmpty()) {
-                showToast("请选择结束日期")
-                return@setOnClickListener
-            }
-
-            if (perform_start.text.isEmpty() && perform_end.text.isNotEmpty()) {
-                showToast("请选择起始日期")
-                return@setOnClickListener
-            }
-
-            if (perform_start.text.isNotEmpty() && perform_end.text.isNotEmpty()) {
-                date_start = perform_start.text.toString()
-                date_end = perform_end.text.toString()
-            }
+            date_start = perform_start.text.toString()
+            date_end = perform_end.text.toString()
 
             updateList()
         }
