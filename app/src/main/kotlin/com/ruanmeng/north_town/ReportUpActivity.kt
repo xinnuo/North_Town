@@ -1,6 +1,9 @@
 package com.ruanmeng.north_town
 
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputType
+import android.text.method.DigitsKeyListener
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.lzg.extend.BaseResponse
@@ -14,6 +17,7 @@ import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.ReportMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
+import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.KeyboardHelper
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
@@ -30,14 +34,16 @@ class ReportUpActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_up)
         init_title("选择上级客户")
-
-        swipe_refresh.isRefreshing = true
-        getData(pageNum)
     }
 
     override fun init_title() {
         super.init_title()
-        search_edit.hint = "请输入客户姓名或手机号或身份证号"
+        search_edit.apply {
+            hint = "请输入客户身份证号"
+            inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
+            keyListener = DigitsKeyListener.getInstance("1234567890xX")
+            filters = arrayOf<InputFilter>(InputFilter.LengthFilter(18))
+        }
         empty_hint.text = "暂无相关客户信息！"
 
         swipe_refresh.refresh { getData(1) }
@@ -75,10 +81,14 @@ class ReportUpActivity : BaseActivity() {
                 KeyboardHelper.hideSoftInput(baseContext) //隐藏软键盘
 
                 if (search_edit.text.toString().isBlank()) {
-                    showToast("请输入关键字")
+                    showToast("请输入身份证号")
                 } else {
-                    keyWord = search_edit.text.toString()
-                    updateList()
+                    if (CommonUtil.IDCardValidate(search_edit.text.toString().toUpperCase())) {
+                        keyWord = search_edit.text.trim().toString()
+                        updateList()
+                    } else {
+                        showToast("请输入正确的身份证号")
+                    }
                 }
             }
             return@setOnEditorActionListener false
@@ -138,7 +148,10 @@ class ReportUpActivity : BaseActivity() {
         search_close.visibility = if (s.isEmpty()) View.GONE else View.VISIBLE
         if (s.isEmpty() && keyWord.isNotEmpty()) {
             keyWord = ""
-            updateList()
+            if (list.isNotEmpty()) {
+                list.clear()
+                mAdapter.notifyDataSetChanged()
+            }
         }
     }
 }

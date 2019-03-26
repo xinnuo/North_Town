@@ -14,8 +14,8 @@ android {
         applicationId "com.ruanmeng.north_town"
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
-        versionCode 103
-        versionName "1.0.3"
+        versionCode 104
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -111,7 +111,7 @@ dependencies {
     }
 
     implementation 'com.yanzhenjie:permission:1.1.2'
-    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'net.idik:slimadapter:2.1.2'
     implementation 'com.fang:dashview:v1.0.0'
     implementation 'com.github.santalu:mask-edittext:1.0.1'

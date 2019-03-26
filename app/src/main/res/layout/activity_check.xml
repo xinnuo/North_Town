@@ -6,6 +6,8 @@
 
     <include layout="@layout/layout_search" />
 
+    <include layout="@layout/layout_result" />
+
     <include layout="@layout/layout_list" />
 
 </LinearLayout>

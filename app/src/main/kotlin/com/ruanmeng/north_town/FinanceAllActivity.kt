@@ -121,7 +121,7 @@ class FinanceAllActivity : BaseActivity() {
     }
 
     override fun getData() {
-        OkGo.post<String>(BaseHttp.customer_purchase_details)
+        OkGo.post<String>(BaseHttp.check_customer_purchase_details)
                 .tag(this@FinanceAllActivity)
                 .headers("token", getString("token"))
                 .params("purchaseId", intent.getStringExtra("purchaseId"))
@@ -171,6 +171,7 @@ class FinanceAllActivity : BaseActivity() {
                         finance_tel.setRightString(obj.optString("cashierInfoTelephone"))
                         finance_manager.text = obj.optString("managerInfoName")
                         finance_non.text = obj.optString("nonManagerName")
+                        finance_dai.text = obj.optString("introducerName")
                         et_memo.setText(obj.optString("financeRemark"))
                         et_code.setSelection(et_code.text.length)
 

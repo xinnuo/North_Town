@@ -10,12 +10,14 @@ import com.lzy.okgo.model.Response
 import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.NumberHelper
 import com.ruanmeng.utils.getDateFormat
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
+import kotlinx.android.synthetic.main.layout_result.*
 import kotlinx.android.synthetic.main.layout_search.*
 import net.idik.lib.slimadapter.SlimAdapter
 import java.text.DecimalFormat
@@ -107,24 +109,27 @@ class FinanceHistoryActivity : BaseActivity() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.purchase_past_auditing_list)
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.purchase_past_auditing_list)
                 .tag(this@FinanceHistoryActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("searchar", keyWord)
                 .params("page", pindex)
-                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
+                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
 
-                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
 
                         list.apply {
                             if (pindex == 1) {
                                 clear()
                                 pageNum = pindex
                             }
-                            addItems(response.body().`object`)
-                            if (count(response.body().`object`) > 0) pageNum++
+                            addItems(response.body().`object`.maps)
+                            if (count(response.body().`object`.maps) > 0) pageNum++
                         }
+
+                        list_result.text = response.body().`object`?.count ?: "0"
+
                         mAdapter.updateData(list)
                     }
 
@@ -154,8 +159,14 @@ class FinanceHistoryActivity : BaseActivity() {
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         search_close.visibility = if (s.isEmpty()) View.GONE else View.VISIBLE
-        if (s.isEmpty() && keyWord.isNotEmpty()) {
-            keyWord = ""
+
+        if (s.isEmpty()) {
+            if (keyWord.isNotEmpty()) {
+                keyWord = ""
+                updateList()
+            }
+        } else {
+            keyWord = s.toString()
             updateList()
         }
     }

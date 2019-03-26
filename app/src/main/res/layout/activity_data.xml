@@ -6,6 +6,8 @@
 
     <include layout="@layout/layout_search" />
 
+    <include layout="@layout/layout_result" />
+
     <View
         android:id="@+id/data_divider"
         android:layout_width="match_parent"

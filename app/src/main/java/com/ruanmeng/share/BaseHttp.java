@@ -45,12 +45,13 @@ public class BaseHttp {
     public static String staff_type_list = baseIp + "/staff_type_list.rm";                                   //各类员工列表√
     public static String customer_investment_past_record = baseIp + "/customer_investment_past_record.rm";   //历史投资记录√
 
-    public static String customer_list_all = baseIp + "/customer_list_all.rm";                     //资料老列表√
-    public static String potentialcustomer_details = baseIp + "/potentialcustomer_details.rm";     //新客户明细√
-    public static String remark_my_potentialcustomer = baseIp + "/remark_my_potentialcustomer.rm"; //新增备注√
-    public static String customer_purchase_list = baseIp + "/customer_purchase_list.rm";           //客户订单√
-    public static String customer_purchase_details = baseIp + "/customer_purchase_details.rm";     //订单详情√
-    public static String introducer_purchase_details = baseIp + "/introducer_purchase_details.rm"; //上级订单详情√
+    public static String customer_list_all = baseIp + "/customer_list_all.rm";                             //资料老列表√
+    public static String potentialcustomer_details = baseIp + "/potentialcustomer_details.rm";             //新客户明细√
+    public static String remark_my_potentialcustomer = baseIp + "/remark_my_potentialcustomer.rm";         //新增备注√
+    public static String customer_purchase_list = baseIp + "/customer_purchase_list.rm";                   //客户订单√
+    public static String customer_purchase_details = baseIp + "/customer_purchase_details.rm";             //订单详情√
+    public static String check_customer_purchase_details = baseIp + "/check_customer_purchase_details.rm"; //订单详情√
+    public static String introducer_purchase_details = baseIp + "/introducer_purchase_details.rm";         //上级订单详情√
 
     public static String paytype_list = baseIp + "/paytype_list.rm";                       //支付方式√
     public static String receipttype_list = baseIp + "/receipttype_list.rm";               //收据类型√

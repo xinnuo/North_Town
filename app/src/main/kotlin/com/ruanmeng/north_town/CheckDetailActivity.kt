@@ -46,7 +46,6 @@ class CheckDetailActivity : BaseActivity() {
         check_money.addTextChangedListener(this@CheckDetailActivity)
         check_begin.addTextChangedListener(this@CheckDetailActivity)
         check_end.addTextChangedListener(this@CheckDetailActivity)
-        check_bank.addTextChangedListener(this@CheckDetailActivity)
         check_card.addTextChangedListener(this@CheckDetailActivity)
         check_phone.addTextChangedListener(this@CheckDetailActivity)
     }
@@ -204,7 +203,6 @@ class CheckDetailActivity : BaseActivity() {
         if (check_money.text.isNotBlank()
                 && check_begin.text.isNotBlank()
                 && check_end.text.isNotBlank()
-                && check_bank.text.isNotBlank()
                 && check_card.text.isNotBlank()
                 && check_phone.text.isNotBlank()) {
             check_pass.setBackgroundResource(R.drawable.rec_bg_red)

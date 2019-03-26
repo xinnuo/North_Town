@@ -306,8 +306,14 @@ class FundsAgentActivity : BaseActivity() {
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         search_close.visibility = if (s.isEmpty()) View.GONE else View.VISIBLE
-        if (s.isEmpty() && keyWord.isNotEmpty()) {
-            keyWord = ""
+
+        if (s.isEmpty()) {
+            if (keyWord.isNotEmpty()) {
+                keyWord = ""
+                updateList()
+            }
+        } else {
+            keyWord = s.toString()
             updateList()
         }
     }

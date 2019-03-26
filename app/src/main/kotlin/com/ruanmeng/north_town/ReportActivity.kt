@@ -21,6 +21,7 @@ import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.KeyboardHelper
 import kotlinx.android.synthetic.main.activity_report.*
 import kotlinx.android.synthetic.main.layout_empty_add.*
+import kotlinx.android.synthetic.main.layout_result.*
 import kotlinx.android.synthetic.main.layout_title_search.*
 import net.idik.lib.slimadapter.SlimAdapter
 import org.greenrobot.eventbus.EventBus
@@ -61,7 +62,6 @@ class ReportActivity : BaseActivity() {
                     injector.text(R.id.item_report_name, getColorText(data.userName, keyWord))
                             .text(R.id.item_report_phone, getColorText("手机 ${data.telephone}", keyWord))
                             .text(R.id.item_report_idcard, getColorText("身份证号 ${data.cardNo}", keyWord))
-                            .visibility(R.id.item_report_divider, if(list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                             .with<RoundedImageView>(R.id.item_report_img) { view ->
                                 view.setImageURL(BaseHttp.baseImg + data.userhead, R.mipmap.default_user)
@@ -128,6 +128,9 @@ class ReportActivity : BaseActivity() {
                             addItems(response.body().`object`.accountInfoList)
                             if (count(response.body().`object`.accountInfoList) > 0) pageNum++
                         }
+
+                        list_result.text = response.body()?.`object`?.count ?: "0"
+
                         mAdapter.updateData(list)
                     }
 
@@ -155,6 +158,9 @@ class ReportActivity : BaseActivity() {
                             clear()
                             addItems(response.body().`object`.accountInfoList)
                         }
+
+                        list_result.text = response.body()?.`object`?.count ?: "0"
+
                         mAdapter.updateData(list)
                     }
 
