@@ -1,5 +1,6 @@
 package com.ruanmeng.north_town
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -27,6 +28,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.text.DecimalFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class NewsActivity : BaseActivity() {
 
@@ -36,15 +38,17 @@ class NewsActivity : BaseActivity() {
     private var date_end = ""
     private var money_min = ""
     private var money_max = ""
-    private var productType = ""
+    private var productId = ""
+    private var isOwner = ""
+    private var years = ""
+    private var villageName = ""
+
+    private val listProduct = ArrayList<CommonData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
-        when (intent.getStringExtra("type")) {
-            "1" -> init_title(intent.getStringExtra("title"))
-            "2" -> init_title(intent.getStringExtra("title"), "类别")
-        }
+        init_title(intent.getStringExtra("title"), "类别")
 
         EventBus.getDefault().register(this@NewsActivity)
 
@@ -118,7 +122,7 @@ class NewsActivity : BaseActivity() {
                                     }
 
                                     .clicked(R.id.item_data) {
-                                        startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
+                                        startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                                     }
                         }
                     }
@@ -184,6 +188,30 @@ class NewsActivity : BaseActivity() {
             })
         }
 
+        news_house.setOnClickListener {
+            getHouseData { item ->
+                val items = ArrayList<String>()
+                item.mapTo(items) { it.villageName }
+
+                if (item.isNotEmpty()) {
+                    DialogHelper.showItemDialog(
+                            baseContext,
+                            "选择住宅类型",
+                            0,
+                            items) { _, name ->
+                        news_house.text = name
+                    }
+                }
+            }
+        }
+
+        rg_check.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.rb_check1 -> isOwner = "1"
+                R.id.rb_check2 -> isOwner = "0"
+            }
+        }
+
         news_filter.setOnClickListener {
             money_min = ""
             money_max = ""
@@ -193,6 +221,9 @@ class NewsActivity : BaseActivity() {
 
             money_min = news_min.text.toString()
             money_max = news_max.text.toString()
+
+            villageName = news_house.text.toString()
+            years = news_year.text.toString()
 
             if (money_min.isNotEmpty() && money_max.isNotEmpty()) {
                 if (money_min.toNoInt() > money_max.toNoInt()) {
@@ -205,27 +236,23 @@ class NewsActivity : BaseActivity() {
         }
 
         tvRight.setOnClickListener {
-            val arrHint = arrayOf("会员卡", "有限合伙人")
-            val dialog = ActionSheetDialog(this, arrHint, null)
-            @Suppress("DEPRECATION")
-            dialog.isTitleShow(false)
-                    .lvBgColor(resources.getColor(R.color.white))
-                    .dividerColor(resources.getColor(R.color.divider))
-                    .dividerHeight(0.5f)
-                    .itemTextColor(resources.getColor(R.color.black_dark))
-                    .itemHeight(40f)
-                    .itemTextSize(15f)
-                    .cancelText(resources.getColor(R.color.light))
-                    .cancelTextSize(15f)
-                    .layoutAnimation(null)
-                    .show()
-            dialog.setOnOperItemClickL { _, _, position, _ ->
-                dialog.dismiss()
+            if (listProduct.isEmpty()) {
+                OkGo.post<BaseResponse<CommonModel>>(BaseHttp.product_list)
+                        .tag(this@NewsActivity)
+                        .headers("token", getString("token"))
+                        .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext, true) {
 
-                productType = "${position + 1}"
-                tvRight.text = arrHint[position]
-                updateList()
-            }
+                            override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
+                                listProduct.apply {
+                                    clear()
+                                    addItems(response.body().`object`.bl)
+                                }
+
+                                showProductDialog()
+                            }
+
+                        })
+            } else showProductDialog()
         }
     }
 
@@ -245,7 +272,10 @@ class NewsActivity : BaseActivity() {
                 .params("min", money_min)
                 .params("max", money_max)
                 .params("page", pindex)
-                .params("productType", productType)
+                .params("productId", productId)
+                .params("isOwner", isOwner)
+                .params("villageName", villageName)
+                .params("years", years)
                 .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
 
                     override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
@@ -260,6 +290,11 @@ class NewsActivity : BaseActivity() {
                         }
 
                         list_result.text = response.body().`object`?.count ?: "0"
+                        val amount = response.body().`object`?.amount ?: ""
+                        if (amount.isNotEmpty()) {
+                            list_right.visible()
+                            list_money.text = DecimalFormat(",##0.##").format(amount.toInt() / 10000.0)
+                        }
 
                         mAdapter.updateData(list)
                     }
@@ -273,6 +308,51 @@ class NewsActivity : BaseActivity() {
                     }
 
                 })
+    }
+
+    private fun getHouseData(event: (ArrayList<CommonData>) -> Unit) {
+        OkGo.post<BaseResponse<java.util.ArrayList<CommonData>>>(BaseHttp.village_list)
+                .tag(this@NewsActivity)
+                .headers("token", getString("token"))
+                .execute(object : JacksonDialogCallback<BaseResponse<java.util.ArrayList<CommonData>>>(baseContext, true) {
+
+                    @SuppressLint("SetTextI18n")
+                    override fun onSuccess(response: Response<BaseResponse<java.util.ArrayList<CommonData>>>) {
+
+                        val items = ArrayList<CommonData>()
+                        items.apply {
+                            clear()
+                            addItems(response.body().`object`)
+                        }
+                        event(items)
+                    }
+
+                })
+    }
+
+    private fun showProductDialog() {
+        val items = ArrayList<String>()
+        listProduct.mapTo(items) { it.productName }
+        val dialog = ActionSheetDialog(this, items.toTypedArray(), null)
+        @Suppress("DEPRECATION")
+        dialog.isTitleShow(false)
+                .lvBgColor(resources.getColor(R.color.white))
+                .dividerColor(resources.getColor(R.color.divider))
+                .dividerHeight(0.5f)
+                .itemTextColor(resources.getColor(R.color.black_dark))
+                .itemHeight(40f)
+                .itemTextSize(15f)
+                .cancelText(resources.getColor(R.color.light))
+                .cancelTextSize(15f)
+                .layoutAnimation(null)
+                .show()
+        dialog.setOnOperItemClickL { _, _, position, _ ->
+            dialog.dismiss()
+
+            productId = listProduct[position].productId
+            tvRight.text = items[position]
+            updateList()
+        }
     }
 
     fun updateList() {

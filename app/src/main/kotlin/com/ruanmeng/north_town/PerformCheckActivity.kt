@@ -106,6 +106,8 @@ class PerformCheckActivity : BaseActivity() {
                 }
 
                 perform_start.text = date
+                date_start = date
+                updateList()
             })
         }
 
@@ -127,14 +129,9 @@ class PerformCheckActivity : BaseActivity() {
                 }
 
                 perform_end.text = date
+                date_end = date
+                updateList()
             })
-        }
-
-        perform_filter.setOnClickListener {
-            date_start = perform_start.text.toString()
-            date_end = perform_end.text.toString()
-
-            updateList()
         }
     }
 
@@ -163,12 +160,16 @@ class PerformCheckActivity : BaseActivity() {
 
                         val data = response.body().`object`.performanceData
                         val managerSum = if (data.managerSum.isEmpty()) "0" else data.managerSum
+                        val managerSumContinue = if (data.managerSumContinue.isEmpty()) "0" else data.managerSumContinue
                         val managerContinueRate = if (data.managerContinueRate.isEmpty()) "0" else data.managerContinueRate
+                        val managerSumOut = if (data.managerSumOut.isEmpty()) "0" else data.managerSumOut
                         val managerQuitRate = if (data.managerQuitRate.isEmpty()) "0" else data.managerQuitRate
 
                         perform_total.text = DecimalFormat(",##0.00").format(managerSum.toInt() / 10000.0)
                         perform_trans.text = "$managerContinueRate%"
                         perform_quit.text = "$managerQuitRate%"
+                        perform_transum.text = managerSumContinue
+                        perform_quitsum.text = managerSumOut
                     }
 
                     override fun onFinish() {

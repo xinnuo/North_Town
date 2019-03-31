@@ -710,6 +710,182 @@
 
             </LinearLayout>
 
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/recruit_expand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/report_yi_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:onClick="doClick"
+                        android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingRight="@dimen/dimen_size_10">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/line_height"
+                            android:gravity="center_vertical"
+                            android:text="意向产品" />
+
+                        <TextView
+                            android:id="@+id/report_yi"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:hint="请选择意向产品"
+                            android:lineSpacingExtra="@dimen/dimen_size_3"
+                            android:paddingTop="@dimen/dimen_size_10"
+                            android:paddingBottom="@dimen/dimen_size_10" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_size_13"
+                            android:layout_height="@dimen/dimen_size_13"
+                            android:layout_marginStart="@dimen/dimen_size_5"
+                            android:src="@mipmap/arrow_right"
+                            tools:ignore="ContentDescription" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:id="@+id/report_du_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:onClick="doClick"
+                        android:paddingLeft="@dimen/dimen_size_10"
+                        android:paddingRight="@dimen/dimen_size_10">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/line_height"
+                            android:gravity="center_vertical"
+                            android:text="意向度" />
+
+                        <TextView
+                            android:id="@+id/report_du"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_size_10"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:hint="请选择意向度"
+                            android:lineSpacingExtra="@dimen/dimen_size_3"
+                            android:paddingTop="@dimen/dimen_size_10"
+                            android:paddingBottom="@dimen/dimen_size_10" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_size_13"
+                            android:layout_height="@dimen/dimen_size_13"
+                            android:layout_marginStart="@dimen/dimen_size_5"
+                            android:src="@mipmap/arrow_right"
+                            tools:ignore="ContentDescription" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:paddingStart="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_0">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:gravity="center_vertical"
+                            android:text="意向房号/铺号" />
+
+                        <EditText
+                            android:id="@+id/recruit_num"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:gravity="end|center_vertical"
+                            android:hint="输入意向房号/铺号"
+                            android:paddingStart="@dimen/dimen_size_10"
+                            android:paddingEnd="@dimen/dimen_size_10"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:paddingStart="@dimen/dimen_size_10"
+                        android:paddingEnd="@dimen/dimen_size_0">
+
+                        <TextView
+                            style="@style/Font14_black_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dimen_size_10"
+                            android:gravity="center_vertical"
+                            android:text="来访途径" />
+
+                        <EditText
+                            android:id="@+id/recruit_way"
+                            style="@style/Font14_black_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:gravity="end|center_vertical"
+                            android:hint="输入来访途径"
+                            android:paddingStart="@dimen/dimen_size_10"
+                            android:paddingEnd="@dimen/dimen_size_10"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginLeft="@dimen/dimen_size_10"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:background="@color/divider" />
+
+                </LinearLayout>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"

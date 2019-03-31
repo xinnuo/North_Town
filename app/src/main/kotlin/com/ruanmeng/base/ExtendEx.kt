@@ -32,8 +32,21 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.bumptech.glide.Glide
 import com.ruanmeng.north_town.R
+
+inline fun <reified T : View> T.visible() {
+    visibility = View.VISIBLE
+}
+
+inline fun <reified T : View> T.invisible() {
+    visibility = View.INVISIBLE
+}
+
+inline fun <reified T : View> T.gone() {
+    visibility = View.GONE
+}
 
 fun <T> ArrayList<T>.addItems(items: List<T>? = null): ArrayList<T> {
     if (items != null && items.isNotEmpty()) addAll(items)

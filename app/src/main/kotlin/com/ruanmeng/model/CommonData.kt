@@ -131,6 +131,8 @@ data class CommonData(
         //利率列表
         var max: String = "",
         var min: String = "",
+        var cashRate: String = "",
+        var surplusRate: String = "",
 
         //统计列表
         var sum: String = "",
@@ -154,6 +156,16 @@ data class CommonData(
         var companyId: String = "",
         var numPeople: String = "",
         var surplus: String = "",
+
+        //组列表
+        var businessGroupId: String = "",
+        var name: String = "",
+
+        //意向列表
+        var intentionId: String = "",
+        var intentionName: String = "",
+        var intentionDegree: String = "",
+        var intentionDegreeId: String = "",
 
         //审核列表
         var serviceCheckDate: String = "",

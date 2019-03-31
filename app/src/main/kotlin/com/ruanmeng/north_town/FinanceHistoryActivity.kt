@@ -69,7 +69,7 @@ class FinanceHistoryActivity : BaseActivity() {
                                     }
 
                                     .clicked(R.id.item_review) {
-                                        startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
+                                        startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                                     }
                         }
                         "2" -> register<CommonData>(R.layout.item_finance_list) { data, injector ->
@@ -83,7 +83,7 @@ class FinanceHistoryActivity : BaseActivity() {
                                     .visibility(R.id.item_finance_ll, if (data.serviceCheckDate.isNotEmpty()) View.VISIBLE else View.GONE)
 
                                     .clicked(R.id.item_finance) {
-                                        startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
+                                        startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                                     }
                         }
                     }

@@ -83,4 +83,9 @@ public class BaseHttp {
     public static String yjgz_center = baseIp + "/yjgz_center.rm";             //佣金规则√
     public static String about_us = baseIp + "/about_us.rm";                   //关于我们√
     public static String get_version_staff = baseIp + "/get_version_staff.rm"; //版本升级√
+
+    public static String check_into_achievement = baseIp + "/check_into_achievement.rm";
+    public static String business_group_list = baseIp + "/business_group_list.rm";
+    public static String get_intention_list = baseIp + "/get_intention_list.rm";
+    public static String get_intention_degree_list = baseIp + "/get_intention_degree_list.rm";
 }

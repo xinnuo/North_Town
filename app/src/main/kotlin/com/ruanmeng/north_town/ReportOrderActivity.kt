@@ -10,10 +10,7 @@ import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
-import com.ruanmeng.model.CommonData
-import com.ruanmeng.model.OrderData
-import com.ruanmeng.model.ProductModel
-import com.ruanmeng.model.ReportMessageEvent
+import com.ruanmeng.model.*
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.*
 import com.ruanmeng.view.OnTextWatcher
@@ -72,6 +69,18 @@ class ReportOrderActivity : BaseActivity() {
                 vip_expand.expand()
                 back_ll.visibility = View.VISIBLE
                 tvTitle.text = "会员卡"
+
+                vip_name.addTextChangedListener(this@ReportOrderActivity)
+                vip_num.addTextChangedListener(this@ReportOrderActivity)
+                vip_card.addTextChangedListener(this@ReportOrderActivity)
+                vip_addr.addTextChangedListener(this@ReportOrderActivity)
+            }
+            "认筹" -> {
+                order_expand.collapse()
+                vip_expand.expand()
+                recruit_expand.expand()
+                back_ll.visibility = View.VISIBLE
+                tvTitle.text = "认筹"
 
                 vip_name.addTextChangedListener(this@ReportOrderActivity)
                 vip_num.addTextChangedListener(this@ReportOrderActivity)
@@ -204,14 +213,39 @@ class ReportOrderActivity : BaseActivity() {
 
                 startActivityEx<ReportUnitActivity>("title" to "客户关系")
             }
-            R.id.report_submit -> {
-                /*if (!BankcardHelper.checkBankCard(et_card.rawText)) {
-                    et_card.requestFocus()
-                    et_card.setText("")
-                    showToast("请输入正确的银行卡卡号")
-                    return
-                }*/
+            R.id.report_yi_ll -> {
+                getAimData { item ->
+                    val items = ArrayList<String>()
+                    item.mapTo(items) { it.intentionName }
 
+                    if (item.isNotEmpty()) {
+                        DialogHelper.showItemDialog(
+                                baseContext,
+                                "选择意向产品",
+                                0,
+                                items) { _, name ->
+                            report_yi.text = name
+                        }
+                    }
+                }
+            }
+            R.id.report_du_ll -> {
+                getAimDegreeData { item ->
+                    val items = ArrayList<String>()
+                    item.mapTo(items) { it.intentionDegree }
+
+                    if (item.isNotEmpty()) {
+                        DialogHelper.showItemDialog(
+                                baseContext,
+                                "选择意向度",
+                                0,
+                                items) { _, name ->
+                            report_du.text = name
+                        }
+                    }
+                }
+            }
+            R.id.report_submit -> {
                 if (!CommonUtil.isMobile(et_phone.text.toString())) {
                     et_phone.requestFocus()
                     et_phone.setText("")
@@ -243,6 +277,15 @@ class ReportOrderActivity : BaseActivity() {
                                     params("vipNo", vip_num.text.toString())
                                     params("cardNo", vip_card.text.toString())
                                     params("prepaidAmount", et_back.text.toString())
+                                }
+                                "认筹" -> {
+                                    params("vipNo", vip_num.text.toString())
+                                    params("cardNo", vip_card.text.toString())
+                                    params("prepaidAmount", et_back.text.toString())
+                                    params("intentionName", report_yi.text.toString())
+                                    params("intentionNo", recruit_num.text.trim().toString())
+                                    params("intentionDegree", report_du.text.toString())
+                                    params("visitingWay", recruit_way.text.trim().toString())
                                 }
                                 else -> {
                                     params("companyId", intent.getStringExtra("companyId"))
@@ -364,6 +407,46 @@ class ReportOrderActivity : BaseActivity() {
                 })
     }
 
+    private fun getAimData(event: (ArrayList<CommonData>) -> Unit) {
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.get_intention_list)
+                .tag(this@ReportOrderActivity)
+                .headers("token", getString("token"))
+                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext, true) {
+
+                    @SuppressLint("SetTextI18n")
+                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
+
+                        val items = ArrayList<CommonData>()
+                        items.apply {
+                            clear()
+                            addItems(response.body().`object`.intentionList)
+                        }
+                        event(items)
+                    }
+
+                })
+    }
+
+    private fun getAimDegreeData(event: (ArrayList<CommonData>) -> Unit) {
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.get_intention_degree_list)
+                .tag(this@ReportOrderActivity)
+                .headers("token", getString("token"))
+                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext, true) {
+
+                    @SuppressLint("SetTextI18n")
+                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
+
+                        val items = ArrayList<CommonData>()
+                        items.apply {
+                            clear()
+                            addItems(response.body().`object`.intentionDegreeList)
+                        }
+                        event(items)
+                    }
+
+                })
+    }
+
     private fun getProductDetail() {
         OkGo.post<BaseResponse<ProductModel>>(BaseHttp.get_product)
                 .tag(this@ReportOrderActivity)
@@ -405,7 +488,7 @@ class ReportOrderActivity : BaseActivity() {
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         when (putType) {
-            "会员卡" -> {
+            "会员卡", "认筹" -> {
                 if (vip_name.text.isNotBlank()
                         && vip_num.text.isNotBlank()
                         && vip_card.text.isNotBlank()

@@ -51,6 +51,16 @@ class ReportSelectActivity : BaseActivity() {
                             "type" to "会员卡")
                 }
             }
+            R.id.report_recruit -> {
+                if (list.any { it.productType == "认筹" }) {
+                    val productId = list.first { it.productType == "认筹" }.productId
+
+                    startActivityEx<ReportOrderActivity>(
+                            "accountInfoId" to accountInfoId,
+                            "productId" to productId,
+                            "type" to "认筹")
+                }
+            }
         }
     }
 

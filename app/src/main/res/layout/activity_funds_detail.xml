@@ -153,6 +153,18 @@
                 app:sRightTextMarginRight="@dimen/dimen_size_10" />
 
             <com.allen.library.SuperTextView
+                android:id="@+id/funds_gender"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="性别"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
                 android:id="@+id/funds_idcard"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_45.5"
@@ -160,6 +172,30 @@
                 app:sLeftTextColor="@color/black_dark"
                 app:sLeftTextMarginLeft="@dimen/dimen_size_10"
                 app:sLeftTextString="身份证号"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_company"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="公司名称"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_he"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="合同编号"
                 app:sLineShow="bottom"
                 app:sRightTextColor="@color/gray"
                 app:sRightTextMarginRight="@dimen/dimen_size_10" />
@@ -241,14 +277,230 @@
                 android:id="@+id/funds_detail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="@dimen/dimen_size_0"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
                 app:sLeftTextColor="@color/black_dark"
                 app:sLeftTextMarginLeft="@dimen/dimen_size_10"
                 app:sLeftTextString="计算详细"
                 app:sLineShow="bottom"
                 app:sRightTextColor="@color/gray"
                 app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="收益 = 投资金额 * 年利率 * 投资期限" />
+                app:sRightTextString="收益 = 投资金额 * 年利率 * 投资期限 * 个税" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_bank"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="开户行"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_bankcard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="账户号"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="联系电话"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="邮寄地址"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_fax"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="传真"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_shou"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="收款编号"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_shoutype"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="收据类型"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_xian"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="现金金额"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_lian"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="银联金额"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_zhuan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="转账金额"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_other"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="其他金额"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_zong"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="总收款金额"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_yin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="收银员"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_yintel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="收银员电话"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_jing"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="经纪人"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_jingtel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="经纪人电话"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_jingno"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="非基金经纪人"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/funds_jingnotel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_0"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="非基金经纪人电话"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
 
         </LinearLayout>
 

@@ -75,8 +75,14 @@ class ReportDetailActivity : BaseActivity() {
                         report_img.setImageURL(BaseHttp.baseImg + obj.optString("userhead"))
                         report_name.text = obj.optString("userName", "姓名")
                         report_tel.text = obj.optString("telephone", "电话")
+                        report_gender.setRightString(when (obj.optString("sex")) {
+                            "0" -> "女"
+                            else -> "男"
+                        })
+                        report_age.setRightString(obj.optString("age"))
+                        report_birth.setRightString(obj.optString("birthday"))
                         report_idcard.setRightString(obj.optString("cardNo"))
-                        report_owner.setRightString(when (obj.opt("isOwner")) {
+                        report_owner.setRightString(when (obj.optString("isOwner")) {
                             "1" -> "是"
                             else -> "否"
                         })

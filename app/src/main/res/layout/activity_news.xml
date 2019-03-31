@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_size_15"
-            android:layout_marginEnd="@dimen/dimen_size_15"
             android:layout_marginTop="@dimen/dimen_size_5"
+            android:layout_marginEnd="@dimen/dimen_size_15"
             android:gravity="center_vertical">
 
             <TextView
@@ -34,17 +34,17 @@
                 android:layout_weight="1"
                 android:background="@drawable/rec_bg_white"
                 android:hint="起始日期"
-                android:paddingBottom="@dimen/dimen_size_3"
                 android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
                 android:paddingRight="@dimen/dimen_size_10"
-                android:paddingTop="@dimen/dimen_size_3" />
+                android:paddingBottom="@dimen/dimen_size_3" />
 
             <TextView
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dimen_size_15"
                 android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginEnd="@dimen/dimen_size_15"
                 android:text="至" />
 
             <TextView
@@ -55,18 +55,18 @@
                 android:layout_weight="1"
                 android:background="@drawable/rec_bg_white"
                 android:hint="结束日期"
-                android:paddingBottom="@dimen/dimen_size_3"
                 android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
                 android:paddingRight="@dimen/dimen_size_10"
-                android:paddingTop="@dimen/dimen_size_3" />
+                android:paddingBottom="@dimen/dimen_size_3" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_size_15"
             android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginTop="@dimen/dimen_size_15"
             android:layout_marginEnd="@dimen/dimen_size_15"
             android:gravity="center_vertical">
 
@@ -87,17 +87,17 @@
                 android:hint="最低金额(元)"
                 android:inputType="number"
                 android:maxLength="9"
-                android:paddingBottom="@dimen/dimen_size_3"
                 android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
                 android:paddingRight="@dimen/dimen_size_10"
-                android:paddingTop="@dimen/dimen_size_3" />
+                android:paddingBottom="@dimen/dimen_size_3" />
 
             <TextView
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dimen_size_15"
                 android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginEnd="@dimen/dimen_size_15"
                 android:text="至" />
 
             <EditText
@@ -110,17 +110,137 @@
                 android:hint="最高金额(元)"
                 android:inputType="number"
                 android:maxLength="9"
-                android:paddingBottom="@dimen/dimen_size_3"
                 android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
                 android:paddingRight="@dimen/dimen_size_10"
-                android:paddingTop="@dimen/dimen_size_3" />
+                android:paddingBottom="@dimen/dimen_size_3" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_size_15"
+            android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginTop="@dimen/dimen_size_13"
+            android:layout_marginEnd="@dimen/dimen_size_15"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_size_5"
+                android:text="是否业主" />
+
+            <RadioGroup
+                android:id="@+id/rg_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_check1"
+                    style="@style/Font14_gray"
+                    android:layout_width="@dimen/dimen_size_50"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="是" />
+
+                <RadioButton
+                    android:id="@+id/rb_check2"
+                    style="@style/Font14_gray"
+                    android:layout_width="@dimen/dimen_size_50"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="否" />
+
+            </RadioGroup>
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginEnd="@dimen/dimen_size_15"
+                android:text="住宅类型" />
+
+            <TextView
+                android:id="@+id/news_house"
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rec_bg_white"
+                android:hint="选择住宅类型"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
+                android:paddingRight="@dimen/dimen_size_10"
+                android:paddingBottom="@dimen/dimen_size_3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginTop="@dimen/dimen_size_10"
+            android:layout_marginEnd="@dimen/dimen_size_15"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_size_15"
+                android:text="投资期限" />
+
+            <EditText
+                android:id="@+id/news_year"
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rec_bg_white"
+                android:hint="投资期限(年)"
+                android:inputType="number"
+                android:maxLength="9"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
+                android:paddingRight="@dimen/dimen_size_10"
+                android:paddingBottom="@dimen/dimen_size_3" />
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginEnd="@dimen/dimen_size_15"
+                android:text="至"
+                android:visibility="invisible" />
+
+            <EditText
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rec_bg_white"
+                android:hint="最高金额(元)"
+                android:inputType="number"
+                android:maxLength="9"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
+                android:paddingRight="@dimen/dimen_size_10"
+                android:paddingBottom="@dimen/dimen_size_3"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginTop="@dimen/dimen_size_15"
+            android:layout_marginEnd="@dimen/dimen_size_15"
             android:gravity="center_vertical">
 
             <TextView
@@ -137,10 +257,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rec_bg_white_stroke_light"
-                android:paddingBottom="@dimen/dimen_size_5"
                 android:paddingLeft="@dimen/dimen_size_20"
-                android:paddingRight="@dimen/dimen_size_20"
                 android:paddingTop="@dimen/dimen_size_5"
+                android:paddingRight="@dimen/dimen_size_20"
+                android:paddingBottom="@dimen/dimen_size_5"
                 android:text="筛选" />
 
         </LinearLayout>

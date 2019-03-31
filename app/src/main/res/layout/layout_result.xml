@@ -21,8 +21,36 @@
 
     <TextView
         style="@style/Font14_gray"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=")" />
+
+    <LinearLayout
+        android:id="@+id/list_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=")" />
+        android:visibility="invisible">
+
+        <TextView
+            style="@style/Font14_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金额：" />
+
+        <TextView
+            android:id="@+id/list_money"
+            style="@style/Font14_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <TextView
+            style="@style/Font14_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="万" />
+
+    </LinearLayout>
 
 </LinearLayout>

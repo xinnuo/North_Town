@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_size_15"
-            android:layout_marginEnd="@dimen/dimen_size_15"
             android:layout_marginTop="@dimen/dimen_size_5"
+            android:layout_marginEnd="@dimen/dimen_size_15"
             android:gravity="center_vertical">
 
             <TextView
@@ -34,17 +34,17 @@
                 android:layout_weight="1"
                 android:background="@drawable/rec_bg_white"
                 android:hint="起始日期"
-                android:paddingBottom="@dimen/dimen_size_3"
                 android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
                 android:paddingRight="@dimen/dimen_size_10"
-                android:paddingTop="@dimen/dimen_size_3" />
+                android:paddingBottom="@dimen/dimen_size_3" />
 
             <TextView
                 style="@style/Font14_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dimen_size_15"
                 android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginEnd="@dimen/dimen_size_15"
                 android:text="至" />
 
             <TextView
@@ -55,17 +55,19 @@
                 android:layout_weight="1"
                 android:background="@drawable/rec_bg_white"
                 android:hint="结束日期"
-                android:paddingBottom="@dimen/dimen_size_3"
                 android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
                 android:paddingRight="@dimen/dimen_size_10"
-                android:paddingTop="@dimen/dimen_size_3" />
+                android:paddingBottom="@dimen/dimen_size_3" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_size_15"
+            android:layout_marginStart="@dimen/dimen_size_15"
+            android:layout_marginTop="@dimen/dimen_size_10"
+            android:layout_marginEnd="@dimen/dimen_size_15"
             android:gravity="center_vertical">
 
             <TextView
@@ -73,24 +75,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dimen_size_15"
-                android:text="金额"
+                android:text="分组" />
+
+            <TextView
+                android:id="@+id/perform_group"
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rec_bg_white"
+                android:hint="选择分组"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
+                android:paddingRight="@dimen/dimen_size_10"
+                android:paddingBottom="@dimen/dimen_size_3" />
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_size_15"
+                android:layout_marginEnd="@dimen/dimen_size_15"
+                android:text="至"
                 android:visibility="invisible" />
 
             <TextView
-                android:id="@+id/perform_filter"
-                style="@style/Font15_black_dark"
-                android:layout_width="wrap_content"
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rec_bg_white_stroke_light"
-                android:paddingBottom="@dimen/dimen_size_5"
-                android:paddingLeft="@dimen/dimen_size_20"
-                android:paddingRight="@dimen/dimen_size_20"
-                android:paddingTop="@dimen/dimen_size_5"
-                android:text="筛选" />
+                android:layout_weight="1"
+                android:background="@drawable/rec_bg_white"
+                android:hint="结束日期"
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_3"
+                android:paddingRight="@dimen/dimen_size_10"
+                android:paddingBottom="@dimen/dimen_size_3"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <include layout="@layout/layout_result" />
 
     <View
         android:layout_width="match_parent"

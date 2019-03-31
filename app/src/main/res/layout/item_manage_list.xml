@@ -15,10 +15,10 @@
             android:id="@+id/item_manage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/dimen_size_13"
             android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingTop="@dimen/dimen_size_13"
             android:paddingRight="@dimen/dimen_size_10"
-            android:paddingTop="@dimen/dimen_size_13">
+            android:paddingBottom="@dimen/dimen_size_13">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -33,22 +33,69 @@
                     android:layout_height="wrap_content"
                     android:text="5万~20万(不含)" />
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/item_manage_down"
-                    style="@style/Font14_gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_size_8"
-                    android:text="利率  1年(0%)  3年(0%)  5年(0%)" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/item_manage_rate"
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_size_8"
+                        android:text="利率  1年(0%)  3年(0%)  5年(0%)" />
+
+                    <TextView
+                        android:id="@+id/item_manage_cash"
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_size_8"
+                        android:text="返现率  1年(0%)  3年(0%)  5年(0%)" />
+
+                    <TextView
+                        android:id="@+id/item_manage_remain"
+                        style="@style/Font14_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_size_8"
+                        android:text="剩余率  1年(0%)  3年(0%)  5年(0%)" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/item_manage_right"
-                style="@style/Font14_gray"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="利率 0%" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/item_manage_rate2"
+                    style="@style/Font14_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="利率 0%" />
+
+                <TextView
+                    android:id="@+id/item_manage_cash2"
+                    style="@style/Font14_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
+                    android:text="返现率 0%" />
+
+                <TextView
+                    android:id="@+id/item_manage_remain2"
+                    style="@style/Font14_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_size_10"
+                    android:text="剩余率 0%" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

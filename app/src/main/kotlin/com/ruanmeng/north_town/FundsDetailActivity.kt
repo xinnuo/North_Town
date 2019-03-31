@@ -28,11 +28,8 @@ class FundsDetailActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
-        val isLead = intent.getBooleanExtra("isLead", false)
-        if (isLead) {
-            funds_expand.expand()
-            getUpData()
-        }
+        funds_expand.expand()
+        getUpData()
 
         tvRight.setOnClickListener {
             startActivityEx<FundsDetailActivity>("purchaseId" to previousPurchaseId)
@@ -65,6 +62,31 @@ class FundsDetailActivity : BaseActivity() {
                         funds_name.setRightString(obj.optString("userName"))
                         funds_tel.setRightString(obj.optString("telephone"))
                         funds_idcard.setRightString(obj.optString("cardNo"))
+                        funds_company.setRightString(obj.optString("commponyName"))
+                        funds_he.setRightString(obj.optString("contractNo"))
+                        funds_gender.setRightString(when (obj.optString("sex")) {
+                            "0" -> "女"
+                            else -> "男"
+                        })
+
+                        funds_bank.setRightString(obj.optString("bank"))
+                        funds_bankcard.setRightString(obj.optString("bankcard"))
+                        funds_phone.setRightString(obj.optString("phone"))
+                        funds_address.setRightString(obj.optString("address"))
+                        funds_fax.setRightString(obj.optString("fax"))
+                        funds_shou.setRightString(obj.optString("receiptNo"))
+                        funds_shoutype.setRightString(obj.optString("receiptTypeName"))
+                        funds_xian.setRightString(obj.optString("xianJin"))
+                        funds_lian.setRightString(obj.optString("yinLian"))
+                        funds_zhuan.setRightString(obj.optString("zhuanZhang"))
+                        funds_other.setRightString(obj.optString("qiTa"))
+                        funds_zong.setRightString(obj.optString("receivedAmount"))
+                        funds_yin.setRightString(obj.optString("cashierInfoName"))
+                        funds_yintel.setRightString(obj.optString("cashierInfoTelephone"))
+                        funds_jing.setRightString(obj.optString("managerInfoName"))
+                        funds_jingtel.setRightString(obj.optString("managerInfoTelephone"))
+                        funds_jingno.setRightString(obj.optString("nonManagerName"))
+                        funds_jingnotel.setRightString(obj.optString("nonManagerTelephone"))
 
                         val year = obj.optString("years", "0").toInt()
                         if (year < 12) {
@@ -120,7 +142,8 @@ class FundsDetailActivity : BaseActivity() {
                     @SuppressLint("SetTextI18n")
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        val obj = JSONObject(response.body()).getJSONObject("object") ?: JSONObject()
+                        val obj = JSONObject(response.body())
+                                .getJSONObject("object") ?: JSONObject()
 
                         val data = obj.getJSONObject("introducer") ?: JSONObject()
                         funds_name2.setRightString(data.optString("introducerName"))
@@ -130,8 +153,10 @@ class FundsDetailActivity : BaseActivity() {
                         val rate = obj.optString("introducerlv", "0")
                         funds_detail2.setRightString("收益 = 投资金额 * 老带新利率($rate%)")
 
-                        val profit = obj.optString("introducerProfit", "0")
-                        funds_get2.setRightString(DecimalFormat(",##0.##").format(profit.toDouble()))
+                        val profit = obj.optString("introducerProfit")
+                        if (profit.isNotEmpty() && profit.toDouble() > 0) {
+                            funds_get2.setRightString(DecimalFormat(",##0.##").format(profit.toDouble()))
+                        }
                     }
 
                 })

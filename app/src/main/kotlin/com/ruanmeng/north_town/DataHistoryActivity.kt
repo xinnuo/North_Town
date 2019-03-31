@@ -73,7 +73,7 @@ class DataHistoryActivity : BaseActivity() {
                                     }
 
                                     .clicked(R.id.item_history) {
-                                        startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
+                                        startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                                     }
                         }
                     } else {
@@ -91,7 +91,7 @@ class DataHistoryActivity : BaseActivity() {
                                     .visibility(R.id.item_check_divider, if (list.indexOf(data) == 0) View.VISIBLE else View.GONE)
 
                                     .clicked(R.id.item_check) {
-                                        startActivityEx<DataProductActivity>("purchaseId" to data.purchaseId)
+                                        startActivityEx<FundsDetailActivity>("purchaseId" to data.purchaseId)
                                     }
                         }
                     }

@@ -3,13 +3,16 @@ package com.ruanmeng.north_town
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import com.flyco.dialog.widget.ActionSheetDialog
 import com.lzg.extend.BaseResponse
+import com.lzg.extend.StringDialogCallback
 import com.lzg.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.KeyboardHelper
@@ -17,10 +20,12 @@ import com.ruanmeng.utils.TimeHelper
 import kotlinx.android.synthetic.main.activity_perform.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
+import kotlinx.android.synthetic.main.layout_result.*
 import kotlinx.android.synthetic.main.layout_search.*
 import net.idik.lib.slimadapter.SlimAdapter
 import java.text.DecimalFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PerformActivity : BaseActivity() {
 
@@ -29,10 +34,15 @@ class PerformActivity : BaseActivity() {
     private var date_start = ""
     private var date_end = ""
 
+    private val listGroup = ArrayList<CommonData>()
+    private var groupPostion = -1
+    private var groupId = ""
+    private var managerType = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perform)
-        init_title("业绩统计")
+        init_title("业绩统计", "类别")
 
         swipe_refresh.isRefreshing = true
         getData(pageNum)
@@ -66,10 +76,19 @@ class PerformActivity : BaseActivity() {
                             .visibility(R.id.item_perform_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_perform_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
                             .clicked(R.id.item_perform) {
-                                startActivityEx<PerformCheckActivity>(
-                                        "managerInfoId" to data.managerInfoId,
-                                        "start" to date_start,
-                                        "end" to date_end)
+
+                                OkGo.post<String>(BaseHttp.check_into_achievement)
+                                        .tag(this@PerformActivity)
+                                        .headers("token", getString("token"))
+                                        .params("managerInfoId", data.managerInfoId)
+                                        .execute(object : StringDialogCallback(baseContext) {
+                                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                                startActivityEx<PerformCheckActivity>(
+                                                        "managerInfoId" to data.managerInfoId,
+                                                        "start" to date_start,
+                                                        "end" to date_end)
+                                            }
+                                        })
                             }
                 }
                 .attachTo(recycle_list)
@@ -109,6 +128,8 @@ class PerformActivity : BaseActivity() {
                 }
 
                 perform_start.text = date
+                date_start = date
+                updateList()
             })
         }
 
@@ -130,38 +151,102 @@ class PerformActivity : BaseActivity() {
                 }
 
                 perform_end.text = date
+                date_end = date
+                updateList()
             })
         }
 
-        perform_filter.setOnClickListener {
-            date_start = perform_start.text.toString()
-            date_end = perform_end.text.toString()
+        perform_group.setOnClickListener {
+            if (listGroup.isEmpty()) {
+                OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.business_group_list)
+                        .tag(this@PerformActivity)
+                        .headers("token", getString("token"))
+                        .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext, true) {
 
+                            override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+
+                                listGroup.apply {
+                                    clear()
+                                    addItems(response.body().`object`)
+                                }
+                                showGroupDialog()
+                            }
+
+                        })
+            } else showGroupDialog()
+        }
+
+        tvRight.setOnClickListener {
+            val arrHint = arrayOf("基金经纪人", "非基金经纪人")
+            val dialog = ActionSheetDialog(this, arrHint, null)
+            @Suppress("DEPRECATION")
+            dialog.isTitleShow(false)
+                    .lvBgColor(resources.getColor(R.color.white))
+                    .dividerColor(resources.getColor(R.color.divider))
+                    .dividerHeight(0.5f)
+                    .itemTextColor(resources.getColor(R.color.black_dark))
+                    .itemHeight(40f)
+                    .itemTextSize(15f)
+                    .cancelText(resources.getColor(R.color.light))
+                    .cancelTextSize(15f)
+                    .layoutAnimation(null)
+                    .show()
+            dialog.setOnOperItemClickL { _, _, position, _ ->
+                dialog.dismiss()
+
+                managerType = "${1 - position}"
+                tvRight.text = arrHint[position]
+                updateList()
+            }
+        }
+    }
+
+    private fun showGroupDialog() {
+        val items = ArrayList<String>()
+        listGroup.mapTo(items) { it.name }
+        DialogHelper.showItemDialog(
+                baseContext,
+                "选择分组",
+                if (groupPostion < 0) 0 else groupPostion,
+                items) { position, name ->
+            groupPostion = position
+            groupId = listGroup[position].businessGroupId
+            perform_group.text = name
             updateList()
         }
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<BaseResponse<ArrayList<CommonData>>>(BaseHttp.achievement_statistics_list)
+        OkGo.post<BaseResponse<CommonModel>>(BaseHttp.achievement_statistics_list)
                 .tag(this@PerformActivity)
                 .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("beginDate", date_start)
                 .params("endDate", date_end)
                 .params("searchar", keyWord)
+                .params("businessGroupId", groupId)
+                .params("managerType", managerType)
                 .params("page", pindex)
-                .execute(object : JacksonDialogCallback<BaseResponse<ArrayList<CommonData>>>(baseContext) {
+                .execute(object : JacksonDialogCallback<BaseResponse<CommonModel>>(baseContext) {
 
-                    override fun onSuccess(response: Response<BaseResponse<ArrayList<CommonData>>>) {
+                    override fun onSuccess(response: Response<BaseResponse<CommonModel>>) {
 
                         list.apply {
                             if (pindex == 1) {
                                 clear()
                                 pageNum = pindex
                             }
-                            addItems(response.body().`object`)
-                            if (count(response.body().`object`) > 0) pageNum++
+                            addItems(response.body().`object`.purchaseList)
+                            if (count(response.body().`object`.purchaseList) > 0) pageNum++
                         }
+
+                        list_result.text = response.body().`object`?.count ?: "0"
+                        val amount = response.body().`object`?.amount ?: ""
+                        if (amount.isNotEmpty()) {
+                            list_right.visible()
+                            list_money.text = DecimalFormat(",##0.##").format(amount.toInt() / 10000.0)
+                        }
+
                         mAdapter.updateData(list)
                     }
 

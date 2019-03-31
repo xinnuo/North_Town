@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.lzg.extend.BaseResponse
 import com.lzg.extend.jackson.JacksonDialogCallback
@@ -68,22 +69,62 @@ class ManageDetailActivity : BaseActivity() {
                                     else view.text = "${min}万~${max}万(不含)"
                                 }
 
-                                .with<TextView>(R.id.item_manage_right) { view ->
+                                .with<LinearLayout>(R.id.item_manage_right) { view ->
                                     val rates = data.rate.split(",")
                                     view.visibility = if (rates.size > 1) View.GONE else View.VISIBLE
-                                    view.text = "利率 ${rates.first()}%"
                                 }
 
-                                .with<TextView>(R.id.item_manage_down) { view ->
+                                .with<LinearLayout>(R.id.item_manage_down) { view ->
+                                    val rates = data.rate.split(",")
+                                    view.visibility = if (rates.size > 1) View.VISIBLE else View.GONE
+                                }
+
+                                .with<TextView>(R.id.item_manage_rate) { view ->
                                     val rates = data.rate.split(",")
                                     val years = data.years.split(",")
-                                    view.visibility = if (rates.size > 1) View.VISIBLE else View.GONE
 
                                     var hint = "利率"
                                     (0 until rates.size).forEach {
                                         hint += "  ${years[it].getDateFormat()}(${rates[it]}%)"
                                     }
                                     view.text = hint
+                                }
+
+                                .with<TextView>(R.id.item_manage_cash) { view ->
+                                    val rates = data.cashRate.split(",")
+                                    val years = data.years.split(",")
+
+                                    var hint = "返现率"
+                                    (0 until rates.size).forEach {
+                                        hint += "  ${years[it].getDateFormat()}(${rates[it]}%)"
+                                    }
+                                    view.text = hint
+                                }
+
+                                .with<TextView>(R.id.item_manage_remain) { view ->
+                                    val rates = data.surplusRate.split(",")
+                                    val years = data.years.split(",")
+
+                                    var hint = "剩余率"
+                                    (0 until rates.size).forEach {
+                                        hint += "  ${years[it].getDateFormat()}(${rates[it]}%)"
+                                    }
+                                    view.text = hint
+                                }
+
+                                .with<TextView>(R.id.item_manage_rate2) { view ->
+                                    val rates = data.rate.split(",")
+                                    view.text = "利率 ${rates.first()}%"
+                                }
+
+                                .with<TextView>(R.id.item_manage_cash2) { view ->
+                                    val rates = data.cashRate.split(",")
+                                    view.text = "返现率 ${rates.first()}%"
+                                }
+
+                                .with<TextView>(R.id.item_manage_remain2) { view ->
+                                    val rates = data.surplusRate.split(",")
+                                    view.text = "剩余率 ${rates.first()}%"
                                 }
                     }
                     .attachTo(this)

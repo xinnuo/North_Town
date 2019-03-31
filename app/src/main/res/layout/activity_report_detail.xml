@@ -101,6 +101,42 @@
                 app:sRightTextMarginRight="@dimen/dimen_size_10" />
 
             <com.allen.library.SuperTextView
+                android:id="@+id/report_gender"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="性别"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/report_age"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="年龄"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/report_birth"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="@dimen/dimen_size_10"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="生日"
+                app:sLineShow="bottom"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+            <com.allen.library.SuperTextView
                 android:id="@+id/report_idcard"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_45.5"

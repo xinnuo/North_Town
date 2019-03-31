@@ -276,7 +276,7 @@
                 app:sLineShow="bottom"
                 app:sRightTextColor="@color/gray"
                 app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="收益 = 投资金额 * 年利率 * 投资期限" />
+                app:sRightTextString="收益 = 投资金额 * 年利率 * 投资期限 * 个税" />
 
         </LinearLayout>
 

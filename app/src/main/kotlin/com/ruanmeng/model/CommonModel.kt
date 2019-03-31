@@ -36,6 +36,7 @@ import java.io.Serializable
  */
 data class CommonModel(
         var count: String = "",
+        var amount: String = "",
         var balance: String = "",
         var withdrawDeposit: String = "",
         var accountInfoCount: String = "",
@@ -46,5 +47,7 @@ data class CommonModel(
         var accountInfoList: List<CommonData> ?= ArrayList(),
         var balanceLogList: List<CommonData> ?= ArrayList(),
         var purchaseList: List<CommonData> ?= ArrayList(),
+        var intentionList: List<CommonData> ?= ArrayList(),
+        var intentionDegreeList: List<CommonData> ?= ArrayList(),
         var companyList: List<CommonData> ?= ArrayList()
 ): Serializable
