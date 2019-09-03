@@ -105,7 +105,7 @@ class CheckDetailActivity : BaseActivity() {
                         .params("productId", productId)
                         .params("accountInfoId", accountInfoId)
                         .params("years", mYears)
-                        .params("amount", doubleToLong(check_money.text))
+                        .params("amount", doubleToLong(check_money.text.toString()))
                         .params("beginDate", check_begin.text.toString())
                         .params("endDate", check_end.text.toString())
                         .params("profit", et_profit.text.toString())
@@ -200,10 +200,10 @@ class CheckDetailActivity : BaseActivity() {
     private fun doubleToLong(edit: CharSequence) = (edit.toNoDouble() * 10000).toLong()
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        if (check_money.text.isNotBlank()
+        if (check_money.text!!.isNotBlank()
                 && check_begin.text.isNotBlank()
                 && check_end.text.isNotBlank()
-                && check_card.text.isNotBlank()
+                && check_card.text!!.isNotBlank()
                 && check_phone.text.isNotBlank()) {
             check_pass.setBackgroundResource(R.drawable.rec_bg_red)
             check_pass.isClickable = true

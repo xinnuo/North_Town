@@ -114,7 +114,7 @@ class ReportOrderActivity : BaseActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.isNotEmpty()) report_expect2.text = "预期收入 ￥0"
                 else {
-                    if (et_money.text.isNotBlank()) calculatedValue(doubleToLong(et_money.text))
+                    if (et_money.text!!.isNotBlank()) calculatedValue(doubleToLong(et_money.text.toString()))
                 }
             }
         }
@@ -191,8 +191,8 @@ class ReportOrderActivity : BaseActivity() {
                         }
                     }
 
-                    if (et_money.text.isNotBlank()) {
-                        calculatedValue(doubleToLong(et_money.text))
+                    if (et_money.text!!.isNotBlank()) {
+                        calculatedValue(doubleToLong(et_money.text.toString()))
                     } else {
                         report_expect1.text = "利率 ${items.first().rate}%（起投 ${items.first().min}万）"
                     }
@@ -255,7 +255,7 @@ class ReportOrderActivity : BaseActivity() {
 
                 if (report_total.text.isNotEmpty()) {
                     val trans = report_total.text.toNoDouble()
-                    val total = et_money.text.toNoDouble()
+                    val total = et_money.text!!.toNoDouble()
                     if (trans > total) {
                         showToast("转投续投金额不能超过认购金额")
                         return
@@ -302,7 +302,7 @@ class ReportOrderActivity : BaseActivity() {
                         .params("previousFlowAmount", previousFlowAmount)
                         .params("stock", doubleToLong(report_total.text))
                         .params("years", items[listYear.indexOf(report_year.text.toString())].years)
-                        .params("amount", doubleToLong(et_money.text))
+                        .params("amount", doubleToLong(et_money.text.toString()))
                         .params("beginDate", report_start.text.toString())
                         .params("endDate", report_end.text.toString())
                         .params("bank", report_bank.text.toString())
@@ -493,10 +493,10 @@ class ReportOrderActivity : BaseActivity() {
                         && vip_num.text.isNotBlank()
                         && vip_card.text.isNotBlank()
                         && vip_addr.text.isNotBlank()
-                        && et_money.text.isNotBlank()
+                        && et_money.text!!.isNotBlank()
                         && report_start.text.isNotBlank()
                         && report_end.text.isNotBlank()
-                        && et_card.text.isNotBlank()
+                        && et_card.text!!.isNotBlank()
                         && et_phone.text.isNotBlank()) {
                     report_submit.setBackgroundResource(R.drawable.rec_bg_red)
                     report_submit.isClickable = true
@@ -507,10 +507,10 @@ class ReportOrderActivity : BaseActivity() {
             }
             else -> {
                 if (et_receipt.text.isNotBlank()
-                        && et_money.text.isNotBlank()
+                        && et_money.text!!.isNotBlank()
                         && report_start.text.isNotBlank()
                         && report_end.text.isNotBlank()
-                        && et_card.text.isNotBlank()
+                        && et_card.text!!.isNotBlank()
                         && et_phone.text.isNotBlank()) {
                     report_submit.setBackgroundResource(R.drawable.rec_bg_red)
                     report_submit.isClickable = true
@@ -521,14 +521,14 @@ class ReportOrderActivity : BaseActivity() {
             }
         }
 
-        if (et_money.isFocused && et_money.text.isNotBlank()) calculatedValue(doubleToLong(et_money.text))
+        if (et_money.isFocused && et_money.text!!.isNotBlank()) calculatedValue(doubleToLong(et_money.text.toString()))
     }
 
     private fun doubleToLong(edit: CharSequence) = (edit.toNoDouble() * 10000).toLong()
 
     @SuppressLint("SetTextI18n")
     private fun calculatedValue(value: Long) {
-        if (items.isEmpty() || et_profit.text.isNotEmpty()) return
+        if (items.isEmpty() || et_profit.text!!.isNotEmpty()) return
 
         val minValue = items.first().min.toInt() * 10000
 
@@ -539,7 +539,7 @@ class ReportOrderActivity : BaseActivity() {
                 val year = it.years.toInt()
 
                 if (min < max) {
-                    if (value in min..(max - 1)) {
+                    if (value in min until max) {
                         report_expect1.text = "利率 ${it.rate}%（起投 ${it.min}万）"
                         val expect = DecimalFormat("###,###,##0.##").format(value * (1 + it.rate.toDouble() * year / 100.0))
                         report_expect2.text = "预期收入 ￥$expect"
